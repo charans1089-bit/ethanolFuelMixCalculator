@@ -47,7 +47,8 @@
   <div class="mode-bar">
     <button class="mode-btn active" id="btn-calc" onclick="setMode('calc')">⚡ Calculator</button>
     <button class="mode-btn" id="btn-table" onclick="setMode('table')">📋 Static Chart</button>
-    <button class="reset-btn" onclick="resetDefault()">↺ Reset to Default</button>
+    <button class="mode-btn" id="btn-log" onclick="setMode('log')">📓 Logbook</button>
+    <button class="reset-btn" onclick="resetDefault()">↺ Reset</button>
   </div>
 
   <div id="calc-view">
@@ -123,6 +124,11 @@
         <div class="ebadge sweet" id="ebadge">✓ SWEET SPOT — SAFE FOR DAILY DRIVING</div>
       </div>
 
+      <div class="log-action-bar">
+        <input type="text" id="inp-station" placeholder="Enter Gas Station (e.g. Meijer)" class="station-input">
+        <button class="save-log-btn" onclick="saveFillUpLog()">💾 Log This Fill-up</button>
+      </div>
+
       <div class="step-box">
         <div class="step-title">// PUMP SEQUENCE FOR THIS FILL</div>
         <div class="steps">
@@ -149,7 +155,7 @@
     </div>
   </div>
 
-  <div id="table-view">
+  <div id="table-view" style="display:none;">
     <div class="table-legend">
       <div><div class="dot d-e85"></div><span>🌽 E85 Pump</span></div>
       <div><div class="dot d-c93"></div><span>⛽ 93 Octane</span></div>
@@ -172,6 +178,34 @@
           </tbody>
         </table>
       </div>
+    </div>
+  </div>
+
+  <div id="log-view" style="display:none;">
+    <div class="solid-card log-container">
+      <div class="log-header">
+        <h2>Vehicle Fill-up History</h2>
+        <button class="download-btn" onclick="downloadCSV()">⬇️ Download Excel (.CSV)</button>
+      </div>
+      <div class="table-wrap">
+        <div style="overflow-x:auto;">
+          <table>
+            <thead>
+              <tr>
+                <th>Date / Time (EST)</th>
+                <th>Gas Station</th>
+                <th>🌽 E85 (Gal)</th>
+                <th>⛽ 93 (Gal)</th>
+                <th>⚗️ Result Eth %</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody id="log-table-body">
+              </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="log-empty" id="log-empty-msg">No fill-ups logged yet. Calculate a mix and click "Log This Fill-up" to store it here.</div>
     </div>
   </div>
 
