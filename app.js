@@ -20,12 +20,12 @@ let fuelLogs = [];
 // 🔴 GOOGLE FORM CONFIGURATION 🔴
 // You MUST update these values after creating your Google Form!
 // ==========================================
-const GOOGLE_FORM_ACTION_URL = "https://docs.google.com/forms/d/e/YOUR_FORM_ID_HERE/formResponse";
-const FORM_ENTRY_DATE    = "entry.111111111"; // Replace with your Date entry ID
-const FORM_ENTRY_STATION = "entry.222222222"; // Replace with your Station entry ID
-const FORM_ENTRY_E85     = "entry.333333333"; // Replace with your E85 entry ID
-const FORM_ENTRY_93      = "entry.444444444"; // Replace with your 93 entry ID
-const FORM_ENTRY_ETH     = "entry.555555555"; // Replace with your Eth% entry ID
+const GOOGLE_FORM_ACTION_URL = "https://docs.google.com/forms/d/e/1FAIpQLScfYRQp2e6oH524g83RI2Hf2xDz1DRJLj2mt2uc8xBrLJ8g9g/formResponse";
+const FORM_ENTRY_DATE    = "entry.1873002234"; // Replace with your Date entry ID
+const FORM_ENTRY_STATION = "entry.490270945"; // Replace with your Station entry ID
+const FORM_ENTRY_E85     = "entry.391979914"; // Replace with your E85 entry ID
+const FORM_ENTRY_93      = "entry.1998665240"; // Replace with your 93 entry ID
+const FORM_ENTRY_ETH     = "entry.1111191565"; // Replace with your Eth% entry ID
 // ==========================================
 
 window.onload = function() {
