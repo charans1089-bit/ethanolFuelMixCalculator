@@ -1,9 +1,21 @@
+Here is the updated interactive HTML code. I have replaced the hardcoded 50/50 split logic with an algebraic formula that precisely calculates the required mix based on your target ethanol, current fuel volume, and current ethanol percentage.
+
+I also added a sleek **Custom Variables** input panel directly into the calculator UI so you can punch in the exact readings from your Cobb AP.
+
+### **What Changed:**
+1. **Dynamic Math Engine:** The script now calculates exactly how much E85 and 93 you need to reach the `Target Ethanol %` while compensating for the ethanol already sitting in the tank.
+2. **Custom Input Grid:** Added three numeric inputs (`Current Fuel`, `Current Eth %`, `Target Eth %`) right under the slider.
+3. **Smart Slider Sync:** Moving the slider updates the `Current Fuel` input, and typing into the `Current Fuel` input seamlessly overrides the slider.
+
+### **Updated `wrx-e45-interactive.html` Code**
+
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>WRX E45 Fuel Mix — Interactive</title>
+<title>WRX Flex Fuel Mix — Interactive</title>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Rajdhani:wght@400;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -78,10 +90,19 @@
   .tick.on{color:var(--gold);font-weight:700;background:rgba(245,166,35,.08);}
 
   /* SLIDER */
-  .slider-wrap{padding:4px 0 14px;}
+  .slider-wrap{padding:4px 0 20px;}
   input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:4px;border-radius:2px;outline:none;cursor:pointer;background:linear-gradient(90deg,var(--e85) 0%,var(--e85) var(--sp,0%),var(--border) var(--sp,0%),var(--border) 100%);}
   input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;height:22px;border-radius:50%;background:var(--gold);border:2px solid #fff;box-shadow:0 0 10px rgba(245,166,35,.5);cursor:pointer;transition:transform .1s,box-shadow .1s;}
   input[type=range]::-webkit-slider-thumb:hover{transform:scale(1.2);box-shadow:0 0 18px rgba(245,166,35,.7);}
+
+  /* CUSTOM INPUTS */
+  .custom-inputs { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; margin-bottom: 28px; }
+  .input-box { background: rgba(0,0,0,.25); border: 1px solid var(--border); border-radius: 4px; padding: 12px 16px; position:relative;}
+  .input-box label { display: block; font-family: 'Share Tech Mono', monospace; font-size: 10px; color: var(--dim); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 8px; }
+  .input-box input { width: 100%; background: transparent; border: none; border-bottom: 1px dashed var(--dim); color: #fff; font-family: 'Bebas Neue', sans-serif; font-size: 26px; outline: none; transition: all .2s; padding-bottom: 4px;}
+  .input-box input:focus { border-bottom: 1px solid var(--gold); color: var(--gold); }
+  .input-box input::-webkit-inner-spin-button, .input-box input::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
+  .input-box .unit { position: absolute; right: 16px; bottom: 18px; font-family: 'Share Tech Mono', monospace; font-size: 12px; color: var(--dim); pointer-events: none;}
 
   /* RESULT CARDS */
   .result-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:18px;}
@@ -179,13 +200,12 @@
   <div class="header">
     <div>
       <div class="badge">FA24 Flex Fuel · WRX</div>
-      <h1>E45<br><span class="hl">SWEET SPOT</span><br>CHEAT SHEET</h1>
+      <h1>E45<br><span class="hl">CUSTOM BLEND</span><br>CALCULATOR</h1>
       <div class="subtitle">16.6-Gallon Tank · Meijer E85 + Costco 93</div>
     </div>
     <div class="hpills">
       <div class="pill danger">⚠ E70 MAX DYNO ONLY — NOT STREET</div>
       <div class="pill safe">✓ E40–E50 DAILY SAFE RANGE</div>
-      <div class="pill safe">✓ 50/50 SPLIT OF EMPTY SPACE</div>
     </div>
   </div>
 
@@ -195,22 +215,21 @@
   </div>
   <div class="banner grn">
     <span class="bico">🎯</span>
-    <p>To hit the <strong class="g">E40–E50 sweet spot</strong>, always pump a <strong class="g">50/50 split</strong> of whatever empty space remains in your tank — equal gallons of Meijer E85 first, then top off with Costco 93.</p>
+    <p>To hit the <strong class="g">perfect blend</strong>, dial in your Cobb AP variables below. The calculator compensates for the existing ethanol sitting in your tank.</p>
   </div>
 
   <div class="mode-bar">
     <span class="mode-lbl">View:</span>
     <button class="mode-btn active" id="btn-calc" onclick="setMode('calc')">⚡ Calculator</button>
-    <button class="mode-btn" id="btn-table" onclick="setMode('table')">📋 Full Chart</button>
+    <button class="mode-btn" id="btn-table" onclick="setMode('table')">📋 Static Chart</button>
     <button class="reset-btn" onclick="resetDefault()">↺ Reset to Default</button>
   </div>
 
-  <!-- CALCULATOR -->
   <div id="calc-view">
     <div class="calc-card">
-      <div style="margin-bottom:28px;">
+      <div style="margin-bottom:12px;">
         <div class="tank-header">
-          <span class="tank-title">Current Fuel Level — Drag Slider or Tap Gauge Marks</span>
+          <span class="tank-title">Current Fuel Level — Drag Slider or Type Exact</span>
           <span class="tank-reading" id="needle-reading">E — <em>Empty</em></span>
         </div>
 
@@ -239,6 +258,24 @@
         </div>
       </div>
 
+      <div class="custom-inputs">
+        <div class="input-box">
+          <label>Current Fuel</label>
+          <input type="number" id="inp-gal" value="0.0" min="0" max="16.6" step="0.1" oninput="handleInput()">
+          <span class="unit">GAL</span>
+        </div>
+        <div class="input-box">
+          <label>AP Final Gauge (Eth %)</label>
+          <input type="number" id="inp-eth" value="10" min="0" max="100" step="1" oninput="handleInput()">
+          <span class="unit">%</span>
+        </div>
+        <div class="input-box">
+          <label>Target Ethanol</label>
+          <input type="number" id="inp-tgt" value="45" min="10" max="85" step="1" oninput="handleInput()">
+          <span class="unit">%</span>
+        </div>
+      </div>
+
       <div class="result-grid">
         <div class="result-card ec">
           <div class="rlbl">🌽 Pump Meijer E85</div>
@@ -251,7 +288,7 @@
           <div class="runit">gallons — top off</div>
         </div>
         <div class="result-card xc">
-          <div class="rlbl">⚗️ Target Ethanol</div>
+          <div class="rlbl">⚗️ Resulting Ethanol</div>
           <div class="rval" id="vx">~E45</div>
           <div class="runit">estimated blend</div>
         </div>
@@ -274,14 +311,13 @@
           </div>
           <div class="step">
             <div class="snum s3">3</div>
-            <div class="stxt">After fueling, check your <strong>Accessport</strong> ethanol sensor — it should read <span id="i3">~45%</span> before you leave the station.</div>
+            <div class="stxt">After fueling, check your <strong>Accessport</strong> ethanol sensor — it should climb to <span id="i3">~45%</span> after driving a few miles.</div>
           </div>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- TABLE -->
   <div id="table-view">
     <div style="display:flex;gap:20px;margin-bottom:16px;flex-wrap:wrap;">
       <div style="display:flex;align-items:center;gap:8px;font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;"><div style="width:10px;height:10px;border-radius:50%;background:var(--e85)"></div><span style="color:var(--e85)">🌽 Meijer E85</span></div>
@@ -305,7 +341,6 @@
     </div>
   </div>
 
-  <!-- TIPS -->
   <div class="tips-grid">
     <div class="tip-card warn">
       <div class="tip-hd"><span class="tip-i">💡</span><span class="tip-t">Low Fuel Light</span></div>
@@ -331,23 +366,17 @@
 <script>
 const TANK = 16.6;
 const LEVELS = [
-  { gal: 0,    label: 'E', sub: 'Empty',            note: 'Low fuel light on', pct: 0     },
-  { gal: 2.1,  label: '⅛', sub: '~2.1 gal rem.',   note: '~2.1 gal remaining', pct: 12.5 },
-  { gal: 4.2,  label: '¼', sub: '~4.2 gal rem.',   note: '~4.2 gal remaining', pct: 25   },
-  { gal: 6.2,  label: '⅜', sub: '~6.2 gal rem.',   note: '~6.2 gal remaining', pct: 37.5 },
-  { gal: 8.3,  label: '½', sub: '~8.3 gal rem.',   note: '~8.3 gal remaining', pct: 50   },
-  { gal: 10.4, label: '⅝', sub: '~10.4 gal rem.',  note: '~10.4 gal remaining', pct: 62.5},
-  { gal: 12.5, label: '¾', sub: '~12.5 gal rem.',  note: '~12.5 gal remaining', pct: 75  },
-  { gal: 14.5, label: '⅞', sub: '~14.5 gal rem.',  note: '~14.5 gal remaining', pct: 87.5},
+  { gal: 0,    label: 'E' },
+  { gal: 2.1,  label: '⅛' },
+  { gal: 4.2,  label: '¼' },
+  { gal: 6.2,  label: '⅜' },
+  { gal: 8.3,  label: '½' },
+  { gal: 10.4, label: '⅝' },
+  { gal: 12.5, label: '¾' },
+  { gal: 14.5, label: '⅞' },
 ];
 
 let cur = 0;
-
-function ethPct(existing, e85, c93) {
-  const total = existing + e85 + c93;
-  if (total <= 0) return 0;
-  return ((existing * 0.10) + (e85 * 0.85) + (c93 * 0.10)) / total * 100;
-}
 
 function animVal(id, txt) {
   const el = document.getElementById(id);
@@ -358,39 +387,92 @@ function animVal(id, txt) {
   setTimeout(() => el.classList.remove('pop'), 200);
 }
 
-function update(idx) {
-  const lv = LEVELS[idx];
-  const empty = TANK - lv.gal;
-  const e85 = empty / 2;
-  const c93 = empty / 2;
-  const eth = Math.round(ethPct(lv.gal, e85, c93));
+// Syncs the slider preset to the manual inputs
+function setTick(i) {
+  cur = i;
+  document.getElementById('sl').value = i;
+  document.getElementById('inp-gal').value = LEVELS[i].gal.toFixed(1);
+  calculateBlend();
+}
 
-  // Needle reading
+function onSlide(v) {
+  cur = +v;
+  document.getElementById('inp-gal').value = LEVELS[cur].gal.toFixed(1);
+  calculateBlend();
+}
+
+// Triggered when user manually types into the input boxes
+function handleInput() {
+  let v = parseFloat(document.getElementById('inp-gal').value) || 0;
+  
+  // Try to match manual input back to a slider tick, unhighlight if custom
+  let match = LEVELS.findIndex(l => Math.abs(l.gal - v) < 0.1);
+  if (match !== -1) {
+    document.getElementById('sl').value = match;
+    cur = match;
+  } else {
+    cur = -1; // Unlink slider visuals
+  }
+  
+  calculateBlend();
+}
+
+// Core Math Engine
+function calculateBlend() {
+  let curGal = parseFloat(document.getElementById('inp-gal').value) || 0;
+  let curEth = parseFloat(document.getElementById('inp-eth').value) || 0;
+  let tgtEth = parseFloat(document.getElementById('inp-tgt').value) || 0;
+
+  // Constrain limits
+  if (curGal > TANK) curGal = TANK;
+  if (curGal < 0) curGal = 0;
+  if (curEth > 100) curEth = 100;
+  if (tgtEth > 100) tgtEth = 100;
+
+  const V_empty = TANK - curGal;
+
+  // Algebraic solve for E85 needed based on: 
+  // (Target * Total) = (CurGal * CurEth) + (E85 * 85) + (C93 * 10)
+  // where C93 = V_empty - E85
+  let e85 = (tgtEth * TANK - curGal * curEth - V_empty * 10) / 75;
+
+  // Constrain physical limits (Can't remove fuel, can't overfill tank)
+  if (e85 < 0) e85 = 0;
+  if (e85 > V_empty) e85 = V_empty;
+
+  let c93 = V_empty - e85;
+
+  // Determine actual resulting ethanol after physical constraints
+  let actualEth = Math.round(((curGal * curEth) + (e85 * 85) + (c93 * 10)) / TANK);
+
+  // --- RENDER UI ---
+
+  // Gauge Needle Label
   const nr = document.getElementById('needle-reading');
-  if (idx === 0) {
+  if (curGal <= 0.1) {
     nr.innerHTML = 'E &mdash; <em>Empty</em>';
   } else {
-    nr.innerHTML = lv.label + ' <em>Tank</em>';
+    nr.innerHTML = curGal.toFixed(1) + ' <em>Gal Remaining</em>';
   }
 
-  // Gauge bars (% of total tank width)
-  const exPct = lv.pct;
-  const e85p  = (e85 / TANK * 100);
-  const c93p  = (c93 / TANK * 100);
+  // Ticks and Slider
+  document.querySelectorAll('.tick').forEach((t,i) => t.classList.toggle('on', i === cur));
+  document.getElementById('sl').style.setProperty('--sp', (curGal/TANK*100)+'%');
 
-  // existing fuel sits at right side
+  // Gauge Bars (% of total tank width)
+  const exPct = (curGal / TANK) * 100;
+  const e85p  = (e85 / TANK) * 100;
+  const c93p  = (c93 / TANK) * 100;
+
   document.getElementById('gex').style.width = exPct + '%';
   document.getElementById('gex').style.right = '0';
   document.getElementById('gex').style.left = 'auto';
 
-  // e85 starts from left
   document.getElementById('ge').style.width = e85p + '%';
-
-  // c93 follows e85
   document.getElementById('gc').style.left  = e85p + '%';
   document.getElementById('gc').style.width = c93p + '%';
 
-  // labels
+  // Floating Labels
   const le = document.getElementById('lle');
   const lc = document.getElementById('llc');
   le.style.opacity = e85p > 14 ? '1' : '0';
@@ -398,36 +480,27 @@ function update(idx) {
   lc.style.left = (e85p + c93p/2) + '%';
   lc.style.transform = 'translateY(-50%) translateX(-50%)';
 
-  // values
+  // Result Values
   animVal('ve', e85.toFixed(2));
   animVal('vc', c93.toFixed(2));
-  animVal('vx', '~E' + eth);
+  animVal('vx', '~E' + actualEth);
 
-  // instructions
+  // Instruction Steps
   document.getElementById('i1').textContent = e85.toFixed(2) + ' gallons';
   document.getElementById('i2').textContent = c93.toFixed(2) + ' gallons';
-  document.getElementById('i3').textContent = '~' + eth + '%';
+  document.getElementById('i3').textContent = '~' + actualEth + '%';
 
-  // badge
+  // Status Badge
   const b = document.getElementById('ebadge');
   b.className = 'ebadge';
-  if (eth >= 40 && eth <= 50) {
+  if (actualEth >= 40 && actualEth <= 50) {
     b.classList.add('sweet'); b.textContent = '✓ SWEET SPOT — SAFE FOR DAILY DRIVING';
-  } else if (eth < 40) {
-    b.classList.add('low');   b.textContent = '⚠ BELOW SWEET SPOT — ADD MORE E85 NEXT FILL';
+  } else if (actualEth < 40) {
+    b.classList.add('low');   b.textContent = '⚠ BELOW TARGET — HIGHER 93 OCTANE BIAS';
   } else {
     b.classList.add('high');  b.textContent = '🚨 ABOVE SAFE STREET LIMIT — HPFP RISK';
   }
-
-  // slider gradient
-  document.getElementById('sl').style.setProperty('--sp', (idx/7*100)+'%');
-
-  // ticks
-  document.querySelectorAll('.tick').forEach((t,i) => t.classList.toggle('on', i===idx));
 }
-
-function onSlide(v) { cur = +v; update(cur); }
-function setTick(i) { cur = i; document.getElementById('sl').value = i; update(i); }
 
 function setMode(m) {
   document.getElementById('calc-view').style.display  = m==='calc'  ? 'block' : 'none';
@@ -438,10 +511,14 @@ function setMode(m) {
 
 function resetDefault() {
   setMode('calc');
+  document.getElementById('inp-tgt').value = 45;
+  document.getElementById('inp-eth').value = 10;
   setTick(0);
 }
 
-update(0);
+// Init
+setTick(0);
 </script>
 </body>
 </html>
+```
