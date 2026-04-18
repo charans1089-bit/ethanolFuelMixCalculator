@@ -6,8 +6,8 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="WRX E45">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; script-src 'self' 'unsafe-inline';">
-<title>Flex Fuel Mix — Interactive</title>
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data: https:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; script-src 'self' 'unsafe-inline';">
+<title>WRX Flex Fuel Mix — Interactive</title>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Rajdhani:wght@400;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
 
 <link rel="stylesheet" href="styles.css">
@@ -31,28 +31,38 @@
     <span class="bico">🚨</span>
     <p><strong class="r">Golden Rule:</strong> The E70 dyno run found the absolute maximum limit of the stock FA24 fuel system. Running E70 daily <strong class="r">will destroy your factory high-pressure fuel pump</strong> over time. Never run above E50 on the street.</p>
   </div>
+
   <div class="banner grn">
     <span class="bico">🎯</span>
     <p>To hit the <strong class="g">perfect blend</strong>, dial in your Cobb AP variables below. The calculator automatically compensates for the existing ethanol sitting in your tank.</p>
   </div>
 
-  <div class="reference-grid">
-    <div class="ref-card">
+  <div class="section-title">// TECHNICAL REFERENCE & GALLERY</div>
+  <div class="gallery-grid">
+    <div class="tech-card">
       <div class="ref-hd">📈 E70 Max HPFP Limit Reference</div>
       <img src="e70dynoimage.png" alt="E70 Dyno Chart Limit" class="ref-img">
       <div class="ref-cap">Dyno data demonstrating the absolute flow limit of the stock FA24 high-pressure fuel pump. Pushing past E50 daily risks HPFP failure.</div>
     </div>
-    <div class="ref-card">
-      <div class="ref-hd">🚗 FA24DIT Platform</div>
-      <img src="wrx2022.jpg" alt="2022 Subaru WRX Premium" class="ref-img">
-      <div class="ref-cap">2022+ Subaru WRX Premium. Always verify your current ethanol content directly via your Cobb Accessport after fueling.</div>
+    
+    <div class="photo-card">
+      <img src="wrx-action.jpg" alt="2022 Subaru WRX Driving">
+    </div>
+    <div class="photo-card">
+      <img src="wrx-shifter.jpg" alt="FA24 WRX Manual Shifter">
+    </div>
+    <div class="photo-card">
+      <img src="wrx-interior.jpg" alt="WRX Interior Dashboard">
     </div>
   </div>
+  
+  <div class="photo-credit">
+    Vehicle photography via <a href="https://www.motortrend.com/features/2022-subaru-wrx-limited-yearlong-review-arrival/photos" target="_blank" rel="noopener noreferrer">MotorTrend</a>. Used for educational reference.
+  </div>
+
   <div class="mode-bar">
     <button class="mode-btn active" id="btn-calc" onclick="setMode('calc')">⚡ Calculator</button>
-  <div class="mode-bar">
-    <button class="mode-btn active" id="btn-calc" onclick="setMode('calc')">⚡ Calculator</button>
-    <button class="mode-btn" id="btn-table" onclick="setMode('table')">📋 Static Chart E45</button>
+    <button class="mode-btn" id="btn-table" onclick="setMode('table')">📋 Static Chart</button>
     <button class="reset-btn" onclick="resetDefault()">↺ Reset to Default</button>
   </div>
 
@@ -199,8 +209,8 @@
   </div>
 
   <div class="footer">
-    <div class="fn">FA24 · Stock HPFP · Accessport Required · Cobb Flex Fuel Kit · Cold Air Intake · Custom Dyno Tune · Verify ETH% at pump</div>
-    <div class="fm">2022 WRX Premium</div>
+    <div class="fn">FA24 · Stock HPFP · Accessport Required · Verify ETH% at pump</div>
+    <div class="fm">2024–2025 WRX</div>
   </div>
 
 </div>
