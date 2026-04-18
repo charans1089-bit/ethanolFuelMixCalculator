@@ -11,6 +11,33 @@ const LEVELS = [
 ];
 
 let cur = 0;
+let currentE85Needed = 0;
+let currentC93Needed = 0;
+let currentEthResult = 0;
+let fuelLogs = [];
+
+// ==========================================
+// 🔴 GOOGLE FORM CONFIGURATION 🔴
+// You MUST update these values after creating your Google Form!
+// ==========================================
+const GOOGLE_FORM_ACTION_URL = "https://docs.google.com/forms/d/e/YOUR_FORM_ID_HERE/formResponse";
+const FORM_ENTRY_DATE    = "entry.111111111"; // Replace with your Date entry ID
+const FORM_ENTRY_STATION = "entry.222222222"; // Replace with your Station entry ID
+const FORM_ENTRY_E85     = "entry.333333333"; // Replace with your E85 entry ID
+const FORM_ENTRY_93      = "entry.444444444"; // Replace with your 93 entry ID
+const FORM_ENTRY_ETH     = "entry.555555555"; // Replace with your Eth% entry ID
+// ==========================================
+
+window.onload = function() {
+  if(localStorage.getItem('tgtEth')) document.getElementById('inp-tgt').value = localStorage.getItem('tgtEth');
+  if(localStorage.getItem('curEth')) document.getElementById('inp-eth').value = localStorage.getItem('curEth');
+  
+  const savedLogs = localStorage.getItem('wrxFuelLogs');
+  if (savedLogs) fuelLogs = JSON.parse(savedLogs);
+  
+  setTick(0);
+  renderLogs();
+};
 
 function animVal(id, txt) {
   const el = document.getElementById(id);
@@ -21,7 +48,6 @@ function animVal(id, txt) {
   setTimeout(() => el.classList.remove('pop'), 200);
 }
 
-// Syncs the slider preset to the manual inputs
 function setTick(i) {
   cur = i;
   document.getElementById('sl').value = i;
@@ -35,49 +61,46 @@ function onSlide(v) {
   calculateBlend();
 }
 
-// Triggered when user manually types into the input boxes
 function handleInput() {
   let v = parseFloat(document.getElementById('inp-gal').value) || 0;
+  if(v < 0) { v = 0; document.getElementById('inp-gal').value = 0; }
   
   let match = LEVELS.findIndex(l => Math.abs(l.gal - v) < 0.1);
   if (match !== -1) {
     document.getElementById('sl').value = match;
     cur = match;
   } else {
-    cur = -1; // Unlink slider visuals
+    cur = -1; 
   }
   calculateBlend();
 }
 
-// Core Math Engine
 function calculateBlend() {
   let curGal = parseFloat(document.getElementById('inp-gal').value) || 0;
   let curEth = parseFloat(document.getElementById('inp-eth').value) || 0;
   let tgtEth = parseFloat(document.getElementById('inp-tgt').value) || 0;
 
-  // Constrain limits
+  localStorage.setItem('tgtEth', tgtEth);
+  localStorage.setItem('curEth', curEth);
+
   if (curGal > TANK) curGal = TANK;
   if (curGal < 0) curGal = 0;
   if (curEth > 100) curEth = 100;
   if (tgtEth > 100) tgtEth = 100;
 
   const V_empty = TANK - curGal;
-
-  // Algebraic solve for E85 needed
   let e85 = (tgtEth * TANK - curGal * curEth - V_empty * 10) / 75;
 
-  // Constrain physical limits
   if (e85 < 0) e85 = 0;
   if (e85 > V_empty) e85 = V_empty;
 
   let c93 = V_empty - e85;
   let actualEth = Math.round(((curGal * curEth) + (e85 * 85) + (c93 * 10)) / TANK);
 
-  // Update Live Math Box
-  document.getElementById('live-math').textContent = 
-    `E85 Needed = [(${tgtEth} × 16.6) - (${curEth} × ${curGal.toFixed(1)}) - (10 × ${V_empty.toFixed(1)})] ÷ 75 = ${e85.toFixed(2)}`;
+  currentE85Needed = e85.toFixed(2);
+  currentC93Needed = c93.toFixed(2);
+  currentEthResult = actualEth;
 
-  // Gauge Needle Label
   const nr = document.getElementById('needle-reading');
   if (curGal <= 0.1) {
     nr.innerHTML = 'E &mdash; <em>Empty</em>';
@@ -85,24 +108,18 @@ function calculateBlend() {
     nr.innerHTML = curGal.toFixed(1) + ' <em>Gal Remaining</em>';
   }
 
-  // Ticks and Slider
   document.querySelectorAll('.tick').forEach((t,i) => t.classList.toggle('on', i === cur));
   document.getElementById('sl').style.setProperty('--sp', (curGal/TANK*100)+'%');
 
-  // Gauge Bars (% of total tank width)
   const exPct = (curGal / TANK) * 100;
   const e85p  = (e85 / TANK) * 100;
   const c93p  = (c93 / TANK) * 100;
 
   document.getElementById('gex').style.width = exPct + '%';
-  document.getElementById('gex').style.right = '0';
-  document.getElementById('gex').style.left = 'auto';
-
   document.getElementById('ge').style.width = e85p + '%';
   document.getElementById('gc').style.left  = e85p + '%';
   document.getElementById('gc').style.width = c93p + '%';
 
-  // Floating Labels
   const le = document.getElementById('lle');
   const lc = document.getElementById('llc');
   le.style.opacity = e85p > 14 ? '1' : '0';
@@ -110,33 +127,35 @@ function calculateBlend() {
   lc.style.left = (e85p + c93p/2) + '%';
   lc.style.transform = 'translateY(-50%) translateX(-50%)';
 
-  // Result Values
-  animVal('ve', e85.toFixed(2));
-  animVal('vc', c93.toFixed(2));
+  animVal('ve', currentE85Needed);
+  animVal('vc', currentC93Needed);
   animVal('vx', '~E' + actualEth);
 
-  // Instruction Steps
-  document.getElementById('i1').textContent = e85.toFixed(2) + ' gallons';
-  document.getElementById('i2').textContent = c93.toFixed(2) + ' gallons';
+  document.getElementById('i1').textContent = currentE85Needed + ' gallons';
+  document.getElementById('i2').textContent = currentC93Needed + ' gallons';
   document.getElementById('i3').textContent = '~' + actualEth + '%';
 
-  // Status Badge
   const b = document.getElementById('ebadge');
   b.className = 'ebadge';
   if (actualEth >= 40 && actualEth <= 50) {
     b.classList.add('sweet'); b.textContent = '✓ SWEET SPOT — SAFE FOR DAILY DRIVING';
-  } else if (actualEth < 40) {
-    b.classList.add('low');   b.textContent = '⚠ BELOW TARGET — HIGHER 93 OCTANE BIAS';
-  } else {
+  } else if (actualEth > 50) {
     b.classList.add('high');  b.textContent = '🚨 ABOVE SAFE STREET LIMIT — HPFP RISK';
+  } else if (actualEth < tgtEth - 2) {
+    b.classList.add('low');   b.textContent = '⚠ TANK TOO FULL TO REACH TARGET MIX';
+  } else {
+    b.classList.add('low');   b.textContent = '⚠ BELOW TARGET — HIGHER 93 OCTANE BIAS';
   }
 }
 
 function setMode(m) {
   document.getElementById('calc-view').style.display  = m==='calc'  ? 'block' : 'none';
   document.getElementById('table-view').style.display = m==='table' ? 'block' : 'none';
+  document.getElementById('log-view').style.display   = m==='log'   ? 'block' : 'none';
+  
   document.getElementById('btn-calc').classList.toggle('active', m==='calc');
   document.getElementById('btn-table').classList.toggle('active', m==='table');
+  document.getElementById('btn-log').classList.toggle('active', m==='log');
 }
 
 function resetDefault() {
@@ -146,5 +165,115 @@ function resetDefault() {
   setTick(0);
 }
 
-// Initialize the app
-setTick(0);
+// --- HYBRID LOGGING SYSTEM ---
+
+function saveFillUpLog() {
+  const station = document.getElementById('inp-station').value.trim() || 'Unknown Station';
+  
+  const dateObj = new Date();
+  const estTime = dateObj.toLocaleString('en-US', { 
+    timeZone: 'America/New_York', 
+    year: 'numeric', month: 'short', day: 'numeric', 
+    hour: 'numeric', minute: '2-digit' 
+  }) + ' EST';
+
+  const newLog = {
+    id: Date.now(),
+    date: estTime,
+    station: station,
+    e85: currentE85Needed,
+    c93: currentC93Needed,
+    eth: currentEthResult
+  };
+
+  // 1. Save to Local Storage (Immediate UI Update)
+  fuelLogs.unshift(newLog); 
+  localStorage.setItem('wrxFuelLogs', JSON.stringify(fuelLogs));
+  
+  // 2. Fire and Forget to Google Cloud (Silent Backup)
+  sendToGoogleForm(newLog);
+
+  document.getElementById('inp-station').value = ''; 
+  
+  // UI Success feedback
+  const btn = document.querySelector('.save-log-btn');
+  btn.textContent = '✓ LOG SAVED TO CLOUD';
+  btn.style.background = 'var(--e85)';
+  setTimeout(() => {
+    btn.textContent = '💾 Log This Fill-up';
+    btn.style.background = 'var(--gold)';
+  }, 2000);
+
+  renderLogs();
+}
+
+function renderLogs() {
+  const tbody = document.getElementById('log-table-body');
+  const emptyMsg = document.getElementById('log-empty-msg');
+  
+  if (fuelLogs.length === 0) {
+    tbody.innerHTML = '';
+    emptyMsg.style.display = 'block';
+    return;
+  }
+  
+  emptyMsg.style.display = 'none';
+  tbody.innerHTML = fuelLogs.map(log => `
+    <tr>
+      <td class="tv">${log.date}</td>
+      <td class="tv">${log.station}</td>
+      <td class="ev">${log.e85} <span class="u">gal</span></td>
+      <td class="cv">${log.c93} <span class="u">gal</span></td>
+      <td style="color:var(--gold); font-family:'Share Tech Mono', monospace; font-size:18px;">E${log.eth}</td>
+      <td><button class="del-btn" onclick="deleteLog(${log.id})">Del</button></td>
+    </tr>
+  `).join('');
+}
+
+function deleteLog(id) {
+  if(confirm('Delete this fill-up log locally? (Note: Cloud backups remain)')) {
+    fuelLogs = fuelLogs.filter(l => l.id !== id);
+    localStorage.setItem('wrxFuelLogs', JSON.stringify(fuelLogs));
+    renderLogs();
+  }
+}
+
+// Generates an Excel-compatible CSV file for local backups
+function downloadCSV() {
+  if (fuelLogs.length === 0) { alert("No logs to download yet."); return; }
+
+  const headers = ["Date (EST)", "Station", "E85 Gallons", "93 Gallons", "Resulting Eth %"];
+  const rows = fuelLogs.map(log => `"${log.date}","${log.station}",${log.e85},${log.c93},${log.eth}`);
+  
+  const csvContent = [headers.join(","), ...rows].join("\n");
+  const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+  
+  const link = document.createElement("a");
+  const url = URL.createObjectURL(blob);
+  link.setAttribute("href", url);
+  link.setAttribute("download", `WRX_Fuel_Log_${Date.now()}.csv`);
+  link.style.visibility = 'hidden';
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+}
+
+// --- GOOGLE FORM CLOUD SYNC ---
+function sendToGoogleForm(logData) {
+  // If user hasn't configured IDs yet, abort silently
+  if (GOOGLE_FORM_ACTION_URL.includes("YOUR_FORM_ID_HERE")) return;
+
+  const formData = new FormData();
+  formData.append(FORM_ENTRY_DATE, logData.date);
+  formData.append(FORM_ENTRY_STATION, logData.station);
+  formData.append(FORM_ENTRY_E85, logData.e85);
+  formData.append(FORM_ENTRY_93, logData.c93);
+  formData.append(FORM_ENTRY_ETH, logData.eth);
+
+  // Use no-cors to prevent the browser from blocking the cross-origin request
+  fetch(GOOGLE_FORM_ACTION_URL, {
+    method: "POST",
+    mode: "no-cors",
+    body: formData
+  }).catch(error => console.error("Cloud Sync Failed:", error));
+}
