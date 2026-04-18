@@ -17,7 +17,7 @@
 <body>
 
 <div class="top-nav">
-  <div class="scrk-brand">SCRK <span class="scrk-tag">WISH I TUNE</span></div>
+  <div class="scrk-brand">SCRK <span class="scrk-tag">TUNING</span></div>
 </div>
 
 <div class="container">
@@ -125,8 +125,8 @@
       </div>
 
       <div class="log-action-bar">
-        <input type="text" id="inp-station" placeholder="Enter Gas Station (e.g. Meijer)" class="station-input">
-        <button class="save-log-btn" onclick="saveFillUpLog()">💾 Log This Fill-up</button>
+        <input type="text" id="inp-station" placeholder="Enter Gas Station (e.g. Shell, Meijer)" class="station-input">
+        <button class="save-log-btn" onclick="saveFillUpLog()">💾 Log Fill-up</button>
       </div>
 
       <div class="step-box">
@@ -182,10 +182,31 @@
   </div>
 
   <div id="log-view" style="display:none;">
+    
+    <div class="log-info-box solid-card">
+      <div class="info-block">
+        <span class="info-icon">💡</span>
+        <div>
+          <strong>How Logging Works</strong>
+          <p>Your fill-up history is saved privately directly to this device's local browser memory. No accounts or logins are required.</p>
+        </div>
+      </div>
+      <div class="info-block warning-block">
+        <span class="info-icon">⚠️</span>
+        <div>
+          <strong>Data Retention Warning</strong>
+          <p>Clearing your phone's browser cache or website data will <strong>permanently erase</strong> these logs. Use the Download button below frequently to back up your history to Excel.</p>
+        </div>
+      </div>
+    </div>
+
     <div class="solid-card log-container">
       <div class="log-header">
         <h2>Vehicle Fill-up History</h2>
-        <button class="download-btn" onclick="downloadCSV()">⬇️ Download Excel (.CSV)</button>
+        <div class="log-actions">
+          <button class="download-btn" onclick="downloadCSV()">⬇️ Export Excel</button>
+          <button class="del-all-btn" onclick="deleteAllLogs()">🗑️ Delete All</button>
+        </div>
       </div>
       <div class="table-wrap">
         <div style="overflow-x:auto;">
@@ -205,7 +226,7 @@
           </table>
         </div>
       </div>
-      <div class="log-empty" id="log-empty-msg">No fill-ups logged yet. Calculate a mix and click "Log This Fill-up" to store it here.</div>
+      <div class="log-empty" id="log-empty-msg">No fill-ups logged yet. Calculate a mix and click "Log Fill-up" to store it here.</div>
     </div>
   </div>
 
@@ -226,26 +247,8 @@
       <img src="wrx-interior.jpg" alt="WRX Interior Dashboard">
     </div>
   </div>
-  <div class="photo-credit">
-    Vehicle photography via <a href="https://www.motortrend.com/features/2022-subaru-wrx-limited-yearlong-review-arrival/photos" target="_blank" rel="noopener noreferrer">MotorTrend</a>.
-  </div>
 
-  <div class="tips-grid">
-    <div class="tip-card warn solid-card">
-      <div class="tip-hd"><span class="tip-i">💡</span><span class="tip-t">Low Fuel Light</span></div>
-      <div class="tip-b">When the yellow low-fuel light hits, the needle rests on E — but Subaru builds in a safety reserve of <strong>~2.0–2.5 gallons</strong> still in tank. Fill immediately and you'll only fit about <strong>14–14.5 gallons</strong> total.</div>
-    </div>
-    <div class="tip-card grn solid-card">
-      <div class="tip-hd"><span class="tip-i">⛽</span><span class="tip-t">Top-Off Rule</span></div>
-      <div class="tip-b">Always pump <span class="te">E85 first</span> per the chart, then switch to the 93 pump and fill until the handle <strong>clicks off automatically</strong>. This gives the most accurate final blend.</div>
-    </div>
-    <div class="tip-card blu solid-card">
-      <div class="tip-hd"><span class="tip-i">🔄</span><span class="tip-t">First Mix Warning</span></div>
-      <div class="tip-b">If your tank is currently full of pure <span class="tc">93</span>, your first fill will land around <strong>~E35</strong> because existing fuel dilutes the mix. By the <strong>2nd or 3rd fillup</strong> you'll stabilize at E45.</div>
-    </div>
-  </div>
-  
-  <div class="disclaimer solid-card">
+  <div class="disclaimer solid-card" style="margin-top: 24px;">
     <strong>DISCLAIMER & LIABILITY:</strong> This calculator relies on mathematical estimates assuming exactly 85% ethanol in pump E85 and 10% ethanol in 93 Premium. <strong>Real-world pump E85 fluctuates heavily by season and state (often E51–E83).</strong> Due to this, your final mix will vary. Always monitor your final ethanol percentage directly via your Cobb Accessport. <strong>Do your own math.</strong> The creator of this tool assumes no liability for engine, HPFP, or vehicle damage. Use at your own risk.
   </div>
 
