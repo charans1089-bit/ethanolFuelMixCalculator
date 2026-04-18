@@ -18,14 +18,13 @@ let fuelLogs = [];
 
 // ==========================================
 // 🔴 GOOGLE FORM CONFIGURATION 🔴
-// You MUST update these values after creating your Google Form!
 // ==========================================
-const GOOGLE_FORM_ACTION_URL = "https://docs.google.com/forms/d/e/1FAIpQLScfYRQp2e6oH524g83RI2Hf2xDz1DRJLj2mt2uc8xBrLJ8g9g/formResponse";
-const FORM_ENTRY_DATE    = "entry.1873002234"; // Replace with your Date entry ID
-const FORM_ENTRY_STATION = "entry.490270945"; // Replace with your Station entry ID
-const FORM_ENTRY_E85     = "entry.391979914"; // Replace with your E85 entry ID
-const FORM_ENTRY_93      = "entry.1998665240"; // Replace with your 93 entry ID
-const FORM_ENTRY_ETH     = "entry.1111191565"; // Replace with your Eth% entry ID
+const GOOGLE_FORM_ACTION_URL = "https://docs.google.com/forms/d/e/YOUR_FORM_ID_HERE/formResponse";
+const FORM_ENTRY_DATE    = "entry.111111111"; 
+const FORM_ENTRY_STATION = "entry.222222222"; 
+const FORM_ENTRY_E85     = "entry.333333333"; 
+const FORM_ENTRY_93      = "entry.444444444"; 
+const FORM_ENTRY_ETH     = "entry.555555555"; 
 // ==========================================
 
 window.onload = function() {
@@ -186,21 +185,18 @@ function saveFillUpLog() {
     eth: currentEthResult
   };
 
-  // 1. Save to Local Storage (Immediate UI Update)
   fuelLogs.unshift(newLog); 
   localStorage.setItem('wrxFuelLogs', JSON.stringify(fuelLogs));
   
-  // 2. Fire and Forget to Google Cloud (Silent Backup)
   sendToGoogleForm(newLog);
 
   document.getElementById('inp-station').value = ''; 
   
-  // UI Success feedback
   const btn = document.querySelector('.save-log-btn');
-  btn.textContent = '✓ LOG SAVED TO CLOUD';
+  btn.textContent = '✓ LOG SAVED';
   btn.style.background = 'var(--e85)';
   setTimeout(() => {
-    btn.textContent = '💾 Log This Fill-up';
+    btn.textContent = '💾 Log Fill-up';
     btn.style.background = 'var(--gold)';
   }, 2000);
 
@@ -230,15 +226,25 @@ function renderLogs() {
   `).join('');
 }
 
+// UPDATED: Explicitly tell the user the cloud backup is safe
 function deleteLog(id) {
-  if(confirm('Delete this fill-up log locally? (Note: Cloud backups remain)')) {
+  if(confirm('Delete this fill-up log from your browser?\n\n(Note: Your Google Sheets backup will NOT be deleted)')) {
     fuelLogs = fuelLogs.filter(l => l.id !== id);
     localStorage.setItem('wrxFuelLogs', JSON.stringify(fuelLogs));
     renderLogs();
   }
 }
 
-// Generates an Excel-compatible CSV file for local backups
+// UPDATED: Explicitly tell the user the cloud backup is safe
+function deleteAllLogs() {
+  if(fuelLogs.length === 0) return;
+  if(confirm('⚠️ Clear all log history on this device?\n\nYour data saved in Google Sheets is safe and will NOT be deleted. Proceed?')) {
+    fuelLogs = [];
+    localStorage.removeItem('wrxFuelLogs');
+    renderLogs();
+  }
+}
+
 function downloadCSV() {
   if (fuelLogs.length === 0) { alert("No logs to download yet."); return; }
 
@@ -258,9 +264,7 @@ function downloadCSV() {
   document.body.removeChild(link);
 }
 
-// --- GOOGLE FORM CLOUD SYNC ---
 function sendToGoogleForm(logData) {
-  // If user hasn't configured IDs yet, abort silently
   if (GOOGLE_FORM_ACTION_URL.includes("YOUR_FORM_ID_HERE")) return;
 
   const formData = new FormData();
@@ -270,7 +274,6 @@ function sendToGoogleForm(logData) {
   formData.append(FORM_ENTRY_93, logData.c93);
   formData.append(FORM_ENTRY_ETH, logData.eth);
 
-  // Use no-cors to prevent the browser from blocking the cross-origin request
   fetch(GOOGLE_FORM_ACTION_URL, {
     method: "POST",
     mode: "no-cors",
