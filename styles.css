@@ -37,6 +37,43 @@ h1 .hl{color:var(--gold);}
 .banner strong.r{color:var(--red);}
 .banner strong.g{color:var(--e85);}
 
+/* REFERENCE IMAGES */
+.reference-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 16px;
+  margin-bottom: 24px;
+}
+.ref-card {
+  background: rgba(0,0,0,.2);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 16px;
+  box-shadow: 0 4px 12px rgba(0,0,0,.2);
+}
+.ref-hd {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 12px;
+  font-weight: bold;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 12px;
+}
+.ref-img {
+  width: 100%;
+  height: auto;
+  border-radius: 4px;
+  border: 1px solid rgba(255,255,255,0.05);
+  display: block;
+}
+.ref-cap {
+  font-size: 13px;
+  color: var(--dim);
+  line-height: 1.5;
+  margin-top: 12px;
+}
+
 /* MODE BAR */
 .mode-bar{display:flex;gap:12px;align-items:center;margin-bottom:24px;flex-wrap:wrap;}
 .mode-lbl{font-family:'Share Tech Mono',monospace;font-size:12px;letter-spacing:2px;color:var(--dim);text-transform:uppercase;}
