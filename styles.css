@@ -4,6 +4,8 @@
   --card-border: #242938;   
   
   --gold: #f5a623; 
+  --neon: #ccff00;     /* High-vis motorsport yellow/green */
+  --wr-blue: #022b6b;  /* Subaru World Rally Blue */
   --e85: #10b981;      
   --c93: #3b82f6;      
   --red: #ef4444;      
@@ -23,20 +25,37 @@ body {
   -webkit-text-size-adjust: 100%;
 }
 
-.top-nav {
-  width: 100%; padding: 24px 20px; background: var(--card-bg);
-  border-bottom: 1px solid var(--card-border); margin-bottom: 32px; text-align: center;
+/* MOTORSPORT RALLY HEADER */
+.rally-banner {
+  width: 100%;
+  padding: 32px 20px;
+  background: var(--wr-blue);
+  /* Aggressive geometric slices */
+  background-image: 
+    linear-gradient(105deg, transparent 45%, rgba(204, 255, 0, 0.95) 45%, rgba(204, 255, 0, 0.95) 48%, transparent 48%),
+    linear-gradient(25deg, transparent 60%, rgba(255, 255, 255, 0.15) 60%, rgba(255, 255, 255, 0.15) 63%, transparent 63%),
+    linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.5) 100%);
+  border-bottom: 4px solid var(--neon);
+  margin-bottom: 32px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 8px 24px rgba(2, 43, 107, 0.5);
 }
 .scrk-brand {
-  font-family: 'Inter', sans-serif; font-weight: 800; font-size: 24px;
+  font-family: 'Inter', sans-serif; font-weight: 900; font-size: 28px;
   letter-spacing: 4px; color: #fff; display: flex; justify-content: center;
-  align-items: center; gap: 8px;
+  align-items: center; gap: 12px; position: relative; z-index: 2;
+  text-shadow: 0 4px 12px rgba(0,0,0,0.6);
 }
 .scrk-tag {
-  font-family: 'Share Tech Mono', monospace; font-size: 11px; font-weight: 600;
-  letter-spacing: 2px; color: var(--gold); background: rgba(245,166,35,0.1);
-  padding: 4px 8px; border-radius: 4px;
+  font-family: 'Share Tech Mono', monospace; font-size: 13px; font-weight: 700;
+  letter-spacing: 2px; color: #000; background: var(--neon);
+  padding: 6px 10px; border-radius: 4px; transform: skewX(-15deg);
+  display: inline-block; box-shadow: 0 4px 10px rgba(204, 255, 0, 0.4);
+  text-shadow: none;
 }
+.scrk-tag span { display: inline-block; transform: skewX(15deg); }
 
 .container { max-width:860px; margin: 0 auto; padding: 0 20px; }
 
@@ -122,51 +141,26 @@ input[type=range]::-webkit-slider-thumb:hover{transform:scale(1.2);}
 .ebadge.low{background:rgba(245,158,11,.15);border:1px solid rgba(245,158,11,.4);color:var(--warn);}
 .ebadge.high{background:rgba(239,68,68,.15);border:1px solid rgba(239,68,68,.4);color:var(--red);}
 
-/* UPGRADED LOGGING ACTION BAR */
-.log-action-bar {
-  display: flex; gap: 16px; margin-bottom: 32px; padding: 24px;
-  background: #090a0f; border: 1px solid var(--card-border); border-radius: 12px;
-  align-items: center; box-shadow: inset 0 4px 12px rgba(0,0,0,0.4);
-}
-.station-input {
-  flex: 1; background: transparent; border: none; border-bottom: 2px solid var(--card-border); color: #fff;
-  padding: 12px 4px; font-family: 'Inter', sans-serif; font-size: 18px; outline: none; transition: border-color 0.2s ease;
-}
+.log-action-bar { display: flex; gap: 16px; margin-bottom: 32px; padding: 24px; background: #090a0f; border: 1px solid var(--card-border); border-radius: 12px; align-items: center; box-shadow: inset 0 4px 12px rgba(0,0,0,0.4); }
+.station-input { flex: 1; background: transparent; border: none; border-bottom: 2px solid var(--card-border); color: #fff; padding: 12px 4px; font-family: 'Inter', sans-serif; font-size: 18px; outline: none; transition: border-color 0.2s ease; }
 .station-input:focus { border-color: var(--gold); }
-.save-log-btn {
-  background: var(--gold); color: #000; border: none; padding: 16px 32px;
-  border-radius: 8px; font-family: 'Share Tech Mono', monospace; font-weight: bold; font-size: 16px;
-  cursor: pointer; text-transform: uppercase; letter-spacing: 1px; transition: transform 0.2s ease;
-}
+.save-log-btn { background: var(--gold); color: #000; border: none; padding: 16px 32px; border-radius: 8px; font-family: 'Share Tech Mono', monospace; font-weight: bold; font-size: 16px; cursor: pointer; text-transform: uppercase; letter-spacing: 1px; transition: transform 0.2s ease; }
 .save-log-btn:hover { transform: scale(1.05); }
 
-/* EXPLANATORY INFO CARD */
 .log-info-box { padding: 24px; margin-bottom: 24px; display: flex; flex-direction: column; gap: 16px; }
 .info-block { display: flex; align-items: flex-start; gap: 16px; font-size: 14px; line-height: 1.5; color: var(--text); }
 .info-block p { color: var(--dim); margin-top: 4px; }
 .info-icon { font-size: 24px; flex-shrink: 0; }
 .warning-block { padding-top: 16px; border-top: 1px solid var(--card-border); }
 
-/* LOGBOOK CONTAINER */
 .log-container { padding: 32px 24px; margin-bottom: 24px; }
 .log-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; flex-wrap:wrap; gap:16px;}
 .log-header h2 { font-family: 'Bebas Neue', sans-serif; font-size: 36px; letter-spacing: 2px; }
 .log-actions { display: flex; gap: 12px; }
-
-.download-btn {
-  background: rgba(16, 185, 129, 0.15); border: 1px solid rgba(16, 185, 129, 0.4); color: var(--e85);
-  padding: 10px 16px; border-radius: 6px; font-family: 'Share Tech Mono', monospace; font-weight: bold;
-  cursor: pointer; transition: all 0.2s ease; font-size: 12px; text-transform: uppercase;
-}
+.download-btn { background: rgba(16, 185, 129, 0.15); border: 1px solid rgba(16, 185, 129, 0.4); color: var(--e85); padding: 10px 16px; border-radius: 6px; font-family: 'Share Tech Mono', monospace; font-weight: bold; cursor: pointer; transition: all 0.2s ease; font-size: 12px; text-transform: uppercase; }
 .download-btn:hover { background: rgba(16, 185, 129, 0.25); color: #fff; }
-
-.del-all-btn {
-  background: rgba(239, 68, 68, 0.15); border: 1px solid rgba(239, 68, 68, 0.4); color: var(--red);
-  padding: 10px 16px; border-radius: 6px; font-family: 'Share Tech Mono', monospace; font-weight: bold;
-  cursor: pointer; transition: all 0.2s ease; font-size: 12px; text-transform: uppercase;
-}
+.del-all-btn { background: rgba(239, 68, 68, 0.15); border: 1px solid rgba(239, 68, 68, 0.4); color: var(--red); padding: 10px 16px; border-radius: 6px; font-family: 'Share Tech Mono', monospace; font-weight: bold; cursor: pointer; transition: all 0.2s ease; font-size: 12px; text-transform: uppercase; }
 .del-all-btn:hover { background: rgba(239, 68, 68, 0.25); color: #fff; }
-
 .log-empty { text-align: center; padding: 40px; color: var(--dim); font-size: 15px; background: #090a0f; border-radius: 12px; margin-top: 16px; border: 1px dashed var(--card-border); }
 .del-btn { background: transparent; border: 1px solid var(--red); color: var(--red); padding: 6px 10px; border-radius: 4px; cursor: pointer; font-size: 11px; font-weight: bold; text-transform: uppercase;}
 .del-btn:hover { background: rgba(239,68,68,.15); }
@@ -229,7 +223,40 @@ tbody td:not(:first-child){text-align:center;}
 .fn{font-family:'Share Tech Mono',monospace;font-size:12px;font-weight:bold;letter-spacing:1.5px;color:var(--dim);text-transform:uppercase; line-height: 1.5; flex: 1 1 300px;}
 .fm{font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:2px;color:rgba(255,255,255,.4);}
 
-@media(max-width:768px){
+/* =========================================
+   TRAP SIMULATOR MODAL CSS 
+========================================= */
+.modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(5, 5, 7, 0.85); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); z-index: 9999; justify-content: center; align-items: center; padding: 20px; opacity: 0; transition: opacity 0.3s ease; }
+.modal-overlay.show { display: flex; opacity: 1; }
+.modal-content { max-width: 760px; width: 100%; position: relative; padding: 32px; background: #090a0f; border: 1px solid var(--card-border); border-radius: 16px; box-shadow: 0 24px 64px rgba(0,0,0,0.8), inset 0 2px 10px rgba(255,255,255,0.05); transform: translateY(20px); transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+.modal-overlay.show .modal-content { transform: translateY(0); }
+.close-btn { position: absolute; top: 20px; right: 24px; background: none; border: none; color: var(--dim); font-size: 28px; cursor: pointer; transition: color 0.2s ease; }
+.close-btn:hover { color: var(--red); }
+.sim-header h2 { font-family: 'Bebas Neue', sans-serif; font-size: 32px; letter-spacing: 2px; color: #fff; margin-bottom: 8px; }
+.sim-header p { font-size: 14px; color: var(--dim); line-height: 1.5; margin-bottom: 32px; }
+.sim-grid { display: grid; grid-template-columns: 1fr 140px; gap: 40px; }
+.sim-slider-group { margin-bottom: 24px; }
+.sim-slider-group label { display: block; font-family: 'Share Tech Mono', monospace; font-size: 11px; text-transform: uppercase; color: var(--dim); margin-bottom: 8px; font-weight: bold; }
+.sim-val { font-family: 'Bebas Neue', sans-serif; font-size: 32px; color: #fff; margin-bottom: 12px; line-height: 1; }
+.sim-slider-group input[type=range] { width: 100%; height: 6px; border-radius: 3px; outline: none; background: var(--card-border); box-shadow: inset 0 2px 4px rgba(0,0,0,0.5); }
+.sim-slider-group input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 24px; height: 24px; border-radius: 50%; background: #fff; border: 3px solid var(--card-bg); cursor: pointer; box-shadow: 0 0 10px rgba(255,255,255,0.3); }
+.sim-alert { padding: 16px; border-radius: 8px; font-size: 13px; line-height: 1.5; margin-bottom: 24px; font-weight: 500; min-height: 70px; display: flex; align-items: center; }
+.sim-alert.ok { background: rgba(16,185,129,0.1); border: 1px solid rgba(16,185,129,0.3); color: var(--e85); }
+.sim-alert.trap { background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.3); color: var(--red); }
+.sim-stats { background: rgba(255,255,255,0.02); border: 1px solid var(--card-border); border-radius: 8px; padding: 16px; font-family: 'Share Tech Mono', monospace; font-size: 12px; text-transform: uppercase; color: var(--dim); }
+.sim-stats div { display: flex; justify-content: space-between; margin-bottom: 8px; }
+.sim-stats div:last-child { margin-bottom: 0; padding-top: 8px; border-top: 1px dashed var(--card-border); }
+.sim-stats strong { font-size: 14px; color: #fff; }
+.sim-visual { display: flex; justify-content: center; }
+.sim-tank-container { width: 100px; display: flex; flex-direction: column; align-items: center; }
+.sim-tank-cap, .sim-tank-base { font-family: 'Share Tech Mono', monospace; font-size: 10px; color: var(--dim); padding: 8px 0; letter-spacing: 1px; }
+.sim-tank { width: 100%; height: 320px; background: rgba(0,0,0,0.6); border: 2px solid var(--card-border); border-radius: 12px; display: flex; flex-direction: column; justify-content: flex-end; overflow: hidden; box-shadow: inset 0 4px 12px rgba(0,0,0,0.8); }
+.sim-fill { width: 100%; transition: height 0.3s ease; display: flex; justify-content: center; align-items: center; font-family: 'Share Tech Mono', monospace; font-size: 11px; font-weight: bold; color: rgba(255,255,255,0.8); overflow: hidden; }
+.sf-93 { background: rgba(59,130,246,0.3); border-top: 2px dashed var(--c93); }
+.sf-e85 { background: rgba(16,185,129,0.4); border-top: 2px dashed var(--e85); }
+.sf-cur { background: rgba(255,255,255,0.1); border-top: 2px dashed rgba(255,255,255,0.3); }
+
+@media(max-width: 768px) {
   .header{flex-direction:column;}
   .hpills{align-items:flex-start;flex-direction:row;flex-wrap:wrap;}
   h1{font-size:48px;}
@@ -237,4 +264,12 @@ tbody td:not(:first-child){text-align:center;}
   .result-grid .xc{grid-column:1/-1;}
   .log-action-bar { flex-direction: column; align-items: stretch; padding: 20px;}
   .save-log-btn { width: 100%; }
+  .mode-bar { gap: 12px; flex-direction:column; align-items:stretch;}
+  .mode-btn { width:100%;}
+  .scrk-brand {font-size: 24px;}
+  .sim-grid { grid-template-columns: 1fr; gap: 24px; }
+  .sim-visual { order: -1; } 
+  .sim-tank { height: 160px; }
+  .sim-tank-container { width: 100%; }
+  .modal-content { padding: 24px; }
 }
