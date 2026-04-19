@@ -282,16 +282,14 @@ function sendToGoogleForm(logData) {
 }
 
 // ==========================================
-// 🧪 FLEX-FUEL TRAP SIMULATOR LOGIC (RADIAL)
+// 🧪 FLEX-FUEL TRAP SIMULATOR LOGIC
 // ==========================================
 
-let simCurGal = 4.2; 
 const arcLength = Math.PI * 80; 
 
 function openSim() {
   const modal = document.getElementById('sim-modal');
   modal.classList.add('show');
-  initRadialGauge();
   runSim();
 }
 
@@ -302,82 +300,28 @@ function closeSim(e) {
   }
 }
 
-function initRadialGauge() {
-  const svg = document.getElementById('radial-svg');
-  let isDragging = false;
-
-  function setGaugeValue(e) {
-    if (!isDragging && e.type !== 'click') return;
-    e.preventDefault();
-
-    const clientX = e.touches ? e.touches[0].clientX : e.clientX;
-    const clientY = e.touches ? e.touches[0].clientY : e.clientY;
-    
-    const rect = svg.getBoundingClientRect();
-    const scaleX = 200 / rect.width;
-    const scaleY = 120 / rect.height;
-    
-    const x = (clientX - rect.left) * scaleX - 100;
-    const y = (clientY - rect.top) * scaleY - 100; 
-    
-    let angle = Math.atan2(-y, x); 
-    
-    if (angle < 0) { angle = (x < 0) ? Math.PI : 0; }
-    
-    let pct = 1 - (angle / Math.PI);
-    
-    simCurGal = pct * TANK;
-    simCurGal = Math.round(simCurGal * 10) / 10; 
-    
-    updateRadialVisuals();
-    runSim();
-  }
-
-  svg.addEventListener('mousedown', () => isDragging = true);
-  window.addEventListener('mouseup', () => isDragging = false);
-  window.addEventListener('mousemove', setGaugeValue);
-  svg.addEventListener('click', (e) => { isDragging = true; setGaugeValue(e); isDragging = false; });
-
-  svg.addEventListener('touchstart', (e) => { isDragging = true; setGaugeValue(e); }, {passive: false});
-  window.addEventListener('touchend', () => isDragging = false);
-  window.addEventListener('touchmove', setGaugeValue, {passive: false});
-  
-  updateRadialVisuals(); 
-}
-
-function updateRadialVisuals() {
-  const pct = simCurGal / TANK;
-  const offset = arcLength - (pct * arcLength);
-  
-  document.getElementById('radial-fill').style.strokeDashoffset = offset;
-  
-  const angleDeg = 180 - (pct * 180);
-  const angleRad = angleDeg * (Math.PI / 180);
-  const tx = 100 + 80 * Math.cos(angleRad);
-  const ty = 100 - 80 * Math.sin(angleRad);
-  
-  const thumb = document.getElementById('radial-thumb');
-  thumb.setAttribute('cx', tx);
-  thumb.setAttribute('cy', ty);
-  
-  document.getElementById('sim-val-cur').textContent = simCurGal.toFixed(1);
-}
-
 function runSim() {
+  const curGal = parseFloat(document.getElementById('sim-sl-cur').value);
   const tgtEth = parseFloat(document.getElementById('sim-sl-tgt').value);
   const curEth = 10; 
   
+  document.getElementById('sim-val-cur').textContent = curGal.toFixed(1);
   document.getElementById('sim-val-tgt').textContent = 'E' + tgtEth;
 
-  const emptySpace = TANK - simCurGal;
-  let idealE85 = ((tgtEth * TANK) - (curEth * simCurGal) - (10 * emptySpace)) / 75;
+  // Update Neon Gauge Visual
+  const pct = curGal / TANK;
+  const offset = arcLength - (pct * arcLength);
+  document.getElementById('radial-fill').style.strokeDashoffset = offset;
+
+  const emptySpace = TANK - curGal;
+  let idealE85 = ((tgtEth * TANK) - (curEth * curGal) - (10 * emptySpace)) / 75;
   
   let actualE85 = idealE85;
   if (actualE85 < 0) actualE85 = 0;
   if (actualE85 > emptySpace) actualE85 = emptySpace; 
 
   let actual93 = emptySpace - actualE85;
-  let finalEth = Math.round(((simCurGal * curEth) + (actualE85 * 85) + (actual93 * 10)) / TANK);
+  let finalEth = Math.round(((curGal * curEth) + (actualE85 * 85) + (actual93 * 10)) / TANK);
 
   document.getElementById('sim-stat-empty').textContent = emptySpace.toFixed(1) + ' gal';
   document.getElementById('sim-stat-ideal').textContent = (idealE85 > 0 ? idealE85.toFixed(1) : '0.0') + ' gal';
@@ -392,15 +336,15 @@ function runSim() {
     alertBox.innerHTML = `✅ <strong>TARGET ACHIEVABLE</strong><br>You have plenty of empty room in the tank to fit the required ${actualE85.toFixed(1)} gallons of E85.`;
   }
 
-  const curPct = (simCurGal / TANK) * 100;
-  const e85Pct = (actualE85 / TANK) * 100;
-  const c93Pct = (actual93 / TANK) * 100;
+  const curPctTank = (curGal / TANK) * 100;
+  const e85PctTank = (actualE85 / TANK) * 100;
+  const c93PctTank = (actual93 / TANK) * 100;
 
-  document.getElementById('sf-cur').style.height = curPct + '%';
-  document.getElementById('sf-e85').style.height = e85Pct + '%';
-  document.getElementById('sf-93').style.height = c93Pct + '%';
+  document.getElementById('sf-cur').style.height = curPctTank + '%';
+  document.getElementById('sf-e85').style.height = e85PctTank + '%';
+  document.getElementById('sf-93').style.height = c93PctTank + '%';
   
-  document.getElementById('slbl-cur').style.opacity = curPct > 10 ? 1 : 0;
-  document.getElementById('slbl-e85').style.opacity = e85Pct > 10 ? 1 : 0;
-  document.getElementById('slbl-93').style.opacity = c93Pct > 10 ? 1 : 0;
+  document.getElementById('slbl-cur').style.opacity = curPctTank > 10 ? 1 : 0;
+  document.getElementById('slbl-e85').style.opacity = e85PctTank > 10 ? 1 : 0;
+  document.getElementById('slbl-93').style.opacity = c93PctTank > 10 ? 1 : 0;
 }
