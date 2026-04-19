@@ -10,7 +10,6 @@
 <title>SCRK Flex Fuel Mix — Interactive</title>
 
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23111318'/><text x='50%' y='68%' font-family='sans-serif' font-size='60' font-weight='bold' fill='%23ccff00' text-anchor='middle'>S</text></svg>">
-
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700;800;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
 </head>
@@ -181,7 +180,6 @@
   </div>
 
   <div id="log-view" style="display:none;">
-    
     <div class="log-info-box solid-card">
       <div class="info-block">
         <span class="info-icon">💡</span>
@@ -221,7 +219,7 @@
               </tr>
             </thead>
             <tbody id="log-table-body">
-              </tbody>
+            </tbody>
           </table>
         </div>
       </div>
@@ -252,8 +250,8 @@
   </div>
 
   <div class="footer">
-    <div class="fn"> A 22 WRX · FA24 VB · Stock HPFP · Cobb Accessport V3 · Verify ETH% at pump · Cobb Flex Fuel Kit · Cold Air Intake · Custom Dyno Tune</div>
-    <div class="fm">2022 WRX Premium</div>
+    <div class="fn">FA24 · Stock HPFP · Accessport Required · Verify ETH% at pump · Cobb Flex Fuel Kit · Cold Air Intake · Custom Dyno Tune</div>
+    <div class="fm">22 WRX Premium</div>
   </div>
 
 </div>
@@ -264,15 +262,35 @@
     
     <div class="sim-header">
       <h2>🧪 The Flex-Fuel Trap Simulator</h2>
-      <p>Discover why you can't reach high ethanol targets if your tank is too full. Adjust the sliders below to see the physical volume constraints in real-time.</p>
+      <p>Discover why you can't reach high ethanol targets if your tank is too full. Adjust the controls below to see the physical volume constraints in real-time.</p>
     </div>
 
     <div class="sim-grid">
       <div class="sim-controls">
-        <div class="sim-slider-group">
-          <label>Current Fuel in Tank (Assumes E10)</label>
-          <div class="sim-val" id="sim-val-cur">4.2 Gal</div>
-          <input type="range" id="sim-sl-cur" min="0" max="16.6" step="0.1" value="4.2" oninput="runSim()">
+        
+        <div class="radial-gauge-container">
+          <label>Current Fuel in Tank (E10)</label>
+          <div class="radial-wrapper">
+            <div class="radial-labels"><span>E</span><span>F</span></div>
+            <svg id="radial-svg" viewBox="0 0 200 120" class="radial-svg">
+              <defs>
+                <filter id="neon-glow" x="-50%" y="-50%" width="200%" height="200%">
+                  <feGaussianBlur stdDeviation="4" result="blur" />
+                  <feMerge>
+                    <feMergeNode in="blur" />
+                    <feMergeNode in="SourceGraphic" />
+                  </feMerge>
+                </filter>
+              </defs>
+              <path class="radial-track" d="M 20 100 A 80 80 0 0 1 180 100" />
+              <path class="radial-fill" id="radial-fill" d="M 20 100 A 80 80 0 0 1 180 100" stroke-dasharray="251.327" stroke-dashoffset="251.327" filter="url(#neon-glow)" />
+              <circle class="radial-thumb" id="radial-thumb" cx="20" cy="100" r="10" />
+            </svg>
+            <div class="radial-readout">
+              <div id="sim-val-cur" class="radial-val">4.2</div>
+              <div class="radial-unit">GALLONS</div>
+            </div>
+          </div>
         </div>
         
         <div class="sim-slider-group">
