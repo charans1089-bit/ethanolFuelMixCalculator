@@ -9,15 +9,18 @@
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src 'self' https://docs.google.com; img-src 'self' data: https:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; script-src 'self' 'unsafe-inline';">
 <title>SCRK Flex Fuel Mix — Interactive</title>
 
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23111318'/><text x='50%' y='68%' font-family='sans-serif' font-size='60' font-weight='bold' fill='%23f5a623' text-anchor='middle'>S</text></svg>">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23111318'/><text x='50%' y='68%' font-family='sans-serif' font-size='60' font-weight='bold' fill='%23ccff00' text-anchor='middle'>S</text></svg>">
 
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700;800&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700;800;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-<div class="top-nav">
-  <div class="scrk-brand">SCRK <span class="scrk-tag">WISH I TUNE</span></div>
+<div class="top-nav rally-banner">
+  <div class="scrk-brand">
+    SCRK 
+    <div class="scrk-tag"><span>WISH I TUNE</span></div>
+  </div>
 </div>
 
 <div class="container">
@@ -39,15 +42,11 @@
     <p><strong class="r">Golden Rule:</strong> The E70 dyno run found the absolute maximum limit of the stock FA24 fuel system. Running E70 daily <strong class="r">will destroy your factory high-pressure fuel pump</strong> over time. Never run above E50 on the street.</p>
   </div>
 
-  <div class="banner grn">
-    <span class="bico">🎯</span>
-    <p>To hit the <strong class="g">perfect blend</strong>, dial in your Cobb AP variables below. The calculator automatically compensates for the existing ethanol sitting in your tank.</p>
-  </div>
-
   <div class="mode-bar">
     <button class="mode-btn active" id="btn-calc" onclick="setMode('calc')">⚡ Calculator</button>
     <button class="mode-btn" id="btn-table" onclick="setMode('table')">📋 Static Chart</button>
     <button class="mode-btn" id="btn-log" onclick="setMode('log')">📓 Logbook</button>
+    <button class="mode-btn" id="btn-sim" style="color: #10b981; border-color: rgba(16,185,129,0.3);" onclick="openSim()">🧪 Trap Simulator</button>
     <button class="reset-btn" onclick="resetDefault()">↺ Reset</button>
   </div>
 
@@ -195,7 +194,7 @@
         <span class="info-icon">⚠️</span>
         <div>
           <strong>Data Retention Warning</strong>
-          <p>Clearing your phone's browser cache or website data will <strong>permanently erase</strong> these logs. Use the Download button below frequently to back up your history to Excel.</p>
+          <p>Clearing your phone's browser cache or website data will <strong>permanently erase</strong> these logs locally. Use the Download button below frequently to back up your history.</p>
         </div>
       </div>
     </div>
@@ -253,10 +252,57 @@
   </div>
 
   <div class="footer">
-    <div class="fn">FA24 · Stock HPFP · Accessport Required · Verify ETH% at pump · Cobb Flex Fuel Kit · Cold Air Intake · Custom Dyno Tune</div>
-    <div class="fm">22 WRX Premium</div>
+    <div class="fn"> A 22 WRX · FA24 VB · Stock HPFP · Cobb Accessport V3 · Verify ETH% at pump · Cobb Flex Fuel Kit · Cold Air Intake · Custom Dyno Tune</div>
+    <div class="fm">2022 WRX Premium</div>
   </div>
 
+</div>
+
+<div id="sim-modal" class="modal-overlay" onclick="closeSim(event)">
+  <div class="modal-content solid-card" onclick="event.stopPropagation()">
+    <button class="close-btn" onclick="closeSim(null)">✕</button>
+    
+    <div class="sim-header">
+      <h2>🧪 The Flex-Fuel Trap Simulator</h2>
+      <p>Discover why you can't reach high ethanol targets if your tank is too full. Adjust the sliders below to see the physical volume constraints in real-time.</p>
+    </div>
+
+    <div class="sim-grid">
+      <div class="sim-controls">
+        <div class="sim-slider-group">
+          <label>Current Fuel in Tank (Assumes E10)</label>
+          <div class="sim-val" id="sim-val-cur">4.2 Gal</div>
+          <input type="range" id="sim-sl-cur" min="0" max="16.6" step="0.1" value="4.2" oninput="runSim()">
+        </div>
+        
+        <div class="sim-slider-group">
+          <label>Target Ethanol %</label>
+          <div class="sim-val" id="sim-val-tgt" style="color: var(--gold);">E45</div>
+          <input type="range" id="sim-sl-tgt" min="10" max="85" step="1" value="45" oninput="runSim()">
+        </div>
+
+        <div id="sim-alert" class="sim-alert"></div>
+
+        <div class="sim-stats">
+          <div><span>Empty Space:</span> <strong id="sim-stat-empty">12.4 gal</strong></div>
+          <div><span>Ideal E85 Needed:</span> <strong id="sim-stat-ideal">6.2 gal</strong></div>
+          <div><span>Max Achievable:</span> <strong id="sim-stat-max" style="color:var(--gold);">E45</strong></div>
+        </div>
+      </div>
+
+      <div class="sim-visual">
+        <div class="sim-tank-container">
+          <div class="sim-tank-cap">16.6G MAX</div>
+          <div class="sim-tank">
+            <div class="sim-fill sf-93" id="sf-93"><span id="slbl-93">93</span></div>
+            <div class="sim-fill sf-e85" id="sf-e85"><span id="slbl-e85">E85</span></div>
+            <div class="sim-fill sf-cur" id="sf-cur"><span id="slbl-cur">Current</span></div>
+          </div>
+          <div class="sim-tank-base">EMPTY</div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
 <script src="app.js"></script>
