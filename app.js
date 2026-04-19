@@ -19,12 +19,12 @@ let fuelLogs = [];
 // ==========================================
 // 🔴 GOOGLE FORM CONFIGURATION 🔴
 // ==========================================
-const GOOGLE_FORM_ACTION_URL = "https://docs.google.com/forms/d/e/1FAIpQLScfYRQp2e6oH524g83RI2Hf2xDz1DRJLj2mt2uc8xBrLJ8g9g/formResponse";
-const FORM_ENTRY_DATE    = "entry.1873002234"; 
-const FORM_ENTRY_STATION = "entry.490270945"; 
-const FORM_ENTRY_E85     = "entry.391979914"; 
-const FORM_ENTRY_93      = "entry.1998665240"; 
-const FORM_ENTRY_ETH     = "entry.1111191565"; 
+const GOOGLE_FORM_ACTION_URL = "https://docs.google.com/forms/d/e/YOUR_FORM_ID_HERE/formResponse";
+const FORM_ENTRY_DATE    = "entry.111111111"; 
+const FORM_ENTRY_STATION = "entry.222222222"; 
+const FORM_ENTRY_E85     = "entry.333333333"; 
+const FORM_ENTRY_93      = "entry.444444444"; 
+const FORM_ENTRY_ETH     = "entry.555555555"; 
 // ==========================================
 
 window.onload = function() {
@@ -164,7 +164,9 @@ function resetDefault() {
   setTick(0);
 }
 
-// --- HYBRID LOGGING SYSTEM ---
+// ==========================================
+// LOGGING SYSTEM
+// ==========================================
 
 function saveFillUpLog() {
   const station = document.getElementById('inp-station').value.trim() || 'Unknown Station';
@@ -226,7 +228,6 @@ function renderLogs() {
   `).join('');
 }
 
-// UPDATED: Explicitly tell the user the cloud backup is safe
 function deleteLog(id) {
   if(confirm('Delete this fill-up log from your browser?\n\n(Note: Your Google Sheets backup will NOT be deleted)')) {
     fuelLogs = fuelLogs.filter(l => l.id !== id);
@@ -235,7 +236,6 @@ function deleteLog(id) {
   }
 }
 
-// UPDATED: Explicitly tell the user the cloud backup is safe
 function deleteAllLogs() {
   if(fuelLogs.length === 0) return;
   if(confirm('⚠️ Clear all log history on this device?\n\nYour data saved in Google Sheets is safe and will NOT be deleted. Proceed?')) {
@@ -279,4 +279,65 @@ function sendToGoogleForm(logData) {
     mode: "no-cors",
     body: formData
   }).catch(error => console.error("Cloud Sync Failed:", error));
+}
+
+// ==========================================
+// 🧪 FLEX-FUEL TRAP SIMULATOR LOGIC
+// ==========================================
+
+function openSim() {
+  const modal = document.getElementById('sim-modal');
+  modal.classList.add('show');
+  runSim();
+}
+
+function closeSim(e) {
+  const modal = document.getElementById('sim-modal');
+  if (!e || e.target === modal) {
+    modal.classList.remove('show');
+  }
+}
+
+function runSim() {
+  const curGal = parseFloat(document.getElementById('sim-sl-cur').value);
+  const tgtEth = parseFloat(document.getElementById('sim-sl-tgt').value);
+  const curEth = 10; 
+  
+  document.getElementById('sim-val-cur').textContent = curGal.toFixed(1) + ' Gal';
+  document.getElementById('sim-val-tgt').textContent = 'E' + tgtEth;
+
+  const emptySpace = TANK - curGal;
+  let idealE85 = ((tgtEth * TANK) - (curEth * curGal) - (10 * emptySpace)) / 75;
+  
+  let actualE85 = idealE85;
+  if (actualE85 < 0) actualE85 = 0;
+  if (actualE85 > emptySpace) actualE85 = emptySpace; 
+
+  let actual93 = emptySpace - actualE85;
+  let finalEth = Math.round(((curGal * curEth) + (actualE85 * 85) + (actual93 * 10)) / TANK);
+
+  document.getElementById('sim-stat-empty').textContent = emptySpace.toFixed(1) + ' gal';
+  document.getElementById('sim-stat-ideal').textContent = (idealE85 > 0 ? idealE85.toFixed(1) : '0.0') + ' gal';
+  document.getElementById('sim-stat-max').textContent = 'E' + finalEth;
+
+  const alertBox = document.getElementById('sim-alert');
+  if (idealE85 > emptySpace) {
+    alertBox.className = 'sim-alert trap';
+    alertBox.innerHTML = `⚠️ <strong>FLEX-FUEL TRAP ACTIVATED</strong><br>You need ${idealE85.toFixed(1)} gallons of E85 to hit E${tgtEth}, but you only have ${emptySpace.toFixed(1)} gallons of empty space. The highest you can reach is E${finalEth}.`;
+  } else {
+    alertBox.className = 'sim-alert ok';
+    alertBox.innerHTML = `✅ <strong>TARGET ACHIEVABLE</strong><br>You have plenty of empty room in the tank to fit the required ${actualE85.toFixed(1)} gallons of E85.`;
+  }
+
+  const curPct = (curGal / TANK) * 100;
+  const e85Pct = (actualE85 / TANK) * 100;
+  const c93Pct = (actual93 / TANK) * 100;
+
+  document.getElementById('sf-cur').style.height = curPct + '%';
+  document.getElementById('sf-e85').style.height = e85Pct + '%';
+  document.getElementById('sf-93').style.height = c93Pct + '%';
+  
+  document.getElementById('slbl-cur').style.opacity = curPct > 10 ? 1 : 0;
+  document.getElementById('slbl-e85').style.opacity = e85Pct > 10 ? 1 : 0;
+  document.getElementById('slbl-93').style.opacity = c93Pct > 10 ? 1 : 0;
 }
