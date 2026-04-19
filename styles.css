@@ -4,8 +4,8 @@
   --card-border: #242938;   
   
   --gold: #f5a623; 
-  --neon: #ccff00;     /* High-vis motorsport yellow/green */
-  --wr-blue: #022b6b;  /* Subaru World Rally Blue */
+  --neon: #ccff00;     
+  --wr-blue: #022b6b;  
   --e85: #10b981;      
   --c93: #3b82f6;      
   --red: #ef4444;      
@@ -25,35 +25,16 @@ body {
   -webkit-text-size-adjust: 100%;
 }
 
-/* MOTORSPORT RALLY HEADER */
 .rally-banner {
-  width: 100%;
-  padding: 32px 20px;
-  background: var(--wr-blue);
-  /* Aggressive geometric slices */
-  background-image: 
-    linear-gradient(105deg, transparent 45%, rgba(204, 255, 0, 0.95) 45%, rgba(204, 255, 0, 0.95) 48%, transparent 48%),
-    linear-gradient(25deg, transparent 60%, rgba(255, 255, 255, 0.15) 60%, rgba(255, 255, 255, 0.15) 63%, transparent 63%),
-    linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.5) 100%);
-  border-bottom: 4px solid var(--neon);
-  margin-bottom: 32px;
-  text-align: center;
-  position: relative;
-  overflow: hidden;
-  box-shadow: 0 8px 24px rgba(2, 43, 107, 0.5);
+  width: 100%; padding: 32px 20px; background: var(--wr-blue);
+  background-image: linear-gradient(105deg, transparent 45%, rgba(204, 255, 0, 0.95) 45%, rgba(204, 255, 0, 0.95) 48%, transparent 48%), linear-gradient(25deg, transparent 60%, rgba(255, 255, 255, 0.15) 60%, rgba(255, 255, 255, 0.15) 63%, transparent 63%), linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.5) 100%);
+  border-bottom: 4px solid var(--neon); margin-bottom: 32px; text-align: center; position: relative; overflow: hidden; box-shadow: 0 8px 24px rgba(2, 43, 107, 0.5);
 }
 .scrk-brand {
-  font-family: 'Inter', sans-serif; font-weight: 900; font-size: 28px;
-  letter-spacing: 4px; color: #fff; display: flex; justify-content: center;
-  align-items: center; gap: 12px; position: relative; z-index: 2;
-  text-shadow: 0 4px 12px rgba(0,0,0,0.6);
+  font-family: 'Inter', sans-serif; font-weight: 900; font-size: 28px; letter-spacing: 4px; color: #fff; display: flex; justify-content: center; align-items: center; gap: 12px; position: relative; z-index: 2; text-shadow: 0 4px 12px rgba(0,0,0,0.6);
 }
 .scrk-tag {
-  font-family: 'Share Tech Mono', monospace; font-size: 13px; font-weight: 700;
-  letter-spacing: 2px; color: #000; background: var(--neon);
-  padding: 6px 10px; border-radius: 4px; transform: skewX(-15deg);
-  display: inline-block; box-shadow: 0 4px 10px rgba(204, 255, 0, 0.4);
-  text-shadow: none;
+  font-family: 'Share Tech Mono', monospace; font-size: 13px; font-weight: 700; letter-spacing: 2px; color: #000; background: var(--neon); padding: 6px 10px; border-radius: 4px; transform: skewX(-15deg); display: inline-block; box-shadow: 0 4px 10px rgba(204, 255, 0, 0.4); text-shadow: none;
 }
 .scrk-tag span { display: inline-block; transform: skewX(15deg); }
 
@@ -89,7 +70,6 @@ h1 .hl{color:var(--gold);}
 .reset-btn:hover{background:rgba(59,130,246,.25); color:#fff;}
 
 .calc-card { padding: 32px 24px; margin-bottom: 24px; }
-
 .tank-header{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:16px;}
 .tank-title{font-family:'Share Tech Mono',monospace;font-size:12px;letter-spacing:2px;color:var(--dim);text-transform:uppercase;}
 .tank-reading{font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:2px;color:#fff;}
@@ -224,7 +204,7 @@ tbody td:not(:first-child){text-align:center;}
 .fm{font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:2px;color:rgba(255,255,255,.4);}
 
 /* =========================================
-   TRAP SIMULATOR MODAL CSS 
+   TRAP SIMULATOR MODAL & NEON GAUGE
 ========================================= */
 .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(5, 5, 7, 0.85); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); z-index: 9999; justify-content: center; align-items: center; padding: 20px; opacity: 0; transition: opacity 0.3s ease; }
 .modal-overlay.show { display: flex; opacity: 1; }
@@ -235,6 +215,21 @@ tbody td:not(:first-child){text-align:center;}
 .sim-header h2 { font-family: 'Bebas Neue', sans-serif; font-size: 32px; letter-spacing: 2px; color: #fff; margin-bottom: 8px; }
 .sim-header p { font-size: 14px; color: var(--dim); line-height: 1.5; margin-bottom: 32px; }
 .sim-grid { display: grid; grid-template-columns: 1fr 140px; gap: 40px; }
+
+.radial-gauge-container { margin-bottom: 32px; background: rgba(0,0,0,0.4); border: 1px solid var(--card-border); border-radius: 16px; padding: 20px; text-align: center; box-shadow: inset 0 4px 12px rgba(0,0,0,0.6); }
+.radial-gauge-container label { display: block; font-family: 'Share Tech Mono', monospace; font-size: 12px; text-transform: uppercase; color: var(--dim); margin-bottom: 16px; font-weight: bold; }
+.radial-wrapper { position: relative; width: 100%; max-width: 240px; margin: 0 auto; }
+.radial-labels { position: absolute; top: 90px; left: 0; width: 100%; display: flex; justify-content: space-between; padding: 0 12px; pointer-events: none; font-family: 'Bebas Neue', sans-serif; font-size: 24px; color: var(--dim); }
+.radial-labels span:last-child { color: #fff; }
+.radial-svg { width: 100%; height: auto; overflow: visible; touch-action: none; cursor: pointer; }
+.radial-track { fill: none; stroke: #1a1e2b; stroke-width: 14; stroke-linecap: round; }
+.radial-fill { fill: none; stroke: var(--neon); stroke-width: 14; stroke-linecap: round; transition: stroke-dashoffset 0.1s linear; }
+.radial-thumb { fill: #fff; stroke: var(--neon); stroke-width: 4; filter: drop-shadow(0 0 8px var(--neon)); transition: transform 0.1s linear; }
+.radial-thumb:hover { transform: scale(1.2); }
+.radial-readout { position: absolute; bottom: 10px; left: 50%; transform: translateX(-50%); pointer-events: none; }
+.radial-val { font-family: 'Bebas Neue', sans-serif; font-size: 42px; color: #fff; line-height: 1; text-shadow: 0 0 16px rgba(204,255,0,0.4); }
+.radial-unit { font-family: 'Share Tech Mono', monospace; font-size: 10px; color: var(--neon); letter-spacing: 2px; }
+
 .sim-slider-group { margin-bottom: 24px; }
 .sim-slider-group label { display: block; font-family: 'Share Tech Mono', monospace; font-size: 11px; text-transform: uppercase; color: var(--dim); margin-bottom: 8px; font-weight: bold; }
 .sim-val { font-family: 'Bebas Neue', sans-serif; font-size: 32px; color: #fff; margin-bottom: 12px; line-height: 1; }
