@@ -9,330 +9,494 @@
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src 'self' https://docs.google.com; img-src 'self' data: https:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; script-src 'self' 'unsafe-inline';">
 <title>SCRK Flex Fuel Mix — Interactive</title>
 
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23111318'/><text x='50%' y='68%' font-family='sans-serif' font-size='60' font-weight='bold' fill='%23ccff00' text-anchor='middle'>S</text></svg>">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23080b12'/><text x='50%' y='68%' font-family='sans-serif' font-size='58' font-weight='bold' fill='%23ccff00' text-anchor='middle'>S</text></svg>">
 
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700;800;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@400;600;700;800;900&family=Share+Tech+Mono&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-<div class="top-nav rally-banner">
- <div class="scrk-brand">
- SCRK 
- <div class="scrk-tag"><span>WISH I TUNE</span></div>
- </div>
+<!-- ======================================================
+     RALLY BANNER — Subaru WRC × SCRK Identity
+     ====================================================== -->
+<div class="rally-banner">
+  <div class="rally-topbar"></div>
+  <div class="rally-banner-inner">
+    <div class="rally-stars">
+      <span></span><span></span><span></span><span></span>
+      <span></span><span></span><span></span><span></span>
+    </div>
+    <div class="scrk-brand">
+      SCRK
+      <div class="scrk-tag"><span>WISH I TUNE</span></div>
+    </div>
+    <div class="rally-subline">WRX FA24 · FLEX FUEL CALCULATOR · EST. 2024</div>
+    <div class="rally-telemetry">
+      <div class="telem-dot"></div>
+      <div class="telem-dot"></div>
+      <div class="telem-dot"></div>
+      <div class="telem-dot"></div>
+      <div class="telem-dot"></div>
+      <div class="telem-dot"></div>
+      <div class="telem-dot"></div>
+    </div>
+  </div>
+  <div class="rally-bottombar"></div>
 </div>
 
 <div class="container">
 
- <div class="header">
- <div>
- <div class="badge">FA24 Flex Fuel · WRX</div>
- <h1>FLEX FUEL<br><span class="hl">CUSTOM BLEND</span><br>CALCULATOR</h1>
- <div class="subtitle">16.6-Gallon Tank · E85 + 93 Octane</div>
- </div>
- <div class="hpills">
- <div class="pill safe">✓ STRAIGHT E85 SAFE</div>
- <div class="pill safe">✓ FULL E10–E85 FLEX CAPABLE</div>
- </div>
- </div>
+  <!-- ======================================================
+       PAGE HEADER
+       ====================================================== -->
+  <div class="header">
+    <div>
+      <div class="badge"><span>FA24 FLEX FUEL · WRX</span></div>
+      <h1>FLEX FUEL<br><span class="hl">CUSTOM BLEND</span><br>CALCULATOR</h1>
+      <div class="subtitle">16.6-Gallon Tank · E85 + 93 Octane</div>
+    </div>
+    <div class="hpills">
+      <div class="pill safe">✓ STRAIGHT E85 SAFE</div>
+      <div class="pill safe">✓ FULL E10–E85 FLEX CAPABLE</div>
+    </div>
+  </div>
 
- <div class="banner grn">
- <span class="bico"> </span>
- <p><strong class="g">SCRK Tuning:</strong> Full Flex Fuel capability unlocked. You can maintain 70%+ ethanol, run straight pump E85, or run straight 93 octane without issue. It is not necessary to always have E85 in the tank.</p>
- </div>
+  <div class="banner grn">
+    <span class="bico">⚡</span>
+    <p><strong class="g">SCRK Tuning:</strong> Full Flex Fuel capability unlocked. You can maintain 70%+ ethanol, run straight pump E85, or run straight 93 octane without issue. It is not necessary to always have E85 in the tank.</p>
+  </div>
 
- <div class="mode-bar">
- <button class="mode-btn active" id="btn-calc" onclick="setMode('calc')"> Calculator</button>
- <button class="mode-btn" id="btn-table" onclick="setMode('table')"> Static Chart</button>
- <button class="mode-btn" id="btn-log" onclick="setMode('log')"> Logbook</button>
- <button class="mode-btn" id="btn-sim" style="color: #ccff00; border-color: rgba(204,255,0,0.3);" onclick="openSim()"> Trap Simulator</button>
- <button class="reset-btn" onclick="resetDefault()">↺ Reset</button>
- </div>
+  <!-- ======================================================
+       MODE BAR
+       ====================================================== -->
+  <div class="mode-bar">
+    <button class="mode-btn active" id="btn-calc" onclick="setMode('calc')">⚙ Calculator</button>
+    <button class="mode-btn" id="btn-table" onclick="setMode('table')">📋 Static Chart</button>
+    <button class="mode-btn" id="btn-log" onclick="setMode('log')">📓 Logbook</button>
+    <button class="mode-btn" id="btn-sim" onclick="openSim()">⚠ Trap Simulator</button>
+    <button class="reset-btn" onclick="resetDefault()">↺ Reset</button>
+  </div>
 
- <div id="calc-view">
- <div class="calc-card solid-card">
- 
- <div style="margin-bottom:32px;">
- <div class="tank-header">
- <span class="tank-title">Current Fuel Level — Drag Slider</span>
- <span class="tank-reading" id="needle-reading">E — <em>Empty</em></span>
- </div>
+  <!-- ======================================================
+       CALCULATOR VIEW
+       ====================================================== -->
+  <div id="calc-view">
+    <div class="calc-card solid-card">
 
- <div class="gauge-track" id="gt">
- <div class="gfill existing" id="gex"></div>
- <div class="gfill e85fill" id="ge"></div>
- <div class="gfill c93fill" id="gc"></div>
- <div class="glabel le" id="lle"> E85</div>
- <div class="glabel lc" id="llc"> 93</div>
- </div>
+      <div style="margin-bottom:28px;">
+        <div class="tank-header">
+          <span class="tank-title">Current Fuel Level — Drag Slider</span>
+          <span class="tank-reading" id="needle-reading">E &mdash; <em>Empty</em></span>
+        </div>
 
- <div class="tick-row">
- <span class="tick on" onclick="setTick(0)">E</span>
- <span class="tick" onclick="setTick(1)">⅛</span>
- <span class="tick" onclick="setTick(2)">¼</span>
- <span class="tick" onclick="setTick(3)">⅜</span>
- <span class="tick" onclick="setTick(4)">½</span>
- <span class="tick" onclick="setTick(5)">⅝</span>
- <span class="tick" onclick="setTick(6)">¾</span>
- <span class="tick" onclick="setTick(7)">⅞</span>
- </div>
+        <div class="gauge-track" id="gt">
+          <div class="gfill existing" id="gex"></div>
+          <div class="gfill e85fill" id="ge"></div>
+          <div class="gfill c93fill" id="gc"></div>
+          <div class="glabel le" id="lle">⬡ E85</div>
+          <div class="glabel lc" id="llc">◈ 93</div>
+        </div>
 
- <div class="slider-wrap">
- <input type="range" id="sl" min="0" max="7" step="1" value="0" oninput="onSlide(this.value)">
- </div>
- </div>
+        <div class="tick-row">
+          <span class="tick on" onclick="setTick(0)">E</span>
+          <span class="tick" onclick="setTick(1)">⅛</span>
+          <span class="tick" onclick="setTick(2)">¼</span>
+          <span class="tick" onclick="setTick(3)">⅜</span>
+          <span class="tick" onclick="setTick(4)">½</span>
+          <span class="tick" onclick="setTick(5)">⅝</span>
+          <span class="tick" onclick="setTick(6)">¾</span>
+          <span class="tick" onclick="setTick(7)">⅞</span>
+        </div>
 
- <div class="custom-inputs">
- <div class="input-box">
- <label>Current Fuel Remaining</label>
- <input type="number" id="inp-gal" value="0.0" min="0" max="16.6" step="0.1" oninput="handleInput()">
- <span class="unit">GAL</span>
- </div>
- <div class="input-box">
- <label>AP Final Gauge (Eth %)</label>
- <input type="number" id="inp-eth" value="10" min="0" max="100" step="1" oninput="handleInput()">
- <span class="unit">%</span>
- </div>
- <div class="input-box">
- <label>Target Ethanol</label>
- <input type="number" id="inp-tgt" value="45" min="10" max="85" step="1" oninput="handleInput()">
- <span class="unit">%</span>
- </div>
- </div>
+        <div class="slider-wrap">
+          <input type="range" id="sl" min="0" max="7" step="1" value="0" oninput="onSlide(this.value)">
+        </div>
+      </div>
 
- <div class="result-grid">
- <div class="result-card ec">
- <div class="rlbl"> Pump E85</div>
- <div class="rval" id="ve">8.30</div>
- <div class="runit">gallons — pump first</div>
- </div>
- <div class="result-card cc">
- <div class="rlbl"> Then 93 Octane</div>
- <div class="rval" id="vc">8.30</div>
- <div class="runit">gallons — top off</div>
- </div>
- <div class="result-card xc">
- <div class="rlbl"> Resulting Ethanol</div>
- <div class="rval" id="vx">~E45</div>
- <div class="runit">estimated blend</div>
- </div>
- </div>
+      <div class="custom-inputs">
+        <div class="input-box">
+          <label>Fuel Remaining</label>
+          <input type="number" id="inp-gal" value="0.0" min="0" max="16.6" step="0.1" oninput="handleInput()">
+          <span class="unit">GAL</span>
+        </div>
+        <div class="input-box">
+          <label>AP Eth Gauge</label>
+          <input type="number" id="inp-eth" value="10" min="0" max="100" step="1" oninput="handleInput()">
+          <span class="unit">%</span>
+        </div>
+        <div class="input-box">
+          <label>Target Eth</label>
+          <input type="number" id="inp-tgt" value="45" min="10" max="85" step="1" oninput="handleInput()">
+          <span class="unit">%</span>
+        </div>
+      </div>
 
- <div class="eth-status">
- <div class="ebadge sweet" id="ebadge">✓ SCRK TUNED — SAFE FOR ALL BLENDS</div>
- </div>
+      <div class="result-grid">
+        <div class="result-card ec">
+          <div class="rlbl">⬡ Pump E85</div>
+          <div class="rval" id="ve">8.30</div>
+          <div class="runit">gallons — pump first</div>
+        </div>
+        <div class="result-card cc">
+          <div class="rlbl">◈ Then 93 Octane</div>
+          <div class="rval" id="vc">8.30</div>
+          <div class="runit">gallons — top off</div>
+        </div>
+        <div class="result-card xc">
+          <div class="rlbl">◎ Resulting Ethanol</div>
+          <div class="rval" id="vx">~E45</div>
+          <div class="runit">estimated blend</div>
+        </div>
+      </div>
 
- <div class="log-action-bar">
- <input type="text" id="inp-station" placeholder="Enter Gas Station (e.g. Shell, Meijer)" class="station-input">
- <button class="save-log-btn" onclick="saveFillUpLog()"> Log Fill-up</button>
- </div>
+      <div class="eth-status">
+        <div class="ebadge sweet" id="ebadge">✓ SCRK TUNED — SAFE FOR ALL BLENDS</div>
+      </div>
 
- <div class="step-box">
- <div class="step-title">// PUMP SEQUENCE FOR THIS FILL</div>
- <div class="steps">
- <div class="step">
- <div class="snum s1">1</div>
- <div class="stxt">Select the <strong>E85 pump</strong>. Pump exactly <span class="se" id="i1">8.30 gallons</span> of E85 into your tank first.</div>
- </div>
- <div class="step">
- <div class="snum s2">2</div>
- <div class="stxt">Switch to the <strong>93 octane pump</strong>. Fill until the nozzle <strong>clicks off</strong> — targeting <span class="sc" id="i2">8.30 gallons</span> of 93.</div>
- </div>
- <div class="step">
- <div class="snum s3">3</div>
- <div class="stxt">After fueling, check your <strong>Accessport</strong> ethanol sensor — it should climb to <span id="i3">~45%</span> after driving a few miles.</div>
- </div>
- </div>
- </div>
+      <div class="log-action-bar">
+        <input type="text" id="inp-station" placeholder="Enter Gas Station (e.g. Shell, Meijer)" class="station-input">
+        <button class="save-log-btn" onclick="saveFillUpLog()">⛽ Log Fill-up</button>
+      </div>
 
- <div class="math-box">
- <div class="math-title"> Math Verification</div>
- <div class="math-formula">V_E85 = [(TargetEth × 16.6) - (CurEth × CurGal) - (10 × EmptyGal)] ÷ 75</div>
- <div class="math-live" id="live-math">E85 Needed = [(45 × 16.6) - (10 × 0.0) - (10 × 16.6)] ÷ 75 = 8.30</div>
- </div>
- </div>
- </div>
+      <div class="step-box">
+        <div class="step-title">// PUMP SEQUENCE FOR THIS FILL</div>
+        <div class="steps">
+          <div class="step">
+            <div class="snum s1">1</div>
+            <div class="stxt">Select the <strong>E85 pump</strong>. Pump exactly <span class="se" id="i1">8.30 gallons</span> of E85 into your tank first.</div>
+          </div>
+          <div class="step">
+            <div class="snum s2">2</div>
+            <div class="stxt">Switch to the <strong>93 octane pump</strong>. Fill until the nozzle <strong>clicks off</strong> — targeting <span class="sc" id="i2">8.30 gallons</span> of 93.</div>
+          </div>
+          <div class="step">
+            <div class="snum s3">3</div>
+            <div class="stxt">After fueling, check your <strong>Accessport</strong> ethanol sensor — it should climb to <span id="i3">~45%</span> after driving a few miles.</div>
+          </div>
+        </div>
+      </div>
 
- <div id="table-view" style="display:none;">
- <div class="table-legend">
- <div><div class="dot d-e85"></div><span> E85 Pump</span></div>
- <div><div class="dot d-c93"></div><span> 93 Octane</span></div>
- <div><div class="dot d-dim"></div><span>Total: 16.6 gal</span></div>
- </div>
- 
- <div class="table-wrap solid-card">
- <div style="overflow-x:auto;">
- <table>
- <thead><tr><th>Gauge Needle</th><th>Total Needed</th><th> E85 Pump</th><th> 93 Octane</th></tr></thead>
- <tbody>
- <tr class="lf"><td><div class="gcell"><div><div class="glv">E — Empty</div><div class="gsub">Low fuel light on<div class="fbw"><div class="fb" style="width:0%"></div></div></div></div></div></td><td><span class="tv">16.6 gal</span></td><td><span class="ev">8.30<span class="u">gal</span></span></td><td><span class="cv">8.30<span class="u">gal</span></span></td></tr>
- <tr><td><div class="gcell"><div><div class="glv">⅛ Tank</div><div class="gsub">~2.1 gal remaining<div class="fbw"><div class="fb" style="width:12.5%"></div></div></div></div></div></td><td><span class="tv">14.5 gal</span></td><td><span class="ev">7.25<span class="u">gal</span></span></td><td><span class="cv">7.25<span class="u">gal</span></span></td></tr>
- <tr><td><div class="gcell"><div><div class="glv">¼ Tank</div><div class="gsub">~4.2 gal remaining<div class="fbw"><div class="fb" style="width:25%"></div></div></div></div></div></td><td><span class="tv">12.5 gal</span></td><td><span class="ev">6.25<span class="u">gal</span></span></td><td><span class="cv">6.25<span class="u">gal</span></span></td></tr>
- <tr><td><div class="gcell"><div><div class="glv">⅜ Tank</div><div class="gsub">~6.2 gal remaining<div class="fbw"><div class="fb" style="width:37.5%"></div></div></div></div></div></td><td><span class="tv">10.4 gal</span></td><td><span class="ev">5.20<span class="u">gal</span></span></td><td><span class="cv">5.20<span class="u">gal</span></span></td></tr>
- <tr><td><div class="gcell"><div><div class="glv">½ Tank</div><div class="gsub">~8.3 gal remaining<div class="fbw"><div class="fb" style="width:50%"></div></div></div></div></div></td><td><span class="tv">8.3 gal</span></td><td><span class="ev">4.15<span class="u">gal</span></span></td><td><span class="cv">4.15<span class="u">gal</span></span></td></tr>
- <tr><td><div class="gcell"><div><div class="glv">⅝ Tank</div><div class="gsub">~10.4 gal remaining<div class="fbw"><div class="fb" style="width:62.5%"></div></div></div></div></div></td><td><span class="tv">6.2 gal</span></td><td><span class="ev">3.10<span class="u">gal</span></span></td><td><span class="cv">3.10<span class="u">gal</span></span></td></tr>
- <tr><td><div class="gcell"><div><div class="glv">¾ Tank</div><div class="gsub">~12.5 gal remaining<div class="fbw"><div class="fb" style="width:75%"></div></div></div></div></div></td><td><span class="tv">4.2 gal</span></td><td><span class="ev">2.10<span class="u">gal</span></span></td><td><span class="cv">2.10<span class="u">gal</span></span></td></tr>
- <tr><td><div class="gcell"><div><div class="glv">⅞ Tank</div><div class="gsub">~14.5 gal remaining<div class="fbw"><div class="fb" style="width:87.5%"></div></div></div></div></div></td><td><span class="tv">2.1 gal</span></td><td><span class="ev">1.05<span class="u">gal</span></span></td><td><span class="cv">1.05<span class="u">gal</span></span></td></tr>
- </tbody>
- </table>
- </div>
- </div>
- </div>
+      <div class="math-box">
+        <div class="math-title">⟨ Math Verification ⟩</div>
+        <div class="math-formula">V_E85 = [(TargetEth × 16.6) - (CurEth × CurGal) - (10 × EmptyGal)] ÷ 75</div>
+        <div class="math-live" id="live-math">E85 Needed = [(45 × 16.6) - (10 × 0.0) - (10 × 16.6)] ÷ 75 = 8.30</div>
+      </div>
 
- <div id="log-view" style="display:none;">
- <div class="log-info-box solid-card">
- <div class="info-block">
- <span class="info-icon"> </span>
- <div>
- <strong>How Logging Works</strong>
- <p>Your fill-up history is saved privately directly to this device's local browser memory. No accounts or logins are required.</p>
- </div>
- </div>
- <div class="info-block warning-block">
- <span class="info-icon"> </span>
- <div>
- <strong>Data Retention Warning</strong>
- <p>Clearing your phone's browser cache or website data will <strong>permanently erase</strong> these logs locally. Use the Download button below frequently to back up your history.</p>
- </div>
- </div>
- </div>
+    </div>
+  </div>
 
- <div class="solid-card log-container">
- <div class="log-header">
- <h2>Vehicle Fill-up History</h2>
- <div class="log-actions">
- <button class="download-btn" onclick="downloadCSV()"> Export Excel</button>
- <button class="del-all-btn" onclick="deleteAllLogs()"> Delete All</button>
- </div>
- </div>
- <div class="table-wrap">
- <div style="overflow-x:auto;">
- <table>
- <thead>
- <tr>
- <th>Date / Time (EST)</th>
- <th>Gas Station</th>
- <th> E85 (Gal)</th>
- <th> 93 (Gal)</th>
- <th> Result Eth %</th>
- <th></th>
- </tr>
- </thead>
- <tbody id="log-table-body">
- </tbody>
- </table>
- </div>
- </div>
- <div class="log-empty" id="log-empty-msg">No fill-ups logged yet. Calculate a mix and click "Log Fill-up" to store it here.</div>
- </div>
- </div>
+  <!-- ======================================================
+       TABLE VIEW
+       ====================================================== -->
+  <div id="table-view" style="display:none;">
+    <div class="table-legend">
+      <div><div class="dot d-e85"></div><span> E85 Pump</span></div>
+      <div><div class="dot d-c93"></div><span> 93 Octane</span></div>
+      <div><div class="dot d-dim"></div><span>Total: 16.6 gal</span></div>
+    </div>
+    <div class="table-wrap solid-card">
+      <div style="overflow-x:auto;">
+        <table>
+          <thead><tr><th>Gauge Needle</th><th>Total Needed</th><th>⬡ E85 Pump</th><th>◈ 93 Octane</th></tr></thead>
+          <tbody>
+            <tr class="lf"><td><div class="gcell"><div><div class="glv">E — Empty</div><div class="gsub">Low fuel light on<div class="fbw"><div class="fb" style="width:0%"></div></div></div></div></div></td><td><span class="tv">16.6 gal</span></td><td><span class="ev">8.30<span class="u">gal</span></span></td><td><span class="cv">8.30<span class="u">gal</span></span></td></tr>
+            <tr><td><div class="gcell"><div><div class="glv">⅛ Tank</div><div class="gsub">~2.1 gal remaining<div class="fbw"><div class="fb" style="width:12.5%"></div></div></div></div></div></td><td><span class="tv">14.5 gal</span></td><td><span class="ev">7.25<span class="u">gal</span></span></td><td><span class="cv">7.25<span class="u">gal</span></span></td></tr>
+            <tr><td><div class="gcell"><div><div class="glv">¼ Tank</div><div class="gsub">~4.2 gal remaining<div class="fbw"><div class="fb" style="width:25%"></div></div></div></div></div></td><td><span class="tv">12.5 gal</span></td><td><span class="ev">6.25<span class="u">gal</span></span></td><td><span class="cv">6.25<span class="u">gal</span></span></td></tr>
+            <tr><td><div class="gcell"><div><div class="glv">⅜ Tank</div><div class="gsub">~6.2 gal remaining<div class="fbw"><div class="fb" style="width:37.5%"></div></div></div></div></div></td><td><span class="tv">10.4 gal</span></td><td><span class="ev">5.20<span class="u">gal</span></span></td><td><span class="cv">5.20<span class="u">gal</span></span></td></tr>
+            <tr><td><div class="gcell"><div><div class="glv">½ Tank</div><div class="gsub">~8.3 gal remaining<div class="fbw"><div class="fb" style="width:50%"></div></div></div></div></div></td><td><span class="tv">8.3 gal</span></td><td><span class="ev">4.15<span class="u">gal</span></span></td><td><span class="cv">4.15<span class="u">gal</span></span></td></tr>
+            <tr><td><div class="gcell"><div><div class="glv">⅝ Tank</div><div class="gsub">~10.4 gal remaining<div class="fbw"><div class="fb" style="width:62.5%"></div></div></div></div></div></td><td><span class="tv">6.2 gal</span></td><td><span class="ev">3.10<span class="u">gal</span></span></td><td><span class="cv">3.10<span class="u">gal</span></span></td></tr>
+            <tr><td><div class="gcell"><div><div class="glv">¾ Tank</div><div class="gsub">~12.5 gal remaining<div class="fbw"><div class="fb" style="width:75%"></div></div></div></div></div></td><td><span class="tv">4.2 gal</span></td><td><span class="ev">2.10<span class="u">gal</span></span></td><td><span class="cv">2.10<span class="u">gal</span></span></td></tr>
+            <tr><td><div class="gcell"><div><div class="glv">⅞ Tank</div><div class="gsub">~14.5 gal remaining<div class="fbw"><div class="fb" style="width:87.5%"></div></div></div></div></div></td><td><span class="tv">2.1 gal</span></td><td><span class="ev">1.05<span class="u">gal</span></span></td><td><span class="cv">1.05<span class="u">gal</span></span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
 
- <div class="section-title" style="margin-top: 16px;">// TECHNICAL REFERENCE & GALLERY</div>
- <div class="gallery-grid">
- <div class="photo-card tilt-container">
- <img src="wrx-action.jpg" alt="2022 Subaru WRX Driving">
- </div>
- <div class="photo-card tilt-container">
- <img src="wrx-shifter.jpg" alt="FA24 WRX Manual Shifter">
- </div>
- <div class="photo-card tilt-container">
- <img src="wrx-interior.jpg" alt="WRX Interior Dashboard">
- </div>
- </div>
- <div class="photo-credit">
- Vehicle photography via <a href="https://www.motortrend.com/features/2022-subaru-wrx-limited-yearlong-review-arrival/photos" target="_blank" rel="noopener noreferrer">MotorTrend</a>.
- </div>
+  <!-- ======================================================
+       LOG VIEW
+       ====================================================== -->
+  <div id="log-view" style="display:none;">
+    <div class="log-info-box solid-card">
+      <div class="info-block">
+        <span class="info-icon">🔒</span>
+        <div>
+          <strong>How Logging Works</strong>
+          <p>Your fill-up history is saved privately directly to this device's local browser memory. No accounts or logins required.</p>
+        </div>
+      </div>
+      <div class="info-block warning-block">
+        <span class="info-icon">⚠️</span>
+        <div>
+          <strong>Data Retention Warning</strong>
+          <p>Clearing your phone's browser cache will <strong>permanently erase</strong> these logs locally. Export to CSV frequently to back up your history.</p>
+        </div>
+      </div>
+    </div>
 
- <div class="disclaimer solid-card" style="margin-top: 24px;">
- <strong>DISCLAIMER & LIABILITY:</strong> This calculator relies on mathematical estimates assuming exactly 85% ethanol in pump E85 and 10% ethanol in 93 Premium. <strong>Real-world pump E85 fluctuates heavily by season and state (often E51–E83).</strong> Due to this, your final mix will vary. Always monitor your final ethanol percentage directly via your Cobb Accessport. <strong>Do your own math.</strong> The creator of this tool assumes no liability for engine or vehicle damage. Use at your own risk.
- </div>
+    <div class="solid-card log-container">
+      <div class="log-header">
+        <h2>Fill-up History</h2>
+        <div class="log-actions">
+          <button class="download-btn" onclick="downloadCSV()">⬇ Export CSV</button>
+          <button class="del-all-btn" onclick="deleteAllLogs()">✕ Delete All</button>
+        </div>
+      </div>
+      <div class="table-wrap">
+        <div style="overflow-x:auto;">
+          <table>
+            <thead>
+              <tr>
+                <th>Date / Time (EST)</th>
+                <th>Gas Station</th>
+                <th>⬡ E85 (Gal)</th>
+                <th>◈ 93 (Gal)</th>
+                <th>◎ Eth %</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody id="log-table-body"></tbody>
+          </table>
+        </div>
+      </div>
+      <div class="log-empty" id="log-empty-msg">No fill-ups logged yet. Calculate a mix and tap "Log Fill-up" to store it here.</div>
+    </div>
+  </div>
 
- <div class="footer">
- <div class="fn">FA24 · Accessport Required · Verify ETH% at pump · Cobb Flex Fuel Kit · Cold Air Intake · SCRK Custom Tune</div>
- <div class="fm">22 WRX Premium</div>
- </div>
+  <!-- ======================================================
+       GALLERY — 3D tilt + hover overlay
+       ====================================================== -->
+  <div class="section-title" style="margin-top: 24px;">// TECHNICAL REFERENCE & GALLERY</div>
+  <div class="gallery-grid">
+    <div class="photo-card" id="pc1" onmousemove="tiltCard(event,'pc1')" onmouseleave="resetCard('pc1')" onclick="openLightbox('wrx-action.jpg','2022 Subaru WRX Driving')">
+      <img src="wrx-action.jpg" alt="2022 Subaru WRX Driving">
+      <div class="photo-overlay">2022 WRX · On Track</div>
+    </div>
+    <div class="photo-card" id="pc2" onmousemove="tiltCard(event,'pc2')" onmouseleave="resetCard('pc2')" onclick="openLightbox('wrx-shifter.jpg','FA24 WRX Manual Shifter')">
+      <img src="wrx-shifter.jpg" alt="FA24 WRX Manual Shifter">
+      <div class="photo-overlay">FA24 · 6-Speed Manual</div>
+    </div>
+    <div class="photo-card" id="pc3" onmousemove="tiltCard(event,'pc3')" onmouseleave="resetCard('pc3')" onclick="openLightbox('wrx-interior.jpg','WRX Interior Dashboard')">
+      <img src="wrx-interior.jpg" alt="WRX Interior Dashboard">
+      <div class="photo-overlay">Cockpit · Accessport</div>
+    </div>
+  </div>
+  <div class="photo-credit">
+    Vehicle photography via <a href="https://www.motortrend.com/features/2022-subaru-wrx-limited-yearlong-review-arrival/photos" target="_blank" rel="noopener noreferrer">MotorTrend</a>.
+  </div>
+
+  <!-- Lightbox -->
+  <div id="lightbox" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.92);z-index:99999;display:none;align-items:center;justify-content:center;padding:20px;" onclick="closeLightbox()">
+    <div style="max-width:900px;width:100%;position:relative;">
+      <img id="lb-img" src="" alt="" style="width:100%;height:auto;border-radius:12px;border:1px solid #2e3555;">
+      <div id="lb-cap" style="font-family:'Share Tech Mono',monospace;font-size:12px;color:#6b7a99;text-align:center;margin-top:12px;letter-spacing:2px;"></div>
+      <button onclick="closeLightbox()" style="position:absolute;top:-14px;right:-14px;background:#1e2235;border:1px solid #2e3555;border-radius:50%;width:36px;height:36px;color:#fff;font-size:16px;cursor:pointer;">✕</button>
+    </div>
+  </div>
+
+  <div class="disclaimer solid-card" style="margin-top: 24px;">
+    <strong>DISCLAIMER &amp; LIABILITY:</strong> This calculator relies on mathematical estimates assuming exactly 85% ethanol in pump E85 and 10% ethanol in 93 Premium. <strong>Real-world pump E85 fluctuates heavily by season and state (often E51–E83).</strong> Due to this, your final mix will vary. Always monitor your final ethanol percentage directly via your Cobb Accessport. <strong>Do your own math.</strong> The creator of this tool assumes no liability for engine or vehicle damage. Use at your own risk.
+  </div>
+
+  <div class="footer">
+    <div class="fn">FA24 · Accessport Required · Verify ETH% at pump · Cobb Flex Fuel Kit · Cold Air Intake · SCRK Custom Tune</div>
+    <div class="fm">22 WRX</div>
+  </div>
 
 </div>
 
+<!-- ======================================================
+     TRAP SIMULATOR MODAL — Full rebuild, iPhone-optimized
+     ====================================================== -->
 <div id="sim-modal" class="modal-overlay" onclick="closeSim(event)">
- <div class="modal-content solid-card" onclick="event.stopPropagation()">
- <button class="close-btn" onclick="closeSim(null)">✕</button>
- 
- <div class="sim-header">
- <h2> The Flex-Fuel Trap Simulator</h2>
- <p>Discover why you can't reach high ethanol targets if your tank is too full. Adjust the controls below to see the physical volume constraints in real-time.</p>
- </div>
+  <div class="modal-content" onclick="event.stopPropagation()">
+    <button class="close-btn" onclick="closeSim(null)">✕</button>
+    <div class="modal-inner">
 
- <div class="sim-grid">
- <div class="sim-controls">
- 
- <div class="radial-gauge-container">
- <label>Current Fuel in Tank (E10)</label>
- <div class="radial-wrapper">
- <div class="radial-labels"><span>E</span><span>F</span></div>
- <svg id="radial-svg" viewBox="0 0 200 110" class="radial-svg">
- <defs>
- <linearGradient id="neon-grad" x1="0%" y1="0%" x2="100%" y2="0%">
- <stop offset="0%" stop-color="#f43f5e" /> 
- <stop offset="50%" stop-color="#f5a623" /> 
- <stop offset="100%" stop-color="#ccff00" /> 
- </linearGradient>
- <filter id="neon-glow" x="-20%" y="-20%" width="140%" height="140%">
- <feGaussianBlur stdDeviation="4" result="blur" />
- <feMerge>
- <feMergeNode in="blur" />
- <feMergeNode in="SourceGraphic" />
- </feMerge>
- </filter>
- </defs>
- 
- <path class="radial-track" d="M 20 100 A 80 80 0 0 1 180 100" />
- <path class="radial-ticks" d="M 20 100 L 30 100 M 43.4 43.4 L 50.5 50.5 M 100 20 L 100 30 M 156.6 43.4 L 149.5 50.5 M 180 100 L 170 100" />
- <path class="radial-fill" id="radial-fill" d="M 20 100 A 80 80 0 0 1 180 100" stroke="url(#neon-grad)" stroke-dasharray="251.327" stroke-dashoffset="251.327" filter="url(#neon-glow)" />
- </svg>
- 
- <div class="radial-readout">
- <div id="sim-val-cur" class="radial-val">4.2</div>
- <div class="radial-unit">GALLONS</div>
- </div>
- </div>
- 
- <div class="gauge-control-wrap">
- <input type="range" id="sim-sl-cur" min="0" max="16.6" step="0.1" value="4.2" oninput="runSim()">
- </div>
- </div>
- 
- <div class="sim-slider-group">
- <label>Target Ethanol %</label>
- <div class="sim-val" id="sim-val-tgt" style="color: var(--gold);">E45</div>
- <input type="range" id="sim-sl-tgt" min="10" max="85" step="1" value="45" oninput="runSim()">
- </div>
+      <div class="sim-header">
+        <h2>⚠ The Flex-Fuel <span>Trap</span> Simulator</h2>
+        <p>Discover why you can't reach high ethanol targets when your tank is too full. Adjust the sliders to see physical volume constraints in real-time.</p>
+      </div>
 
- <div id="sim-alert" class="sim-alert"></div>
+      <!-- TANK VISUAL — horizontal, iPhone-native -->
+      <div class="sim-visual" style="margin-bottom:20px;">
+        <div class="sim-tank-container" style="width:100%;">
+          <div class="sim-tank-label-row">
+            <span>⬡ E85 ADDED</span>
+            <span>◈ 93 ADDED</span>
+            <span style="color:rgba(255,255,255,0.3)">▤ EXISTING E10</span>
+          </div>
+          <div class="sim-tank-horiz" id="sim-tank-horiz">
+            <!-- layers stack left→right: existing | e85 | 93 -->
+            <div class="sim-fill-horiz" id="sfh-cur" style="width:0%;left:0;"><span class="tank-fill-label" id="slbl-cur-h"></span></div>
+            <div class="sim-fill-horiz" id="sfh-e85" style="width:0%;left:0;"><span class="tank-fill-label" id="slbl-e85-h"></span></div>
+            <div class="sim-fill-horiz" id="sfh-93"  style="width:0%;left:0;"><span class="tank-fill-label" id="slbl-93-h"></span></div>
+          </div>
+          <div class="sim-tank-pct-row">
+            <div class="sim-pct-badge e85-b" id="pct-e85">E85: — gal</div>
+            <div class="sim-pct-badge c93-b"  id="pct-93">93: — gal</div>
+            <div class="sim-pct-badge cur-b"  id="pct-cur">In tank: — gal</div>
+          </div>
+          <div class="sim-tank-cap-new">16.6 GAL MAX CAPACITY</div>
+        </div>
+      </div>
 
- <div class="sim-stats">
- <div><span>Empty Space:</span> <strong id="sim-stat-empty">12.4 gal</strong></div>
- <div><span>Ideal E85 Needed:</span> <strong id="sim-stat-ideal">6.2 gal</strong></div>
- <div><span>Max Achievable:</span> <strong id="sim-stat-max" style="color:var(--gold);">E45</strong></div>
- </div>
- </div>
+      <div class="sim-grid">
+        <div class="sim-controls">
 
- <div class="sim-visual">
- <div class="sim-tank-container">
- <div class="sim-tank-cap">16.6G MAX</div>
- <div class="sim-tank">
- <div class="sim-fill sf-93" id="sf-93"><span id="slbl-93">93</span></div>
- <div class="sim-fill sf-e85" id="sf-e85"><span id="slbl-e85">E85</span></div>
- <div class="sim-fill sf-cur" id="sf-cur"><span id="slbl-cur">Current</span></div>
- </div>
- <div class="sim-tank-base">EMPTY</div>
- </div>
- </div>
- </div>
- </div>
+          <!-- Radial fuel gauge -->
+          <div class="radial-gauge-container">
+            <label>Current Fuel in Tank (E10)</label>
+            <div class="radial-wrapper">
+              <div class="radial-labels"><span>E</span><span>F</span></div>
+              <svg id="radial-svg" viewBox="0 0 200 110" class="radial-svg">
+                <defs>
+                  <linearGradient id="neon-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" stop-color="#f43f5e"/>
+                    <stop offset="50%" stop-color="#f5a623"/>
+                    <stop offset="100%" stop-color="#ccff00"/>
+                  </linearGradient>
+                  <filter id="neon-glow" x="-20%" y="-20%" width="140%" height="140%">
+                    <feGaussianBlur stdDeviation="4" result="blur"/>
+                    <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+                  </filter>
+                </defs>
+                <path class="radial-track" d="M 20 100 A 80 80 0 0 1 180 100"/>
+                <path class="radial-ticks" d="M 20 100 L 30 100 M 43.4 43.4 L 50.5 50.5 M 100 20 L 100 30 M 156.6 43.4 L 149.5 50.5 M 180 100 L 170 100"/>
+                <path class="radial-fill" id="radial-fill" d="M 20 100 A 80 80 0 0 1 180 100" stroke="url(#neon-grad)" stroke-dasharray="251.327" stroke-dashoffset="251.327" filter="url(#neon-glow)"/>
+              </svg>
+              <div class="radial-readout">
+                <div id="sim-val-cur" class="radial-val">4.2</div>
+                <div class="radial-unit">GALLONS</div>
+              </div>
+            </div>
+            <div class="gauge-control-wrap" style="margin-top:12px;">
+              <input type="range" id="sim-sl-cur" min="0" max="16.6" step="0.1" value="4.2" oninput="runSim()">
+            </div>
+          </div>
+
+          <!-- Target ethanol slider -->
+          <div class="sim-slider-group">
+            <label>Target Ethanol %</label>
+            <div class="sim-val" id="sim-val-tgt" style="color:var(--gold);">E45</div>
+            <input type="range" id="sim-sl-tgt" min="10" max="85" step="1" value="45" oninput="runSim()">
+          </div>
+
+        </div>
+
+        <div>
+          <!-- Alert box -->
+          <div id="sim-alert" class="sim-alert ok">
+            <strong>Run the sliders to simulate.</strong>
+          </div>
+
+          <!-- Stats -->
+          <div class="sim-stats">
+            <div><span>Empty Space:</span> <strong id="sim-stat-empty">—</strong></div>
+            <div><span>Ideal E85 Needed:</span> <strong id="sim-stat-ideal">—</strong></div>
+            <div><span>Max Achievable:</span> <strong id="sim-stat-max" style="color:var(--gold);">—</strong></div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /.modal-inner -->
+  </div>
 </div>
 
 <script src="app.js"></script>
+<script>
+// ======================================================
+// 3D TILT on gallery cards (desktop only)
+// ======================================================
+function tiltCard(e, id) {
+  if (window.innerWidth < 600) return;
+  const card = document.getElementById(id);
+  const rect = card.getBoundingClientRect();
+  const x = (e.clientX - rect.left) / rect.width  - 0.5;
+  const y = (e.clientY - rect.top)  / rect.height - 0.5;
+  card.style.transform = `perspective(600px) rotateY(${x * 12}deg) rotateX(${-y * 10}deg) scale(1.03)`;
+}
+function resetCard(id) {
+  const card = document.getElementById(id);
+  card.style.transform = '';
+  card.style.transition = 'transform 0.5s ease';
+  setTimeout(() => card.style.transition = '', 500);
+}
+
+// ======================================================
+// LIGHTBOX
+// ======================================================
+function openLightbox(src, caption) {
+  const lb = document.getElementById('lightbox');
+  document.getElementById('lb-img').src = src;
+  document.getElementById('lb-cap').textContent = caption;
+  lb.style.display = 'flex';
+}
+function closeLightbox() {
+  document.getElementById('lightbox').style.display = 'none';
+}
+
+// ======================================================
+// TRAP SIMULATOR — runSim override for horizontal tank
+// ======================================================
+// We override runSim from app.js to also update the new
+// horizontal tank visual. We do this after app.js loads.
+document.addEventListener('DOMContentLoaded', () => {
+  const _origRunSim = window.runSim;
+  window.runSim = function() {
+    _origRunSim(); // run original logic
+    updateHorizTank();
+  };
+  // run once on open
+});
+
+function updateHorizTank() {
+  const TANK = 16.6;
+  const curGal  = parseFloat(document.getElementById('sim-sl-cur').value);
+  const tgtEth  = parseFloat(document.getElementById('sim-sl-tgt').value);
+  const curEth  = 10;
+  const emptySpace = TANK - curGal;
+
+  let idealE85 = ((tgtEth * TANK) - (curEth * curGal) - (10 * emptySpace)) / 75;
+  let actualE85 = Math.max(0, Math.min(idealE85, emptySpace));
+  let actual93  = emptySpace - actualE85;
+
+  const curPct  = (curGal   / TANK) * 100;
+  const e85Pct  = (actualE85 / TANK) * 100;
+  const c93Pct  = (actual93  / TANK) * 100;
+
+  // Horizontal: layers stack. Existing from left, then e85, then 93
+  // We use absolute positioning on a relative parent
+  const sfCur = document.getElementById('sfh-cur');
+  const sfE85 = document.getElementById('sfh-e85');
+  const sf93  = document.getElementById('sfh-93');
+
+  sfCur.style.width = curPct + '%';
+  sfCur.style.left  = '0%';
+
+  sfE85.style.width = e85Pct + '%';
+  sfE85.style.left  = curPct + '%';
+
+  sf93.style.width = c93Pct + '%';
+  sf93.style.left  = (curPct + e85Pct) + '%';
+
+  // Labels — only show if wide enough
+  document.getElementById('slbl-cur-h').textContent  = curPct  > 12 ? `E10 ${curGal.toFixed(1)}g`   : '';
+  document.getElementById('slbl-e85-h').textContent  = e85Pct  > 12 ? `E85 ${actualE85.toFixed(1)}g` : '';
+  document.getElementById('slbl-93-h').textContent   = c93Pct  > 12 ? `93 ${actual93.toFixed(1)}g`   : '';
+
+  // Badge row
+  document.getElementById('pct-e85').textContent = `E85: ${actualE85.toFixed(2)} gal`;
+  document.getElementById('pct-93').textContent  = `93:  ${actual93.toFixed(2)} gal`;
+  document.getElementById('pct-cur').textContent = `In tank: ${curGal.toFixed(1)} gal`;
+}
+
+// Run horizontal tank on first open
+const _origOpenSim = window.openSim;
+window.openSim = function() {
+  _origOpenSim();
+  updateHorizTank();
+};
+</script>
 </body>
 </html>
