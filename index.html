@@ -318,13 +318,13 @@
         <p>Discover why you can't reach high ethanol targets when your tank is too full. Adjust the sliders to see physical volume constraints in real-time.</p>
       </div>
 
-      <!-- TANK VISUAL — horizontal, iPhone-native -->
-      <div class="sim-visual" style="margin-bottom:20px;">
-        <div class="sim-tank-container" style="width:100%;">
+      <!-- TANK VISUAL — horizontal, all-device native -->
+      <div class="sim-visual-wrapper">
+        <div>
           <div class="sim-tank-label-row">
-            <span>⬡ E85 ADDED</span>
-            <span>◈ 93 ADDED</span>
-            <span style="color:rgba(255,255,255,0.3)">▤ EXISTING E10</span>
+            <span class="lbl-e85">⬡ E85 ADDED</span>
+            <span class="lbl-c93">◈ 93 ADDED</span>
+            <span class="lbl-cur">▤ EXISTING E10</span>
           </div>
           <div class="sim-tank-horiz" id="sim-tank-horiz">
             <!-- layers stack left→right: existing | e85 | 93 -->
@@ -339,7 +339,7 @@
           </div>
           <div class="sim-tank-cap-new">16.6 GAL MAX CAPACITY</div>
         </div>
-      </div>
+      </div><!-- /.sim-visual-wrapper -->
 
       <div class="sim-grid">
         <div class="sim-controls">
