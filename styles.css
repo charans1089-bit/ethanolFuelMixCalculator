@@ -1,48 +1,48 @@
 :root {
-  --bg-page: #090a0f;       
-  --card-bg: #141722;       
-  --card-border: #242938;   
-  
-  --gold: #f5a623; 
-  --neon: #ccff00;     
-  --wr-blue: #022b6b;  
-  --e85: #10b981;      
-  --c93: #3b82f6;      
-  --red: #ef4444;      
-  --warn: #f59e0b;
-  --text: #f8fafc;
-  --dim: #94a3b8;
+--bg-page: #090a0f;
+--card-bg: #141722;
+--card-border: #242938;
+
+--gold: #f5a623;
+--neon: #ccff00;
+--wr-blue: #022b6b;
+--e85: #10b981;
+--c93: #3b82f6;
+--red: #ef4444;
+--warn: #f59e0b;
+--text: #f8fafc;
+--dim: #94a3b8;
 }
 
 *{margin:0;padding:0;box-sizing:border-box; -webkit-tap-highlight-color: transparent;}
 
 body {
-  font-family: 'Inter', -apple-system, sans-serif;
-  background-color: var(--bg-page); 
-  color: var(--text);
-  min-height: 100vh; 
-  padding: 0 0 48px 0; 
-  -webkit-text-size-adjust: 100%;
+font-family: 'Inter', -apple-system, sans-serif;
+background-color: var(--bg-page);
+color: var(--text);
+min-height: 100vh;
+padding: 0 0 48px 0;
+-webkit-text-size-adjust: 100%;
 }
 
 .rally-banner {
-  width: 100%; padding: 32px 20px; background: var(--wr-blue);
-  background-image: linear-gradient(105deg, transparent 45%, rgba(204, 255, 0, 0.95) 45%, rgba(204, 255, 0, 0.95) 48%, transparent 48%), linear-gradient(25deg, transparent 60%, rgba(255, 255, 255, 0.15) 60%, rgba(255, 255, 255, 0.15) 63%, transparent 63%), linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.5) 100%);
-  border-bottom: 4px solid var(--neon); margin-bottom: 32px; text-align: center; position: relative; overflow: hidden; box-shadow: 0 8px 24px rgba(2, 43, 107, 0.5);
+width: 100%; padding: 32px 20px; background: var(--wr-blue);
+background-image: linear-gradient(105deg, transparent 45%, rgba(204, 255, 0, 0.95) 45%, rgba(204, 255, 0, 0.95) 48%, transparent 48%), linear-gradient(25deg, transparent 60%, rgba(255, 255, 255, 0.15) 60%, rgba(255, 255, 255, 0.15) 63%, transparent 63%), linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.5) 100%);
+border-bottom: 4px solid var(--neon); margin-bottom: 32px; text-align: center; position: relative; overflow: hidden; box-shadow: 0 8px 24px rgba(2, 43, 107, 0.5);
 }
 .scrk-brand {
-  font-family: 'Inter', sans-serif; font-weight: 900; font-size: 28px; letter-spacing: 4px; color: #fff; display: flex; justify-content: center; align-items: center; gap: 12px; position: relative; z-index: 2; text-shadow: 0 4px 12px rgba(0,0,0,0.6);
+font-family: 'Inter', sans-serif; font-weight: 900; font-size: 28px; letter-spacing: 4px; color: #fff; display: flex; justify-content: center; align-items: center; gap: 12px; position: relative; z-index: 2; text-shadow: 0 4px 12px rgba(0,0,0,0.6);
 }
 .scrk-tag {
-  font-family: 'Share Tech Mono', monospace; font-size: 13px; font-weight: 700; letter-spacing: 2px; color: #000; background: var(--neon); padding: 6px 10px; border-radius: 4px; transform: skewX(-15deg); display: inline-block; box-shadow: 0 4px 10px rgba(204, 255, 0, 0.4); text-shadow: none;
+font-family: 'Share Tech Mono', monospace; font-size: 13px; font-weight: 700; letter-spacing: 2px; color: #000; background: var(--neon); padding: 6px 10px; border-radius: 4px; transform: skewX(-15deg); display: inline-block; box-shadow: 0 4px 10px rgba(204, 255, 0, 0.4); text-shadow: none;
 }
 .scrk-tag span { display: inline-block; transform: skewX(15deg); }
 
 .container { max-width:860px; margin: 0 auto; padding: 0 20px; }
 
 .solid-card {
-  background: var(--card-bg); border: 1px solid var(--card-border);
-  border-radius: 16px; box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4);
+background: var(--card-bg); border: 1px solid var(--card-border);
+border-radius: 16px; box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4);
 }
 
 .header{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;margin-bottom:24px;padding-bottom:24px;border-bottom:1px solid var(--card-border);}
@@ -197,14 +197,14 @@ tbody td:not(:first-child){text-align:center;}
 .tilt-container:hover { transform: translateY(-4px); border-color: var(--gold); }
 .tilt-container:hover img { transform: scale(1.05); opacity: 1; }
 
-.disclaimer {padding:24px; font-size:14px; color:var(--dim); line-height:1.6; border-left: 4px solid var(--red);}
-.disclaimer strong {color:var(--red); font-weight:600;}
+.disclaimer {padding:24px; font-size:14px; color:var(--dim); line-height:1.6; border-left: 4px solid var(--gold);}
+.disclaimer strong {color:var(--gold); font-weight:600;}
 .footer{margin-top:32px;padding-top:24px;border-top:1px solid var(--card-border);display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;}
 .fn{font-family:'Share Tech Mono',monospace;font-size:12px;font-weight:bold;letter-spacing:1.5px;color:var(--dim);text-transform:uppercase; line-height: 1.5; flex: 1 1 300px;}
 .fm{font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:2px;color:rgba(255,255,255,.4);}
 
 /* =========================================
-   TRAP SIMULATOR MODAL & NEON GAUGE CSS 
+TRAP SIMULATOR MODAL & NEON GAUGE CSS
 ========================================= */
 .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(5, 5, 7, 0.85); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); z-index: 9999; justify-content: center; align-items: center; padding: 20px; opacity: 0; transition: opacity 0.3s ease; }
 .modal-overlay.show { display: flex; opacity: 1; }
@@ -259,19 +259,19 @@ tbody td:not(:first-child){text-align:center;}
 .sf-cur { background: rgba(255,255,255,0.1); border-top: 2px dashed rgba(255,255,255,0.3); }
 
 @media(max-width: 768px) {
-  .header{flex-direction:column;}
-  .hpills{align-items:flex-start;flex-direction:row;flex-wrap:wrap;}
-  h1{font-size:48px;}
-  .result-grid{grid-template-columns:1fr 1fr; gap:12px;}
-  .result-grid .xc{grid-column:1/-1;}
-  .log-action-bar { flex-direction: column; align-items: stretch; padding: 20px;}
-  .save-log-btn { width: 100%; }
-  .mode-bar { gap: 12px; flex-direction:column; align-items:stretch;}
-  .mode-btn { width:100%;}
-  .scrk-brand {font-size: 24px;}
-  .sim-grid { grid-template-columns: 1fr; gap: 24px; }
-  .sim-visual { order: -1; } 
-  .sim-tank { height: 160px; }
-  .sim-tank-container { width: 100%; }
-  .modal-content { padding: 24px; }
+.header{flex-direction:column;}
+.hpills{align-items:flex-start;flex-direction:row;flex-wrap:wrap;}
+h1{font-size:48px;}
+.result-grid{grid-template-columns:1fr 1fr; gap:12px;}
+.result-grid .xc{grid-column:1/-1;}
+.log-action-bar { flex-direction: column; align-items: stretch; padding: 20px;}
+.save-log-btn { width: 100%; }
+.mode-bar { gap: 12px; flex-direction:column; align-items:stretch;}
+.mode-btn { width:100%;}
+.scrk-brand {font-size: 24px;}
+.sim-grid { grid-template-columns: 1fr; gap: 24px; }
+.sim-visual { order: -1; }
+.sim-tank { height: 160px; }
+.sim-tank-container { width: 100%; }
+.modal-content { padding: 24px; }
 }
