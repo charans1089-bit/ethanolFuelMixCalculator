@@ -18,13 +18,19 @@ let fuelLogs = [];
 
 // ==========================================
 // 🔴 GOOGLE FORM CONFIGURATION 🔴
+//1FAIpQLScfYRQp2e6oH524g83RI2Hf2xDz1DRJLj2mt2uc8xBrLJ8g9g
+//1873002234=Date
+//490270945=Station
+//391979914=85
+//1998665240=93
+//1111191565=eth%25
 // ==========================================
-const GOOGLE_FORM_ACTION_URL = "https://docs.google.com/forms/d/e/YOUR_FORM_ID_HERE/formResponse";
-const FORM_ENTRY_DATE    = "entry.111111111"; 
-const FORM_ENTRY_STATION = "entry.222222222"; 
-const FORM_ENTRY_E85     = "entry.333333333"; 
-const FORM_ENTRY_93      = "entry.444444444"; 
-const FORM_ENTRY_ETH     = "entry.555555555"; 
+const GOOGLE_FORM_ACTION_URL = "https://docs.google.com/forms/d/e/1FAIpQLScfYRQp2e6oH524g83RI2Hf2xDz1DRJLj2mt2uc8xBrLJ8g9g/formResponse";
+const FORM_ENTRY_DATE    = "entry.1873002234"; 
+const FORM_ENTRY_STATION = "entry.490270945"; 
+const FORM_ENTRY_E85     = "entry.391979914"; 
+const FORM_ENTRY_93      = "entry.1998665240"; 
+const FORM_ENTRY_ETH     = "entry.1111191565"; 
 // ==========================================
 
 window.onload = function() {
