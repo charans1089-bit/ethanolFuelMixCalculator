@@ -44,7 +44,7 @@ body {
 
 .container { max-width: 880px; margin: 0 auto; padding: 0 20px; position: relative; z-index: 1; }
 
-/* ==================== RALLY BANNER (SUBARU / NEON) ==================== */
+/* ==================== RALLY BANNER ==================== */
 .rally-banner { 
   width: 100%; position: relative; margin-bottom: 30px; 
   background: var(--wr-blue);
@@ -71,7 +71,7 @@ body {
 /* ==================== CARD ==================== */
 .solid-card { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 16px; box-shadow: 0 10px 40px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.04); }
 
-/* ==================== PAGE HEADER (RESET FIXED) ==================== */
+/* ==================== PAGE HEADER ==================== */
 .header { display:flex; align-items:flex-start; justify-content:space-between; margin-bottom:28px; padding-bottom:24px; border-bottom:1px solid var(--card-border); }
 .header-left { flex: 1; }
 .header-right { display: flex; flex-direction: column; align-items: flex-end; gap: 16px; }
@@ -83,7 +83,6 @@ h1 { font-family:'Orbitron',sans-serif; font-size:clamp(36px,7vw,66px); letter-s
 h1 .hl { color: var(--e85); }
 .subtitle { font-size:14px; letter-spacing:2px; font-family:'Share Tech Mono'; color:var(--text-muted); text-transform:uppercase; margin-top:12px; }
 
-/* RESET BUTTON MOVED & STYLED */
 .reset-btn { font-family:'Share Tech Mono'; font-size:14px; letter-spacing:2px; padding:10px 20px; border-radius:8px; cursor:pointer; border:1px solid rgba(255,69,69,0.4); background:rgba(255,69,69,0.1); color:var(--red); font-weight:bold; transition:all .2s ease; display:flex; align-items:center; gap:8px;}
 .reset-btn:hover { background:rgba(255,69,69,0.2); transform: scale(1.05); }
 
@@ -93,7 +92,6 @@ h1 .hl { color: var(--e85); }
 
 .banner { padding:18px 22px; margin-bottom:24px; border-radius:12px; display:flex; gap:16px; font-size:16px; background:var(--card-bg); border:1px solid var(--card-border); }
 .banner.grn { border-left:4px solid var(--e85); }
-.banner.red { border-left:4px solid var(--red); }
 .banner strong.g { color:var(--e85); }
 
 /* ==================== MODE BAR ==================== */
@@ -103,7 +101,7 @@ h1 .hl { color: var(--e85); }
 .mode-btn.active { background:rgba(245,166,35,.1); border-color:var(--gold); color:var(--gold); box-shadow:0 0 14px rgba(245,166,35,0.12); }
 #btn-sim:hover { background:rgba(204,255,0,0.06); box-shadow:0 0 18px rgba(204,255,0,0.18); }
 
-/* ==================== CALC CARD & UPGRADED SLIDER ==================== */
+/* ==================== CALC CARD & UPGRADED GAUGE ==================== */
 .calc-card { padding:32px 24px; margin-bottom:24px; }
 .fuel-level-module { background:var(--card-inner); border:1px solid var(--card-border); border-radius:12px; padding:20px; margin-bottom:32px; box-shadow:inset 0 4px 12px rgba(0,0,0,0.4); }
 
@@ -112,18 +110,24 @@ h1 .hl { color: var(--e85); }
 .tank-reading { font-family:'Orbitron'; font-size:24px; color:var(--text); }
 .tank-reading em { color:var(--e85); font-style:normal; font-size:18px;}
 
-.gauge-track { position:relative; height:48px; margin-bottom:20px; background:#000; border:1px solid var(--card-border-bright); border-radius:8px; overflow:hidden; }
-.gfill { position:absolute; top:0; height:100%; transition:width .3s ease,left .3s ease; }
-.gfill.existing { right:0; background:rgba(138,154,184,0.12); border-left:2px dashed rgba(138,154,184,0.3); }
-.gfill.e85fill  { left:0; background:linear-gradient(90deg,rgba(245,200,66,0.88),rgba(245,200,66,0.5)); border-right:3px dashed #000; }
-.gfill.c93fill  { background:linear-gradient(90deg,rgba(94,184,255,0.75),rgba(94,184,255,0.3)); border-right:3px dashed #000;}
-.glabel { position:absolute; top:50%; transform:translateY(-50%); font-family:'Share Tech Mono'; font-size:12px; font-weight:bold; color:#fff; text-shadow:0 2px 8px rgba(0,0,0,0.95); z-index:6; }
-.glabel.le { left:12px; }
+/* UPDATED FLEX STACKED TRACK */
+.gauge-track { 
+  position:relative; height:48px; margin-bottom:20px; background:#000; 
+  border:1px solid var(--card-border-bright); border-radius:8px; overflow:hidden; 
+}
+.gfill { 
+  position:absolute; top:0; height:100%; transition:width 0.3s ease, left 0.3s ease; 
+  display: flex; align-items: center; justify-content: center; overflow: hidden;
+}
+.gfill.existing { background:linear-gradient(90deg, #2b3347, #4e5a78); border-right:2px dashed #000; }
+.gfill.e85fill  { background:linear-gradient(90deg, #f5a623, #f5c842); border-right:2px dashed #000; }
+.gfill.c93fill  { background:linear-gradient(90deg, #3b82f6, #5eb8ff); }
+.glabel { font-family:'Share Tech Mono'; font-size:12px; font-weight:bold; color:#000; white-space: nowrap; pointer-events:none;}
 
 /* The Tactile Slider */
 .slider-tactile-wrap { position: relative; padding: 0 12px; }
 .tick-row { display:flex; justify-content:space-between; margin-bottom:12px; padding: 0 4px;}
-.tick { font-family:'Share Tech Mono'; font-size:13px; color:var(--text-muted); cursor:pointer; text-align:center; font-weight:bold; }
+.tick { font-family:'Share Tech Mono'; font-size:13px; color:var(--text-muted); cursor:pointer; text-align:center; font-weight:bold; flex: 1;}
 .tick.on { color:var(--gold); transform:scale(1.2); text-shadow: 0 0 8px var(--e85-glow); }
 
 .tactile-slider {
@@ -241,10 +245,8 @@ tbody td { padding:16px; font-size: 15px;}
 .photo-card:hover img { opacity:1; transform: scale(1.05);}
 .photo-overlay { position:absolute; bottom:0; left:0; right:0; padding:16px; background:linear-gradient(transparent,rgba(0,0,0,0.9)); font-family:'Share Tech Mono'; font-size:11px; color:#fff; transform:translateY(100%); transition:transform .3s; }
 .photo-card:hover .photo-overlay { transform:translateY(0); }
-.photo-credit { font-size:12px; color:var(--text-muted); margin-bottom:24px; font-family:'Share Tech Mono';}
-.photo-credit a { color:var(--gold); }
 
-/* ==================== TRAP SIMULATOR MODAL (MOBILE FIXED) ==================== */
+/* ==================== TRAP SIMULATOR MODAL ==================== */
 .modal-overlay { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.9); backdrop-filter:blur(8px); z-index:9999; align-items:center; justify-content:center; padding:16px; }
 .modal-overlay.show { display:flex; }
 .modal-content { background:var(--card-bg); width:100%; max-width:800px; border-radius:16px; border:1px solid var(--card-border-bright); position:relative; box-shadow:0 20px 60px rgba(0,0,0,0.9); overflow: hidden; }
