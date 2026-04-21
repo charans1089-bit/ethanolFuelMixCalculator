@@ -22,7 +22,7 @@
       SCRK
       <div class="scrk-tag"><span>WISH I TUNE</span></div>
     </div>
-    <div class="rally-subline">WRX FA24 · FLEX FUEL CALCULATOR · EST. 2026</div>
+    <div class="rally-subline">WRX FA24 · FLEX FUEL CALCULATOR · EST. 2024</div>
   </div>
 </div>
 
@@ -65,25 +65,24 @@
         </div>
 
         <div class="gauge-track" id="gt">
-          <div class="gfill existing" id="gex"></div>
-          <div class="gfill e85fill" id="ge"></div>
-          <div class="gfill c93fill" id="gc"></div>
-          <div class="glabel le" id="lle">⬡ E85</div>
-          <div class="glabel lc" id="llc">◈ 93</div>
+          <div class="gfill existing" id="gex"><span class="glabel" id="llex">▤ E10</span></div>
+          <div class="gfill e85fill" id="ge"><span class="glabel" id="lle">⬡ E85</span></div>
+          <div class="gfill c93fill" id="gc"><span class="glabel" id="llc">◈ 93</span></div>
         </div>
 
         <div class="slider-tactile-wrap">
           <div class="tick-row">
-            <span class="tick on" onclick="setTick(0)">E</span>
-            <span class="tick" onclick="setTick(1)">⅛</span>
-            <span class="tick" onclick="setTick(2)">¼</span>
-            <span class="tick" onclick="setTick(3)">⅜</span>
-            <span class="tick" onclick="setTick(4)">½</span>
-            <span class="tick" onclick="setTick(5)">⅝</span>
-            <span class="tick" onclick="setTick(6)">¾</span>
-            <span class="tick" onclick="setTick(7)">F</span>
+            <span class="tick main-t on" onclick="setTick(0)">E</span>
+            <span class="tick main-t" onclick="setTick(1)">⅛</span>
+            <span class="tick main-t" onclick="setTick(2)">¼</span>
+            <span class="tick main-t" onclick="setTick(3)">⅜</span>
+            <span class="tick main-t" onclick="setTick(4)">½</span>
+            <span class="tick main-t" onclick="setTick(5)">⅝</span>
+            <span class="tick main-t" onclick="setTick(6)">¾</span>
+            <span class="tick main-t" onclick="setTick(7)">⅞</span>
+            <span class="tick main-t" onclick="setTick(8)">F</span>
           </div>
-          <input type="range" id="sl" class="tactile-slider" min="0" max="7" step="1" value="0" oninput="onSlide(this.value)">
+          <input type="range" id="sl" class="tactile-slider" min="0" max="8" step="1" value="0" oninput="onSlide(this.value)">
         </div>
       </div>
 
@@ -296,11 +295,22 @@
               <div class="sim-val" id="sim-val-cur">4.2<span style="font-size:16px;"> GAL</span></div>
             </div>
             <div class="slider-tactile-wrap sim-wrap">
-              <input type="range" id="sim-sl-cur" class="tactile-slider" min="0" max="16.6" step="0.1" value="4.2" oninput="runSim()">
+              <div class="tick-row" style="margin-bottom: 8px;">
+                <span class="tick sim-t on" onclick="setSimTick(0)">E</span>
+                <span class="tick sim-t" onclick="setSimTick(1)">⅛</span>
+                <span class="tick sim-t" onclick="setSimTick(2)">¼</span>
+                <span class="tick sim-t" onclick="setSimTick(3)">⅜</span>
+                <span class="tick sim-t" onclick="setSimTick(4)">½</span>
+                <span class="tick sim-t" onclick="setSimTick(5)">⅝</span>
+                <span class="tick sim-t" onclick="setSimTick(6)">¾</span>
+                <span class="tick sim-t" onclick="setSimTick(7)">⅞</span>
+                <span class="tick sim-t" onclick="setSimTick(8)">F</span>
+              </div>
+              <input type="range" id="sim-sl-cur" class="tactile-slider" min="0" max="8" step="1" value="2" oninput="onSimSlide(this.value)">
             </div>
           </div>
           
-          <div class="sim-slider-group">
+          <div class="sim-slider-group" style="margin-top: 24px;">
             <div class="sim-slider-header">
               <label style="color:var(--neon);">Target Ethanol %</label>
               <div class="sim-val" id="sim-val-tgt" style="color:var(--neon);">E45</div>
