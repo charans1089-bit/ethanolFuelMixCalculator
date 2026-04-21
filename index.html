@@ -16,9 +16,6 @@
 </head>
 <body>
 
-<!-- ======================================================
-     RALLY BANNER — Subaru WRC × SCRK Identity
-     ====================================================== -->
 <div class="rally-banner">
   <div class="rally-topbar"></div>
   <div class="rally-banner-inner">
@@ -46,9 +43,6 @@
 
 <div class="container">
 
-  <!-- ======================================================
-       PAGE HEADER
-       ====================================================== -->
   <div class="header">
     <div>
       <div class="badge"><span>FA24 FLEX FUEL · WRX</span></div>
@@ -66,29 +60,21 @@
     <p><strong class="g">SCRK Tuning:</strong> Full Flex Fuel capability unlocked. You can maintain 70%+ ethanol, run straight pump E85, or run straight 93 octane without issue. It is not necessary to always have E85 in the tank.</p>
   </div>
 
-  <!-- ======================================================
-       MODE BAR
-       ====================================================== -->
   <div class="mode-bar">
     <button class="mode-btn active" id="btn-calc" onclick="setMode('calc')">⚙ Calculator</button>
     <button class="mode-btn" id="btn-table" onclick="setMode('table')">📋 Static Chart</button>
     <button class="mode-btn" id="btn-log" onclick="setMode('log')">📓 Logbook</button>
-    <button class="mode-btn" id="btn-sim" onclick="openSim()">⚠ Trap Simulator</button>
+    <button class="mode-btn" id="btn-sim" style="color:var(--neon) !important; border-color:rgba(204,255,0,0.3) !important;" onclick="openSim()">🧪 Trap Simulator</button>
     <button class="reset-btn" onclick="resetDefault()">↺ Reset</button>
   </div>
 
-  <!-- ======================================================
-       CALCULATOR VIEW
-       ====================================================== -->
   <div id="calc-view">
     <div class="calc-card solid-card">
-
       <div style="margin-bottom:28px;">
         <div class="tank-header">
           <span class="tank-title">Current Fuel Level — Drag Slider</span>
           <span class="tank-reading" id="needle-reading">E &mdash; <em>Empty</em></span>
         </div>
-
         <div class="gauge-track" id="gt">
           <div class="gfill existing" id="gex"></div>
           <div class="gfill e85fill" id="ge"></div>
@@ -96,7 +82,6 @@
           <div class="glabel le" id="lle">⬡ E85</div>
           <div class="glabel lc" id="llc">◈ 93</div>
         </div>
-
         <div class="tick-row">
           <span class="tick on" onclick="setTick(0)">E</span>
           <span class="tick" onclick="setTick(1)">⅛</span>
@@ -107,7 +92,6 @@
           <span class="tick" onclick="setTick(6)">¾</span>
           <span class="tick" onclick="setTick(7)">⅞</span>
         </div>
-
         <div class="slider-wrap">
           <input type="range" id="sl" min="0" max="7" step="1" value="0" oninput="onSlide(this.value)">
         </div>
@@ -181,13 +165,9 @@
         <div class="math-formula">V_E85 = [(TargetEth × 16.6) - (CurEth × CurGal) - (10 × EmptyGal)] ÷ 75</div>
         <div class="math-live" id="live-math">E85 Needed = [(45 × 16.6) - (10 × 0.0) - (10 × 16.6)] ÷ 75 = 8.30</div>
       </div>
-
     </div>
   </div>
 
-  <!-- ======================================================
-       TABLE VIEW
-       ====================================================== -->
   <div id="table-view" style="display:none;">
     <div class="table-legend">
       <div><div class="dot d-e85"></div><span> E85 Pump</span></div>
@@ -198,24 +178,13 @@
       <div style="overflow-x:auto;">
         <table>
           <thead><tr><th>Gauge Needle</th><th>Total Needed</th><th>⬡ E85 Pump</th><th>◈ 93 Octane</th></tr></thead>
-          <tbody>
-            <tr class="lf"><td><div class="gcell"><div><div class="glv">E — Empty</div><div class="gsub">Low fuel light on<div class="fbw"><div class="fb" style="width:0%"></div></div></div></div></div></td><td><span class="tv">16.6 gal</span></td><td><span class="ev">8.30<span class="u">gal</span></span></td><td><span class="cv">8.30<span class="u">gal</span></span></td></tr>
-            <tr><td><div class="gcell"><div><div class="glv">⅛ Tank</div><div class="gsub">~2.1 gal remaining<div class="fbw"><div class="fb" style="width:12.5%"></div></div></div></div></div></td><td><span class="tv">14.5 gal</span></td><td><span class="ev">7.25<span class="u">gal</span></span></td><td><span class="cv">7.25<span class="u">gal</span></span></td></tr>
-            <tr><td><div class="gcell"><div><div class="glv">¼ Tank</div><div class="gsub">~4.2 gal remaining<div class="fbw"><div class="fb" style="width:25%"></div></div></div></div></div></td><td><span class="tv">12.5 gal</span></td><td><span class="ev">6.25<span class="u">gal</span></span></td><td><span class="cv">6.25<span class="u">gal</span></span></td></tr>
-            <tr><td><div class="gcell"><div><div class="glv">⅜ Tank</div><div class="gsub">~6.2 gal remaining<div class="fbw"><div class="fb" style="width:37.5%"></div></div></div></div></div></td><td><span class="tv">10.4 gal</span></td><td><span class="ev">5.20<span class="u">gal</span></span></td><td><span class="cv">5.20<span class="u">gal</span></span></td></tr>
-            <tr><td><div class="gcell"><div><div class="glv">½ Tank</div><div class="gsub">~8.3 gal remaining<div class="fbw"><div class="fb" style="width:50%"></div></div></div></div></div></td><td><span class="tv">8.3 gal</span></td><td><span class="ev">4.15<span class="u">gal</span></span></td><td><span class="cv">4.15<span class="u">gal</span></span></td></tr>
-            <tr><td><div class="gcell"><div><div class="glv">⅝ Tank</div><div class="gsub">~10.4 gal remaining<div class="fbw"><div class="fb" style="width:62.5%"></div></div></div></div></div></td><td><span class="tv">6.2 gal</span></td><td><span class="ev">3.10<span class="u">gal</span></span></td><td><span class="cv">3.10<span class="u">gal</span></span></td></tr>
-            <tr><td><div class="gcell"><div><div class="glv">¾ Tank</div><div class="gsub">~12.5 gal remaining<div class="fbw"><div class="fb" style="width:75%"></div></div></div></div></div></td><td><span class="tv">4.2 gal</span></td><td><span class="ev">2.10<span class="u">gal</span></span></td><td><span class="cv">2.10<span class="u">gal</span></span></td></tr>
-            <tr><td><div class="gcell"><div><div class="glv">⅞ Tank</div><div class="gsub">~14.5 gal remaining<div class="fbw"><div class="fb" style="width:87.5%"></div></div></div></div></div></td><td><span class="tv">2.1 gal</span></td><td><span class="ev">1.05<span class="u">gal</span></span></td><td><span class="cv">1.05<span class="u">gal</span></span></td></tr>
-          </tbody>
+          <tbody id="static-chart-body">
+            </tbody>
         </table>
       </div>
     </div>
   </div>
 
-  <!-- ======================================================
-       LOG VIEW
-       ====================================================== -->
   <div id="log-view" style="display:none;">
     <div class="log-info-box solid-card">
       <div class="info-block">
@@ -233,7 +202,6 @@
         </div>
       </div>
     </div>
-
     <div class="solid-card log-container">
       <div class="log-header">
         <h2>Fill-up History</h2>
@@ -263,9 +231,6 @@
     </div>
   </div>
 
-  <!-- ======================================================
-       GALLERY — 3D tilt + hover overlay
-       ====================================================== -->
   <div class="section-title" style="margin-top: 24px;">// TECHNICAL REFERENCE & GALLERY</div>
   <div class="gallery-grid">
     <div class="photo-card" id="pc1" onmousemove="tiltCard(event,'pc1')" onmouseleave="resetCard('pc1')" onclick="openLightbox('wrx-action.jpg','2022 Subaru WRX Driving')">
@@ -285,17 +250,8 @@
     Vehicle photography via <a href="https://www.motortrend.com/features/2022-subaru-wrx-limited-yearlong-review-arrival/photos" target="_blank" rel="noopener noreferrer">MotorTrend</a>.
   </div>
 
-  <!-- Lightbox -->
-  <div id="lightbox" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.92);z-index:99999;display:none;align-items:center;justify-content:center;padding:20px;" onclick="closeLightbox()">
-    <div style="max-width:900px;width:100%;position:relative;">
-      <img id="lb-img" src="" alt="" style="width:100%;height:auto;border-radius:12px;border:1px solid #2e3555;">
-      <div id="lb-cap" style="font-family:'Share Tech Mono',monospace;font-size:12px;color:#6b7a99;text-align:center;margin-top:12px;letter-spacing:2px;"></div>
-      <button onclick="closeLightbox()" style="position:absolute;top:-14px;right:-14px;background:#1e2235;border:1px solid #2e3555;border-radius:50%;width:36px;height:36px;color:#fff;font-size:16px;cursor:pointer;">✕</button>
-    </div>
-  </div>
-
   <div class="disclaimer solid-card" style="margin-top: 24px;">
-    <strong>DISCLAIMER &amp; LIABILITY:</strong> This calculator relies on mathematical estimates assuming exactly 85% ethanol in pump E85 and 10% ethanol in 93 Premium. <strong>Real-world pump E85 fluctuates heavily by season and state (often E51–E83).</strong> Due to this, your final mix will vary. Always monitor your final ethanol percentage directly via your Cobb Accessport. <strong>Do your own math.</strong> The creator of this tool assumes no liability for engine or vehicle damage. Use at your own risk.
+    <strong>DISCLAIMER & LIABILITY:</strong> This calculator relies on mathematical estimates. The creator assumes no liability for engine or vehicle damage. Use at your own risk.
   </div>
 
   <div class="footer">
@@ -305,46 +261,43 @@
 
 </div>
 
-<!-- ======================================================
-     TRAP SIMULATOR MODAL — Full rebuild, iPhone-optimized
-     ====================================================== -->
+<div id="lightbox" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.95);z-index:99999;align-items:center;justify-content:center;padding:20px;" onclick="closeLightbox()">
+  <div style="max-width:900px;width:100%;position:relative;">
+    <img id="lb-img" src="" alt="" style="width:100%;height:auto;border-radius:12px;border:1px solid #2e3555;">
+    <div id="lb-cap" style="font-family:'Share Tech Mono',monospace;font-size:12px;color:#6b7a99;text-align:center;margin-top:12px;letter-spacing:2px;"></div>
+    <button style="position:absolute;top:-20px;right:-20px;background:#1e2235;border:1px solid #2e3555;border-radius:50%;width:40px;height:40px;color:#fff;font-size:20px;cursor:pointer;">✕</button>
+  </div>
+</div>
+
 <div id="sim-modal" class="modal-overlay" onclick="closeSim(event)">
   <div class="modal-content" onclick="event.stopPropagation()">
     <button class="close-btn" onclick="closeSim(null)">✕</button>
     <div class="modal-inner">
-
       <div class="sim-header">
         <h2>⚠ The Flex-Fuel <span>Trap</span> Simulator</h2>
-        <p>Discover why you can't reach high ethanol targets when your tank is too full. Adjust the sliders to see physical volume constraints in real-time.</p>
+        <p>Discover why targets are missed when the tank is too full.</p>
       </div>
 
-      <!-- TANK VISUAL — horizontal, all-device native -->
       <div class="sim-visual-wrapper">
-        <div>
-          <div class="sim-tank-label-row">
-            <span class="lbl-e85">⬡ E85 ADDED</span>
-            <span class="lbl-c93">◈ 93 ADDED</span>
-            <span class="lbl-cur">▤ EXISTING E10</span>
-          </div>
-          <div class="sim-tank-horiz" id="sim-tank-horiz">
-            <!-- layers stack left→right: existing | e85 | 93 -->
-            <div class="sim-fill-horiz" id="sfh-cur" style="width:0%;left:0;"><span class="tank-fill-label" id="slbl-cur-h"></span></div>
-            <div class="sim-fill-horiz" id="sfh-e85" style="width:0%;left:0;"><span class="tank-fill-label" id="slbl-e85-h"></span></div>
-            <div class="sim-fill-horiz" id="sfh-93"  style="width:0%;left:0;"><span class="tank-fill-label" id="slbl-93-h"></span></div>
-          </div>
-          <div class="sim-tank-pct-row">
-            <div class="sim-pct-badge e85-b" id="pct-e85">E85: — gal</div>
-            <div class="sim-pct-badge c93-b"  id="pct-93">93: — gal</div>
-            <div class="sim-pct-badge cur-b"  id="pct-cur">In tank: — gal</div>
-          </div>
-          <div class="sim-tank-cap-new">16.6 GAL MAX CAPACITY</div>
+        <div class="sim-tank-label-row">
+          <span class="lbl-cur">▤ EXISTING</span>
+          <span class="lbl-e85">⬡ E85 ADDED</span>
+          <span class="lbl-c93">◈ 93 ADDED</span>
         </div>
-      </div><!-- /.sim-visual-wrapper -->
+        <div class="sim-tank-horiz" id="sim-tank-horiz">
+          <div class="sim-fill-horiz" id="sfh-cur"></div>
+          <div class="sim-fill-horiz" id="sfh-e85"></div>
+          <div class="sim-fill-horiz" id="sfh-93"></div>
+        </div>
+        <div class="sim-tank-pct-row">
+          <div class="sim-pct-badge cur-b" id="pct-cur">In: —</div>
+          <div class="sim-pct-badge e85-b" id="pct-e85">E85: —</div>
+          <div class="sim-pct-badge c93-b" id="pct-93">93: —</div>
+        </div>
+      </div>
 
       <div class="sim-grid">
         <div class="sim-controls">
-
-          <!-- Radial fuel gauge -->
           <div class="radial-gauge-container">
             <label>Current Fuel in Tank (E10)</label>
             <div class="radial-wrapper">
@@ -352,17 +305,13 @@
               <svg id="radial-svg" viewBox="0 0 200 110" class="radial-svg">
                 <defs>
                   <linearGradient id="neon-grad" x1="0%" y1="0%" x2="100%" y2="0%">
-                    <stop offset="0%" stop-color="#f43f5e"/>
-                    <stop offset="50%" stop-color="#f5a623"/>
-                    <stop offset="100%" stop-color="#ccff00"/>
+                    <stop offset="0%" stop-color="#f43f5e"/><stop offset="50%" stop-color="#f5a623"/><stop offset="100%" stop-color="#ccff00"/>
                   </linearGradient>
                   <filter id="neon-glow" x="-20%" y="-20%" width="140%" height="140%">
-                    <feGaussianBlur stdDeviation="4" result="blur"/>
-                    <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+                    <feGaussianBlur stdDeviation="4" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
                   </filter>
                 </defs>
-                <path class="radial-track" d="M 20 100 A 80 80 0 0 1 180 100"/>
-                <path class="radial-ticks" d="M 20 100 L 30 100 M 43.4 43.4 L 50.5 50.5 M 100 20 L 100 30 M 156.6 43.4 L 149.5 50.5 M 180 100 L 170 100"/>
+                <path class="radial-track" d="M 20 100 A 80 80 0 0 1 180 100"/><path class="radial-ticks" d="M 20 100 L 30 100 M 43.4 43.4 L 50.5 50.5 M 100 20 L 100 30 M 156.6 43.4 L 149.5 50.5 M 180 100 L 170 100"/>
                 <path class="radial-fill" id="radial-fill" d="M 20 100 A 80 80 0 0 1 180 100" stroke="url(#neon-grad)" stroke-dasharray="251.327" stroke-dashoffset="251.327" filter="url(#neon-glow)"/>
               </svg>
               <div class="radial-readout">
@@ -370,27 +319,16 @@
                 <div class="radial-unit">GALLONS</div>
               </div>
             </div>
-            <div class="gauge-control-wrap" style="margin-top:12px;">
-              <input type="range" id="sim-sl-cur" min="0" max="16.6" step="0.1" value="4.2" oninput="runSim()">
-            </div>
+            <div class="gauge-control-wrap"><input type="range" id="sim-sl-cur" min="0" max="16.6" step="0.1" value="4.2" oninput="runSim()"></div>
           </div>
-
-          <!-- Target ethanol slider -->
           <div class="sim-slider-group">
             <label>Target Ethanol %</label>
             <div class="sim-val" id="sim-val-tgt" style="color:var(--gold);">E45</div>
             <input type="range" id="sim-sl-tgt" min="10" max="85" step="1" value="45" oninput="runSim()">
           </div>
-
         </div>
-
         <div>
-          <!-- Alert box -->
-          <div id="sim-alert" class="sim-alert ok">
-            <strong>Run the sliders to simulate.</strong>
-          </div>
-
-          <!-- Stats -->
+          <div id="sim-alert" class="sim-alert ok"><strong>Sliders updated.</strong></div>
           <div class="sim-stats">
             <div><span>Empty Space:</span> <strong id="sim-stat-empty">—</strong></div>
             <div><span>Ideal E85 Needed:</span> <strong id="sim-stat-ideal">—</strong></div>
@@ -398,16 +336,13 @@
           </div>
         </div>
       </div>
-
-    </div><!-- /.modal-inner -->
+    </div>
   </div>
 </div>
 
 <script src="app.js"></script>
 <script>
-// ======================================================
-// 3D TILT on gallery cards (desktop only)
-// ======================================================
+// UI TILT
 function tiltCard(e, id) {
   if (window.innerWidth < 600) return;
   const card = document.getElementById(id);
@@ -420,83 +355,15 @@ function resetCard(id) {
   const card = document.getElementById(id);
   card.style.transform = '';
   card.style.transition = 'transform 0.5s ease';
-  setTimeout(() => card.style.transition = '', 500);
 }
-
-// ======================================================
-// LIGHTBOX
-// ======================================================
-function openLightbox(src, caption) {
-  const lb = document.getElementById('lightbox');
+function openLightbox(src, cap) {
   document.getElementById('lb-img').src = src;
-  document.getElementById('lb-cap').textContent = caption;
-  lb.style.display = 'flex';
+  document.getElementById('lb-cap').textContent = cap;
+  document.getElementById('lightbox').style.display = 'flex';
 }
 function closeLightbox() {
   document.getElementById('lightbox').style.display = 'none';
 }
-
-// ======================================================
-// TRAP SIMULATOR — runSim override for horizontal tank
-// ======================================================
-// We override runSim from app.js to also update the new
-// horizontal tank visual. We do this after app.js loads.
-document.addEventListener('DOMContentLoaded', () => {
-  const _origRunSim = window.runSim;
-  window.runSim = function() {
-    _origRunSim(); // run original logic
-    updateHorizTank();
-  };
-  // run once on open
-});
-
-function updateHorizTank() {
-  const TANK = 16.6;
-  const curGal  = parseFloat(document.getElementById('sim-sl-cur').value);
-  const tgtEth  = parseFloat(document.getElementById('sim-sl-tgt').value);
-  const curEth  = 10;
-  const emptySpace = TANK - curGal;
-
-  let idealE85 = ((tgtEth * TANK) - (curEth * curGal) - (10 * emptySpace)) / 75;
-  let actualE85 = Math.max(0, Math.min(idealE85, emptySpace));
-  let actual93  = emptySpace - actualE85;
-
-  const curPct  = (curGal   / TANK) * 100;
-  const e85Pct  = (actualE85 / TANK) * 100;
-  const c93Pct  = (actual93  / TANK) * 100;
-
-  // Horizontal: layers stack. Existing from left, then e85, then 93
-  // We use absolute positioning on a relative parent
-  const sfCur = document.getElementById('sfh-cur');
-  const sfE85 = document.getElementById('sfh-e85');
-  const sf93  = document.getElementById('sfh-93');
-
-  sfCur.style.width = curPct + '%';
-  sfCur.style.left  = '0%';
-
-  sfE85.style.width = e85Pct + '%';
-  sfE85.style.left  = curPct + '%';
-
-  sf93.style.width = c93Pct + '%';
-  sf93.style.left  = (curPct + e85Pct) + '%';
-
-  // Labels — only show if wide enough
-  document.getElementById('slbl-cur-h').textContent  = curPct  > 12 ? `E10 ${curGal.toFixed(1)}g`   : '';
-  document.getElementById('slbl-e85-h').textContent  = e85Pct  > 12 ? `E85 ${actualE85.toFixed(1)}g` : '';
-  document.getElementById('slbl-93-h').textContent   = c93Pct  > 12 ? `93 ${actual93.toFixed(1)}g`   : '';
-
-  // Badge row
-  document.getElementById('pct-e85').textContent = `E85: ${actualE85.toFixed(2)} gal`;
-  document.getElementById('pct-93').textContent  = `93:  ${actual93.toFixed(2)} gal`;
-  document.getElementById('pct-cur').textContent = `In tank: ${curGal.toFixed(1)} gal`;
-}
-
-// Run horizontal tank on first open
-const _origOpenSim = window.openSim;
-window.openSim = function() {
-  _origOpenSim();
-  updateHorizTank();
-};
 </script>
 </body>
 </html>
