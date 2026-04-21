@@ -1,13 +1,15 @@
 const TANK = 16.6;
+// 9 Full Ticks to properly support 'F' = 16.6
 const LEVELS = [
- { gal: 0, label: 'E' },
- { gal: 2.1, label: '⅛' },
- { gal: 4.2, label: '¼' },
- { gal: 6.2, label: '⅜' },
- { gal: 8.3, label: '½' },
+ { gal: 0,    label: 'E' },
+ { gal: 2.1,  label: '⅛' },
+ { gal: 4.2,  label: '¼' },
+ { gal: 6.2,  label: '⅜' },
+ { gal: 8.3,  label: '½' },
  { gal: 10.4, label: '⅝' },
  { gal: 12.5, label: '¾' },
  { gal: 14.5, label: '⅞' },
+ { gal: 16.6, label: 'F' }
 ];
 
 let fuelLogs = [];
@@ -39,9 +41,18 @@ function setTick(i) {
  calculateBlend();
 }
 
+function setSimTick(i) {
+ document.getElementById('sim-sl-cur').value = i;
+ runSim();
+}
+
 function onSlide(v) {
  document.getElementById('inp-gal').value = LEVELS[v].gal.toFixed(1);
  calculateBlend();
+}
+
+function onSimSlide(v) {
+ runSim();
 }
 
 function handleInput() {
@@ -71,16 +82,25 @@ function calculateBlend() {
 
  document.getElementById('needle-reading').innerHTML = curGal <= 0.1 ? 'E &mdash; <em>Empty</em>' : curGal.toFixed(1) + ' <em>Gal Left</em>';
  
- // Gauge Bar UI & Slider Track Fill
+ // PERFECTLY STACKED UI BARS (Left to Right)
+ const curp = (curGal / TANK) * 100;
  const e85p = (e85 / TANK) * 100;
  const c93p = (c93 / TANK) * 100;
- const curp = (curGal / TANK) * 100;
 
  document.getElementById('gex').style.width = curp + '%';
- document.getElementById('ge').style.width = e85p + '%';
- document.getElementById('gc').style.left = e85p + '%';
- document.getElementById('gc').style.width = c93p + '%';
+ document.getElementById('gex').style.left = '0%';
  
+ document.getElementById('ge').style.width = e85p + '%';
+ document.getElementById('ge').style.left = curp + '%';
+ 
+ document.getElementById('gc').style.width = c93p + '%';
+ document.getElementById('gc').style.left = (curp + e85p) + '%';
+ 
+ // Hide labels if segment is too small to prevent bleed
+ document.getElementById('llex').style.opacity = curp > 12 ? '1' : '0';
+ document.getElementById('lle').style.opacity = e85p > 12 ? '1' : '0';
+ document.getElementById('llc').style.opacity = c93p > 12 ? '1' : '0';
+
  // Animate the value pop
  const els = ['ve','vc','vx'];
  els.forEach(id => {
@@ -104,7 +124,7 @@ function calculateBlend() {
 
  // Update Tick styling
  let matchIndex = LEVELS.findIndex(l => Math.abs(l.gal - curGal) < 0.1);
- document.querySelectorAll('.tick').forEach((t, i) => {
+ document.querySelectorAll('.main-t').forEach((t, i) => {
    t.classList.toggle('on', i === matchIndex);
  });
 }
@@ -157,9 +177,11 @@ function openSim() { document.getElementById('sim-modal').classList.add('show');
 function closeSim(e) { if(!e || e.target.classList.contains('modal-overlay')) document.getElementById('sim-modal').classList.remove('show'); }
 
 function runSim() {
- const curGal = parseFloat(document.getElementById('sim-sl-cur').value);
+ // Get current level from the slider index (0 to 8)
+ const tickIndex = parseInt(document.getElementById('sim-sl-cur').value);
+ const curGal = LEVELS[tickIndex].gal;
  const tgtEth = parseFloat(document.getElementById('sim-sl-tgt').value);
- const emptySpace = TANK - curGal;
+ const emptySpace = Math.max(0, TANK - curGal);
 
  let idealE85 = ((tgtEth * TANK) - (10 * curGal) - (10 * emptySpace)) / 75;
  let actualE85 = Math.max(0, Math.min(idealE85, emptySpace));
@@ -196,6 +218,10 @@ function runSim() {
     alert.className = 'sim-alert ok';
     alert.innerHTML = `<strong>✓ TARGET CLEAR:</strong> Room to fit ${actualE85.toFixed(1)}g of E85 safely.`;
  }
+ 
+ document.querySelectorAll('.sim-t').forEach((t, i) => {
+   t.classList.toggle('on', i === tickIndex);
+ });
 }
 
 function setMode(m) {
@@ -207,17 +233,16 @@ function setMode(m) {
  document.getElementById('btn-log').className = m==='log' ? 'mode-btn active' : 'mode-btn';
 }
 
-function resetDefault() { location.reload(); }
+function resetDefault() { localStorage.removeItem('tgtEth'); localStorage.removeItem('curEth'); location.reload(); }
 
 function generateStaticTable() {
-  // Automatically populates the static chart so we don't need hardcoded HTML rows.
   const tbody = document.getElementById('static-chart-body');
   if(!tbody) return;
   tbody.innerHTML = LEVELS.map((l, i) => {
-    let empty = TANK - l.gal;
+    let empty = Math.max(0, TANK - l.gal);
     let e85 = ((45 * TANK) - (10 * l.gal) - (10 * empty)) / 75;
     e85 = Math.max(0, Math.min(e85, empty));
-    let c93 = empty - e85;
+    let c93 = Math.max(0, empty - e85);
     let w = (l.gal / TANK) * 100;
     return `<tr ${i===0?'class="lf"':''}>
       <td><div class="gcell"><div><div class="glv">${l.label} Tank</div><div class="gsub">~${l.gal.toFixed(1)} gal remaining<div class="fbw"><div class="fb" style="width:${w}%"></div></div></div></div></div></td>
