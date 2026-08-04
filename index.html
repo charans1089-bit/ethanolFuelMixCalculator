@@ -13,6 +13,138 @@
 
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@400;600;700;800;900&family=Share+Tech+Mono&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
+
+<style>
+/* ============================================================
+   AP REFERENCE MODAL — additions only, namespaced to avoid
+   colliding with anything already defined in styles.css
+   ============================================================ */
+.ref-scenario {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-left: 3px solid var(--neon, #ccff00);
+  border-radius: 10px;
+  padding: 16px 18px;
+  margin-bottom: 14px;
+}
+.ref-scenario h3 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 17px;
+  letter-spacing: 0.5px;
+  color: #fff;
+  margin: 0 0 4px 0;
+  text-transform: uppercase;
+}
+.ref-condition {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 11px;
+  color: #8a93ad;
+  margin-bottom: 10px;
+  letter-spacing: 0.3px;
+}
+.ref-data-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  margin-bottom: 8px;
+}
+.ref-data-item {
+  background: rgba(0,0,0,0.25);
+  border-radius: 6px;
+  padding: 7px 8px;
+}
+.ref-data-item .lbl {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 9.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #6b7a99;
+  margin-bottom: 3px;
+}
+.ref-data-item .val {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 13.5px;
+  font-weight: 700;
+  color: var(--neon, #ccff00);
+  line-height: 1.2;
+}
+.ref-status {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 11px;
+  color: #7fd88f;
+  margin-top: 2px;
+}
+.ref-flags-box {
+  background: linear-gradient(135deg, rgba(224,60,60,0.16), rgba(224,60,60,0.05));
+  border: 1px solid rgba(224,60,60,0.35);
+  border-radius: 10px;
+  padding: 16px 18px;
+  margin-top: 18px;
+}
+.ref-flags-box h3 {
+  color: #ff6b6b;
+  font-family: 'Barlow Condensed', sans-serif;
+  text-transform: uppercase;
+  font-size: 16px;
+  letter-spacing: 0.5px;
+  margin: 0 0 10px 0;
+}
+.ref-flag-item {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 11.5px;
+  color: #f0d9d9;
+  background: rgba(0,0,0,0.22);
+  border-left: 2px solid #ff6b6b;
+  padding: 8px 10px;
+  margin-bottom: 6px;
+  border-radius: 4px;
+  line-height: 1.4;
+}
+.ref-flag-item strong { color: #fff; }
+.ref-footer-note {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 10px;
+  color: #5c6580;
+  text-align: center;
+  margin-top: 16px;
+  letter-spacing: 1px;
+}
+#ref-modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(5,7,12,0.92);
+  z-index: 99998;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 20px;
+  overflow-y: auto;
+}
+#ref-modal .ref-modal-content {
+  max-width: 640px;
+  width: 100%;
+  position: relative;
+  margin: 20px auto;
+}
+#ref-modal .ref-close-btn {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: #1e2235;
+  border: 1px solid #2e3555;
+  border-radius: 50%;
+  width: 34px;
+  height: 34px;
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+  z-index: 2;
+}
+@media (max-width: 600px) {
+  .ref-data-row { grid-template-columns: 1fr 1fr; }
+}
+</style>
 </head>
 <body>
 
@@ -53,6 +185,7 @@
     <button class="mode-btn" id="btn-table" onclick="setMode('table')">📋 Static Chart</button>
     <button class="mode-btn" id="btn-log" onclick="setMode('log')">📓 Logbook</button>
     <button class="mode-btn" id="btn-sim" style="color:var(--neon) !important; border-color:rgba(204,255,0,0.3) !important;" onclick="openSim()">🧪 Trap Simulator</button>
+    <button class="mode-btn" id="btn-ref" style="color:var(--neon) !important; border-color:rgba(204,255,0,0.3) !important;" onclick="openRef()">🎛 AP Reference</button>
   </div>
 
   <div id="calc-view">
@@ -336,6 +469,87 @@
   </div>
 </div>
 
+<div id="ref-modal" onclick="closeRef()">
+  <div class="ref-modal-content solid-card" onclick="event.stopPropagation()">
+    <button class="ref-close-btn" onclick="closeRef()">✕</button>
+    <div class="sim-header">
+      <h2>🎛 Live Gauge <span>Reference</span></h2>
+      <p>Normal Accessport ranges by driving scenario — RevHang E85WRK2</p>
+    </div>
+
+    <div class="ref-scenario">
+      <h3>Idle</h3>
+      <div class="ref-condition">▸ 600–900 RPM · Park/Neutral · stopped, traffic light</div>
+      <div class="ref-data-row">
+        <div class="ref-data-item"><div class="lbl">AFR</div><div class="val">14.0–15.0</div></div>
+        <div class="ref-data-item"><div class="lbl">Timing</div><div class="val">8.0–11.0°</div></div>
+        <div class="ref-data-item"><div class="lbl">DAM</div><div class="val">1.000</div></div>
+        <div class="ref-data-item"><div class="lbl">FK / FKL</div><div class="val">0 / 0</div></div>
+      </div>
+      <div class="ref-status">✓ Smooth, quiet — timing fluctuates ±0.5–1.0°</div>
+    </div>
+
+    <div class="ref-scenario">
+      <h3>Light Cruise In Vacuum</h3>
+      <div class="ref-condition">▸ 40–70 mph · light throttle · no boost building</div>
+      <div class="ref-data-row">
+        <div class="ref-data-item"><div class="lbl">AFR</div><div class="val">14.5–15.5</div></div>
+        <div class="ref-data-item"><div class="lbl">Timing</div><div class="val">10.0–15.0°</div></div>
+        <div class="ref-data-item"><div class="lbl">DAM</div><div class="val">1.000</div></div>
+        <div class="ref-data-item"><div class="lbl">FK / FKL</div><div class="val">0 / 0</div></div>
+      </div>
+      <div class="ref-status">✓ Smooth, no knock, timing advances with RPM</div>
+    </div>
+
+    <div class="ref-scenario">
+      <h3>Partial Throttle Accel</h3>
+      <div class="ref-condition">▸ 1–6 psi boost · 4th–6th gear</div>
+      <div class="ref-data-row">
+        <div class="ref-data-item"><div class="lbl">AFR</div><div class="val">12.0–13.5</div></div>
+        <div class="ref-data-item"><div class="lbl">Timing</div><div class="val">6.0–10.0°</div></div>
+        <div class="ref-data-item"><div class="lbl">DAM</div><div class="val">1.000</div></div>
+        <div class="ref-data-item"><div class="lbl">FK / FKL</div><div class="val">≥-0.35 / 0</div></div>
+      </div>
+      <div class="ref-status">✓ Normal enrichment — occasional -0.35° FK is fine</div>
+    </div>
+
+    <div class="ref-scenario">
+      <h3>WOT Pull</h3>
+      <div class="ref-condition">▸ 3rd gear · 3,000–6,500 RPM · 15–19 psi</div>
+      <div class="ref-data-row">
+        <div class="ref-data-item"><div class="lbl">AFR</div><div class="val">10.9–12.0</div></div>
+        <div class="ref-data-item"><div class="lbl">Timing</div><div class="val">2.5–14.0°</div></div>
+        <div class="ref-data-item"><div class="lbl">DAM</div><div class="val">1.000</div></div>
+        <div class="ref-data-item"><div class="lbl">FK / FKL</div><div class="val">0 / 0</div></div>
+      </div>
+      <div class="ref-status">✓ Rich fuel, conservative timing at peak boost</div>
+    </div>
+
+    <div class="ref-scenario">
+      <h3>Lift-Off / Fuel Cut</h3>
+      <div class="ref-condition">▸ Coasting after cruise or a pull</div>
+      <div class="ref-data-row">
+        <div class="ref-data-item"><div class="lbl">AFR</div><div class="val">19.0–21.9</div></div>
+        <div class="ref-data-item"><div class="lbl">Timing</div><div class="val">-0.5 to +2.0°</div></div>
+        <div class="ref-data-item"><div class="lbl">DAM</div><div class="val">1.000</div></div>
+        <div class="ref-data-item"><div class="lbl">FK / FKL</div><div class="val">0 / 0</div></div>
+      </div>
+      <div class="ref-status">✓ RevHang cut active — lean, efficient coast</div>
+    </div>
+
+    <div class="ref-flags-box">
+      <h3>⚠ Back Off If You See</h3>
+      <div class="ref-flag-item"><strong>DAM below 0.900</strong> — ease off, drive gentle until it recovers to 1.000</div>
+      <div class="ref-flag-item"><strong>FK below -1.05°</strong> — reduce load, avoid lugging in a tall gear at low RPM</div>
+      <div class="ref-flag-item"><strong>FKL below -0.70°</strong> — retard is accumulating, back off and cruise easy</div>
+      <div class="ref-flag-item"><strong>6th gear under ~1,600 RPM + throttle</strong> — lugging zone, downshift to 5th/4th</div>
+      <div class="ref-flag-item"><strong>Timing jumping erratically</strong> — possible active knock, lift immediately</div>
+    </div>
+
+    <div class="ref-footer-note">FA24 · RevHang E85WRK2 · Dman E-Tune · Reference only — always defer to logs &amp; your tuner</div>
+  </div>
+</div>
+
 <script src="app.js"></script>
 <script>
 function tiltCard(e, id) {
@@ -357,6 +571,12 @@ function openLightbox(src, cap) {
 }
 function closeLightbox() {
   document.getElementById('lightbox').style.display = 'none';
+}
+function openRef() {
+  document.getElementById('ref-modal').style.display = 'flex';
+}
+function closeRef() {
+  document.getElementById('ref-modal').style.display = 'none';
 }
 </script>
 </body>
