@@ -34,6 +34,14 @@ const pickPrice = (item, keys) => {
     return null;
 };
 
+const pickNumber = (item, keys) => {
+    for (const key of keys) {
+        const value = toNum(item?.[key]);
+        if (Number.isFinite(value)) return value;
+    }
+    return null;
+};
+
 function normalizeItem(item) {
     const cash = pickPrice(item, ['price_cash', 'cash', 'priceCash']);
     const credit = pickPrice(item, ['price_credit', 'credit', 'priceCredit']);
@@ -55,6 +63,8 @@ function normalizeItem(item) {
         },
         distance: toNum(item?.distance),
         distanceUnit: item?.distanceUnit ?? item?.distance_unit ?? null,
+        latitude: pickNumber(item, ['latitude', 'lat']),
+        longitude: pickNumber(item, ['longitude', 'lng', 'lon']),
         starRating: toNum(item?.starRating),
         ratingsCount: toNum(item?.ratingsCount),
         priceUnit: item?.priceUnit ?? 'dollars_per_gallon',
