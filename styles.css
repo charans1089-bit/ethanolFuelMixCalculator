@@ -726,6 +726,16 @@ h1 .hl {
   padding: 7px 9px;
 }
 
+.fuel-map-link {
+  color: var(--neon);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.fuel-map-link:hover {
+  color: var(--e85);
+}
+
 .weather-status {
   min-height: 32px;
 }
