@@ -44,7 +44,7 @@ const DEFAULTS = {
 };
 
 const WEATHER_API_BASE = 'https://api.open-meteo.com/v1/forecast';
-const WEATHER_GEOCODE_BASE = 'https://geocoding-api.open-meteo.com/v1/reverse';
+const WEATHER_REVERSE_GEOCODE_BASE = 'https://api.bigdatacloud.net/data/reverse-geocode-client';
 const WEATHER_CACHE_KEY = 'wrxWeatherCache';
 
 let fuelLogs = [];
@@ -234,25 +234,27 @@ async function fetchOpenMeteoWeather(lat, lon) {
   return { tempF, raw: data };
 }
 
-async function reverseGeocodeOpenMeteo(lat, lon) {
-  const url = new URL(WEATHER_GEOCODE_BASE);
+async function reverseGeocodeLocation(lat, lon) {
+  const url = new URL(WEATHER_REVERSE_GEOCODE_BASE);
   url.searchParams.set('latitude', String(lat));
   url.searchParams.set('longitude', String(lon));
-  url.searchParams.set('count', '1');
-  url.searchParams.set('language', 'en');
+  url.searchParams.set('localityLanguage', 'en');
 
   const response = await fetch(url.toString(), { method: 'GET' });
   if (!response.ok) return null;
 
   const data = await response.json();
-  const hit = Array.isArray(data?.results) ? data.results[0] : null;
-  if (!hit) return null;
+  const city = data?.city || data?.locality || '';
+  const stateCodeRaw = String(data?.principalSubdivisionCode || '');
+  const stateCode = stateCodeRaw.includes('-') ? stateCodeRaw.split('-').pop() : stateCodeRaw;
+  const stateName = data?.principalSubdivision || '';
+  const countryCode = data?.countryCode || '';
 
-  const name = hit.name || '';
-  const admin1 = hit.admin1 || '';
-  const country = hit.country_code || '';
-  const label = [name, admin1].filter(Boolean).join(', ');
-  return label || country || null;
+  if (city && stateCode) return `${city}, ${stateCode}`;
+  if (city && stateName) return `${city}, ${stateName}`;
+  if (city) return city;
+  if (stateCode) return stateCode;
+  return countryCode || null;
 }
 
 function getCurrentPosition() {
@@ -280,9 +282,13 @@ async function useLiveWeather() {
     const position = await getCurrentPosition();
     const { latitude, longitude } = position.coords;
     const weather = await fetchOpenMeteoWeather(latitude, longitude);
-    const place = await reverseGeocodeOpenMeteo(latitude, longitude).catch(() => null);
+    const place = await reverseGeocodeLocation(latitude, longitude).catch(() => null);
     const loc = place || `${latitude.toFixed(2)}, ${longitude.toFixed(2)}`;
     applyAmbientWeather(weather.tempF, 'Open-Meteo live weather', loc, true);
+    if (statusEl) {
+      statusEl.textContent = 'Live weather updated.';
+      statusEl.dataset.kind = 'live';
+    }
   } catch (error) {
     const cached = getWeatherCache();
     if (cached) {
