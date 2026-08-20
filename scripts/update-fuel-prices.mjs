@@ -14,18 +14,34 @@ if (!APIFY_TOKEN) {
 }
 
 const toNum = (v) => {
+    if (v === null || v === undefined) return null;
+    if (typeof v === 'string') {
+        const trimmed = v.trim();
+        if (!trimmed) return null;
+        const normalized = trimmed.replace(/[$,]/g, '');
+        const parsed = Number.parseFloat(normalized);
+        return Number.isFinite(parsed) ? parsed : null;
+    }
     const n = Number(v);
     return Number.isFinite(n) ? n : null;
 };
 
+const pickPrice = (item, keys) => {
+    for (const key of keys) {
+        const value = toNum(item?.[key]);
+        if (Number.isFinite(value) && value > 0) return value;
+    }
+    return null;
+};
+
 function normalizeItem(item) {
-    const cash = toNum(item?.price_cash);
-    const credit = toNum(item?.price_credit);
+    const cash = pickPrice(item, ['price_cash', 'cash', 'priceCash']);
+    const credit = pickPrice(item, ['price_credit', 'credit', 'priceCredit']);
     const bestPrice = cash !== null && credit !== null
         ? Math.min(cash, credit)
         : (cash ?? credit);
 
-    if (bestPrice === null) return null;
+    if (bestPrice === null || bestPrice <= 0) return null;
 
     return {
         id: item?.id ?? null,
