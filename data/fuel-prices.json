@@ -1,0 +1,24 @@
+{
+    "schemaVersion": 1,
+    "source": "Apify johnvc/fuelprices",
+    "search": "Not configured",
+    "maxAgeDays": 3,
+    "generatedAt": null,
+    "e85": {
+        "fuelCode": 5,
+        "count": 0,
+        "avg": null,
+        "min": null,
+        "max": null,
+        "stations": []
+    },
+    "premium93": {
+        "fuelCode": 3,
+        "count": 0,
+        "avg": null,
+        "min": null,
+        "max": null,
+        "stations": []
+    },
+    "fingerprint": ""
+}
