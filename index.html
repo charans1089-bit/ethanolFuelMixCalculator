@@ -1,583 +1,854 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="SCRK Flex">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src 'self' https://docs.google.com; img-src 'self' data: https:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; script-src 'self' 'unsafe-inline';">
-<title>SCRK Flex Fuel Mix — Interactive</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="SCRK Flex">
+  <meta http-equiv="Content-Security-Policy"
+    content="default-src 'self'; connect-src 'self' https://docs.google.com; img-src 'self' data: https:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; script-src 'self' 'unsafe-inline';">
+  <title>SCRK Flex Fuel Mix — Interactive</title>
 
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23080b12'/><text x='50%' y='68%' font-family='sans-serif' font-size='58' font-weight='bold' fill='%23ccff00' text-anchor='middle'>S</text></svg>">
+  <link rel="icon" type="image/svg+xml"
+    href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23080b12'/><text x='50%' y='68%' font-family='sans-serif' font-size='58' font-weight='bold' fill='%23ccff00' text-anchor='middle'>S</text></svg>">
 
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@400;600;700;800;900&family=Share+Tech+Mono&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@400;600;700;800;900&family=Share+Tech+Mono&family=Orbitron:wght@400;700;900&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
 
-<style>
-/* ============================================================
+  <style>
+    /* ============================================================
    AP REFERENCE MODAL — additions only, namespaced to avoid
    colliding with anything already defined in styles.css
    ============================================================ */
-.ref-scenario {
-  background: rgba(255,255,255,0.03);
-  border: 1px solid rgba(255,255,255,0.08);
-  border-left: 3px solid var(--neon, #ccff00);
-  border-radius: 10px;
-  padding: 16px 18px;
-  margin-bottom: 14px;
-}
-.ref-scenario h3 {
-  font-family: 'Barlow Condensed', sans-serif;
-  font-weight: 700;
-  font-size: 17px;
-  letter-spacing: 0.5px;
-  color: #fff;
-  margin: 0 0 4px 0;
-  text-transform: uppercase;
-}
-.ref-condition {
-  font-family: 'Share Tech Mono', monospace;
-  font-size: 11px;
-  color: #8a93ad;
-  margin-bottom: 10px;
-  letter-spacing: 0.3px;
-}
-.ref-data-row {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 8px;
-  margin-bottom: 8px;
-}
-.ref-data-item {
-  background: rgba(0,0,0,0.25);
-  border-radius: 6px;
-  padding: 7px 8px;
-}
-.ref-data-item .lbl {
-  font-family: 'Share Tech Mono', monospace;
-  font-size: 9.5px;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  color: #6b7a99;
-  margin-bottom: 3px;
-}
-.ref-data-item .val {
-  font-family: 'Orbitron', sans-serif;
-  font-size: 13.5px;
-  font-weight: 700;
-  color: var(--neon, #ccff00);
-  line-height: 1.2;
-}
-.ref-status {
-  font-family: 'Share Tech Mono', monospace;
-  font-size: 11px;
-  color: #7fd88f;
-  margin-top: 2px;
-}
-.ref-flags-box {
-  background: linear-gradient(135deg, rgba(224,60,60,0.16), rgba(224,60,60,0.05));
-  border: 1px solid rgba(224,60,60,0.35);
-  border-radius: 10px;
-  padding: 16px 18px;
-  margin-top: 18px;
-}
-.ref-flags-box h3 {
-  color: #ff6b6b;
-  font-family: 'Barlow Condensed', sans-serif;
-  text-transform: uppercase;
-  font-size: 16px;
-  letter-spacing: 0.5px;
-  margin: 0 0 10px 0;
-}
-.ref-flag-item {
-  font-family: 'Share Tech Mono', monospace;
-  font-size: 11.5px;
-  color: #f0d9d9;
-  background: rgba(0,0,0,0.22);
-  border-left: 2px solid #ff6b6b;
-  padding: 8px 10px;
-  margin-bottom: 6px;
-  border-radius: 4px;
-  line-height: 1.4;
-}
-.ref-flag-item strong { color: #fff; }
-.ref-footer-note {
-  font-family: 'Share Tech Mono', monospace;
-  font-size: 10px;
-  color: #5c6580;
-  text-align: center;
-  margin-top: 16px;
-  letter-spacing: 1px;
-}
-#ref-modal {
-  display: none;
-  position: fixed;
-  inset: 0;
-  background: rgba(5,7,12,0.92);
-  z-index: 99998;
-  align-items: flex-start;
-  justify-content: center;
-  padding: 20px;
-  overflow-y: auto;
-}
-#ref-modal .ref-modal-content {
-  max-width: 640px;
-  width: 100%;
-  position: relative;
-  margin: 20px auto;
-}
-#ref-modal .ref-close-btn {
-  position: absolute;
-  top: 12px;
-  right: 12px;
-  background: #1e2235;
-  border: 1px solid #2e3555;
-  border-radius: 50%;
-  width: 34px;
-  height: 34px;
-  color: #fff;
-  font-size: 16px;
-  cursor: pointer;
-  z-index: 2;
-}
-@media (max-width: 600px) {
-  .ref-data-row { grid-template-columns: 1fr 1fr; }
-}
-</style>
+    .ref-scenario {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-left: 3px solid var(--neon, #ccff00);
+      border-radius: 10px;
+      padding: 16px 18px;
+      margin-bottom: 14px;
+    }
+
+    .ref-scenario h3 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 17px;
+      letter-spacing: 0.5px;
+      color: #fff;
+      margin: 0 0 4px 0;
+      text-transform: uppercase;
+    }
+
+    .ref-condition {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 11px;
+      color: #8a93ad;
+      margin-bottom: 10px;
+      letter-spacing: 0.3px;
+    }
+
+    .ref-data-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+
+    .ref-data-item {
+      background: rgba(0, 0, 0, 0.25);
+      border-radius: 6px;
+      padding: 7px 8px;
+    }
+
+    .ref-data-item .lbl {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 9.5px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: #6b7a99;
+      margin-bottom: 3px;
+    }
+
+    .ref-data-item .val {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 13.5px;
+      font-weight: 700;
+      color: var(--neon, #ccff00);
+      line-height: 1.2;
+    }
+
+    .ref-status {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 11px;
+      color: #7fd88f;
+      margin-top: 2px;
+    }
+
+    .ref-flags-box {
+      background: linear-gradient(135deg, rgba(224, 60, 60, 0.16), rgba(224, 60, 60, 0.05));
+      border: 1px solid rgba(224, 60, 60, 0.35);
+      border-radius: 10px;
+      padding: 16px 18px;
+      margin-top: 18px;
+    }
+
+    .ref-flags-box h3 {
+      color: #ff6b6b;
+      font-family: 'Barlow Condensed', sans-serif;
+      text-transform: uppercase;
+      font-size: 16px;
+      letter-spacing: 0.5px;
+      margin: 0 0 10px 0;
+    }
+
+    .ref-flag-item {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 11.5px;
+      color: #f0d9d9;
+      background: rgba(0, 0, 0, 0.22);
+      border-left: 2px solid #ff6b6b;
+      padding: 8px 10px;
+      margin-bottom: 6px;
+      border-radius: 4px;
+      line-height: 1.4;
+    }
+
+    .ref-flag-item strong {
+      color: #fff;
+    }
+
+    .ref-footer-note {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 10px;
+      color: #5c6580;
+      text-align: center;
+      margin-top: 16px;
+      letter-spacing: 1px;
+    }
+
+    #ref-modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(5, 7, 12, 0.92);
+      z-index: 99998;
+      align-items: flex-start;
+      justify-content: center;
+      padding: 20px;
+      overflow-y: auto;
+    }
+
+    #ref-modal .ref-modal-content {
+      max-width: 640px;
+      width: 100%;
+      position: relative;
+      margin: 20px auto;
+    }
+
+    #ref-modal .ref-close-btn {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      background: #1e2235;
+      border: 1px solid #2e3555;
+      border-radius: 50%;
+      width: 34px;
+      height: 34px;
+      color: #fff;
+      font-size: 16px;
+      cursor: pointer;
+      z-index: 2;
+    }
+
+    @media (max-width: 600px) {
+      .ref-data-row {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+  </style>
 </head>
+
 <body>
 
-<div class="rally-banner">
-  <div class="rally-banner-inner">
-    <div class="scrk-brand">
-      SCRK
-      <div class="scrk-tag"><span>WISH I TUNE</span></div>
-    </div>
-    <div class="rally-subline">WRX FA24 · FLEX FUEL CALCULATOR · EST. 2024</div>
-  </div>
-</div>
-
-<div class="container">
-
-  <div class="header">
-    <div class="header-left">
-      <div class="badge"><span>FA24 FLEX FUEL · WRX</span></div>
-      <h1>FLEX FUEL<br><span class="hl">CUSTOM BLEND</span><br>CALCULATOR</h1>
-      <div class="subtitle">16.6-Gallon Tank · E85 + 93 Octane</div>
-    </div>
-    <div class="header-right">
-      <button class="reset-btn" onclick="resetDefault()" title="Reset Calculator">⟳ RESET</button>
-      <div class="hpills">
-        <div class="pill safe">✓ STRAIGHT E85 SAFE</div>
-        <div class="pill safe">✓ FULL E10–E85 FLEX CAPABLE</div>
+  <div class="rally-banner">
+    <div class="rally-banner-inner">
+      <div class="scrk-brand">
+        SCRK
+        <div class="scrk-tag"><span>WISH I TUNE</span></div>
       </div>
+      <div class="rally-subline">WRX FA24 · FLEX FUEL CALCULATOR · EST. 2024</div>
     </div>
   </div>
 
-  <div class="banner grn">
-    <span class="bico">⚡</span>
-    <p><strong class="g">SCRK Tuning:</strong> Full Flex Fuel capability unlocked. You can maintain 70%+ ethanol, run straight pump E85, or run straight 93 octane without issue. It is not necessary to always have E85 in the tank.</p>
-  </div>
+  <div class="container">
 
-  <div class="mode-bar">
-    <button class="mode-btn active" id="btn-calc" onclick="setMode('calc')">⚙ Calculator</button>
-    <button class="mode-btn" id="btn-table" onclick="setMode('table')">📋 Static Chart</button>
-    <button class="mode-btn" id="btn-log" onclick="setMode('log')">📓 Logbook</button>
-    <button class="mode-btn" id="btn-sim" style="color:var(--neon) !important; border-color:rgba(204,255,0,0.3) !important;" onclick="openSim()">🧪 Trap Simulator</button>
-    <button class="mode-btn" id="btn-ref" style="color:var(--neon) !important; border-color:rgba(204,255,0,0.3) !important;" onclick="openRef()">🎛 AP Reference</button>
-  </div>
-
-  <div id="calc-view">
-    <div class="calc-card solid-card">
-      
-      <div class="fuel-level-module">
-        <div class="tank-header">
-          <span class="tank-title">Current Fuel Level</span>
-          <span class="tank-reading" id="needle-reading">E &mdash; <em>Empty</em></span>
-        </div>
-
-        <div class="gauge-track" id="gt">
-          <div class="gfill existing" id="gex"><span class="glabel" id="llex">▤ E10</span></div>
-          <div class="gfill e85fill" id="ge"><span class="glabel" id="lle">⬡ E85</span></div>
-          <div class="gfill c93fill" id="gc"><span class="glabel" id="llc">◈ 93</span></div>
-        </div>
-
-        <div class="slider-tactile-wrap">
-          <div class="tick-row">
-            <span class="tick main-t on" onclick="setTick(0)">E</span>
-            <span class="tick main-t" onclick="setTick(1)">⅛</span>
-            <span class="tick main-t" onclick="setTick(2)">¼</span>
-            <span class="tick main-t" onclick="setTick(3)">⅜</span>
-            <span class="tick main-t" onclick="setTick(4)">½</span>
-            <span class="tick main-t" onclick="setTick(5)">⅝</span>
-            <span class="tick main-t" onclick="setTick(6)">¾</span>
-            <span class="tick main-t" onclick="setTick(7)">⅞</span>
-            <span class="tick main-t" onclick="setTick(8)">F</span>
-          </div>
-          <input type="range" id="sl" class="tactile-slider" min="0" max="8" step="1" value="0" oninput="onSlide(this.value)">
-        </div>
+    <div class="header">
+      <div class="header-left">
+        <div class="badge"><span>FA24 FLEX FUEL · WRX</span></div>
+        <h1>FLEX FUEL<br><span class="hl">CUSTOM BLEND</span><br>CALCULATOR</h1>
+        <div class="subtitle">16.6-Gallon Tank · E85 + 93 Octane</div>
       </div>
-
-      <div class="custom-inputs">
-        <div class="input-box">
-          <label>Fuel Remaining</label>
-          <div class="input-row">
-            <input type="number" id="inp-gal" value="0.0" min="0" max="16.6" step="0.1" oninput="handleInput()">
-            <span class="unit">GAL</span>
-          </div>
+      <div class="header-right">
+        <button class="reset-btn" onclick="resetDefault()" title="Reset Calculator">⟳ RESET</button>
+        <div class="hpills">
+          <div class="pill safe">✓ STRAIGHT E85 SAFE</div>
+          <div class="pill safe">✓ FULL E10–E85 FLEX CAPABLE</div>
         </div>
-        <div class="input-box">
-          <label>AP Eth Gauge</label>
-          <div class="input-row">
-            <input type="number" id="inp-eth" value="10" min="0" max="100" step="1" oninput="handleInput()">
-            <span class="unit">%</span>
-          </div>
-        </div>
-        <div class="input-box tgt">
-          <label style="color: var(--neon);">Target Eth</label>
-          <div class="input-row">
-            <input type="number" id="inp-tgt" value="45" min="10" max="85" step="1" oninput="handleInput()" style="color: var(--neon);">
-            <span class="unit" style="color: var(--neon);">%</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="result-grid">
-        <div class="result-card ec">
-          <div class="rlbl">⬡ Pump E85 First</div>
-          <div class="rval" id="ve">8.30</div>
-          <div class="runit">Gallons</div>
-        </div>
-        <div class="result-card cc">
-          <div class="rlbl">◈ Top Off 93 Octane</div>
-          <div class="rval" id="vc">8.30</div>
-          <div class="runit">Gallons</div>
-        </div>
-        <div class="result-card xc">
-          <div class="rlbl">◎ Est. Blend</div>
-          <div class="rval" id="vx">~E45</div>
-          <div class="runit">Target Hit</div>
-        </div>
-      </div>
-
-      <div class="eth-status">
-        <div class="ebadge sweet" id="ebadge">✓ SCRK TUNED — SAFE FOR ALL BLENDS</div>
-      </div>
-
-      <div class="log-action-bar">
-        <div class="log-input-group">
-          <label>Location / Notes</label>
-          <input type="text" id="inp-station" placeholder="e.g. Shell, Meijer..." class="station-input">
-        </div>
-        <button class="save-log-btn" onclick="saveFillUpLog()">
-          <span class="btn-icon">💾</span> SAVE TELEMETRY
-        </button>
-      </div>
-
-      <div class="step-box">
-        <div class="step-title">// PIT STOP SEQUENCE</div>
-        <div class="steps">
-          <div class="step">
-            <div class="snum s1">1</div>
-            <div class="stxt">Pump exactly <span class="se" id="i1">8.30 gallons</span> of <strong>E85</strong> first.</div>
-          </div>
-          <div class="step">
-            <div class="snum s2">2</div>
-            <div class="stxt">Switch to <strong>93 Octane</strong>. Fill until the nozzle clicks off (approx. <span class="sc" id="i2">8.30 gallons</span>).</div>
-          </div>
-          <div class="step">
-            <div class="snum s3">3</div>
-            <div class="stxt">Check your Accessport after a few miles. It should stabilize near <span id="i3" style="color:var(--neon);font-weight:bold;">~45%</span>.</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="math-box">
-        <div class="math-title">⟨ Math Verification ⟩</div>
-        <div class="math-formula">V_E85 = [(TargetEth × 16.6) - (CurEth × CurGal) - (10 × EmptyGal)] ÷ 75</div>
-        <div class="math-live" id="live-math">E85 Needed = [(45 × 16.6) - (10 × 0.0) - (10 × 16.6)] ÷ 75 = 8.30</div>
       </div>
     </div>
-  </div>
 
-  <div id="table-view" style="display:none;">
-    <div class="table-legend">
-      <div><div class="dot d-e85"></div><span> E85 Pump</span></div>
-      <div><div class="dot d-c93"></div><span> 93 Octane</span></div>
-      <div><div class="dot d-dim"></div><span>Total: 16.6 gal</span></div>
+    <div class="banner grn">
+      <span class="bico">⚡</span>
+      <p><strong class="g">SCRK Tuning:</strong> Full Flex Fuel capability unlocked. You can maintain 70%+ ethanol, run
+        straight pump E85, or run straight 93 octane without issue. It is not necessary to always have E85 in the tank.
+      </p>
     </div>
-    <div class="table-wrap solid-card">
-      <div style="overflow-x:auto;">
-        <table>
-          <thead><tr><th>Gauge Needle</th><th>Total Needed</th><th>⬡ E85 Pump</th><th>◈ 93 Octane</th></tr></thead>
-          <tbody id="static-chart-body">
-            </tbody>
-        </table>
+
+    <div class="mode-bar">
+      <button class="mode-btn active" id="btn-calc" onclick="setMode('calc')">⚙ Calculator</button>
+      <button class="mode-btn" id="btn-table" onclick="setMode('table')">📋 Static Chart</button>
+      <button class="mode-btn" id="btn-log" onclick="setMode('log')">📓 Logbook</button>
+      <button class="mode-btn mode-btn-accent" id="btn-sim" onclick="openSim()">🧪 Trap Simulator</button>
+      <button class="mode-btn mode-btn-accent" id="btn-ref" onclick="openRef()">🎛 AP Reference</button>
+    </div>
+
+    <div id="calc-view">
+      <div class="calc-card solid-card">
+
+        <div class="fuel-level-module">
+          <div class="tank-header">
+            <span class="tank-title">Current Fuel Level</span>
+            <span class="tank-reading" id="needle-reading">E &mdash; <em>Empty</em></span>
+          </div>
+
+          <div class="gauge-track" id="gt">
+            <div class="gfill existing" id="gex"><span class="glabel" id="llex">▤ E10</span></div>
+            <div class="gfill e85fill" id="ge"><span class="glabel" id="lle">⬡ E85</span></div>
+            <div class="gfill c93fill" id="gc"><span class="glabel" id="llc">◈ 93</span></div>
+          </div>
+
+          <div class="slider-tactile-wrap">
+            <div class="tick-row">
+              <span class="tick main-t on" onclick="setTick(0)">E</span>
+              <span class="tick main-t" onclick="setTick(1)">⅛</span>
+              <span class="tick main-t" onclick="setTick(2)">¼</span>
+              <span class="tick main-t" onclick="setTick(3)">⅜</span>
+              <span class="tick main-t" onclick="setTick(4)">½</span>
+              <span class="tick main-t" onclick="setTick(5)">⅝</span>
+              <span class="tick main-t" onclick="setTick(6)">¾</span>
+              <span class="tick main-t" onclick="setTick(7)">⅞</span>
+              <span class="tick main-t" onclick="setTick(8)">F</span>
+            </div>
+            <input type="range" id="sl" class="tactile-slider" min="0" max="8" step="1" value="0"
+              oninput="onSlide(this.value)">
+          </div>
+        </div>
+
+        <div class="custom-inputs">
+          <div class="input-box">
+            <label for="inp-gal">Fuel Remaining</label>
+            <div class="input-row">
+              <input type="number" id="inp-gal" value="0.0" min="0" max="16.6" step="0.1" oninput="handleInput()"
+                onchange="commitInput()" onblur="commitInput()">
+              <span class="unit">GAL</span>
+            </div>
+          </div>
+          <div class="input-box">
+            <label for="inp-eth">AP Eth Gauge</label>
+            <div class="input-row">
+              <input type="number" id="inp-eth" value="10" min="0" max="100" step="1" oninput="handleInput()"
+                onchange="commitInput()" onblur="commitInput()">
+              <span class="unit">%</span>
+            </div>
+          </div>
+          <div class="input-box tgt">
+            <label for="inp-tgt" style="color: var(--neon);">Target Eth</label>
+            <div class="input-row">
+              <input type="number" id="inp-tgt" value="45" min="0" max="100" step="1" oninput="handleInput()"
+                onchange="commitInput()" onblur="commitInput()" style="color: var(--neon);">
+              <span class="unit" style="color: var(--neon);">%</span>
+            </div>
+          </div>
+          <div class="input-box">
+            <label for="inp-pump-e85">Pump E85 %</label>
+            <div class="input-row">
+              <input type="number" id="inp-pump-e85" value="85" min="40" max="100" step="1" oninput="handleInput()"
+                onchange="commitInput()" onblur="commitInput()">
+              <span class="unit">%</span>
+            </div>
+          </div>
+          <div class="input-box">
+            <label for="inp-pump-gas">Pump Gas E%</label>
+            <div class="input-row">
+              <input type="number" id="inp-pump-gas" value="10" min="0" max="15" step="1" oninput="handleInput()"
+                onchange="commitInput()" onblur="commitInput()">
+              <span class="unit">%</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="fill-mode-box solid-card">
+          <div class="fill-mode-head">
+            <div>
+              <div class="fill-mode-title">Fill Mode</div>
+              <div class="fill-mode-note">Choose whether to top off the tank or add a fixed amount.</div>
+            </div>
+            <div class="fill-mode-options">
+              <label class="fill-mode-option">
+                <input type="radio" name="fill-mode" value="full" checked onchange="setFillMode('full')">
+                <span>Fill to full</span>
+              </label>
+              <label class="fill-mode-option">
+                <input type="radio" name="fill-mode" value="add" onchange="setFillMode('add')">
+                <span>Adding N gallons</span>
+              </label>
+            </div>
+          </div>
+          <div class="fill-mode-extra" id="add-volume-wrap" hidden>
+            <label for="inp-add-gal">Gallons to add</label>
+            <div class="input-row">
+              <input type="number" id="inp-add-gal" value="0.0" min="0" max="16.6" step="0.1" oninput="handleInput()"
+                onchange="commitInput()" onblur="commitInput()">
+              <span class="unit">GAL</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="advanced-grid">
+          <div class="advanced-card solid-card" aria-live="polite" aria-atomic="true">
+            <div class="advanced-title">Weather Advisory</div>
+            <div class="advanced-row">
+              <label for="inp-amb-temp">Ambient Temp</label>
+              <div class="input-row small-row">
+                <input type="number" id="inp-amb-temp" value="70" min="-40" max="140" step="1" oninput="handleInput()"
+                  onchange="commitInput()" onblur="commitInput()">
+                <span class="unit">°F</span>
+              </div>
+            </div>
+            <div class="weather-actions">
+              <button type="button" class="weather-live-btn" onclick="useLiveWeather()">Use Live Weather</button>
+              <div class="weather-source" id="weather-source-label">Manual input · not using API</div>
+            </div>
+            <div class="advanced-value" id="season-target-label">Suggested E45 for current weather</div>
+            <div class="advanced-sub" id="season-temp-label">70°F · SUMMER</div>
+            <div class="advanced-note" id="season-note">Advisory only.</div>
+            <div class="advanced-note weather-status" id="weather-status">Live weather is optional. Manual input stays
+              available.</div>
+          </div>
+
+          <div class="advanced-card solid-card" aria-live="polite" aria-atomic="true">
+            <div class="advanced-title">Ethanol Ceiling</div>
+            <div class="advanced-row">
+              <label for="inp-max-eth">Max Ethanol</label>
+              <div class="input-row small-row">
+                <input type="number" id="inp-max-eth" value="70" min="0" max="100" step="1" oninput="handleInput()"
+                  onchange="commitInput()" onblur="commitInput()">
+                <span class="unit">%</span>
+              </div>
+            </div>
+            <div class="advanced-note" id="ceiling-note">Ceiling set to E70.</div>
+          </div>
+
+          <div class="advanced-card solid-card" aria-live="polite" aria-atomic="true">
+            <div class="advanced-title">Fuel Prices</div>
+            <div class="advanced-row advanced-price-row">
+              <div>
+                <label for="inp-price-e85">E85 $/gal</label>
+                <div class="input-row small-row">
+                  <input type="number" id="inp-price-e85" value="2.89" min="0" max="999" step="0.01"
+                    oninput="handleInput()" onchange="commitInput()" onblur="commitInput()">
+                </div>
+              </div>
+              <div>
+                <label for="inp-price-93">93 $/gal</label>
+                <div class="input-row small-row">
+                  <input type="number" id="inp-price-93" value="3.79" min="0" max="999" step="0.01"
+                    oninput="handleInput()" onchange="commitInput()" onblur="commitInput()">
+                </div>
+              </div>
+            </div>
+            <div class="advanced-cost">Estimated Fill Cost <strong id="fill-cost-live">—</strong></div>
+            <div class="advanced-note" id="fill-cost-note">Live estimate uses saved prices.</div>
+          </div>
+        </div>
+
+        <div class="result-grid">
+          <div class="result-card ec" aria-live="polite" aria-atomic="true">
+            <div class="rlbl">⬡ Pump E85 First</div>
+            <div class="rval" id="ve">8.30</div>
+            <div class="runit">Gallons</div>
+            <div class="rnote" id="ve-range">8.3 gal (8.2 to 8.4 gives E44 to E46)</div>
+          </div>
+          <div class="result-card cc" aria-live="polite" aria-atomic="true">
+            <div class="rlbl">◈ Top Off 93 Octane</div>
+            <div class="rval" id="vc">8.30</div>
+            <div class="runit">Gallons</div>
+          </div>
+          <div class="result-card xc" aria-live="polite" aria-atomic="true">
+            <div class="rlbl">◎ Est. Blend</div>
+            <div class="rval" id="vx">~E45</div>
+            <div class="runit">Target Hit</div>
+          </div>
+        </div>
+
+        <div class="eth-status">
+          <div class="ebadge sweet" id="ebadge">✓ SCRK TUNED — SAFE FOR ALL BLENDS</div>
+        </div>
+
+        <div class="log-action-bar">
+          <div class="log-input-group">
+            <label>Location / Notes</label>
+            <input type="text" id="inp-station" placeholder="e.g. Shell, Meijer..." class="station-input">
+            <div class="log-edit-banner" id="log-edit-banner" hidden>
+              <div>
+                <strong id="log-edit-title">Editing log</strong>
+                <p>Update the row, then save to replace the local entry. AP readings can be added later.</p>
+              </div>
+              <button type="button" class="cancel-edit-btn" onclick="cancelLogEdit()">Cancel Edit</button>
+            </div>
+            <div class="log-actuals">
+              <div class="log-actuals-title">Actual Pumped <span>(optional)</span></div>
+              <div class="log-actual-grid">
+                <div class="log-actual-field">
+                  <label for="inp-act-e85">E85 Gal</label>
+                  <input type="number" id="inp-act-e85" step="0.1" min="0" placeholder="—" class="station-input">
+                </div>
+                <div class="log-actual-field">
+                  <label for="inp-act-93">93 Gal</label>
+                  <input type="number" id="inp-act-93" step="0.1" min="0" placeholder="—" class="station-input">
+                </div>
+                <div class="log-actual-field">
+                  <label for="inp-ap-eth">AP Confirmed Eth %</label>
+                  <input type="number" id="inp-ap-eth" step="1" min="0" max="100" placeholder="—" class="station-input">
+                </div>
+              </div>
+            </div>
+          </div>
+          <button class="save-log-btn" onclick="saveFillUpLog()">
+            <span class="btn-icon">💾</span> SAVE TELEMETRY
+          </button>
+        </div>
+
+        <div class="step-box">
+          <div class="step-title">// PIT STOP SEQUENCE</div>
+          <div class="steps">
+            <div class="step">
+              <div class="snum s1">1</div>
+              <div class="stxt">Pump exactly <span class="se" id="i1">8.30 gallons</span> of <strong>E85</strong> first.
+              </div>
+            </div>
+            <div class="step">
+              <div class="snum s2">2</div>
+              <div class="stxt">Switch to <strong>93 Octane</strong>. Fill until the nozzle clicks off (approx. <span
+                  class="sc" id="i2">8.30 gallons</span>).</div>
+            </div>
+            <div class="step">
+              <div class="snum s3">3</div>
+              <div class="stxt">Check your Accessport after a few miles. It should stabilize near <span id="i3"
+                  style="color:var(--neon);font-weight:bold;">~45%</span>.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="math-box">
+          <div class="math-title">⟨ Math Verification ⟩</div>
+          <div class="math-formula">E85 gal = (Target% × TankSize - CurrentEth% × CurrentGal - PumpGas% × FillVolume) ÷
+            (PumpE85% - PumpGas%)</div>
+          <div class="math-live" id="live-math">E85 Needed = [(45 × 16.6) - (10 × 0.0) - (10 × 16.6)] ÷ 75 = 8.30</div>
+        </div>
       </div>
     </div>
-  </div>
 
-  <div id="log-view" style="display:none;">
-    <div class="log-info-box solid-card">
-      <div class="info-block">
-        <span class="info-icon">🔒</span>
+    <div id="table-view" style="display:none;">
+      <div class="table-legend">
         <div>
-          <strong>Local Telemetry Storage</strong>
-          <p>Fill-up history is saved privately to this device's browser memory. Export to CSV frequently to back up your data.</p>
+          <div class="dot d-e85"></div><span> E85 Pump</span>
+        </div>
+        <div>
+          <div class="dot d-c93"></div><span> 93 Octane</span>
+        </div>
+        <div>
+          <div class="dot d-dim"></div><span>Total: 16.6 gal</span>
         </div>
       </div>
-    </div>
-    <div class="solid-card log-container">
-      <div class="log-header">
-        <h2>Fill-up History</h2>
-        <div class="log-actions">
-          <button class="download-btn" onclick="downloadCSV()">⬇ Export CSV</button>
-          <button class="del-all-btn" onclick="deleteAllLogs()">✕ Delete All</button>
-        </div>
-      </div>
-      <div class="table-wrap">
+      <div class="table-wrap solid-card">
         <div style="overflow-x:auto;">
           <table>
             <thead>
               <tr>
-                <th>Date / Time (EST)</th>
-                <th>Gas Station</th>
-                <th>⬡ E85 (Gal)</th>
-                <th>◈ 93 (Gal)</th>
-                <th>◎ Eth %</th>
-                <th></th>
+                <th>Gauge Needle</th>
+                <th>Total Needed</th>
+                <th>⬡ E85 Pump</th>
+                <th>◈ 93 Octane</th>
               </tr>
             </thead>
-            <tbody id="log-table-body"></tbody>
+            <tbody id="static-chart-body">
+            </tbody>
           </table>
         </div>
       </div>
-      <div class="log-empty" id="log-empty-msg">No telemetry logged yet. Calculate a mix and tap "Save Telemetry".</div>
     </div>
-  </div>
 
-  <div class="section-title" style="margin-top: 24px;">// TECHNICAL REFERENCE & GALLERY</div>
-  <div class="gallery-grid">
-    <div class="photo-card" id="pc1" onmousemove="tiltCard(event,'pc1')" onmouseleave="resetCard('pc1')" onclick="openLightbox('wrx-action.jpg','2022 Subaru WRX Driving')">
-      <img src="wrx-action.jpg" alt="2022 Subaru WRX Driving">
-      <div class="photo-overlay">2022 WRX · On Track</div>
-    </div>
-    <div class="photo-card" id="pc2" onmousemove="tiltCard(event,'pc2')" onmouseleave="resetCard('pc2')" onclick="openLightbox('wrx-shifter.jpg','FA24 WRX Manual Shifter')">
-      <img src="wrx-shifter.jpg" alt="FA24 WRX Manual Shifter">
-      <div class="photo-overlay">FA24 · 6-Speed Manual</div>
-    </div>
-    <div class="photo-card" id="pc3" onmousemove="tiltCard(event,'pc3')" onmouseleave="resetCard('pc3')" onclick="openLightbox('wrx-interior.jpg','WRX Interior Dashboard')">
-      <img src="wrx-interior.jpg" alt="WRX Interior Dashboard">
-      <div class="photo-overlay">Cockpit · Accessport</div>
-    </div>
-  </div>
-
-  <div class="disclaimer solid-card" style="margin-top: 24px;">
-    <strong>DISCLAIMER & LIABILITY:</strong> This calculator relies on mathematical estimates. The creator assumes no liability for engine or vehicle damage. Use at your own risk.
-  </div>
-
-  <div class="footer">
-    <div class="fn">FA24 · Accessport Required · Verify ETH% at pump · Cobb Flex Fuel Kit · Cold Air Intake · SCRK Custom Tune</div>
-    <div class="fm">22 WRX</div>
-  </div>
-
-</div>
-
-<div id="lightbox" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.95);z-index:99999;align-items:center;justify-content:center;padding:20px;" onclick="closeLightbox()">
-  <div style="max-width:900px;width:100%;position:relative;">
-    <img id="lb-img" src="" alt="" style="width:100%;height:auto;border-radius:12px;border:1px solid #2e3555;">
-    <div id="lb-cap" style="font-family:'Share Tech Mono',monospace;font-size:12px;color:#6b7a99;text-align:center;margin-top:12px;letter-spacing:2px;"></div>
-    <button style="position:absolute;top:-20px;right:-20px;background:#1e2235;border:1px solid #2e3555;border-radius:50%;width:40px;height:40px;color:#fff;font-size:20px;cursor:pointer;">✕</button>
-  </div>
-</div>
-
-<div id="sim-modal" class="modal-overlay" onclick="closeSim(event)">
-  <div class="modal-content" onclick="event.stopPropagation()">
-    <button class="close-btn" onclick="closeSim(null)">✕</button>
-    <div class="modal-inner">
-      <div class="sim-header">
-        <h2>⚠ The Flex-Fuel <span>Trap</span> Simulator</h2>
-        <p>Discover why targets are missed when the tank is too full.</p>
-      </div>
-
-      <div class="sim-visual-wrapper">
-        <div class="sim-tank-label-row">
-          <span class="lbl-cur">▤ EXISTING</span>
-          <span class="lbl-e85">⬡ E85 ADDED</span>
-          <span class="lbl-c93">◈ 93 ADDED</span>
-        </div>
-        <div class="sim-tank-horiz" id="sim-tank-horiz">
-          <div class="sim-fill-horiz" id="sfh-cur"></div>
-          <div class="sim-fill-horiz" id="sfh-e85"></div>
-          <div class="sim-fill-horiz" id="sfh-93"></div>
-        </div>
-        <div class="sim-tank-pct-row">
-          <div class="sim-pct-badge cur-b" id="pct-cur">In: —</div>
-          <div class="sim-pct-badge e85-b" id="pct-e85">E85: —</div>
-          <div class="sim-pct-badge c93-b" id="pct-93">93: —</div>
+    <div id="log-view" style="display:none;">
+      <div class="log-info-box solid-card">
+        <div class="info-block">
+          <span class="info-icon">🔒</span>
+          <div>
+            <strong>Local Telemetry Storage</strong>
+            <p>Fill-up history is saved locally on this device and can optionally sync to a private Google Form. Export
+              to CSV frequently to back up your data.</p>
+            <label class="sync-option">
+              <input type="checkbox" id="chk-sync" checked onchange="setSyncEnabled(this.checked)">
+              <span>Sync saved logs to private Google Form</span>
+            </label>
+          </div>
         </div>
       </div>
+      <div class="station-insights solid-card">
+        <div class="station-insights-head">
+          <div>
+            <div class="station-insights-title">Station Back-Calculation</div>
+            <div class="station-insights-sub">Uses actual pumped gallons + AP-confirmed ethanol.</div>
+          </div>
+          <div class="station-insights-caveat">Rolling average keeps the latest five valid estimates per station.</div>
+        </div>
+        <div class="station-insights-body" id="station-insights-body"></div>
+        <div class="station-insights-empty" id="station-insights-empty">No valid AP-confirmed logs yet.</div>
+      </div>
+      <div class="solid-card log-container">
+        <div class="log-header">
+          <h2>Fill-up History</h2>
+          <div class="log-actions">
+            <button class="download-btn" onclick="downloadCSV()">⬇ Export CSV</button>
+            <button class="del-all-btn" onclick="deleteAllLogs()">✕ Delete All</button>
+          </div>
+        </div>
+        <div class="table-wrap">
+          <div style="overflow-x:auto;">
+            <table>
+              <thead>
+                <tr>
+                  <th>Date / Time (EST)</th>
+                  <th>Gas Station</th>
+                  <th>Planned E85</th>
+                  <th>Planned 93</th>
+                  <th>AP Eth</th>
+                  <th>Actual E85</th>
+                  <th>Actual 93</th>
+                  <th>Station E85 Est</th>
+                  <th>Fuel Cost</th>
+                  <th>◎ Eth %</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="log-table-body"></tbody>
+            </table>
+          </div>
+        </div>
+        <div class="log-empty" id="log-empty-msg">No telemetry logged yet. Calculate a mix and tap "Save Telemetry".
+        </div>
+      </div>
+    </div>
 
-      <div class="sim-grid">
-        <div class="sim-controls">
-          
-          <div class="sim-slider-group">
-            <div class="sim-slider-header">
-              <label>Current Fuel in Tank</label>
-              <div class="sim-val" id="sim-val-cur">4.2<span style="font-size:16px;"> GAL</span></div>
-            </div>
-            <div class="slider-tactile-wrap sim-wrap">
-              <div class="tick-row" style="margin-bottom: 8px;">
-                <span class="tick sim-t on" onclick="setSimTick(0)">E</span>
-                <span class="tick sim-t" onclick="setSimTick(1)">⅛</span>
-                <span class="tick sim-t" onclick="setSimTick(2)">¼</span>
-                <span class="tick sim-t" onclick="setSimTick(3)">⅜</span>
-                <span class="tick sim-t" onclick="setSimTick(4)">½</span>
-                <span class="tick sim-t" onclick="setSimTick(5)">⅝</span>
-                <span class="tick sim-t" onclick="setSimTick(6)">¾</span>
-                <span class="tick sim-t" onclick="setSimTick(7)">⅞</span>
-                <span class="tick sim-t" onclick="setSimTick(8)">F</span>
+    <div class="section-title" style="margin-top: 24px;">// TECHNICAL REFERENCE & GALLERY</div>
+    <div class="gallery-grid">
+      <div class="photo-card" id="pc1" onmousemove="tiltCard(event,'pc1')" onmouseleave="resetCard('pc1')"
+        onclick="openLightbox('wrx-action.jpg','2022 Subaru WRX Driving')">
+        <img src="wrx-action.jpg" alt="2022 Subaru WRX Driving">
+        <div class="photo-overlay">2022 WRX · On Track</div>
+      </div>
+      <div class="photo-card" id="pc2" onmousemove="tiltCard(event,'pc2')" onmouseleave="resetCard('pc2')"
+        onclick="openLightbox('wrx-shifter.jpg','FA24 WRX Manual Shifter')">
+        <img src="wrx-shifter.jpg" alt="FA24 WRX Manual Shifter">
+        <div class="photo-overlay">FA24 · 6-Speed Manual</div>
+      </div>
+      <div class="photo-card" id="pc3" onmousemove="tiltCard(event,'pc3')" onmouseleave="resetCard('pc3')"
+        onclick="openLightbox('wrx-interior.jpg','WRX Interior Dashboard')">
+        <img src="wrx-interior.jpg" alt="WRX Interior Dashboard">
+        <div class="photo-overlay">Cockpit · Accessport</div>
+      </div>
+    </div>
+
+    <div class="disclaimer solid-card" style="margin-top: 24px;">
+      <strong>DISCLAIMER & LIABILITY:</strong> This calculator relies on mathematical estimates. The creator assumes no
+      liability for engine or vehicle damage. Use at your own risk.
+    </div>
+
+    <div class="footer">
+      <div class="fn">FA24 · Accessport Required · Verify ETH% at pump · Cobb Flex Fuel Kit · Cold Air Intake · SCRK
+        Custom Tune</div>
+      <div class="fm">22 WRX</div>
+    </div>
+
+  </div>
+
+  <div id="lightbox"
+    style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.95);z-index:99999;align-items:center;justify-content:center;padding:20px;"
+    onclick="closeLightbox()">
+    <div style="max-width:900px;width:100%;position:relative;">
+      <img id="lb-img" src="" alt="" style="width:100%;height:auto;border-radius:12px;border:1px solid #2e3555;">
+      <div id="lb-cap"
+        style="font-family:'Share Tech Mono',monospace;font-size:12px;color:#6b7a99;text-align:center;margin-top:12px;letter-spacing:2px;">
+      </div>
+      <button
+        style="position:absolute;top:-20px;right:-20px;background:#1e2235;border:1px solid #2e3555;border-radius:50%;width:40px;height:40px;color:#fff;font-size:20px;cursor:pointer;">✕</button>
+    </div>
+  </div>
+
+  <div id="sim-modal" class="modal-overlay" onclick="closeSim(event)">
+    <div class="modal-content" onclick="event.stopPropagation()">
+      <button class="close-btn" onclick="closeSim(null)">✕</button>
+      <div class="modal-inner">
+        <div class="sim-header">
+          <h2>⚠ The Flex-Fuel <span>Trap</span> Simulator</h2>
+          <p>Discover why targets are missed when the tank is too full.</p>
+        </div>
+
+        <div class="sim-visual-wrapper">
+          <div class="sim-tank-label-row">
+            <span class="lbl-cur">▤ EXISTING</span>
+            <span class="lbl-e85">⬡ E85 ADDED</span>
+            <span class="lbl-c93">◈ 93 ADDED</span>
+          </div>
+          <div class="sim-tank-horiz" id="sim-tank-horiz">
+            <div class="sim-fill-horiz" id="sfh-cur"></div>
+            <div class="sim-fill-horiz" id="sfh-e85"></div>
+            <div class="sim-fill-horiz" id="sfh-93"></div>
+          </div>
+          <div class="sim-tank-pct-row">
+            <div class="sim-pct-badge cur-b" id="pct-cur">In: —</div>
+            <div class="sim-pct-badge e85-b" id="pct-e85">E85: —</div>
+            <div class="sim-pct-badge c93-b" id="pct-93">93: —</div>
+          </div>
+        </div>
+
+        <div class="sim-grid">
+          <div class="sim-controls">
+
+            <div class="sim-slider-group">
+              <div class="sim-slider-header">
+                <label>Current Fuel in Tank</label>
+                <div class="sim-val" id="sim-val-cur">4.2<span style="font-size:16px;"> GAL</span></div>
               </div>
-              <input type="range" id="sim-sl-cur" class="tactile-slider" min="0" max="8" step="1" value="2" oninput="onSimSlide(this.value)">
+              <div class="slider-tactile-wrap sim-wrap">
+                <div class="tick-row" style="margin-bottom: 8px;">
+                  <span class="tick sim-t on" onclick="setSimTick(0)">E</span>
+                  <span class="tick sim-t" onclick="setSimTick(1)">⅛</span>
+                  <span class="tick sim-t" onclick="setSimTick(2)">¼</span>
+                  <span class="tick sim-t" onclick="setSimTick(3)">⅜</span>
+                  <span class="tick sim-t" onclick="setSimTick(4)">½</span>
+                  <span class="tick sim-t" onclick="setSimTick(5)">⅝</span>
+                  <span class="tick sim-t" onclick="setSimTick(6)">¾</span>
+                  <span class="tick sim-t" onclick="setSimTick(7)">⅞</span>
+                  <span class="tick sim-t" onclick="setSimTick(8)">F</span>
+                </div>
+                <input type="range" id="sim-sl-cur" class="tactile-slider" min="0" max="8" step="1" value="2"
+                  oninput="onSimSlide(this.value)">
+              </div>
+            </div>
+
+            <div class="sim-slider-group" style="margin-top: 24px;">
+              <div class="sim-slider-header">
+                <label style="color:var(--neon);">Target Ethanol %</label>
+                <div class="sim-val" id="sim-val-tgt" style="color:var(--neon);">E45</div>
+              </div>
+              <div class="slider-tactile-wrap sim-wrap">
+                <input type="range" id="sim-sl-tgt" class="tactile-slider neon-slider" min="10" max="85" step="1"
+                  value="45" oninput="runSim()">
+              </div>
             </div>
           </div>
-          
-          <div class="sim-slider-group" style="margin-top: 24px;">
-            <div class="sim-slider-header">
-              <label style="color:var(--neon);">Target Ethanol %</label>
-              <div class="sim-val" id="sim-val-tgt" style="color:var(--neon);">E45</div>
-            </div>
-            <div class="slider-tactile-wrap sim-wrap">
-              <input type="range" id="sim-sl-tgt" class="tactile-slider neon-slider" min="10" max="85" step="1" value="45" oninput="runSim()">
-            </div>
-          </div>
-        </div>
-        
-        <div class="sim-feedback">
-          <div id="sim-alert" class="sim-alert ok"><strong>Sliders updated.</strong></div>
-          <div class="sim-stats">
-            <div><span>Empty Space:</span> <strong id="sim-stat-empty">—</strong></div>
-            <div><span>Ideal E85 Needed:</span> <strong id="sim-stat-ideal">—</strong></div>
-            <div style="border-top:1px dashed #323868; padding-top:8px; margin-top:8px;">
-              <span style="color:var(--neon);">Max Achievable:</span> <strong id="sim-stat-max" style="color:var(--neon); font-size:20px;">—</strong>
+
+          <div class="sim-feedback">
+            <div id="sim-alert" class="sim-alert ok"><strong>Sliders updated.</strong></div>
+            <div class="sim-stats">
+              <div><span>Empty Space:</span> <strong id="sim-stat-empty">—</strong></div>
+              <div><span>Ideal E85 Needed:</span> <strong id="sim-stat-ideal">—</strong></div>
+              <div style="border-top:1px dashed #323868; padding-top:8px; margin-top:8px;">
+                <span style="color:var(--neon);">Max Achievable:</span> <strong id="sim-stat-max"
+                  style="color:var(--neon); font-size:20px;">—</strong>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-</div>
 
-<div id="ref-modal" onclick="closeRef()">
-  <div class="ref-modal-content solid-card" onclick="event.stopPropagation()">
-    <button class="ref-close-btn" onclick="closeRef()">✕</button>
-    <div class="sim-header">
-      <h2>🎛 Live Gauge <span>Reference</span></h2>
-      <p>Normal Accessport ranges by driving scenario — RevHang E85WRK2</p>
-    </div>
-
-    <div class="ref-scenario">
-      <h3>Idle</h3>
-      <div class="ref-condition">▸ 600–900 RPM · Park/Neutral · stopped, traffic light</div>
-      <div class="ref-data-row">
-        <div class="ref-data-item"><div class="lbl">AFR</div><div class="val">14.0–15.0</div></div>
-        <div class="ref-data-item"><div class="lbl">Timing</div><div class="val">8.0–11.0°</div></div>
-        <div class="ref-data-item"><div class="lbl">DAM</div><div class="val">1.000</div></div>
-        <div class="ref-data-item"><div class="lbl">FK / FKL</div><div class="val">0 / 0</div></div>
+  <div id="ref-modal" onclick="closeRef(event)">
+    <div class="ref-modal-content solid-card" onclick="event.stopPropagation()">
+      <button class="ref-close-btn" onclick="closeRef()">✕</button>
+      <div class="sim-header">
+        <h2>🎛 Live Gauge <span>Reference</span></h2>
+        <p>Normal Accessport ranges by driving scenario — RevHang E85WRK2</p>
       </div>
-      <div class="ref-status">✓ Smooth, quiet — timing fluctuates ±0.5–1.0°</div>
-    </div>
 
-    <div class="ref-scenario">
-      <h3>Light Cruise In Vacuum</h3>
-      <div class="ref-condition">▸ 40–70 mph · light throttle · no boost building</div>
-      <div class="ref-data-row">
-        <div class="ref-data-item"><div class="lbl">AFR</div><div class="val">14.5–15.5</div></div>
-        <div class="ref-data-item"><div class="lbl">Timing</div><div class="val">10.0–15.0°</div></div>
-        <div class="ref-data-item"><div class="lbl">DAM</div><div class="val">1.000</div></div>
-        <div class="ref-data-item"><div class="lbl">FK / FKL</div><div class="val">0 / 0</div></div>
+      <div class="ref-scenario">
+        <h3>Idle</h3>
+        <div class="ref-condition">▸ 600–900 RPM · Park/Neutral · stopped, traffic light</div>
+        <div class="ref-data-row">
+          <div class="ref-data-item">
+            <div class="lbl">AFR</div>
+            <div class="val">14.0–15.0</div>
+          </div>
+          <div class="ref-data-item">
+            <div class="lbl">Timing</div>
+            <div class="val">8.0–11.0°</div>
+          </div>
+          <div class="ref-data-item">
+            <div class="lbl">DAM</div>
+            <div class="val">1.000</div>
+          </div>
+          <div class="ref-data-item">
+            <div class="lbl">FK / FKL</div>
+            <div class="val">0 / 0</div>
+          </div>
+        </div>
+        <div class="ref-status">✓ Smooth, quiet — timing fluctuates ±0.5–1.0°</div>
       </div>
-      <div class="ref-status">✓ Smooth, no knock, timing advances with RPM</div>
-    </div>
 
-    <div class="ref-scenario">
-      <h3>Partial Throttle Accel</h3>
-      <div class="ref-condition">▸ 1–6 psi boost · 4th–6th gear</div>
-      <div class="ref-data-row">
-        <div class="ref-data-item"><div class="lbl">AFR</div><div class="val">12.0–13.5</div></div>
-        <div class="ref-data-item"><div class="lbl">Timing</div><div class="val">6.0–10.0°</div></div>
-        <div class="ref-data-item"><div class="lbl">DAM</div><div class="val">1.000</div></div>
-        <div class="ref-data-item"><div class="lbl">FK / FKL</div><div class="val">≥-0.35 / 0</div></div>
+      <div class="ref-scenario">
+        <h3>Light Cruise In Vacuum</h3>
+        <div class="ref-condition">▸ 40–70 mph · light throttle · no boost building</div>
+        <div class="ref-data-row">
+          <div class="ref-data-item">
+            <div class="lbl">AFR</div>
+            <div class="val">14.5–15.5</div>
+          </div>
+          <div class="ref-data-item">
+            <div class="lbl">Timing</div>
+            <div class="val">10.0–15.0°</div>
+          </div>
+          <div class="ref-data-item">
+            <div class="lbl">DAM</div>
+            <div class="val">1.000</div>
+          </div>
+          <div class="ref-data-item">
+            <div class="lbl">FK / FKL</div>
+            <div class="val">0 / 0</div>
+          </div>
+        </div>
+        <div class="ref-status">✓ Smooth, no knock, timing advances with RPM</div>
       </div>
-      <div class="ref-status">✓ Normal enrichment — occasional -0.35° FK is fine</div>
-    </div>
 
-    <div class="ref-scenario">
-      <h3>WOT Pull</h3>
-      <div class="ref-condition">▸ 3rd gear · 3,000–6,500 RPM · 15–19 psi</div>
-      <div class="ref-data-row">
-        <div class="ref-data-item"><div class="lbl">AFR</div><div class="val">10.9–12.0</div></div>
-        <div class="ref-data-item"><div class="lbl">Timing</div><div class="val">2.5–14.0°</div></div>
-        <div class="ref-data-item"><div class="lbl">DAM</div><div class="val">1.000</div></div>
-        <div class="ref-data-item"><div class="lbl">FK / FKL</div><div class="val">0 / 0</div></div>
+      <div class="ref-scenario">
+        <h3>Partial Throttle Accel</h3>
+        <div class="ref-condition">▸ 1–6 psi boost · 4th–6th gear</div>
+        <div class="ref-data-row">
+          <div class="ref-data-item">
+            <div class="lbl">AFR</div>
+            <div class="val">12.0–13.5</div>
+          </div>
+          <div class="ref-data-item">
+            <div class="lbl">Timing</div>
+            <div class="val">6.0–10.0°</div>
+          </div>
+          <div class="ref-data-item">
+            <div class="lbl">DAM</div>
+            <div class="val">1.000</div>
+          </div>
+          <div class="ref-data-item">
+            <div class="lbl">FK / FKL</div>
+            <div class="val">≥-0.35 / 0</div>
+          </div>
+        </div>
+        <div class="ref-status">✓ Normal enrichment — occasional -0.35° FK is fine</div>
       </div>
-      <div class="ref-status">✓ Rich fuel, conservative timing at peak boost</div>
-    </div>
 
-    <div class="ref-scenario">
-      <h3>Lift-Off / Fuel Cut</h3>
-      <div class="ref-condition">▸ Coasting after cruise or a pull</div>
-      <div class="ref-data-row">
-        <div class="ref-data-item"><div class="lbl">AFR</div><div class="val">19.0–21.9</div></div>
-        <div class="ref-data-item"><div class="lbl">Timing</div><div class="val">-0.5 to +2.0°</div></div>
-        <div class="ref-data-item"><div class="lbl">DAM</div><div class="val">1.000</div></div>
-        <div class="ref-data-item"><div class="lbl">FK / FKL</div><div class="val">0 / 0</div></div>
+      <div class="ref-scenario">
+        <h3>WOT Pull</h3>
+        <div class="ref-condition">▸ 3rd gear · 3,000–6,500 RPM · 15–19 psi</div>
+        <div class="ref-data-row">
+          <div class="ref-data-item">
+            <div class="lbl">AFR</div>
+            <div class="val">10.9–12.0</div>
+          </div>
+          <div class="ref-data-item">
+            <div class="lbl">Timing</div>
+            <div class="val">2.5–14.0°</div>
+          </div>
+          <div class="ref-data-item">
+            <div class="lbl">DAM</div>
+            <div class="val">1.000</div>
+          </div>
+          <div class="ref-data-item">
+            <div class="lbl">FK / FKL</div>
+            <div class="val">0 / 0</div>
+          </div>
+        </div>
+        <div class="ref-status">✓ Rich fuel, conservative timing at peak boost</div>
       </div>
-      <div class="ref-status">✓ RevHang cut active — lean, efficient coast</div>
-    </div>
 
-    <div class="ref-flags-box">
-      <h3>⚠ Back Off If You See</h3>
-      <div class="ref-flag-item"><strong>DAM below 0.900</strong> — ease off, drive gentle until it recovers to 1.000</div>
-      <div class="ref-flag-item"><strong>FK below -1.05°</strong> — reduce load, avoid lugging in a tall gear at low RPM</div>
-      <div class="ref-flag-item"><strong>FKL below -0.70°</strong> — retard is accumulating, back off and cruise easy</div>
-      <div class="ref-flag-item"><strong>6th gear under ~1,600 RPM + throttle</strong> — lugging zone, downshift to 5th/4th</div>
-      <div class="ref-flag-item"><strong>Timing jumping erratically</strong> — possible active knock, lift immediately</div>
-    </div>
+      <div class="ref-scenario">
+        <h3>Lift-Off / Fuel Cut</h3>
+        <div class="ref-condition">▸ Coasting after cruise or a pull</div>
+        <div class="ref-data-row">
+          <div class="ref-data-item">
+            <div class="lbl">AFR</div>
+            <div class="val">19.0–21.9</div>
+          </div>
+          <div class="ref-data-item">
+            <div class="lbl">Timing</div>
+            <div class="val">-0.5 to +2.0°</div>
+          </div>
+          <div class="ref-data-item">
+            <div class="lbl">DAM</div>
+            <div class="val">1.000</div>
+          </div>
+          <div class="ref-data-item">
+            <div class="lbl">FK / FKL</div>
+            <div class="val">0 / 0</div>
+          </div>
+        </div>
+        <div class="ref-status">✓ RevHang cut active — lean, efficient coast</div>
+      </div>
 
-    <div class="ref-footer-note">FA24 · RevHang E85WRK2 · Dman E-Tune · Reference only — always defer to logs &amp; your tuner</div>
+      <div class="ref-flags-box">
+        <h3>⚠ Back Off If You See</h3>
+        <div class="ref-flag-item"><strong>DAM below 0.900</strong> — ease off, drive gentle until it recovers to 1.000
+        </div>
+        <div class="ref-flag-item"><strong>FK below -1.05°</strong> — reduce load, avoid lugging in a tall gear at low
+          RPM</div>
+        <div class="ref-flag-item"><strong>FKL below -0.70°</strong> — retard is accumulating, back off and cruise easy
+        </div>
+        <div class="ref-flag-item"><strong>6th gear under ~1,600 RPM + throttle</strong> — lugging zone, downshift to
+          5th/4th</div>
+        <div class="ref-flag-item"><strong>Timing jumping erratically</strong> — possible active knock, lift immediately
+        </div>
+      </div>
+
+      <div class="ref-footer-note">FA24 · RevHang E85WRK2 · Dman E-Tune · Reference only — always defer to logs &amp;
+        your tuner</div>
+    </div>
   </div>
-</div>
 
-<script src="app.js"></script>
-<script>
-function tiltCard(e, id) {
-  if (window.innerWidth < 600) return;
-  const card = document.getElementById(id);
-  const rect = card.getBoundingClientRect();
-  const x = (e.clientX - rect.left) / rect.width  - 0.5;
-  const y = (e.clientY - rect.top)  / rect.height - 0.5;
-  card.style.transform = `perspective(600px) rotateY(${x * 12}deg) rotateX(${-y * 10}deg) scale(1.03)`;
-}
-function resetCard(id) {
-  const card = document.getElementById(id);
-  card.style.transform = '';
-}
-function openLightbox(src, cap) {
-  document.getElementById('lb-img').src = src;
-  document.getElementById('lb-cap').textContent = cap;
-  document.getElementById('lightbox').style.display = 'flex';
-}
-function closeLightbox() {
-  document.getElementById('lightbox').style.display = 'none';
-}
-function openRef() {
-  document.getElementById('ref-modal').style.display = 'flex';
-}
-function closeRef() {
-  document.getElementById('ref-modal').style.display = 'none';
-}
-</script>
+  <script src="app.js"></script>
+  <script>
+    function tiltCard(e, id) {
+      if (window.innerWidth < 600) return;
+      const card = document.getElementById(id);
+      const rect = card.getBoundingClientRect();
+      const x = (e.clientX - rect.left) / rect.width - 0.5;
+      const y = (e.clientY - rect.top) / rect.height - 0.5;
+      card.style.transform = `perspective(600px) rotateY(${x * 12}deg) rotateX(${-y * 10}deg) scale(1.03)`;
+    }
+    function resetCard(id) {
+      const card = document.getElementById(id);
+      card.style.transform = '';
+    }
+    function openLightbox(src, cap) {
+      document.getElementById('lb-img').src = src;
+      document.getElementById('lb-cap').textContent = cap;
+      document.getElementById('lightbox').style.display = 'flex';
+    }
+    function closeLightbox() {
+      document.getElementById('lightbox').style.display = 'none';
+    }
+  </script>
 </body>
+
 </html>
