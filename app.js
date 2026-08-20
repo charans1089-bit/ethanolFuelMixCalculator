@@ -277,9 +277,29 @@ function getNearestStation(group) {
   return normalized[0].station;
 }
 
+function toMiles(distanceValue, unitValue) {
+  const d = Number(distanceValue);
+  if (!Number.isFinite(d)) return null;
+
+  const unit = String(unitValue || '').trim().toLowerCase();
+  if (unit === 'mi' || unit === 'mile' || unit === 'miles') return d;
+  if (unit === 'km' || unit === 'kilometer' || unit === 'kilometers') return d * 0.621371;
+  if (unit === 'm' || unit === 'meter' || unit === 'meters') return d / 1609.344;
+  if (unit === 'ft' || unit === 'foot' || unit === 'feet') return d / 5280;
+
+  return d;
+}
+
 function formatStationDistanceMiles(station) {
-  const distance = Number(station?.distance);
-  return Number.isFinite(distance) ? `${distance.toFixed(1)} mi` : 'distance n/a';
+  const miles = toMiles(
+    station?.distance,
+    station?.distanceUnit ?? station?.distance_unit ?? station?.distanceUnits
+  );
+  if (!Number.isFinite(miles)) return 'distance n/a';
+  if (miles === 0) return 'at search point';
+  if (miles < 0.1) return '<0.1 mi';
+  if (miles < 10) return `${miles.toFixed(2)} mi`;
+  return `${miles.toFixed(1)} mi`;
 }
 
 function formatStationSummary(station) {
