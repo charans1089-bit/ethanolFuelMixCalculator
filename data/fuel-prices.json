@@ -3,7 +3,7 @@
   "source": "Apify johnvc/fuelprices",
   "search": "Dearborn, MI",
   "maxAgeDays": 3,
-  "generatedAt": "2026-08-20T18:53:12.398Z",
+  "generatedAt": "2026-08-20T19:30:23.814Z",
   "e85": {
     "fuelCode": 5,
     "count": 1,
@@ -281,23 +281,23 @@
         "bestPrice": 5.39
       },
       {
-        "id": "98820",
+        "id": "99496",
         "name": "Mobil",
         "address": {
-          "line1": "10000 Ford Rd",
+          "line1": "7954 Greenfield Rd",
           "line2": "",
           "city": "Dearborn",
           "region": "MI",
-          "postalCode": "48126-3329"
+          "postalCode": "48126-1061"
         },
         "distance": null,
-        "starRating": 3.6,
-        "ratingsCount": 21,
+        "starRating": 4.2,
+        "ratingsCount": 52,
         "priceUnit": "dollars_per_gallon",
         "cash": 5.39,
-        "cashPostedTime": "2026-08-20T03:08:39.984Z",
+        "cashPostedTime": "2026-08-20T03:08:08.396Z",
         "credit": 5.49,
-        "creditPostedTime": "2026-08-20T03:08:40.161Z",
+        "creditPostedTime": "2026-08-20T03:01:16.805Z",
         "bestPrice": 5.39
       },
       {
@@ -321,23 +321,23 @@
         "bestPrice": 5.39
       },
       {
-        "id": "99496",
+        "id": "98820",
         "name": "Mobil",
         "address": {
-          "line1": "7954 Greenfield Rd",
+          "line1": "10000 Ford Rd",
           "line2": "",
           "city": "Dearborn",
           "region": "MI",
-          "postalCode": "48126-1061"
+          "postalCode": "48126-3329"
         },
         "distance": null,
-        "starRating": 4.2,
-        "ratingsCount": 52,
+        "starRating": 3.6,
+        "ratingsCount": 21,
         "priceUnit": "dollars_per_gallon",
         "cash": 5.39,
-        "cashPostedTime": "2026-08-20T03:08:08.396Z",
+        "cashPostedTime": "2026-08-20T03:08:39.984Z",
         "credit": 5.49,
-        "creditPostedTime": "2026-08-20T03:01:16.805Z",
+        "creditPostedTime": "2026-08-20T03:08:40.161Z",
         "bestPrice": 5.39
       },
       {
@@ -442,5 +442,5 @@
       }
     ]
   },
-  "fingerprint": "02d7634c36d601aa6edf909ee65aef53576dbfe39fae01225896f70b4c55d9c3"
+  "fingerprint": "0ad099efa0051d00f242a32e0bde4e2fe7d824d6c04414753467f797b351d3b0"
 }
