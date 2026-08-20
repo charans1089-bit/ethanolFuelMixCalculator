@@ -277,6 +277,25 @@ function getNearestStation(group) {
   return normalized[0].station;
 }
 
+function stationIdentity(station) {
+  if (!station || typeof station !== 'object') return '';
+  const name = String(station?.name || '').trim().toLowerCase();
+  const addr = formatStationAddress(station).trim().toLowerCase();
+  const id = String(station?.id ?? '').trim().toLowerCase();
+  return `${id}|${name}|${addr}`;
+}
+
+function getNearestDifferentStation(group, selectedStation) {
+  const selectedKey = stationIdentity(selectedStation);
+  const normalized = getPricedStations(group)
+    .filter(item => Number.isFinite(item.distance))
+    .filter(item => stationIdentity(item.station) !== selectedKey);
+
+  if (!normalized.length) return null;
+  normalized.sort((a, b) => (a.distance - b.distance) || (a.bestPrice - b.bestPrice));
+  return normalized[0].station;
+}
+
 function toMiles(distanceValue, unitValue) {
   const d = Number(distanceValue);
   if (!Number.isFinite(d)) return null;
@@ -316,7 +335,9 @@ function setFuelStationLine(id, label, cheapestStation, nearestStation) {
   const el = document.getElementById(id);
   if (!el) return;
   const cheapestText = formatStationSummary(cheapestStation);
-  const nearestText = formatStationSummary(nearestStation);
+  const nearestText = nearestStation
+    ? formatStationSummary(nearestStation)
+    : 'same as lowest (no different nearby station in snapshot)';
   el.textContent = `${label} lowest: ${cheapestText} | nearest: ${nearestText}`;
 }
 
@@ -352,8 +373,8 @@ async function fetchFuelPriceSnapshot() {
 function applyFuelSnapshot(snapshot, sourceKind) {
   const e85Station = getBestStation(snapshot?.e85);
   const p93Station = getBestStation(snapshot?.premium93);
-  const e85Nearest = getNearestStation(snapshot?.e85);
-  const p93Nearest = getNearestStation(snapshot?.premium93);
+  const e85Nearest = getNearestDifferentStation(snapshot?.e85, e85Station);
+  const p93Nearest = getNearestDifferentStation(snapshot?.premium93, p93Station);
   const e85Price = Number(e85Station?.bestPrice ?? e85Station?.cash ?? e85Station?.credit);
   const p93Price = Number(p93Station?.bestPrice ?? p93Station?.cash ?? p93Station?.credit);
 
