@@ -255,7 +255,7 @@ function getBestStation(group) {
     const distance = Number(station?.distance);
     return {
       station,
-      bestPrice: Number.isFinite(bestPrice) ? bestPrice : Number.POSITIVE_INFINITY,
+      bestPrice: Number.isFinite(bestPrice) && bestPrice > 0 ? bestPrice : Number.POSITIVE_INFINITY,
       distance: Number.isFinite(distance) ? distance : Number.POSITIVE_INFINITY
     };
   }).filter(item => Number.isFinite(item.bestPrice));
@@ -276,7 +276,7 @@ function setFuelStationLine(id, label, station) {
   const name = station?.name || 'Unknown station';
   const addr = formatStationAddress(station);
   const price = Number(station?.bestPrice ?? station?.cash ?? station?.credit);
-  const priceText = Number.isFinite(price) ? `$${price.toFixed(2)}/gal` : 'Price unavailable';
+  const priceText = Number.isFinite(price) && price > 0 ? `$${price.toFixed(2)}/gal` : 'Price unavailable';
 
   el.textContent = `${label}: ${name} · ${addr} · ${priceText}`;
 }
@@ -317,12 +317,12 @@ function applyFuelSnapshot(snapshot, sourceKind) {
   const p93Price = Number(p93Station?.bestPrice ?? p93Station?.cash ?? p93Station?.credit);
 
   let applied = false;
-  if (Number.isFinite(e85Price)) {
+  if (Number.isFinite(e85Price) && e85Price > 0) {
     setValue('inp-price-e85', e85Price.toFixed(2));
     safeSetItem('priceE85', e85Price.toFixed(2));
     applied = true;
   }
-  if (Number.isFinite(p93Price)) {
+  if (Number.isFinite(p93Price) && p93Price > 0) {
     setValue('inp-price-93', p93Price.toFixed(2));
     safeSetItem('price93', p93Price.toFixed(2));
     applied = true;
