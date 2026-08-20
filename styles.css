@@ -700,6 +700,32 @@ h1 .hl {
   color: var(--text-muted);
 }
 
+.fuel-source {
+  font-family: 'Share Tech Mono';
+  font-size: 10px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 10px;
+}
+
+.fuel-stations {
+  margin-top: 6px;
+  display: grid;
+  gap: 6px;
+}
+
+.fuel-station-line {
+  font-family: 'Share Tech Mono';
+  font-size: 10.5px;
+  line-height: 1.45;
+  color: var(--text-body);
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  padding: 7px 9px;
+}
+
 .weather-status {
   min-height: 32px;
 }
@@ -713,6 +739,22 @@ h1 .hl {
 }
 
 .weather-status[data-kind="error"] {
+  color: var(--red);
+}
+
+.fuel-status {
+  min-height: 32px;
+}
+
+.fuel-status[data-kind="live"] {
+  color: var(--neon);
+}
+
+.fuel-status[data-kind="cache"] {
+  color: var(--e85);
+}
+
+.fuel-status[data-kind="error"] {
   color: var(--red);
 }
 
