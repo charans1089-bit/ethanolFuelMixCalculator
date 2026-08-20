@@ -3,7 +3,7 @@
   "source": "Apify johnvc/fuelprices",
   "search": "Dearborn, MI",
   "maxAgeDays": 3,
-  "generatedAt": "2026-08-20T19:30:23.814Z",
+  "generatedAt": "2026-08-20T19:45:44.465Z",
   "e85": {
     "fuelCode": 5,
     "count": 1,
@@ -22,6 +22,7 @@
           "postalCode": "48126-3224"
         },
         "distance": null,
+        "distanceUnit": null,
         "starRating": 4.2,
         "ratingsCount": 15,
         "priceUnit": "dollars_per_gallon",
@@ -51,6 +52,7 @@
           "postalCode": "48124-3802"
         },
         "distance": null,
+        "distanceUnit": null,
         "starRating": 4,
         "ratingsCount": 75,
         "priceUnit": "dollars_per_gallon",
@@ -71,6 +73,7 @@
           "postalCode": "48126-1418"
         },
         "distance": null,
+        "distanceUnit": null,
         "starRating": 3.7,
         "ratingsCount": 29,
         "priceUnit": "dollars_per_gallon",
@@ -91,6 +94,7 @@
           "postalCode": "48126-3151"
         },
         "distance": null,
+        "distanceUnit": null,
         "starRating": 4.2,
         "ratingsCount": 18,
         "priceUnit": "dollars_per_gallon",
@@ -111,6 +115,7 @@
           "postalCode": "48124"
         },
         "distance": null,
+        "distanceUnit": null,
         "starRating": 4.6,
         "ratingsCount": 675,
         "priceUnit": "dollars_per_gallon",
@@ -131,6 +136,7 @@
           "postalCode": "48126-3148"
         },
         "distance": null,
+        "distanceUnit": null,
         "starRating": 3.5,
         "ratingsCount": 14,
         "priceUnit": "dollars_per_gallon",
@@ -151,6 +157,7 @@
           "postalCode": "48124"
         },
         "distance": null,
+        "distanceUnit": null,
         "starRating": 4.1,
         "ratingsCount": 151,
         "priceUnit": "dollars_per_gallon",
@@ -171,6 +178,7 @@
           "postalCode": "48124-2116"
         },
         "distance": null,
+        "distanceUnit": null,
         "starRating": 4.6,
         "ratingsCount": 145,
         "priceUnit": "dollars_per_gallon",
@@ -191,6 +199,7 @@
           "postalCode": "48126-4502"
         },
         "distance": null,
+        "distanceUnit": null,
         "starRating": 3.2,
         "ratingsCount": 12,
         "priceUnit": "dollars_per_gallon",
@@ -211,6 +220,7 @@
           "postalCode": "48126-3224"
         },
         "distance": null,
+        "distanceUnit": null,
         "starRating": 4.2,
         "ratingsCount": 15,
         "priceUnit": "dollars_per_gallon",
@@ -231,6 +241,7 @@
           "postalCode": "48124-2647"
         },
         "distance": null,
+        "distanceUnit": null,
         "starRating": 4,
         "ratingsCount": 153,
         "priceUnit": "dollars_per_gallon",
@@ -251,6 +262,7 @@
           "postalCode": "48124-3244"
         },
         "distance": null,
+        "distanceUnit": null,
         "starRating": 4,
         "ratingsCount": 29,
         "priceUnit": "dollars_per_gallon",
@@ -271,6 +283,7 @@
           "postalCode": "48128-1261"
         },
         "distance": null,
+        "distanceUnit": null,
         "starRating": 4.7,
         "ratingsCount": 247,
         "priceUnit": "dollars_per_gallon",
@@ -291,6 +304,7 @@
           "postalCode": "48126-1061"
         },
         "distance": null,
+        "distanceUnit": null,
         "starRating": 4.2,
         "ratingsCount": 52,
         "priceUnit": "dollars_per_gallon",
@@ -311,6 +325,7 @@
           "postalCode": "48126"
         },
         "distance": null,
+        "distanceUnit": null,
         "starRating": 4.1,
         "ratingsCount": 18,
         "priceUnit": "dollars_per_gallon",
@@ -331,6 +346,7 @@
           "postalCode": "48126-3329"
         },
         "distance": null,
+        "distanceUnit": null,
         "starRating": 3.6,
         "ratingsCount": 21,
         "priceUnit": "dollars_per_gallon",
@@ -351,6 +367,7 @@
           "postalCode": "48124"
         },
         "distance": null,
+        "distanceUnit": null,
         "starRating": 4.2,
         "ratingsCount": 660,
         "priceUnit": "dollars_per_gallon",
@@ -371,6 +388,7 @@
           "postalCode": "48124-3018"
         },
         "distance": null,
+        "distanceUnit": null,
         "starRating": 4.3,
         "ratingsCount": 293,
         "priceUnit": "dollars_per_gallon",
@@ -391,6 +409,7 @@
           "postalCode": "48126"
         },
         "distance": null,
+        "distanceUnit": null,
         "starRating": 4.2,
         "ratingsCount": 4,
         "priceUnit": "dollars_per_gallon",
@@ -411,6 +430,7 @@
           "postalCode": "48126"
         },
         "distance": null,
+        "distanceUnit": null,
         "starRating": 3.9,
         "ratingsCount": 157,
         "priceUnit": "dollars_per_gallon",
@@ -431,6 +451,7 @@
           "postalCode": "48126-3642"
         },
         "distance": null,
+        "distanceUnit": null,
         "starRating": 4.2,
         "ratingsCount": 119,
         "priceUnit": "dollars_per_gallon",
@@ -442,5 +463,5 @@
       }
     ]
   },
-  "fingerprint": "0ad099efa0051d00f242a32e0bde4e2fe7d824d6c04414753467f797b351d3b0"
+  "fingerprint": "e8dea754e4f9485d45bffc9d06553b5260d5dc70e08b8ffa317146d6064da7af"
 }
