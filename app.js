@@ -45,6 +45,7 @@ const DEFAULTS = {
 
 const WEATHER_API_BASE = 'https://api.open-meteo.com/v1/forecast';
 const WEATHER_REVERSE_GEOCODE_BASE = 'https://api.bigdatacloud.net/data/reverse-geocode-client';
+const WEATHER_REVERSE_GEOCODE_FALLBACK_BASE = 'https://nominatim.openstreetmap.org/reverse';
 const WEATHER_CACHE_KEY = 'wrxWeatherCache';
 
 let fuelLogs = [];
@@ -171,13 +172,16 @@ function saveWeatherCache(tempF, sourceLabel, detailLabel) {
   safeSetItem(WEATHER_CACHE_KEY, JSON.stringify(payload));
 }
 
-function updateWeatherUIStatus(message, kind) {
+function setWeatherSourceLabel(message, kind) {
   const sourceEl = document.getElementById('weather-source-label');
-  const statusEl = document.getElementById('weather-status');
   if (sourceEl) {
     sourceEl.textContent = message;
     sourceEl.dataset.kind = kind || 'info';
   }
+}
+
+function updateWeatherUIStatus(message, kind) {
+  const statusEl = document.getElementById('weather-status');
   if (statusEl) {
     statusEl.textContent = message;
     statusEl.dataset.kind = kind || 'info';
@@ -191,10 +195,11 @@ function applyAmbientWeather(tempF, sourceLabel, detailLabel, persist = true) {
     safeSetItem('ambientTempF', temp);
     saveWeatherCache(temp, sourceLabel, detailLabel);
   }
-  updateWeatherUIStatus(
+  setWeatherSourceLabel(
     `${sourceLabel || 'Live weather'}${detailLabel ? ` · ${detailLabel}` : ''} · ${safeFixed(temp, 0)}°F`,
     'live'
   );
+  updateWeatherUIStatus('Live weather updated.', 'live');
   calculateBlend();
 }
 
@@ -235,26 +240,59 @@ async function fetchOpenMeteoWeather(lat, lon) {
 }
 
 async function reverseGeocodeLocation(lat, lon) {
-  const url = new URL(WEATHER_REVERSE_GEOCODE_BASE);
-  url.searchParams.set('latitude', String(lat));
-  url.searchParams.set('longitude', String(lon));
-  url.searchParams.set('localityLanguage', 'en');
+  try {
+    const url = new URL(WEATHER_REVERSE_GEOCODE_BASE);
+    url.searchParams.set('latitude', String(lat));
+    url.searchParams.set('longitude', String(lon));
+    url.searchParams.set('localityLanguage', 'en');
 
-  const response = await fetch(url.toString(), { method: 'GET' });
-  if (!response.ok) return null;
+    const response = await fetch(url.toString(), { method: 'GET' });
+    if (response.ok) {
+      const data = await response.json();
+      const city = data?.city || data?.locality || '';
+      const stateCodeRaw = String(data?.principalSubdivisionCode || '');
+      const stateCode = stateCodeRaw.includes('-') ? stateCodeRaw.split('-').pop() : stateCodeRaw;
+      const stateName = data?.principalSubdivision || '';
+      const countryCode = data?.countryCode || '';
 
-  const data = await response.json();
-  const city = data?.city || data?.locality || '';
-  const stateCodeRaw = String(data?.principalSubdivisionCode || '');
-  const stateCode = stateCodeRaw.includes('-') ? stateCodeRaw.split('-').pop() : stateCodeRaw;
-  const stateName = data?.principalSubdivision || '';
-  const countryCode = data?.countryCode || '';
+      if (city && stateCode) return `${city}, ${stateCode}`;
+      if (city && stateName) return `${city}, ${stateName}`;
+      if (city) return city;
+      if (stateCode) return stateCode;
+      if (countryCode) return countryCode;
+    }
+  } catch (e) {
+  }
 
-  if (city && stateCode) return `${city}, ${stateCode}`;
-  if (city && stateName) return `${city}, ${stateName}`;
-  if (city) return city;
-  if (stateCode) return stateCode;
-  return countryCode || null;
+  try {
+    const url = new URL(WEATHER_REVERSE_GEOCODE_FALLBACK_BASE);
+    url.searchParams.set('format', 'jsonv2');
+    url.searchParams.set('lat', String(lat));
+    url.searchParams.set('lon', String(lon));
+    url.searchParams.set('zoom', '10');
+    url.searchParams.set('addressdetails', '1');
+
+    const response = await fetch(url.toString(), {
+      method: 'GET',
+      headers: { 'Accept-Language': 'en' }
+    });
+    if (!response.ok) return null;
+
+    const data = await response.json();
+    const city = data?.address?.city || data?.address?.town || data?.address?.village || data?.address?.municipality || data?.name || '';
+    const stateCodeRaw = String(data?.address?.['ISO3166-2-lvl4'] || '');
+    const stateCode = stateCodeRaw.includes('-') ? stateCodeRaw.split('-').pop() : stateCodeRaw;
+    const stateName = data?.address?.state || '';
+    const countryCode = String(data?.address?.country_code || '').toUpperCase();
+
+    if (city && stateCode) return `${city}, ${stateCode}`;
+    if (city && stateName) return `${city}, ${stateName}`;
+    if (city) return city;
+    if (stateCode) return stateCode;
+    return countryCode || null;
+  } catch (e) {
+    return null;
+  }
 }
 
 function getCurrentPosition() {
@@ -283,19 +321,16 @@ async function useLiveWeather() {
     const { latitude, longitude } = position.coords;
     const weather = await fetchOpenMeteoWeather(latitude, longitude);
     const place = await reverseGeocodeLocation(latitude, longitude).catch(() => null);
-    const loc = place || `${latitude.toFixed(2)}, ${longitude.toFixed(2)}`;
+    const loc = place || 'Location unavailable';
     applyAmbientWeather(weather.tempF, 'Open-Meteo live weather', loc, true);
-    if (statusEl) {
-      statusEl.textContent = 'Live weather updated.';
-      statusEl.dataset.kind = 'live';
-    }
   } catch (error) {
     const cached = getWeatherCache();
     if (cached) {
-      updateWeatherUIStatus(
+      setWeatherSourceLabel(
         `Using cached weather · ${cached.sourceLabel || 'Open-Meteo'} · ${formatWeatherCacheTime(cached.updatedAt)}`,
         'cache'
       );
+      updateWeatherUIStatus('Using cached weather data.', 'cache');
       setValue('inp-amb-temp', Number(cached.tempF).toFixed(0));
       safeSetItem('ambientTempF', Number(cached.tempF));
       calculateBlend();
