@@ -246,9 +246,9 @@ function formatStationAddress(station) {
   return combined || 'Address unavailable';
 }
 
-function getBestStation(group) {
+function getPricedStations(group) {
   const stations = Array.isArray(group?.stations) ? group.stations : [];
-  if (!stations.length) return null;
+  if (!stations.length) return [];
 
   const normalized = stations.map(station => {
     const bestPrice = Number(station?.bestPrice ?? station?.cash ?? station?.credit);
@@ -260,25 +260,44 @@ function getBestStation(group) {
     };
   }).filter(item => Number.isFinite(item.bestPrice));
 
+  return normalized;
+}
+
+function getBestStation(group) {
+  const normalized = getPricedStations(group);
   if (!normalized.length) return null;
   normalized.sort((a, b) => (a.bestPrice - b.bestPrice) || (a.distance - b.distance));
   return normalized[0].station;
 }
 
-function setFuelStationLine(id, label, station) {
-  const el = document.getElementById(id);
-  if (!el) return;
-  if (!station) {
-    el.textContent = `${label}: no station data`;
-    return;
-  }
+function getNearestStation(group) {
+  const normalized = getPricedStations(group).filter(item => Number.isFinite(item.distance));
+  if (!normalized.length) return null;
+  normalized.sort((a, b) => (a.distance - b.distance) || (a.bestPrice - b.bestPrice));
+  return normalized[0].station;
+}
 
+function formatStationDistanceMiles(station) {
+  const distance = Number(station?.distance);
+  return Number.isFinite(distance) ? `${distance.toFixed(1)} mi` : 'distance n/a';
+}
+
+function formatStationSummary(station) {
+  if (!station) return 'no station data';
   const name = station?.name || 'Unknown station';
   const addr = formatStationAddress(station);
   const price = Number(station?.bestPrice ?? station?.cash ?? station?.credit);
   const priceText = Number.isFinite(price) && price > 0 ? `$${price.toFixed(2)}/gal` : 'Price unavailable';
+  const distanceText = formatStationDistanceMiles(station);
+  return `${name} · ${addr} · ${priceText} · ${distanceText}`;
+}
 
-  el.textContent = `${label}: ${name} · ${addr} · ${priceText}`;
+function setFuelStationLine(id, label, cheapestStation, nearestStation) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  const cheapestText = formatStationSummary(cheapestStation);
+  const nearestText = formatStationSummary(nearestStation);
+  el.textContent = `${label} lowest: ${cheapestText} | nearest: ${nearestText}`;
 }
 
 function syncFuelModeFromCurrentInput() {
@@ -313,6 +332,8 @@ async function fetchFuelPriceSnapshot() {
 function applyFuelSnapshot(snapshot, sourceKind) {
   const e85Station = getBestStation(snapshot?.e85);
   const p93Station = getBestStation(snapshot?.premium93);
+  const e85Nearest = getNearestStation(snapshot?.e85);
+  const p93Nearest = getNearestStation(snapshot?.premium93);
   const e85Price = Number(e85Station?.bestPrice ?? e85Station?.cash ?? e85Station?.credit);
   const p93Price = Number(p93Station?.bestPrice ?? p93Station?.cash ?? p93Station?.credit);
 
@@ -328,8 +349,8 @@ function applyFuelSnapshot(snapshot, sourceKind) {
     applied = true;
   }
 
-  setFuelStationLine('fuel-station-e85', 'E85', e85Station);
-  setFuelStationLine('fuel-station-93', '93', p93Station);
+  setFuelStationLine('fuel-station-e85', 'E85', e85Station, e85Nearest);
+  setFuelStationLine('fuel-station-93', '93', p93Station, p93Nearest);
 
   const search = String(snapshot?.search || 'Configured location');
   const generatedAt = formatFuelTime(snapshot?.generatedAt);
