@@ -309,6 +309,30 @@ function toMiles(distanceValue, unitValue) {
   return d;
 }
 
+function pickCoordinate(station, keys) {
+  for (const key of keys) {
+    const value = Number(station?.[key]);
+    if (Number.isFinite(value)) return value;
+  }
+  return null;
+}
+
+function buildGoogleMapsUrl(station) {
+  if (!station || typeof station !== 'object') return null;
+
+  const lat = pickCoordinate(station, ['latitude', 'lat']);
+  const lon = pickCoordinate(station, ['longitude', 'lng', 'lon']);
+  if (Number.isFinite(lat) && Number.isFinite(lon)) {
+    return `https://www.google.com/maps?q=${encodeURIComponent(`${lat},${lon}`)}`;
+  }
+
+  const address = formatStationAddress(station);
+  const name = String(station?.name || '').trim();
+  const query = [name, address].filter(Boolean).join(' ').trim();
+  if (!query) return null;
+  return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(query)}`;
+}
+
 function formatStationDistanceMiles(station) {
   const miles = toMiles(
     station?.distance,
@@ -331,14 +355,22 @@ function formatStationSummary(station) {
   return `${name} · ${addr} · ${priceText} · ${distanceText}`;
 }
 
+function formatStationSummaryHtml(station) {
+  if (!station) return 'no station data';
+  const summary = formatStationSummary(station);
+  const mapsUrl = buildGoogleMapsUrl(station);
+  if (!mapsUrl) return escHtml(summary);
+  return `${escHtml(summary)} · <a class="fuel-map-link" href="${mapsUrl}" target="_blank" rel="noopener noreferrer">map</a>`;
+}
+
 function setFuelStationLine(id, label, cheapestStation, nearestStation) {
   const el = document.getElementById(id);
   if (!el) return;
-  const cheapestText = formatStationSummary(cheapestStation);
+  const cheapestText = formatStationSummaryHtml(cheapestStation);
   const nearestText = nearestStation
-    ? formatStationSummary(nearestStation)
+    ? formatStationSummaryHtml(nearestStation)
     : 'same as lowest (no different nearby station in snapshot)';
-  el.textContent = `${label} lowest: ${cheapestText} | nearest: ${nearestText}`;
+  el.innerHTML = `${escHtml(label)} lowest: ${cheapestText} | nearest: ${nearestText}`;
 }
 
 function syncFuelModeFromCurrentInput() {
