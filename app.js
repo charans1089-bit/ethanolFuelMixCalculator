@@ -44,6 +44,7 @@ const DEFAULTS = {
 };
 
 const WEATHER_API_BASE = 'https://api.open-meteo.com/v1/forecast';
+const WEATHER_GEOCODE_BASE = 'https://geocoding-api.open-meteo.com/v1/reverse';
 const WEATHER_CACHE_KEY = 'wrxWeatherCache';
 
 let fuelLogs = [];
@@ -178,6 +179,7 @@ function updateWeatherUIStatus(message, kind) {
     sourceEl.dataset.kind = kind || 'info';
   }
   if (statusEl) {
+    statusEl.textContent = message;
     statusEl.dataset.kind = kind || 'info';
   }
 }
@@ -232,6 +234,27 @@ async function fetchOpenMeteoWeather(lat, lon) {
   return { tempF, raw: data };
 }
 
+async function reverseGeocodeOpenMeteo(lat, lon) {
+  const url = new URL(WEATHER_GEOCODE_BASE);
+  url.searchParams.set('latitude', String(lat));
+  url.searchParams.set('longitude', String(lon));
+  url.searchParams.set('count', '1');
+  url.searchParams.set('language', 'en');
+
+  const response = await fetch(url.toString(), { method: 'GET' });
+  if (!response.ok) return null;
+
+  const data = await response.json();
+  const hit = Array.isArray(data?.results) ? data.results[0] : null;
+  if (!hit) return null;
+
+  const name = hit.name || '';
+  const admin1 = hit.admin1 || '';
+  const country = hit.country_code || '';
+  const label = [name, admin1].filter(Boolean).join(', ');
+  return label || country || null;
+}
+
 function getCurrentPosition() {
   return new Promise((resolve, reject) => {
     if (!navigator.geolocation) {
@@ -248,13 +271,17 @@ function getCurrentPosition() {
 
 async function useLiveWeather() {
   const statusEl = document.getElementById('weather-status');
-  if (statusEl) statusEl.textContent = 'Getting location and weather...';
+  if (statusEl) {
+    statusEl.textContent = 'Getting location and weather...';
+    statusEl.dataset.kind = 'info';
+  }
 
   try {
     const position = await getCurrentPosition();
     const { latitude, longitude } = position.coords;
     const weather = await fetchOpenMeteoWeather(latitude, longitude);
-    const loc = `${latitude.toFixed(2)}, ${longitude.toFixed(2)}`;
+    const place = await reverseGeocodeOpenMeteo(latitude, longitude).catch(() => null);
+    const loc = place || `${latitude.toFixed(2)}, ${longitude.toFixed(2)}`;
     applyAmbientWeather(weather.tempF, 'Open-Meteo live weather', loc, true);
   } catch (error) {
     const cached = getWeatherCache();
@@ -884,12 +911,12 @@ function renderAdvisorPanels(inputs, result, targetState) {
   }
 
   const cachedWeather = getWeatherCache();
-  if (weatherSourceEl && weatherSourceEl.dataset.kind !== 'live') {
+  if (weatherSourceEl && (!weatherSourceEl.dataset.kind || weatherSourceEl.dataset.kind === 'info')) {
     weatherSourceEl.textContent = cachedWeather
       ? `Cached weather · ${safeFixed(inputs.ambientTempF, 0)}°F`
       : 'Manual input · not using API';
   }
-  if (weatherStatusEl && weatherStatusEl.dataset.kind !== 'live') {
+  if (weatherStatusEl && (!weatherStatusEl.dataset.kind || weatherStatusEl.dataset.kind === 'info')) {
     weatherStatusEl.textContent = cachedWeather
       ? `Cached live weather last updated ${formatWeatherCacheTime(cachedWeather.updatedAt)}.`
       : 'Live weather is optional. Manual input stays available.';
