@@ -355,6 +355,7 @@
 
           <div class="advanced-card solid-card" aria-live="polite" aria-atomic="true">
             <div class="advanced-title">Fuel Prices</div>
+            <div class="fuel-source" id="fuel-source-label">Fuel snapshot · waiting for data</div>
             <div class="advanced-row advanced-price-row">
               <div>
                 <label for="inp-price-e85">E85 $/gal</label>
@@ -371,8 +372,14 @@
                 </div>
               </div>
             </div>
+            <div class="fuel-stations" aria-live="polite" aria-atomic="true">
+              <div class="fuel-station-line" id="fuel-station-e85">E85: no station data</div>
+              <div class="fuel-station-line" id="fuel-station-93">93: no station data</div>
+            </div>
             <div class="advanced-cost">Estimated Fill Cost <strong id="fill-cost-live">—</strong></div>
             <div class="advanced-note" id="fill-cost-note">Live estimate uses saved prices.</div>
+            <div class="advanced-note fuel-status" id="fuel-status">Auto-fill uses latest saved fuel snapshot when
+              available.</div>
           </div>
         </div>
 
