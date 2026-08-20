@@ -54,6 +54,7 @@ function normalizeItem(item) {
             postalCode: item?.address_postalCode ?? ''
         },
         distance: toNum(item?.distance),
+        distanceUnit: item?.distanceUnit ?? item?.distance_unit ?? null,
         starRating: toNum(item?.starRating),
         ratingsCount: toNum(item?.ratingsCount),
         priceUnit: item?.priceUnit ?? 'dollars_per_gallon',
