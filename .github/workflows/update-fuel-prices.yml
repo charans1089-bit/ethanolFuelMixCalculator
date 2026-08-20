@@ -1,0 +1,47 @@
+name: Update fuel prices snapshot
+
+on:
+    schedule:
+        - cron: "15 */4 * * *"
+    workflow_dispatch:
+        inputs:
+            search:
+                description: "Location query (ZIP, city/state, or lat,lon)"
+                required: false
+                type: string
+
+permissions:
+    contents: write
+
+jobs:
+    update-fuel-prices:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v4
+
+            - name: Setup Node
+              uses: actions/setup-node@v4
+              with:
+                  node-version: "20"
+
+            - name: Build fuel snapshot JSON
+              env:
+                  APIFY_API_TOKEN: ${{ secrets.APIFY_API_TOKEN }}
+                  FUEL_SEARCH: ${{ github.event.inputs.search || vars.FUEL_SEARCH || 'Dearborn, MI' }}
+                  FUEL_MAX_AGE_DAYS: ${{ vars.FUEL_MAX_AGE_DAYS || '3' }}
+                  FUEL_MAX_ITEMS: ${{ vars.FUEL_MAX_ITEMS || '25' }}
+              run: node scripts/update-fuel-prices.mjs
+
+            - name: Commit changes if needed
+              run: |
+                  if git diff --quiet -- data/fuel-prices.json; then
+                    echo "No fuel price changes."
+                    exit 0
+                  fi
+
+                  git config user.name "github-actions[bot]"
+                  git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+                  git add data/fuel-prices.json
+                  git commit -m "chore: update fuel prices snapshot"
+                  git push
