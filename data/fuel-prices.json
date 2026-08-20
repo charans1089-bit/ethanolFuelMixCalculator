@@ -3,7 +3,7 @@
   "source": "Apify johnvc/fuelprices",
   "search": "Dearborn, MI",
   "maxAgeDays": 3,
-  "generatedAt": "2026-08-20T18:28:12.649Z",
+  "generatedAt": "2026-08-20T18:32:01.839Z",
   "e85": {
     "fuelCode": 5,
     "count": 4,
@@ -32,26 +32,6 @@
         "bestPrice": 0
       },
       {
-        "id": "99496",
-        "name": "Mobil",
-        "address": {
-          "line1": "7954 Greenfield Rd",
-          "line2": "",
-          "city": "Dearborn",
-          "region": "MI",
-          "postalCode": "48126-1061"
-        },
-        "distance": 0,
-        "starRating": 4.2,
-        "ratingsCount": 52,
-        "priceUnit": "dollars_per_gallon",
-        "cash": 0,
-        "cashPostedTime": null,
-        "credit": 0,
-        "creditPostedTime": null,
-        "bestPrice": 0
-      },
-      {
         "id": "109058",
         "name": "Mobil",
         "address": {
@@ -64,6 +44,26 @@
         "distance": 0,
         "starRating": 4.1,
         "ratingsCount": 18,
+        "priceUnit": "dollars_per_gallon",
+        "cash": 0,
+        "cashPostedTime": null,
+        "credit": 0,
+        "creditPostedTime": null,
+        "bestPrice": 0
+      },
+      {
+        "id": "99496",
+        "name": "Mobil",
+        "address": {
+          "line1": "7954 Greenfield Rd",
+          "line2": "",
+          "city": "Dearborn",
+          "region": "MI",
+          "postalCode": "48126-1061"
+        },
+        "distance": 0,
+        "starRating": 4.2,
+        "ratingsCount": 52,
         "priceUnit": "dollars_per_gallon",
         "cash": 0,
         "cashPostedTime": null,
@@ -100,26 +100,6 @@
     "min": 0,
     "max": 5.79,
     "stations": [
-      {
-        "id": "81117",
-        "name": "Amoco",
-        "address": {
-          "line1": "23785 Michigan Ave",
-          "line2": "",
-          "city": "Dearborn",
-          "region": "MI",
-          "postalCode": "48124"
-        },
-        "distance": 0,
-        "starRating": 4.5,
-        "ratingsCount": 232,
-        "priceUnit": "dollars_per_gallon",
-        "cash": 0,
-        "cashPostedTime": null,
-        "credit": 0,
-        "creditPostedTime": null,
-        "bestPrice": 0
-      },
       {
         "id": "110303",
         "name": "Amoco",
@@ -201,18 +181,38 @@
         "bestPrice": 0
       },
       {
-        "id": "102162",
-        "name": "CITGO",
+        "id": "74102",
+        "name": "BP",
         "address": {
-          "line1": "15500 MICHIGAN AVE",
+          "line1": "23405 Michigan Ave",
           "line2": "",
           "city": "Dearborn",
           "region": "MI",
-          "postalCode": "48126"
+          "postalCode": "48124-1908"
         },
         "distance": 0,
-        "starRating": 4.2,
-        "ratingsCount": 269,
+        "starRating": 4.1,
+        "ratingsCount": 145,
+        "priceUnit": "dollars_per_gallon",
+        "cash": 0,
+        "cashPostedTime": null,
+        "credit": 0,
+        "creditPostedTime": null,
+        "bestPrice": 0
+      },
+      {
+        "id": "29961",
+        "name": "CITGO",
+        "address": {
+          "line1": "25350 Michigan Ave",
+          "line2": "",
+          "city": "Dearborn",
+          "region": "MI",
+          "postalCode": "48124"
+        },
+        "distance": 0,
+        "starRating": 3.4,
+        "ratingsCount": 189,
         "priceUnit": "dollars_per_gallon",
         "cash": 0,
         "cashPostedTime": null,
@@ -238,26 +238,6 @@
         "cashPostedTime": null,
         "credit": 5.19,
         "creditPostedTime": "2026-08-20T12:22:15.595Z",
-        "bestPrice": 0
-      },
-      {
-        "id": "45080",
-        "name": "Mobil",
-        "address": {
-          "line1": "12841 Michigan Ave",
-          "line2": "",
-          "city": "Dearborn",
-          "region": "MI",
-          "postalCode": "48126-3734"
-        },
-        "distance": 0,
-        "starRating": 3.1,
-        "ratingsCount": 33,
-        "priceUnit": "dollars_per_gallon",
-        "cash": 0,
-        "cashPostedTime": null,
-        "credit": 0,
-        "creditPostedTime": null,
         "bestPrice": 0
       },
       {
@@ -298,6 +278,26 @@
         "cashPostedTime": null,
         "credit": 5.29,
         "creditPostedTime": "2026-08-20T02:25:28.076Z",
+        "bestPrice": 0
+      },
+      {
+        "id": "81605",
+        "name": "Sunoco",
+        "address": {
+          "line1": "10000 Michigan Ave",
+          "line2": "",
+          "city": "Dearborn",
+          "region": "MI",
+          "postalCode": "48126-3707"
+        },
+        "distance": 0,
+        "starRating": 3.7,
+        "ratingsCount": 12,
+        "priceUnit": "dollars_per_gallon",
+        "cash": 0,
+        "cashPostedTime": null,
+        "credit": 0,
+        "creditPostedTime": null,
         "bestPrice": 0
       },
       {
@@ -602,5 +602,5 @@
       }
     ]
   },
-  "fingerprint": "4ca7c9ff67322b507afb6b52faf65fd2462d56029c538198a4d15ceaa722c82a"
+  "fingerprint": "de68d1a186f99b44a70bdbea1d8f1593b7f4c546908a71b1ec5042faa5c10220"
 }
