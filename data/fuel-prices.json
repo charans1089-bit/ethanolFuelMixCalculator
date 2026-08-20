@@ -3,7 +3,7 @@
   "source": "Apify johnvc/fuelprices",
   "search": "Dearborn, MI",
   "maxAgeDays": 3,
-  "generatedAt": "2026-08-20T19:52:53.310Z",
+  "generatedAt": "2026-08-20T20:44:30.408Z",
   "e85": {
     "fuelCode": 5,
     "count": 1,
@@ -435,29 +435,6 @@
         "bestPrice": 5.59
       },
       {
-        "id": "110300",
-        "name": "BP",
-        "address": {
-          "line1": "10419 FORD RD",
-          "line2": "",
-          "city": "Dearborn",
-          "region": "MI",
-          "postalCode": "48126"
-        },
-        "distance": null,
-        "distanceUnit": null,
-        "latitude": null,
-        "longitude": null,
-        "starRating": 4.2,
-        "ratingsCount": 4,
-        "priceUnit": "dollars_per_gallon",
-        "cash": 5.69,
-        "cashPostedTime": "2026-08-20T03:00:49.071Z",
-        "credit": null,
-        "creditPostedTime": null,
-        "bestPrice": 5.69
-      },
-      {
         "id": "71408",
         "name": "BP",
         "address": {
@@ -476,6 +453,29 @@
         "priceUnit": "dollars_per_gallon",
         "cash": 5.69,
         "cashPostedTime": "2026-08-20T03:09:28.561Z",
+        "credit": null,
+        "creditPostedTime": null,
+        "bestPrice": 5.69
+      },
+      {
+        "id": "110300",
+        "name": "BP",
+        "address": {
+          "line1": "10419 FORD RD",
+          "line2": "",
+          "city": "Dearborn",
+          "region": "MI",
+          "postalCode": "48126"
+        },
+        "distance": null,
+        "distanceUnit": null,
+        "latitude": null,
+        "longitude": null,
+        "starRating": 4.2,
+        "ratingsCount": 4,
+        "priceUnit": "dollars_per_gallon",
+        "cash": 5.69,
+        "cashPostedTime": "2026-08-20T03:00:49.071Z",
         "credit": null,
         "creditPostedTime": null,
         "bestPrice": 5.69
@@ -505,5 +505,5 @@
       }
     ]
   },
-  "fingerprint": "90bacc305dc0088bbe9d780e3296f218a22610c7c2abef1d13ebfa3a4170c096"
+  "fingerprint": "b05fc76d02a495c30e54cca5765e7e39eb9f8bb36d29043b1f6c846ef95e699b"
 }
