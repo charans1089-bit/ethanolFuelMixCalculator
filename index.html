@@ -8,7 +8,7 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="SCRK Flex">
   <meta http-equiv="Content-Security-Policy"
-    content="default-src 'self'; connect-src 'self' https://docs.google.com https://api.open-meteo.com https://api.bigdatacloud.net https://nominatim.openstreetmap.org; img-src 'self' data: https:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; script-src 'self' 'unsafe-inline';">
+    content="default-src 'self'; connect-src 'self' https://docs.google.com https://api.open-meteo.com https://api.bigdatacloud.net https://nominatim.openstreetmap.org https://api.fuelprices.io; img-src 'self' data: https:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; script-src 'self' 'unsafe-inline';">
   <title>SCRK Flex Fuel Mix — Interactive</title>
 
   <link rel="icon" type="image/svg+xml"
@@ -401,6 +401,8 @@
             <div class="runit">Target Hit</div>
           </div>
         </div>
+
+        <div id="cleaning-advisory-container" class="cleaning-advisory" style="display: none;" aria-live="polite"></div>
 
         <div class="eth-status">
           <div class="ebadge sweet" id="ebadge">✓ SCRK TUNED — SAFE FOR ALL BLENDS</div>

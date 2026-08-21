@@ -47,8 +47,8 @@ const WEATHER_API_BASE = 'https://api.open-meteo.com/v1/forecast';
 const WEATHER_REVERSE_GEOCODE_BASE = 'https://api.bigdatacloud.net/data/reverse-geocode-client';
 const WEATHER_REVERSE_GEOCODE_FALLBACK_BASE = 'https://nominatim.openstreetmap.org/reverse';
 const WEATHER_CACHE_KEY = 'wrxWeatherCache';
-const FUEL_PRICES_SNAPSHOT_PATH = 'data/fuel-prices.json';
-const FUEL_PRICES_CACHE_KEY = 'wrxFuelPricesSnapshot';
+const FUEL_API_BASE = 'https://api.fuelprices.io/v1/prices';
+const FUEL_PRICES_CACHE_KEY = 'wrxFuelPricesCache';
 
 let fuelLogs = [];
 let currentE85Needed = '0.00';
@@ -190,7 +190,95 @@ function updateWeatherUIStatus(message, kind) {
   }
 }
 
-function getFuelSnapshotCache() {
+let manualPriceOverrideE85 = safeGetItem('manualPriceOverrideE85', '0') === '1';
+let manualPriceOverride93 = safeGetItem('manualPriceOverride93', '0') === '1';
+
+function getCleaningTankStreak(logs) {
+  if (!Array.isArray(logs) || logs.length === 0) return 0;
+
+  const sorted = [...logs].sort((a, b) => {
+    const idA = Number(a?.id) || 0;
+    const idB = Number(b?.id) || 0;
+    return idB - idA;
+  });
+
+  let highEthTankStreak = 0;
+  for (const log of sorted) {
+    if (!log || typeof log !== 'object') continue;
+
+    const ethRaw = log.eth;
+    if (ethRaw === null || ethRaw === undefined || ethRaw === '') {
+      continue;
+    }
+
+    const ethVal = Number(ethRaw);
+    if (!Number.isFinite(ethVal)) {
+      continue;
+    }
+
+    if (ethVal >= 75) {
+      highEthTankStreak++;
+    } else {
+      break;
+    }
+  }
+
+  return highEthTankStreak;
+}
+
+function renderCleaningTankAdvisory() {
+  const container = document.getElementById('cleaning-advisory-container');
+  if (!container) return;
+
+  let logs = [];
+  try {
+    const raw = safeGetItem('wrxFuelLogs', '');
+    if (raw) {
+      const parsed = JSON.parse(raw);
+      if (Array.isArray(parsed)) logs = parsed;
+    }
+  } catch (e) {
+    logs = [];
+  }
+
+  if (!logs.length && Array.isArray(fuelLogs) && fuelLogs.length) {
+    logs = fuelLogs;
+  }
+
+  const streak = getCleaningTankStreak(logs);
+
+  if (streak < 3) {
+    container.style.display = 'none';
+    container.innerHTML = '';
+    return;
+  }
+
+  const explanatoryText = 'Sustained high ethanol increases oil dilution and fuel system wear. Running one tank at E20–E35 periodically gives the system a break.';
+
+  if (streak === 3) {
+    container.style.display = 'flex';
+    container.className = 'cleaning-advisory info';
+    container.innerHTML = `
+      <div class="cleaning-advisory-icon">ℹ</div>
+      <div class="cleaning-advisory-content">
+        <div class="cleaning-advisory-title">3 consecutive tanks at E75+. Consider a cleaning tank (E20–E35) soon.</div>
+        <div class="cleaning-advisory-text">${escHtml(explanatoryText)}</div>
+      </div>
+    `;
+  } else {
+    container.style.display = 'flex';
+    container.className = 'cleaning-advisory warning';
+    container.innerHTML = `
+      <div class="cleaning-advisory-icon">⚠</div>
+      <div class="cleaning-advisory-content">
+        <div class="cleaning-advisory-title">${streak} consecutive tanks at E75+. A cleaning tank at E20–E35 is recommended.</div>
+        <div class="cleaning-advisory-text">${escHtml(explanatoryText)}</div>
+      </div>
+    `;
+  }
+}
+
+function getFuelPriceCache() {
   const raw = safeGetItem(FUEL_PRICES_CACHE_KEY, '');
   if (!raw) return null;
   try {
@@ -202,9 +290,12 @@ function getFuelSnapshotCache() {
   }
 }
 
-function saveFuelSnapshotCache(snapshot) {
-  if (!snapshot || typeof snapshot !== 'object') return;
-  safeSetItem(FUEL_PRICES_CACHE_KEY, JSON.stringify(snapshot));
+function saveFuelPriceCache(payload) {
+  if (!payload || typeof payload !== 'object') return;
+  try {
+    safeSetItem(FUEL_PRICES_CACHE_KEY, JSON.stringify(payload));
+  } catch (e) {
+  }
 }
 
 function setFuelSourceLabel(message, kind) {
@@ -223,17 +314,20 @@ function updateFuelUIStatus(message, kind) {
   }
 }
 
-function formatFuelTime(value) {
-  if (!value) return 'unknown time';
+function formatFuelPriceAge(timestamp) {
+  const ts = Number(timestamp);
+  if (!Number.isFinite(ts)) return '';
   try {
-    return new Date(value).toLocaleString('en-US', {
-      hour: 'numeric',
-      minute: '2-digit',
-      month: 'short',
-      day: 'numeric'
-    });
+    const d = new Date(ts);
+    if (isNaN(d.getTime())) return '';
+    const hh = String(d.getHours()).padStart(2, '0');
+    const mm = String(d.getMinutes()).padStart(2, '0');
+    const day = d.getDate();
+    const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    const month = monthNames[d.getMonth()];
+    return `Prices as of ${hh}:${mm}, ${day} ${month}.`;
   } catch (e) {
-    return 'unknown time';
+    return '';
   }
 }
 
@@ -246,214 +340,208 @@ function formatStationAddress(station) {
   return combined || 'Address unavailable';
 }
 
-function getPricedStations(group) {
-  const stations = Array.isArray(group?.stations) ? group.stations : [];
-  if (!stations.length) return [];
-
-  const normalized = stations.map(station => {
-    const bestPrice = Number(station?.bestPrice ?? station?.cash ?? station?.credit);
-    const distance = Number(station?.distance);
-    return {
-      station,
-      bestPrice: Number.isFinite(bestPrice) && bestPrice > 0 ? bestPrice : Number.POSITIVE_INFINITY,
-      distance: Number.isFinite(distance) ? distance : Number.POSITIVE_INFINITY
-    };
-  }).filter(item => Number.isFinite(item.bestPrice));
-
-  return normalized;
-}
-
-function getBestStation(group) {
-  const normalized = getPricedStations(group);
-  if (!normalized.length) return null;
-  normalized.sort((a, b) => (a.bestPrice - b.bestPrice) || (a.distance - b.distance));
-  return normalized[0].station;
-}
-
-function getNearestStation(group) {
-  const normalized = getPricedStations(group).filter(item => Number.isFinite(item.distance));
-  if (!normalized.length) return null;
-  normalized.sort((a, b) => (a.distance - b.distance) || (a.bestPrice - b.bestPrice));
-  return normalized[0].station;
-}
-
-function stationIdentity(station) {
-  if (!station || typeof station !== 'object') return '';
-  const name = String(station?.name || '').trim().toLowerCase();
-  const addr = formatStationAddress(station).trim().toLowerCase();
-  const id = String(station?.id ?? '').trim().toLowerCase();
-  return `${id}|${name}|${addr}`;
-}
-
-function getNearestDifferentStation(group, selectedStation) {
-  const selectedKey = stationIdentity(selectedStation);
-  const normalized = getPricedStations(group)
-    .filter(item => Number.isFinite(item.distance))
-    .filter(item => stationIdentity(item.station) !== selectedKey);
-
-  if (!normalized.length) return null;
-  normalized.sort((a, b) => (a.distance - b.distance) || (a.bestPrice - b.bestPrice));
-  return normalized[0].station;
-}
-
-function toMiles(distanceValue, unitValue) {
-  const d = Number(distanceValue);
-  if (!Number.isFinite(d)) return null;
-
-  const unit = String(unitValue || '').trim().toLowerCase();
-  if (unit === 'mi' || unit === 'mile' || unit === 'miles') return d;
-  if (unit === 'km' || unit === 'kilometer' || unit === 'kilometers') return d * 0.621371;
-  if (unit === 'm' || unit === 'meter' || unit === 'meters') return d / 1609.344;
-  if (unit === 'ft' || unit === 'foot' || unit === 'feet') return d / 5280;
-
-  return d;
-}
-
-function pickCoordinate(station, keys) {
-  for (const key of keys) {
-    const value = Number(station?.[key]);
-    if (Number.isFinite(value)) return value;
+function isManualPriceE85() {
+  if (manualPriceOverrideE85) return true;
+  if (safeGetItem('manualPriceOverrideE85', '0') === '1') {
+    manualPriceOverrideE85 = true;
+    return true;
   }
-  return null;
-}
-
-function buildGoogleMapsUrl(station) {
-  if (!station || typeof station !== 'object') return null;
-
-  const lat = pickCoordinate(station, ['latitude', 'lat']);
-  const lon = pickCoordinate(station, ['longitude', 'lng', 'lon']);
-  if (Number.isFinite(lat) && Number.isFinite(lon)) {
-    return `https://www.google.com/maps?q=${encodeURIComponent(`${lat},${lon}`)}`;
+  const cached = getFuelPriceCache();
+  if (cached && cached.prices && Number.isFinite(Number(cached.prices.e85))) {
+    const currentE85 = clampNumber(getValue('inp-price-e85', DEFAULTS.priceE85), 0, 999, DEFAULTS.priceE85);
+    if (Math.abs(currentE85 - Number(cached.prices.e85)) > 0.001) {
+      manualPriceOverrideE85 = true;
+      safeSetItem('manualPriceOverrideE85', '1');
+      return true;
+    }
+    return false;
   }
-
-  const address = formatStationAddress(station);
-  const name = String(station?.name || '').trim();
-  const query = [name, address].filter(Boolean).join(' ').trim();
-  if (!query) return null;
-  return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(query)}`;
+  return true;
 }
 
-function formatStationDistanceMiles(station) {
-  const miles = toMiles(
-    station?.distance,
-    station?.distanceUnit ?? station?.distance_unit ?? station?.distanceUnits
-  );
-  if (!Number.isFinite(miles)) return 'distance n/a';
-  if (miles === 0) return 'at search point';
-  if (miles < 0.1) return '<0.1 mi';
-  if (miles < 10) return `${miles.toFixed(2)} mi`;
-  return `${miles.toFixed(1)} mi`;
-}
-
-function formatStationSummary(station) {
-  if (!station) return 'no station data';
-  const name = station?.name || 'Unknown station';
-  const addr = formatStationAddress(station);
-  const price = Number(station?.bestPrice ?? station?.cash ?? station?.credit);
-  const priceText = Number.isFinite(price) && price > 0 ? `$${price.toFixed(2)}/gal` : 'Price unavailable';
-  const distanceText = formatStationDistanceMiles(station);
-  return `${name} · ${addr} · ${priceText} · ${distanceText}`;
-}
-
-function formatStationSummaryHtml(station) {
-  if (!station) return 'no station data';
-  const summary = formatStationSummary(station);
-  const mapsUrl = buildGoogleMapsUrl(station);
-  if (!mapsUrl) return escHtml(summary);
-  return `${escHtml(summary)} · <a class="fuel-map-link" href="${mapsUrl}" target="_blank" rel="noopener noreferrer">map</a>`;
-}
-
-function setFuelStationLine(id, label, cheapestStation, nearestStation) {
-  const el = document.getElementById(id);
-  if (!el) return;
-  const cheapestText = formatStationSummaryHtml(cheapestStation);
-  const nearestText = nearestStation
-    ? formatStationSummaryHtml(nearestStation)
-    : 'same as lowest (no different nearby station in snapshot)';
-  el.innerHTML = `${escHtml(label)} lowest: ${cheapestText} | nearest: ${nearestText}`;
+function isManualPrice93() {
+  if (manualPriceOverride93) return true;
+  if (safeGetItem('manualPriceOverride93', '0') === '1') {
+    manualPriceOverride93 = true;
+    return true;
+  }
+  const cached = getFuelPriceCache();
+  if (cached && cached.prices && Number.isFinite(Number(cached.prices.premium))) {
+    const current93 = clampNumber(getValue('inp-price-93', DEFAULTS.price93), 0, 999, DEFAULTS.price93);
+    if (Math.abs(current93 - Number(cached.prices.premium)) > 0.001) {
+      manualPriceOverride93 = true;
+      safeSetItem('manualPriceOverride93', '1');
+      return true;
+    }
+    return false;
+  }
+  return true;
 }
 
 function syncFuelModeFromCurrentInput() {
-  const cached = getFuelSnapshotCache();
-  if (!cached) return;
-
-  const e85Station = getBestStation(cached.e85);
-  const p93Station = getBestStation(cached.premium93);
-  const snapshotE85 = Number(e85Station?.bestPrice ?? e85Station?.cash ?? e85Station?.credit);
-  const snapshot93 = Number(p93Station?.bestPrice ?? p93Station?.cash ?? p93Station?.credit);
+  const cached = getFuelPriceCache();
   const currentE85 = clampNumber(getValue('inp-price-e85', DEFAULTS.priceE85), 0, 999, DEFAULTS.priceE85);
   const current93 = clampNumber(getValue('inp-price-93', DEFAULTS.price93), 0, 999, DEFAULTS.price93);
 
-  const e85Diff = Number.isFinite(snapshotE85) ? Math.abs(currentE85 - snapshotE85) : 0;
-  const p93Diff = Number.isFinite(snapshot93) ? Math.abs(current93 - snapshot93) : 0;
-  if (e85Diff > 0.001 || p93Diff > 0.001) {
-    setFuelSourceLabel('Manual prices · not using snapshot values', 'info');
+  if (cached && cached.prices) {
+    const cachedE85 = Number(cached.prices.e85);
+    const cached93 = Number(cached.prices.premium);
+    if (Number.isFinite(cachedE85) && Math.abs(currentE85 - cachedE85) > 0.001) {
+      manualPriceOverrideE85 = true;
+      safeSetItem('manualPriceOverrideE85', '1');
+    }
+    if (Number.isFinite(cached93) && Math.abs(current93 - cached93) > 0.001) {
+      manualPriceOverride93 = true;
+      safeSetItem('manualPriceOverride93', '1');
+    }
+  } else {
+    manualPriceOverrideE85 = true;
+    manualPriceOverride93 = true;
+    safeSetItem('manualPriceOverrideE85', '1');
+    safeSetItem('manualPriceOverride93', '1');
+  }
+
+  if (manualPriceOverrideE85 || manualPriceOverride93) {
+    setFuelSourceLabel('Manual prices · not using API', 'info');
     updateFuelUIStatus('Manual price edits override auto-filled values.', 'info');
   }
 }
 
-async function fetchFuelPriceSnapshot() {
-  const cacheBuster = `v=${Date.now()}`;
-  const url = `${FUEL_PRICES_SNAPSHOT_PATH}?${cacheBuster}`;
-  const response = await fetch(url, { method: 'GET', cache: 'no-store' });
-  if (!response.ok) {
-    throw new Error(`Fuel snapshot fetch failed (${response.status})`);
+async function fetchFuelPrices(lat, lon) {
+  if (!FUEL_API_BASE) {
+    return null;
   }
-  return response.json();
-}
-
-function applyFuelSnapshot(snapshot, sourceKind) {
-  const e85Station = getBestStation(snapshot?.e85);
-  const p93Station = getBestStation(snapshot?.premium93);
-  const e85Nearest = getNearestDifferentStation(snapshot?.e85, e85Station);
-  const p93Nearest = getNearestDifferentStation(snapshot?.premium93, p93Station);
-  const e85Price = Number(e85Station?.bestPrice ?? e85Station?.cash ?? e85Station?.credit);
-  const p93Price = Number(p93Station?.bestPrice ?? p93Station?.cash ?? p93Station?.credit);
-
-  let applied = false;
-  if (Number.isFinite(e85Price) && e85Price > 0) {
-    setValue('inp-price-e85', e85Price.toFixed(2));
-    safeSetItem('priceE85', e85Price.toFixed(2));
-    applied = true;
-  }
-  if (Number.isFinite(p93Price) && p93Price > 0) {
-    setValue('inp-price-93', p93Price.toFixed(2));
-    safeSetItem('price93', p93Price.toFixed(2));
-    applied = true;
-  }
-
-  setFuelStationLine('fuel-station-e85', 'E85', e85Station, e85Nearest);
-  setFuelStationLine('fuel-station-93', '93', p93Station, p93Nearest);
-
-  const search = String(snapshot?.search || 'Configured location');
-  const generatedAt = formatFuelTime(snapshot?.generatedAt);
-  setFuelSourceLabel(`Fuel snapshot · ${search} · ${generatedAt}`, sourceKind || 'live');
-
-  if (applied) {
-    updateFuelUIStatus('Auto-filled E85 and 93 prices from fuel snapshot.', sourceKind || 'live');
-    calculateBlend();
-    return true;
-  }
-
-  updateFuelUIStatus('Snapshot loaded, but no station prices were available.', 'error');
-  return false;
-}
-
-async function useFuelPriceSnapshotAuto() {
-  updateFuelUIStatus('Loading fuel prices...', 'info');
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), 5000);
   try {
-    const snapshot = await fetchFuelPriceSnapshot();
-    saveFuelSnapshotCache(snapshot);
-    applyFuelSnapshot(snapshot, 'live');
-  } catch (error) {
-    const cached = getFuelSnapshotCache();
-    if (cached) {
-      applyFuelSnapshot(cached, 'cache');
-      updateFuelUIStatus('Using cached fuel snapshot data.', 'cache');
-      return;
+    const url = new URL(FUEL_API_BASE);
+    url.searchParams.set('lat', String(lat));
+    url.searchParams.set('lon', String(lon));
+
+    const response = await fetch(url.toString(), {
+      method: 'GET',
+      signal: controller.signal
+    });
+    if (!response.ok) {
+      return null;
     }
-    updateFuelUIStatus(`Fuel prices unavailable · ${error?.message || 'Use manual prices'}`, 'error');
+    const data = await response.json();
+    return data;
+  } catch (e) {
+    return null;
+  } finally {
+    clearTimeout(timeoutId);
   }
+}
+
+function parseFuelPricesResponse(data) {
+  if (!data || typeof data !== 'object') return null;
+
+  let e85 = null;
+  let premium = null;
+  let stationName = '';
+
+  const stations = Array.isArray(data?.stations)
+    ? data.stations
+    : (Array.isArray(data?.data?.stations) ? data.data.stations : []);
+
+  if (stations.length > 0) {
+    const station = stations[0];
+    stationName = station?.name || '';
+    const p85 = Number(station?.prices?.e85 ?? station?.prices?.E85);
+    const pPrem = Number(station?.prices?.premium ?? station?.prices?.premium93 ?? station?.prices?.['93']);
+    if (Number.isFinite(p85) && p85 > 0) e85 = p85;
+    if (Number.isFinite(pPrem) && pPrem > 0) premium = pPrem;
+  } else if (data?.prices) {
+    const p85 = Number(data.prices.e85 ?? data.prices.E85);
+    const pPrem = Number(data.prices.premium ?? data.prices.premium93 ?? data.prices['93']);
+    if (Number.isFinite(p85) && p85 > 0) e85 = p85;
+    if (Number.isFinite(pPrem) && pPrem > 0) premium = pPrem;
+  }
+
+  if (e85 === null && premium === null) {
+    return null;
+  }
+
+  return {
+    prices: { e85, premium },
+    stationName,
+    fetchedAt: Date.now()
+  };
+}
+
+function applyLiveFuelPrices(data) {
+  const parsed = parseFuelPricesResponse(data);
+  if (!parsed) {
+    handleFuelPricesUnavailable();
+    return;
+  }
+
+  saveFuelPriceCache(parsed);
+
+  const ageText = formatFuelPriceAge(parsed.fetchedAt);
+  const ageDisplay = ageText ? ` · ${ageText}` : '';
+  let updatedCount = 0;
+
+  const isE85Manual = isManualPriceE85();
+  const is93Manual = isManualPrice93();
+
+  if (!isE85Manual && Number.isFinite(parsed.prices.e85)) {
+    setValue('inp-price-e85', parsed.prices.e85.toFixed(2));
+    safeSetItem('priceE85', parsed.prices.e85.toFixed(2));
+    updatedCount++;
+  }
+
+  if (!is93Manual && Number.isFinite(parsed.prices.premium)) {
+    setValue('inp-price-93', parsed.prices.premium.toFixed(2));
+    safeSetItem('price93', parsed.prices.premium.toFixed(2));
+    updatedCount++;
+  }
+
+  const stationDisplay = parsed.stationName ? ` · ${parsed.stationName}` : '';
+  setFuelSourceLabel(`Live fuel prices${stationDisplay}${ageDisplay}`, 'live');
+  updateFuelUIStatus(
+    updatedCount > 0
+      ? `Auto-filled fuel prices${ageDisplay}`
+      : 'Manual price edits override auto-filled values.',
+    updatedCount > 0 ? 'live' : 'info'
+  );
+
+  const stE85El = document.getElementById('fuel-station-e85');
+  const st93El = document.getElementById('fuel-station-93');
+  if (stE85El) {
+    stE85El.textContent = Number.isFinite(parsed.prices.e85)
+      ? `E85: $${parsed.prices.e85.toFixed(2)}/gal${ageDisplay}`
+      : 'E85: price unavailable';
+  }
+  if (st93El) {
+    st93El.textContent = Number.isFinite(parsed.prices.premium)
+      ? `93: $${parsed.prices.premium.toFixed(2)}/gal${ageDisplay}`
+      : '93: price unavailable';
+  }
+
+  calculateBlend();
+}
+
+function handleFuelPricesUnavailable() {
+  const cached = getFuelPriceCache();
+  if (cached && cached.prices && (cached.prices.e85 !== null || cached.prices.premium !== null)) {
+    const ageText = formatFuelPriceAge(cached.fetchedAt);
+    const ageDisplay = ageText ? ` · ${ageText}` : '';
+    setFuelSourceLabel(`Cached prices${ageDisplay}`, 'cache');
+    updateFuelUIStatus(`Using cached fuel prices${ageDisplay}`, 'cache');
+
+    if (!manualPriceOverrideE85 && Number.isFinite(cached.prices.e85)) {
+      setValue('inp-price-e85', cached.prices.e85.toFixed(2));
+    }
+    if (!manualPriceOverride93 && Number.isFinite(cached.prices.premium)) {
+      setValue('inp-price-93', cached.prices.premium.toFixed(2));
+    }
+    return;
+  }
+
+  setFuelSourceLabel('Prices unavailable · manual input', 'info');
+  updateFuelUIStatus('Prices unavailable · manual entry active.', 'info');
 }
 
 function applyAmbientWeather(tempF, sourceLabel, detailLabel, persist = true) {
@@ -580,32 +668,68 @@ function getCurrentPosition() {
 async function useLiveWeather() {
   const statusEl = document.getElementById('weather-status');
   if (statusEl) {
-    statusEl.textContent = 'Getting location and weather...';
+    statusEl.textContent = 'Getting location, weather & fuel prices...';
     statusEl.dataset.kind = 'info';
+  }
+
+  const fuelStatusEl = document.getElementById('fuel-status');
+  if (fuelStatusEl) {
+    fuelStatusEl.textContent = 'Fetching current fuel prices...';
+    fuelStatusEl.dataset.kind = 'info';
   }
 
   try {
     const position = await getCurrentPosition();
     const { latitude, longitude } = position.coords;
-    const weather = await fetchOpenMeteoWeather(latitude, longitude);
-    const place = await reverseGeocodeLocation(latitude, longitude).catch(() => null);
-    const loc = place || 'Location unavailable';
-    applyAmbientWeather(weather.tempF, 'Open-Meteo live weather', loc, true);
+
+    const [weatherRes, fuelRes, placeRes] = await Promise.allSettled([
+      fetchOpenMeteoWeather(latitude, longitude),
+      fetchFuelPrices(latitude, longitude),
+      reverseGeocodeLocation(latitude, longitude)
+    ]);
+
+    if (weatherRes.status === 'fulfilled' && weatherRes.value) {
+      const weather = weatherRes.value;
+      const place = placeRes.status === 'fulfilled' ? placeRes.value : null;
+      const loc = place || 'Location unavailable';
+      applyAmbientWeather(weather.tempF, 'Open-Meteo live weather', loc, true);
+    } else {
+      const cached = getWeatherCache();
+      if (cached) {
+        setWeatherSourceLabel(
+          `Using cached weather · ${cached.sourceLabel || 'Open-Meteo'} · ${formatWeatherCacheTime(cached.updatedAt)}`,
+          'cache'
+        );
+        updateWeatherUIStatus('Using cached weather data.', 'cache');
+        setValue('inp-amb-temp', Number(cached.tempF).toFixed(0));
+        safeSetItem('ambientTempF', Number(cached.tempF));
+        calculateBlend();
+      } else {
+        const errMsg = weatherRes.status === 'rejected' && weatherRes.reason ? weatherRes.reason.message : 'Manual input still available';
+        updateWeatherUIStatus(`Live weather unavailable · ${errMsg}`, 'error');
+      }
+    }
+
+    if (fuelRes.status === 'fulfilled' && fuelRes.value) {
+      applyLiveFuelPrices(fuelRes.value);
+    } else {
+      handleFuelPricesUnavailable();
+    }
   } catch (error) {
-    const cached = getWeatherCache();
-    if (cached) {
+    const cachedWeather = getWeatherCache();
+    if (cachedWeather) {
       setWeatherSourceLabel(
-        `Using cached weather · ${cached.sourceLabel || 'Open-Meteo'} · ${formatWeatherCacheTime(cached.updatedAt)}`,
+        `Using cached weather · ${cachedWeather.sourceLabel || 'Open-Meteo'} · ${formatWeatherCacheTime(cachedWeather.updatedAt)}`,
         'cache'
       );
       updateWeatherUIStatus('Using cached weather data.', 'cache');
-      setValue('inp-amb-temp', Number(cached.tempF).toFixed(0));
-      safeSetItem('ambientTempF', Number(cached.tempF));
+      setValue('inp-amb-temp', Number(cachedWeather.tempF).toFixed(0));
+      safeSetItem('ambientTempF', Number(cachedWeather.tempF));
       calculateBlend();
-      return;
+    } else {
+      updateWeatherUIStatus(`Live weather unavailable · ${error?.message || 'Manual input still available'}`, 'error');
     }
-
-    updateWeatherUIStatus(`Live weather unavailable · ${error?.message || 'Manual input still available'}`, 'error');
+    handleFuelPricesUnavailable();
   }
 }
 
@@ -1186,6 +1310,7 @@ function renderLogs() {
     return `<tr><td>${escHtml(log.date)}</td><td>${escHtml(log.station)}</td><td style="color:var(--e85);font-weight:bold;">${escHtml(log.e85)}</td><td style="color:var(--c93);font-weight:bold;">${escHtml(log.c93)}</td><td style="color:var(--neon);font-weight:bold;">${formatOptionalNumber(log.apEth)}</td><td style="color:var(--e85);font-weight:bold;">${formatOptionalNumber(log.actualE85)}</td><td style="color:var(--c93);font-weight:bold;">${formatOptionalNumber(log.actual93)}</td><td style="color:var(--neon);font-weight:bold;">${stationEth}</td><td style="color:var(--gold);font-weight:bold;">${formatMoney(costValue)}</td><td style="color:var(--gold);font-family:'Orbitron',sans-serif;font-size:20px;">E${escHtml(log.eth)}</td><td><button class="row-btn edit-btn" onclick="beginLogEdit(${log.id})">Edit</button><button class="del-btn" onclick="deleteLog(${log.id})">✕</button></td></tr>`;
   }).join('');
   renderStationInsights();
+  renderCleaningTankAdvisory();
 }
 
 function renderStationInsights() {
@@ -1234,11 +1359,28 @@ function renderAdvisorPanels(inputs, result, targetState) {
       : 'Live weather is optional. Manual input stays available.';
   }
 
+  renderCleaningTankAdvisory();
+
+  const cachedFuel = getFuelPriceCache();
   if (fuelSourceEl && (!fuelSourceEl.dataset.kind || fuelSourceEl.dataset.kind === 'info')) {
-    fuelSourceEl.textContent = 'Fuel snapshot · waiting for data';
+    if (manualPriceOverrideE85 || manualPriceOverride93) {
+      fuelSourceEl.textContent = 'Manual prices · not using API';
+    } else if (cachedFuel && cachedFuel.fetchedAt) {
+      const ageText = formatFuelPriceAge(cachedFuel.fetchedAt);
+      fuelSourceEl.textContent = ageText ? `Cached prices · ${ageText}` : 'Cached fuel prices';
+    } else {
+      fuelSourceEl.textContent = 'Manual prices · on-demand lookup';
+    }
   }
   if (fuelStatusEl && (!fuelStatusEl.dataset.kind || fuelStatusEl.dataset.kind === 'info')) {
-    fuelStatusEl.textContent = 'Auto-fill uses latest saved fuel snapshot when available.';
+    if (manualPriceOverrideE85 || manualPriceOverride93) {
+      fuelStatusEl.textContent = 'Manual price edits override auto-filled values.';
+    } else if (cachedFuel && cachedFuel.fetchedAt) {
+      const ageText = formatFuelPriceAge(cachedFuel.fetchedAt);
+      fuelStatusEl.textContent = ageText ? `Using cached prices (${ageText}).` : 'Using cached fuel prices.';
+    } else {
+      fuelStatusEl.textContent = 'Fuel prices update on-demand when live weather is requested.';
+    }
   }
 
   if (ceilingNote) {
@@ -1432,6 +1574,9 @@ function resetDefault() {
   safeRemoveItem('addGallons');
   safeRemoveItem('logSyncEnabled');
   safeRemoveItem('wrxFuelLogs');
+  safeRemoveItem('wrxFuelPricesCache');
+  safeRemoveItem('manualPriceOverrideE85');
+  safeRemoveItem('manualPriceOverride93');
   location.reload();
 }
 
@@ -1509,6 +1654,5 @@ window.onload = function () {
   calculateBlend();
   const liveStatus = document.getElementById('weather-status');
   if (liveStatus) liveStatus.textContent = 'Live weather is optional. Manual input stays available.';
-  useFuelPriceSnapshotAuto();
   document.addEventListener('keydown', handleGlobalKeydown);
 };

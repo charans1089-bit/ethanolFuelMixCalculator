@@ -877,6 +877,69 @@ h1 .hl {
   line-height: 1.4;
 }
 
+/* ==================== CLEANING TANK ADVISORY ==================== */
+.cleaning-advisory {
+  border-radius: 10px;
+  padding: 14px 18px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+}
+
+.cleaning-advisory-icon {
+  font-size: 20px;
+  line-height: 1.2;
+  flex-shrink: 0;
+}
+
+.cleaning-advisory-content {
+  flex: 1;
+}
+
+.cleaning-advisory-title {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 13.5px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  margin-bottom: 5px;
+}
+
+.cleaning-advisory-text {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 11px;
+  line-height: 1.5;
+  color: var(--text-body);
+}
+
+.cleaning-advisory.info {
+  background: rgba(94, 184, 255, 0.08);
+  border: 1px solid rgba(94, 184, 255, 0.35);
+  box-shadow: 0 0 16px rgba(94, 184, 255, 0.12);
+}
+
+.cleaning-advisory.info .cleaning-advisory-icon {
+  color: var(--c93);
+}
+
+.cleaning-advisory.info .cleaning-advisory-title {
+  color: var(--c93);
+}
+
+.cleaning-advisory.warning {
+  background: rgba(255, 69, 69, 0.1);
+  border: 1px solid rgba(255, 69, 69, 0.45);
+  box-shadow: 0 0 20px rgba(255, 69, 69, 0.2);
+}
+
+.cleaning-advisory.warning .cleaning-advisory-icon {
+  color: var(--red);
+}
+
+.cleaning-advisory.warning .cleaning-advisory-title {
+  color: var(--red);
+}
+
 .eth-status {
   margin-bottom: 28px;
 }
