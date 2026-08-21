@@ -1628,6 +1628,7 @@ window.onload = function () {
   if (syncBox) syncBox.checked = syncEnabled;
   syncModeUI(fillMode);
   clearLogEditMode();
+  safeRemoveItem('wrxFuelPricesSnapshot');
 
   const savedLogs = safeGetItem('wrxFuelLogs', '');
   if (savedLogs) {
