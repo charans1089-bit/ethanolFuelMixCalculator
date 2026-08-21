@@ -169,6 +169,107 @@
         grid-template-columns: 1fr 1fr;
       }
     }
+
+    /* ============================================================
+   EMBEDDED DOCUMENTATION
+   ============================================================ */
+    .docs-card {
+      margin-top: 24px;
+      padding: 22px;
+    }
+
+    .docs-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+
+    .docs-head h2 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 24px;
+      color: #fff;
+      margin: 0;
+    }
+
+    .docs-kicker {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 1px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+    }
+
+    .docs-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .docs-block {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      padding: 14px;
+    }
+
+    .docs-block h3 {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 12px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--neon, #ccff00);
+      margin: 0 0 10px;
+    }
+
+    .docs-block p,
+    .docs-block li {
+      color: var(--text-body);
+      font-size: 14px;
+      line-height: 1.55;
+    }
+
+    .docs-block ul,
+    .docs-block ol {
+      margin: 0;
+      padding-left: 18px;
+      display: grid;
+      gap: 6px;
+    }
+
+    .docs-mini {
+      margin-top: 10px;
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 11px;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    .docs-chip-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 8px;
+    }
+
+    .docs-chip {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.6px;
+      text-transform: uppercase;
+      color: var(--text-body);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 999px;
+      padding: 5px 9px;
+      background: rgba(0, 0, 0, 0.25);
+    }
+
+    @media (max-width: 760px) {
+      .docs-grid {
+        grid-template-columns: 1fr;
+      }
+    }
   </style>
 </head>
 
@@ -214,6 +315,7 @@
       <button class="mode-btn" id="btn-log" onclick="setMode('log')">📓 Logbook</button>
       <button class="mode-btn mode-btn-accent" id="btn-sim" onclick="openSim()">🧪 Trap Simulator</button>
       <button class="mode-btn mode-btn-accent" id="btn-ref" onclick="openRef()">🎛 AP Reference</button>
+      <button class="mode-btn" type="button" onclick="document.getElementById('app-docs').scrollIntoView({ behavior: 'smooth', block: 'start' });">📘 Docs</button>
     </div>
 
     <div id="calc-view">
@@ -585,6 +687,65 @@
       <strong>DISCLAIMER & LIABILITY:</strong> This calculator relies on mathematical estimates. The creator assumes no
       liability for engine or vehicle damage. Use at your own risk.
     </div>
+
+    <section id="app-docs" class="docs-card solid-card" aria-label="Application documentation">
+      <div class="docs-head">
+        <div>
+          <div class="docs-kicker">Embedded Documentation</div>
+          <h2>SCRK Flex Fuel Calculator Docs</h2>
+        </div>
+      </div>
+
+      <div class="docs-grid">
+        <article class="docs-block">
+          <h3>Technical Implementation</h3>
+          <p>This is a static client-side web application. Core blend computation is performed in-browser with
+            JavaScript and no runtime database.</p>
+          <div class="docs-chip-row">
+            <span class="docs-chip">HTML5</span>
+            <span class="docs-chip">CSS3</span>
+            <span class="docs-chip">Vanilla JavaScript</span>
+            <span class="docs-chip">LocalStorage</span>
+            <span class="docs-chip">Cloudflare Worker</span>
+            <span class="docs-chip">GitHub Pages</span>
+          </div>
+          <ul style="margin-top:10px;">
+            <li><strong>Blend engine:</strong> deterministic calculation for E85 + 93 volumes based on current gallons,
+              current ethanol, target ethanol, and pump compositions.</li>
+            <li><strong>Weather advisory:</strong> Open-Meteo current weather lookup, reverse geocode labeling,
+              advisory-only target guidance.</li>
+            <li><strong>Fuel price path:</strong> on-demand request only (triggered by Use Live Weather action), routed
+              through a Cloudflare Worker endpoint.</li>
+            <li><strong>Persistence:</strong> user settings, logs, and cached weather/fuel data are stored in browser
+              localStorage with safe access wrappers.</li>
+            <li><strong>Telemetry sync:</strong> optional no-cors Google Form post for personal log mirroring.</li>
+            <li><strong>Automation:</strong> GitHub Actions + Node script update snapshot data from Apify for offline
+              fallback workflows and maintenance operations.</li>
+          </ul>
+          <div class="docs-mini">Security posture: restrictive CSP, no client-side secret storage, origin-controlled
+            worker CORS, input clamping, DOM-safe rendering for station lines, and CSV formula-injection mitigation for
+            exports.</div>
+        </article>
+
+        <article class="docs-block">
+          <h3>User Guide (How To Use)</h3>
+          <ol>
+            <li><strong>Set your current tank:</strong> use the tick slider or Fuel Remaining gallons input.</li>
+            <li><strong>Enter current ethanol:</strong> AP Eth Gauge value from your Accessport.</li>
+            <li><strong>Set your target:</strong> choose Target Eth and confirm Max Eth ceiling for your tune.</li>
+            <li><strong>Confirm pump assumptions:</strong> Pump E85 % and Pump Gas E% for your region.</li>
+            <li><strong>Optional live update:</strong> tap <em>Use Live Weather</em> to fetch weather + fuel prices in one action.</li>
+            <li><strong>Read outputs:</strong> Pump E85 First, Top Off 93, and Estimated Blend cards show planned fill.</li>
+            <li><strong>Save telemetry:</strong> add station/actuals and save to build history + station insights.</li>
+            <li><strong>Review advisory panels:</strong> weather suggestion, ceiling notes, and cleaning tank streak reminders are advisory only.</li>
+            <li><strong>Export backup:</strong> use Export CSV regularly for personal archive.</li>
+          </ol>
+          <div class="docs-mini">What users can learn: how ethanol percentage moves with tank state, why a full tank
+            can limit achievable target, how temperature influences drivability guidance, and how real fill logs improve
+            future station decisions.</div>
+        </article>
+      </div>
+    </section>
 
     <div class="footer">
       <div class="fn">FA24 · Accessport Required · Verify ETH% at pump · Cobb Flex Fuel Kit · Cold Air Intake · SCRK
