@@ -47,7 +47,7 @@ const WEATHER_API_BASE = 'https://api.open-meteo.com/v1/forecast';
 const WEATHER_REVERSE_GEOCODE_BASE = 'https://api.bigdatacloud.net/data/reverse-geocode-client';
 const WEATHER_REVERSE_GEOCODE_FALLBACK_BASE = 'https://nominatim.openstreetmap.org/reverse';
 const WEATHER_CACHE_KEY = 'wrxWeatherCache';
-const FUEL_API_BASE = 'https://api.fuelprices.io/v1/prices';
+const FUEL_API_BASE = 'https://ethanolfuelmixcalculator.charans1089.workers.dev';
 const FUEL_PRICES_CACHE_KEY = 'wrxFuelPricesCache';
 
 let fuelLogs = [];
