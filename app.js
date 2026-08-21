@@ -527,6 +527,9 @@ async function fetchFuelPrices(lat, lon) {
   if (!FUEL_API_BASE) {
     return null;
   }
+  if (!Number.isFinite(Number(lat)) || !Number.isFinite(Number(lon))) {
+    return null;
+  }
   const controller = new AbortController();
   const timeoutId = setTimeout(() => controller.abort(), 5000);
   try {
@@ -548,16 +551,6 @@ async function fetchFuelPrices(lat, lon) {
   } finally {
     clearTimeout(timeoutId);
   }
-}
-
-async function fetchFuelPriceSnapshot() {
-  try {
-    const res = await fetch(`data/fuel-prices.json?v=${Date.now()}`, { cache: 'no-store' });
-    if (res.ok) {
-      return await res.json();
-    }
-  } catch (e) {}
-  return null;
 }
 
 function applyFuelSnapshotData(data, sourceLabel) {
@@ -608,45 +601,6 @@ function applyFuelSnapshotData(data, sourceLabel) {
   return true;
 }
 
-function parseFuelPricesResponse(data) {
-  if (!data || typeof data !== 'object') return null;
-
-  let e85 = null;
-  let premium = null;
-  let stationName = '';
-
-  const stations = Array.isArray(data?.stations)
-    ? data.stations
-    : (Array.isArray(data?.data?.stations) ? data.data.stations : []);
-
-  if (stations.length > 0) {
-    const station = stations[0];
-    stationName = station?.name || '';
-    const p85 = Number(station?.prices?.e85 ?? station?.prices?.E85 ?? station?.bestPrice);
-    const pPrem = Number(station?.prices?.premium ?? station?.prices?.premium93 ?? station?.prices?.['93'] ?? station?.bestPrice);
-    if (Number.isFinite(p85) && p85 > 0) e85 = p85;
-    if (Number.isFinite(pPrem) && pPrem > 0) premium = pPrem;
-  } else if (data?.prices) {
-    const p85 = Number(data.prices.e85 ?? data.prices.E85);
-    const pPrem = Number(data.prices.premium ?? data.prices.premium93 ?? data.prices['93']);
-    if (Number.isFinite(p85) && p85 > 0) e85 = p85;
-    if (Number.isFinite(pPrem) && pPrem > 0) premium = pPrem;
-  } else if (data?.e85 || data?.premium93) {
-    return data;
-  }
-
-  if (e85 === null && premium === null) {
-    return null;
-  }
-
-  return {
-    prices: { e85, premium },
-    stations,
-    stationName,
-    fetchedAt: Date.now()
-  };
-}
-
 function applyLiveFuelPrices(data) {
   if (!data || typeof data !== 'object') {
     handleFuelPricesUnavailable();
@@ -666,18 +620,7 @@ function applyLiveFuelPrices(data) {
   applyFuelSnapshotData(payload, 'Live fuel prices');
 }
 
-async function handleFuelPricesUnavailable() {
-  const cached = getFuelPriceCache();
-  if (cached && (cached.e85 || cached.premium93 || cached.stations)) {
-    applyFuelSnapshotData(cached, 'Cached fuel prices');
-    return;
-  }
-  const snapshot = await fetchFuelPriceSnapshot();
-  if (snapshot) {
-    applyFuelSnapshotData(snapshot, 'Fuel snapshot');
-    return;
-  }
-
+function handleFuelPricesUnavailable() {
   setFuelSourceLabel('Prices unavailable · manual input', 'info');
   updateFuelUIStatus('Prices unavailable · manual entry active.', 'info');
 }
@@ -1799,14 +1742,8 @@ window.onload = function () {
   const liveStatus = document.getElementById('weather-status');
   if (liveStatus) liveStatus.textContent = 'Live weather is optional. Manual input stays available.';
 
-  const cachedFuel = getFuelPriceCache();
-  if (cachedFuel && (cachedFuel.e85 || cachedFuel.premium93 || cachedFuel.stations)) {
-    applyFuelSnapshotData(cachedFuel, 'Cached fuel prices');
-  } else {
-    fetchFuelPriceSnapshot().then(snap => {
-      if (snap) applyFuelSnapshotData(snap, 'Fuel snapshot');
-    });
-  }
+  setFuelSourceLabel('Manual prices · on-demand lookup', 'info');
+  updateFuelUIStatus('Fuel prices update only when you request live weather.', 'info');
 
   document.addEventListener('keydown', handleGlobalKeydown);
 };

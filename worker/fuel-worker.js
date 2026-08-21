@@ -8,7 +8,11 @@
 const DEFAULT_CORS = {
   'Access-Control-Allow-Methods': 'GET, OPTIONS',
   'Access-Control-Allow-Headers': 'Content-Type',
-  'Content-Type': 'application/json; charset=utf-8'
+  'Content-Type': 'application/json; charset=utf-8',
+  'X-Content-Type-Options': 'nosniff',
+  'Referrer-Policy': 'no-referrer',
+  'Cache-Control': 'no-store',
+  'Vary': 'Origin'
 };
 
 const ORIGIN_ALLOWLIST = new Set([
@@ -21,7 +25,9 @@ const ORIGIN_ALLOWLIST = new Set([
 function buildCorsHeaders(request) {
   const origin = request.headers.get('Origin');
   const headers = { ...DEFAULT_CORS };
-  headers['Access-Control-Allow-Origin'] = origin || '*';
+  if (origin && ORIGIN_ALLOWLIST.has(origin)) {
+    headers['Access-Control-Allow-Origin'] = origin;
+  }
   return headers;
 }
 
@@ -41,6 +47,14 @@ function calculateDistanceMiles(lat1, lon1, lat2, lon2) {
 
 export default {
   async fetch(request, env, ctx) {
+    const origin = request.headers.get('Origin');
+    if (origin && !ORIGIN_ALLOWLIST.has(origin)) {
+      return new Response(JSON.stringify({ status: 'error', error: 'Origin not allowed.' }), {
+        status: 403,
+        headers: DEFAULT_CORS
+      });
+    }
+
     const headers = buildCorsHeaders(request);
 
     if (request.method === 'OPTIONS') {
