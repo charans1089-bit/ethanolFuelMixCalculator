@@ -416,7 +416,7 @@ function buildGoogleMapsUrl(station) {
   const lat = pickCoordinate(station, ['latitude', 'lat']);
   const lon = pickCoordinate(station, ['longitude', 'lng', 'lon']);
   if (Number.isFinite(lat) && Number.isFinite(lon)) {
-    return `https://www.google.com/maps?q=${encodeURIComponent(`${lat},${lon}`)}`;
+    return `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(`${lat},${lon}`)}`;
   }
 
   const address = formatStationAddress(station);
@@ -443,9 +443,12 @@ function formatStationSummary(station) {
   const name = station?.name || 'Unknown station';
   const addr = formatStationAddress(station);
   const price = Number(station?.bestPrice ?? station?.cash ?? station?.credit ?? station?.price);
-  const priceText = Number.isFinite(price) && price > 0 ? `$${price.toFixed(2)}/gal` : 'Price unavailable';
+  const priceText = Number.isFinite(price) && price > 0 ? `$${price.toFixed(2)}/gal` : '';
   const distanceText = formatStationDistanceMiles(station);
-  return `${name} · ${addr} · ${priceText} · ${distanceText}`;
+  const parts = [name, addr];
+  if (priceText) parts.push(priceText);
+  parts.push(distanceText);
+  return parts.join(' · ');
 }
 
 function createStationSummaryNode(station) {
@@ -456,6 +459,15 @@ function createStationSummaryNode(station) {
   }
   const summary = formatStationSummary(station);
   frag.appendChild(document.createTextNode(summary));
+
+  if (station.hasBoth || (Array.isArray(station.fuelTypes) && station.fuelTypes.includes('E85') && station.fuelTypes.includes('93'))) {
+    const dualBadge = document.createElement('span');
+    dualBadge.className = 'station-dual-badge';
+    dualBadge.textContent = ' ⚡ E85+93';
+    dualBadge.title = 'Station carries both E85 and 93 Premium Octane';
+    frag.appendChild(dualBadge);
+  }
+
   const mapsUrl = buildGoogleMapsUrl(station);
   if (mapsUrl) {
     frag.appendChild(document.createTextNode(' · '));
@@ -464,7 +476,7 @@ function createStationSummaryNode(station) {
     a.href = mapsUrl;
     a.target = '_blank';
     a.rel = 'noopener noreferrer';
-    a.textContent = 'map';
+    a.textContent = 'Navigate ↗';
     frag.appendChild(a);
   }
   return frag;

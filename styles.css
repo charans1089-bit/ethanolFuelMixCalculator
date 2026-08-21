@@ -730,10 +730,24 @@ h1 .hl {
   color: var(--neon);
   text-decoration: underline;
   text-underline-offset: 2px;
+  font-weight: 600;
 }
 
 .fuel-map-link:hover {
   color: var(--e85);
+}
+
+.station-dual-badge {
+  display: inline-block;
+  margin-left: 4px;
+  padding: 1px 6px;
+  font-size: 9.5px;
+  font-weight: bold;
+  letter-spacing: 0.5px;
+  color: #0b0f19;
+  background: linear-gradient(135deg, var(--neon, #ccff00), #ffaa00);
+  border-radius: 4px;
+  text-transform: uppercase;
 }
 
 .weather-status {

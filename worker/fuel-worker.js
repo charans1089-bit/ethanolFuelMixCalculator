@@ -114,6 +114,22 @@ async function fetchOverpassStations(query) {
   return Array.isArray(data?.elements) ? data.elements : [];
 }
 
+const NLR_API_URL = 'https://developer.nlr.gov/api/alt-fuel-stations/v1/nearest.json';
+const DEFAULT_NLR_KEY = 'CWNYli7U9J8lNy38iRrSl0EceyXCjjTPsYeH1ffU';
+
+const KNOWN_DUAL_FUEL_BRANDS = [
+  'sheetz', 'wawa', 'sunoco', 'speedway', 'meijer', 'buc-ee', 'cumberland',
+  'mobil', 'exxon', 'shell', 'bp', 'marathon', 'thorntons', 'casey',
+  'kwik trip', 'quiktrip', 'circle k', 'getgo', 'turkey hill', 'pilot',
+  'flying j', "love's", 'racetrac', 'murphy', 'phillips 66', 'sinclair',
+  'citgo', 'valero', 'chevron'
+];
+
+function isKnownDualFuelBrand(name) {
+  const lower = String(name || '').toLowerCase();
+  return KNOWN_DUAL_FUEL_BRANDS.some(b => lower.includes(b));
+}
+
 export default {
   async fetch(request, env, ctx) {
     const origin = request.headers.get('Origin');
@@ -149,15 +165,16 @@ export default {
     let p93Stations = [];
     let locationName = '';
 
-    // 1. Try NREL for real nearby E85 stations
+    // 1. Query NLR (National Laboratory of the Rockies AFDC API) for verified nearby E85 stations
     try {
-      const nrelUrl = `https://developer.nrel.gov/api/alt-fuel-stations/v1/nearest.json?api_key=DEMO_KEY&fuel_type=E85&latitude=${lat}&longitude=${lon}&radius=35&limit=15`;
-      const nrelRes = await fetch(nrelUrl, {
+      const apiKey = env.NLR_API_KEY || DEFAULT_NLR_KEY;
+      const nlrUrl = `${NLR_API_URL}?api_key=${encodeURIComponent(apiKey)}&fuel_type=E85&latitude=${lat}&longitude=${lon}&radius=35&status=E&access=public&limit=20`;
+      const nlrRes = await fetch(nlrUrl, {
         headers: { 'User-Agent': 'SCRK-FlexFuel/2.0' }
       });
-      if (nrelRes.ok) {
-        const nrelData = await nrelRes.json();
-        const rawStations = nrelData.fuel_stations || [];
+      if (nlrRes.ok) {
+        const nlrData = await nlrRes.json();
+        const rawStations = nlrData.fuel_stations || [];
         for (const st of rawStations) {
           const stLat = parseFloat(st.latitude);
           const stLon = parseFloat(st.longitude);
@@ -167,9 +184,18 @@ export default {
             locationName = [st.city, st.state].filter(Boolean).join(', ');
           }
 
+          const stName = st.station_name || 'E85 Station';
+          const isDual = isKnownDualFuelBrand(stName);
+
           e85Stations.push({
             id: String(st.id),
-            name: st.station_name || 'E85 Station',
+            name: stName,
+            brand: isDual ? stName : null,
+            phone: st.station_phone || null,
+            accessDaysTime: st.access_days_time || null,
+            cardsAccepted: st.cards_accepted || null,
+            hasBoth: isDual,
+            fuelTypes: isDual ? ['E85', '93'] : ['E85'],
             bestPrice: null,
             distance: Number.isFinite(dist) ? parseFloat(dist.toFixed(2)) : null,
             distanceUnit: 'mi',
@@ -181,7 +207,7 @@ export default {
             },
             latitude: Number.isFinite(stLat) ? stLat : null,
             longitude: Number.isFinite(stLon) ? stLon : null,
-            source: 'nrel'
+            source: 'nlr'
           });
         }
       }
@@ -205,6 +231,9 @@ export default {
           if (!locationName && (station.address.city || station.address.region)) {
             locationName = [station.address.city, station.address.region].filter(Boolean).join(', ');
           }
+          const isDual = isKnownDualFuelBrand(station.name);
+          station.hasBoth = isDual;
+          station.fuelTypes = isDual ? ['E85', '93'] : ['E85'];
           e85Stations.push(station);
         }
       }
@@ -228,6 +257,7 @@ export default {
           if (!locationName && (station.address.city || station.address.region)) {
             locationName = [station.address.city, station.address.region].filter(Boolean).join(', ');
           }
+          station.fuelTypes = ['93'];
           p93Stations.push(station);
         }
       }
@@ -235,6 +265,21 @@ export default {
 
     e85Stations = dedupeStations(e85Stations);
     p93Stations = dedupeStations(p93Stations);
+
+    // Cross-reference E85 stations with 93 stations: if within 0.1 miles, tag as dual-fuel
+    for (const e85St of e85Stations) {
+      if (!e85St.hasBoth && Number.isFinite(e85St.latitude) && Number.isFinite(e85St.longitude)) {
+        const near93 = p93Stations.some(p93 => {
+          if (!Number.isFinite(p93.latitude) || !Number.isFinite(p93.longitude)) return false;
+          const dist = calculateDistanceMiles(e85St.latitude, e85St.longitude, p93.latitude, p93.longitude);
+          return Number.isFinite(dist) && dist <= 0.1;
+        });
+        if (near93) {
+          e85St.hasBoth = true;
+          e85St.fuelTypes = ['E85', '93'];
+        }
+      }
+    }
 
     e85Stations.sort((a, b) => (a.distance ?? 999) - (b.distance ?? 999));
     p93Stations.sort((a, b) => (a.distance ?? 999) - (b.distance ?? 999));
