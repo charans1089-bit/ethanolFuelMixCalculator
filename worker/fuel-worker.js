@@ -5,12 +5,29 @@
  * returning clean CORS-enabled JSON to the SCRK Flex Fuel Calculator.
  */
 
-const CORS_HEADERS = {
-  'Access-Control-Allow-Origin': '*',
+const DEFAULT_CORS = {
   'Access-Control-Allow-Methods': 'GET, OPTIONS',
   'Access-Control-Allow-Headers': 'Content-Type',
   'Content-Type': 'application/json; charset=utf-8'
 };
+
+const ORIGIN_ALLOWLIST = new Set([
+  'https://charans1089-bit.github.io',
+  'http://localhost:3000',
+  'http://127.0.0.1:5500',
+  'http://localhost:8080'
+]);
+
+function buildCorsHeaders(request) {
+  const origin = request.headers.get('Origin');
+  const headers = { ...DEFAULT_CORS };
+  if (origin && ORIGIN_ALLOWLIST.has(origin)) {
+    headers['Access-Control-Allow-Origin'] = origin;
+  } else {
+    headers['Access-Control-Allow-Origin'] = 'https://charans1089-bit.github.io';
+  }
+  return headers;
+}
 
 function calculateDistanceMiles(lat1, lon1, lat2, lon2) {
   if (!Number.isFinite(lat1) || !Number.isFinite(lon1) || !Number.isFinite(lat2) || !Number.isFinite(lon2)) {
@@ -28,19 +45,25 @@ function calculateDistanceMiles(lat1, lon1, lat2, lon2) {
 
 export default {
   async fetch(request, env, ctx) {
+    const headers = buildCorsHeaders(request);
+
     if (request.method === 'OPTIONS') {
-      return new Response(null, { headers: CORS_HEADERS });
+      return new Response(null, { headers });
     }
 
     const url = new URL(request.url);
     const lat = parseFloat(url.searchParams.get('lat') || url.searchParams.get('latitude'));
     const lon = parseFloat(url.searchParams.get('lon') || url.searchParams.get('lng') || url.searchParams.get('longitude'));
 
-    if (isNaN(lat) || isNaN(lon)) {
+    if (
+      !Number.isFinite(lat) || !Number.isFinite(lon) ||
+      lat < -90 || lat > 90 ||
+      lon < -180 || lon > 180
+    ) {
       return new Response(JSON.stringify({
         status: 'error',
-        error: 'Missing or invalid lat/lon parameters. Example: /?lat=42.9&lon=-83.7'
-      }), { status: 400, headers: CORS_HEADERS });
+        error: 'Invalid coordinates. Latitude must be between -90 and 90, Longitude between -180 and 180.'
+      }), { status: 400, headers });
     }
 
     let e85Stations = [];
@@ -150,7 +173,7 @@ export default {
 
     return new Response(JSON.stringify(payload, null, 2), {
       status: 200,
-      headers: CORS_HEADERS
+      headers
     });
   }
 };

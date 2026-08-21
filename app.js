@@ -449,22 +449,48 @@ function formatStationSummary(station) {
   return `${name} · ${addr} · ${priceText} · ${distanceText}`;
 }
 
-function formatStationSummaryHtml(station) {
-  if (!station) return 'no station data';
+function createStationSummaryNode(station) {
+  const frag = document.createDocumentFragment();
+  if (!station) {
+    frag.appendChild(document.createTextNode('no station data'));
+    return frag;
+  }
   const summary = formatStationSummary(station);
+  frag.appendChild(document.createTextNode(summary));
   const mapsUrl = buildGoogleMapsUrl(station);
-  if (!mapsUrl) return escHtml(summary);
-  return `${escHtml(summary)} · <a class="fuel-map-link" href="${mapsUrl}" target="_blank" rel="noopener noreferrer">map</a>`;
+  if (mapsUrl) {
+    frag.appendChild(document.createTextNode(' · '));
+    const a = document.createElement('a');
+    a.className = 'fuel-map-link';
+    a.href = mapsUrl;
+    a.target = '_blank';
+    a.rel = 'noopener noreferrer';
+    a.textContent = 'map';
+    frag.appendChild(a);
+  }
+  return frag;
 }
 
 function setFuelStationLine(id, label, cheapestStation, nearestStation) {
   const el = document.getElementById(id);
   if (!el) return;
-  const cheapestText = formatStationSummaryHtml(cheapestStation);
-  const nearestText = nearestStation
-    ? formatStationSummaryHtml(nearestStation)
-    : 'same as lowest (no different nearby station in snapshot)';
-  el.innerHTML = `${escHtml(label)} lowest: ${cheapestText} | nearest: ${nearestText}`;
+
+  while (el.firstChild) el.removeChild(el.firstChild);
+
+  const prefix = document.createElement('span');
+  prefix.textContent = `${label} lowest: `;
+  el.appendChild(prefix);
+
+  el.appendChild(createStationSummaryNode(cheapestStation));
+
+  const separator = document.createElement('span');
+  separator.textContent = ' | nearest: ';
+  el.appendChild(separator);
+
+  const nearestNode = nearestStation
+    ? createStationSummaryNode(nearestStation)
+    : document.createTextNode('same as lowest (no different nearby station in snapshot)');
+  el.appendChild(nearestNode);
 }
 
 function isManualPriceE85() {
@@ -920,7 +946,12 @@ function calcFillCost(volumeE85, volume93, priceE85, price93) {
 }
 
 function escCsv(v) {
-  return '"' + String(v ?? '').replace(/"/g, '""') + '"';
+  const s = String(v ?? '');
+  // Prefix formula trigger characters (=, +, -, @, tab, CR) with single quote to neutralize spreadsheet injection
+  if (/^[=+\-@\t\r]/.test(s)) {
+    return '"\'' + s.replace(/"/g, '""') + '"';
+  }
+  return '"' + s.replace(/"/g, '""') + '"';
 }
 
 function getValue(id, fallback) {
