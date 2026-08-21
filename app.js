@@ -623,61 +623,22 @@ function parseFuelPricesResponse(data) {
 }
 
 function applyLiveFuelPrices(data) {
-  const parsed = parseFuelPricesResponse(data);
-  if (!parsed) {
+  if (!data || typeof data !== 'object') {
     handleFuelPricesUnavailable();
     return;
   }
 
-  if (parsed.e85 || parsed.premium93) {
-    applyFuelSnapshotData(parsed, 'Live fuel prices');
-    return;
-  }
+  const e85Group = data?.e85 || { stations: Array.isArray(data?.stations) ? data.stations : [] };
+  const p93Group = data?.premium93 || { stations: Array.isArray(data?.stations) ? data.stations : [] };
 
-  saveFuelPriceCache(parsed);
+  const payload = {
+    ...data,
+    e85: e85Group,
+    premium93: p93Group,
+    fetchedAt: data.fetchedAt || Date.now()
+  };
 
-  const ageText = formatFuelPriceAge(parsed.fetchedAt);
-  const ageDisplay = ageText ? ` · ${ageText}` : '';
-  let updatedCount = 0;
-
-  const isE85Manual = isManualPriceE85();
-  const is93Manual = isManualPrice93();
-
-  if (!isE85Manual && Number.isFinite(parsed.prices?.e85)) {
-    setValue('inp-price-e85', parsed.prices.e85.toFixed(2));
-    safeSetItem('priceE85', parsed.prices.e85.toFixed(2));
-    updatedCount++;
-  }
-
-  if (!is93Manual && Number.isFinite(parsed.prices?.premium)) {
-    setValue('inp-price-93', parsed.prices.premium.toFixed(2));
-    safeSetItem('price93', parsed.prices.premium.toFixed(2));
-    updatedCount++;
-  }
-
-  const stationDisplay = parsed.stationName ? ` · ${parsed.stationName}` : '';
-  setFuelSourceLabel(`Live fuel prices${stationDisplay}${ageDisplay}`, 'live');
-  updateFuelUIStatus(
-    updatedCount > 0
-      ? `Auto-filled fuel prices${ageDisplay}`
-      : 'Manual price edits override auto-filled values.',
-    updatedCount > 0 ? 'live' : 'info'
-  );
-
-  const stE85El = document.getElementById('fuel-station-e85');
-  const st93El = document.getElementById('fuel-station-93');
-  if (stE85El) {
-    stE85El.textContent = Number.isFinite(parsed.prices?.e85)
-      ? `E85: $${parsed.prices.e85.toFixed(2)}/gal${ageDisplay}`
-      : 'E85: price unavailable';
-  }
-  if (st93El) {
-    st93El.textContent = Number.isFinite(parsed.prices?.premium)
-      ? `93: $${parsed.prices.premium.toFixed(2)}/gal${ageDisplay}`
-      : '93: price unavailable';
-  }
-
-  calculateBlend();
+  applyFuelSnapshotData(payload, 'Live fuel prices');
 }
 
 async function handleFuelPricesUnavailable() {
