@@ -470,26 +470,26 @@ function createStationSummaryNode(station) {
   return frag;
 }
 
-function setFuelStationLine(id, label, cheapestStation, nearestStation) {
+function setFuelStationLine(id, label, nearestStation, alternateStation) {
   const el = document.getElementById(id);
   if (!el) return;
 
   while (el.firstChild) el.removeChild(el.firstChild);
 
   const prefix = document.createElement('span');
-  prefix.textContent = `${label} lowest: `;
+  prefix.textContent = `${label} nearest: `;
   el.appendChild(prefix);
 
-  el.appendChild(createStationSummaryNode(cheapestStation));
+  el.appendChild(createStationSummaryNode(nearestStation));
 
   const separator = document.createElement('span');
-  separator.textContent = ' | nearest: ';
+  separator.textContent = ' | alternate: ';
   el.appendChild(separator);
 
-  const nearestNode = nearestStation
-    ? createStationSummaryNode(nearestStation)
-    : document.createTextNode('same as lowest (no different nearby station in snapshot)');
-  el.appendChild(nearestNode);
+  const alternateNode = alternateStation
+    ? createStationSummaryNode(alternateStation)
+    : document.createTextNode('no second nearby station in this lookup');
+  el.appendChild(alternateNode);
 }
 
 function isManualPriceE85() {
@@ -572,10 +572,10 @@ function classifyFuelError(error) {
 function applyFuelSnapshotData(data, sourceLabel) {
   if (!data || typeof data !== 'object') return false;
 
-  const e85Station = getBestStation(data?.e85 || data?.stations || data);
-  const p93Station = getBestStation(data?.premium93 || data?.stations || data);
-  const e85Nearest = getNearestDifferentStation(data?.e85 || data?.stations || data, e85Station);
-  const p93Nearest = getNearestDifferentStation(data?.premium93 || data?.stations || data, p93Station);
+  const e85Station = getNearestStation(data?.e85 || data?.stations || data) || getBestStation(data?.e85 || data?.stations || data);
+  const p93Station = getNearestStation(data?.premium93 || data?.stations || data) || getBestStation(data?.premium93 || data?.stations || data);
+  const e85Alternate = getNearestDifferentStation(data?.e85 || data?.stations || data, e85Station);
+  const p93Alternate = getNearestDifferentStation(data?.premium93 || data?.stations || data, p93Station);
 
   const e85Price = Number(e85Station?.bestPrice ?? e85Station?.cash ?? e85Station?.credit ?? data?.prices?.e85);
   const p93Price = Number(p93Station?.bestPrice ?? p93Station?.cash ?? p93Station?.credit ?? data?.prices?.premium);
@@ -596,8 +596,8 @@ function applyFuelSnapshotData(data, sourceLabel) {
     updatedCount++;
   }
 
-  setFuelStationLine('fuel-station-e85', 'E85', e85Station, e85Nearest);
-  setFuelStationLine('fuel-station-93', '93', p93Station, p93Nearest);
+  setFuelStationLine('fuel-station-e85', 'E85', e85Station, e85Alternate);
+  setFuelStationLine('fuel-station-93', '93', p93Station, p93Alternate);
 
   const generatedAt = data?.generatedAt || data?.fetchedAt || Date.now();
   const ageText = formatFuelPriceAge(generatedAt);

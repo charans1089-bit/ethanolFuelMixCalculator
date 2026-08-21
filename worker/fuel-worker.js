@@ -45,6 +45,23 @@ function calculateDistanceMiles(lat1, lon1, lat2, lon2) {
   return R * c;
 }
 
+function dedupeStations(stations) {
+  const seen = new Set();
+  const out = [];
+  for (const st of stations) {
+    const key = [
+      String(st?.name || '').trim().toLowerCase(),
+      Number.isFinite(Number(st?.latitude)) ? Number(st.latitude).toFixed(4) : '',
+      Number.isFinite(Number(st?.longitude)) ? Number(st.longitude).toFixed(4) : '',
+      String(st?.address?.line1 || '').trim().toLowerCase()
+    ].join('|');
+    if (!key || seen.has(key)) continue;
+    seen.add(key);
+    out.push(st);
+  }
+  return out;
+}
+
 export default {
   async fetch(request, env, ctx) {
     const origin = request.headers.get('Origin');
@@ -117,7 +134,45 @@ export default {
       }
     } catch (e) {}
 
-    // 2. Query OSM Nominatim for nearby gas stations
+    // 2. Query OSM Nominatim for nearby E85 stations (keyword based)
+    try {
+      const e85OsmUrl = `https://nominatim.openstreetmap.org/search?format=json&q=e85+gas+station&bounded=1&viewbox=${lon-0.2},${lat+0.2},${lon+0.2},${lat-0.2}&limit=12`;
+      const e85OsmRes = await fetch(e85OsmUrl, {
+        headers: {
+          'User-Agent': 'SCRK-FlexFuel/2.0 (contact: charans1089@gmail.com)',
+          'Accept-Language': 'en'
+        }
+      });
+      if (e85OsmRes.ok) {
+        const e85OsmData = await e85OsmRes.json();
+        for (const el of (Array.isArray(e85OsmData) ? e85OsmData : [])) {
+          const stLat = parseFloat(el.lat);
+          const stLon = parseFloat(el.lon);
+          const dist = calculateDistanceMiles(lat, lon, stLat, stLon);
+          const nameParts = (el.display_name || '').split(',');
+          const brand = nameParts[0] || 'E85 Station';
+          const road = nameParts[1] ? nameParts[1].trim() : '';
+
+          e85Stations.push({
+            id: String(el.place_id || el.osm_id || `e85-osm-${stLat}-${stLon}`),
+            name: brand,
+            bestPrice: null,
+            distance: Number.isFinite(dist) ? parseFloat(dist.toFixed(2)) : null,
+            distanceUnit: 'mi',
+            address: {
+              line1: road || 'Nearby E85 listing',
+              city: nameParts[2] ? nameParts[2].trim() : '',
+              region: nameParts[3] ? nameParts[3].trim() : '',
+              postalCode: ''
+            },
+            latitude: Number.isFinite(stLat) ? stLat : null,
+            longitude: Number.isFinite(stLon) ? stLon : null
+          });
+        }
+      }
+    } catch (e) {}
+
+    // 3. Query OSM Nominatim for nearby gas stations
     try {
       const osmUrl = `https://nominatim.openstreetmap.org/search?format=json&q=gas+station&bounded=1&viewbox=${lon-0.15},${lat+0.15},${lon+0.15},${lat-0.15}&limit=10`;
       const osmRes = await fetch(osmUrl, {
@@ -155,48 +210,14 @@ export default {
       }
     } catch (e) {}
 
-    // 3. Fallback stations if external APIs were rate-limited
-    if (e85Stations.length === 0) {
-      e85Stations.push({
-        id: 'e85-local-1',
-        name: 'Nearby E85 Station',
-        bestPrice: 2.89,
-        distance: 1.4,
-        distanceUnit: 'mi',
-        address: {
-          line1: 'Local Area E85 Pump',
-          city: locationName ? locationName.split(',')[0] : 'Current Location',
-          region: '',
-          postalCode: ''
-        },
-        latitude: lat + 0.015,
-        longitude: lon + 0.012
-      });
-    }
-
-    if (p93Stations.length === 0) {
-      p93Stations.push({
-        id: 'p93-local-1',
-        name: 'Nearby 93 Pump',
-        bestPrice: 3.79,
-        distance: 0.9,
-        distanceUnit: 'mi',
-        address: {
-          line1: 'Local Area Premium 93',
-          city: locationName ? locationName.split(',')[0] : 'Current Location',
-          region: '',
-          postalCode: ''
-        },
-        latitude: lat + 0.008,
-        longitude: lon + 0.007
-      });
-    }
+    e85Stations = dedupeStations(e85Stations);
+    p93Stations = dedupeStations(p93Stations);
 
     e85Stations.sort((a, b) => (a.distance ?? 999) - (b.distance ?? 999));
     p93Stations.sort((a, b) => (a.distance ?? 999) - (b.distance ?? 999));
 
-    const minE85 = e85Stations[0].bestPrice;
-    const min93 = p93Stations[0].bestPrice;
+    const minE85 = Number.isFinite(Number(e85Stations[0]?.bestPrice)) ? e85Stations[0].bestPrice : null;
+    const min93 = Number.isFinite(Number(p93Stations[0]?.bestPrice)) ? p93Stations[0].bestPrice : null;
 
     const payload = {
       status: 'ok',
