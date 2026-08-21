@@ -3,7 +3,7 @@
   "source": "Apify johnvc/fuelprices",
   "search": "Dearborn, MI",
   "maxAgeDays": 3,
-  "generatedAt": "2026-08-21T04:51:58.657Z",
+  "generatedAt": "2026-08-21T08:55:54.966Z",
   "e85": {
     "fuelCode": 5,
     "count": 1,
@@ -435,29 +435,6 @@
         "bestPrice": 5.59
       },
       {
-        "id": "110300",
-        "name": "BP",
-        "address": {
-          "line1": "10419 FORD RD",
-          "line2": "",
-          "city": "Dearborn",
-          "region": "MI",
-          "postalCode": "48126"
-        },
-        "distance": null,
-        "distanceUnit": null,
-        "latitude": null,
-        "longitude": null,
-        "starRating": 4.2,
-        "ratingsCount": 4,
-        "priceUnit": "dollars_per_gallon",
-        "cash": 5.69,
-        "cashPostedTime": "2026-08-20T03:00:49.071Z",
-        "credit": null,
-        "creditPostedTime": null,
-        "bestPrice": 5.69
-      },
-      {
         "id": "71408",
         "name": "BP",
         "address": {
@@ -478,6 +455,29 @@
         "cashPostedTime": "2026-08-21T03:03:24.653Z",
         "credit": 5.79,
         "creditPostedTime": "2026-08-21T03:03:24.746Z",
+        "bestPrice": 5.69
+      },
+      {
+        "id": "110300",
+        "name": "BP",
+        "address": {
+          "line1": "10419 FORD RD",
+          "line2": "",
+          "city": "Dearborn",
+          "region": "MI",
+          "postalCode": "48126"
+        },
+        "distance": null,
+        "distanceUnit": null,
+        "latitude": null,
+        "longitude": null,
+        "starRating": 4.2,
+        "ratingsCount": 4,
+        "priceUnit": "dollars_per_gallon",
+        "cash": 5.69,
+        "cashPostedTime": "2026-08-20T03:00:49.071Z",
+        "credit": null,
+        "creditPostedTime": null,
         "bestPrice": 5.69
       },
       {
@@ -505,5 +505,5 @@
       }
     ]
   },
-  "fingerprint": "a0dd817ef8b55e84384c721c2ee2ae6da4b8ff4396bd01d5c5ad55781184020d"
+  "fingerprint": "e864eb22295a2e063f14aae0eef351cfe94e4e61a88cc873cd4b51890d69f6a6"
 }
