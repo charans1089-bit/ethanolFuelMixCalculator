@@ -352,7 +352,7 @@ function getPricedStations(group) {
       bestPrice: Number.isFinite(bestPrice) && bestPrice > 0 ? bestPrice : Number.POSITIVE_INFINITY,
       distance: Number.isFinite(distance) ? distance : Number.POSITIVE_INFINITY
     };
-  }).filter(item => Number.isFinite(item.bestPrice));
+  });
 
   return normalized;
 }
@@ -365,7 +365,7 @@ function getBestStation(group) {
 }
 
 function getNearestStation(group) {
-  const normalized = getPricedStations(group).filter(item => Number.isFinite(item.distance));
+  const normalized = getPricedStations(group);
   if (!normalized.length) return null;
   normalized.sort((a, b) => (a.distance - b.distance) || (a.bestPrice - b.bestPrice));
   return normalized[0].station;
@@ -382,7 +382,6 @@ function stationIdentity(station) {
 function getNearestDifferentStation(group, selectedStation) {
   const selectedKey = stationIdentity(selectedStation);
   const normalized = getPricedStations(group)
-    .filter(item => Number.isFinite(item.distance))
     .filter(item => stationIdentity(item.station) !== selectedKey);
 
   if (!normalized.length) return null;
