@@ -62,6 +62,58 @@ function dedupeStations(stations) {
   return out;
 }
 
+function normalizeText(value) {
+  return String(value || '').trim();
+}
+
+function buildAddressFromTags(tags) {
+  const line1 = [tags?.['addr:housenumber'], tags?.['addr:street']].filter(Boolean).join(' ').trim();
+  return {
+    line1,
+    line2: normalizeText(tags?.['addr:unit']),
+    city: normalizeText(tags?.['addr:city'] || tags?.['addr:town'] || tags?.['addr:village']),
+    region: normalizeText(tags?.['addr:state']),
+    postalCode: normalizeText(tags?.['addr:postcode'])
+  };
+}
+
+function buildOverpassStation(element, lat, lon, fallbackName) {
+  const tags = element?.tags || {};
+  const stLat = Number(element?.lat);
+  const stLon = Number(element?.lon);
+  if (!Number.isFinite(stLat) || !Number.isFinite(stLon)) return null;
+
+  const address = buildAddressFromTags(tags);
+  return {
+    id: String(element?.id || `${stLat},${stLon}`),
+    name: normalizeText(tags.name || tags.brand || tags.operator || fallbackName || 'Fuel Station'),
+    bestPrice: null,
+    distance: (() => {
+      const dist = calculateDistanceMiles(lat, lon, stLat, stLon);
+      return Number.isFinite(dist) ? parseFloat(dist.toFixed(2)) : null;
+    })(),
+    distanceUnit: 'mi',
+    address,
+    latitude: stLat,
+    longitude: stLon,
+    source: 'overpass'
+  };
+}
+
+async function fetchOverpassStations(query) {
+  const response = await fetch('https://overpass-api.de/api/interpreter', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'text/plain; charset=utf-8',
+      'User-Agent': 'SCRK-FlexFuel/2.0 (contact: charans1089@gmail.com)'
+    },
+    body: query
+  });
+  if (!response.ok) return [];
+  const data = await response.json();
+  return Array.isArray(data?.elements) ? data.elements : [];
+}
+
 export default {
   async fetch(request, env, ctx) {
     const origin = request.headers.get('Origin');
@@ -118,7 +170,7 @@ export default {
           e85Stations.push({
             id: String(st.id),
             name: st.station_name || 'E85 Station',
-            bestPrice: 2.89,
+            bestPrice: null,
             distance: Number.isFinite(dist) ? parseFloat(dist.toFixed(2)) : null,
             distanceUnit: 'mi',
             address: {
@@ -128,84 +180,55 @@ export default {
               postalCode: st.zip || ''
             },
             latitude: Number.isFinite(stLat) ? stLat : null,
-            longitude: Number.isFinite(stLon) ? stLon : null
+            longitude: Number.isFinite(stLon) ? stLon : null,
+            source: 'nrel'
           });
         }
       }
     } catch (e) {}
 
-    // 2. Query OSM Nominatim for nearby E85 stations (keyword based)
+    // 2. Query Overpass for amenity=fuel stations explicitly tagged with E85 support
     try {
-      const e85OsmUrl = `https://nominatim.openstreetmap.org/search?format=json&q=e85+gas+station&bounded=1&viewbox=${lon-0.2},${lat+0.2},${lon+0.2},${lat-0.2}&limit=12`;
-      const e85OsmRes = await fetch(e85OsmUrl, {
-        headers: {
-          'User-Agent': 'SCRK-FlexFuel/2.0 (contact: charans1089@gmail.com)',
-          'Accept-Language': 'en'
-        }
-      });
-      if (e85OsmRes.ok) {
-        const e85OsmData = await e85OsmRes.json();
-        for (const el of (Array.isArray(e85OsmData) ? e85OsmData : [])) {
-          const stLat = parseFloat(el.lat);
-          const stLon = parseFloat(el.lon);
-          const dist = calculateDistanceMiles(lat, lon, stLat, stLon);
-          const nameParts = (el.display_name || '').split(',');
-          const brand = nameParts[0] || 'E85 Station';
-          const road = nameParts[1] ? nameParts[1].trim() : '';
-
-          e85Stations.push({
-            id: String(el.place_id || el.osm_id || `e85-osm-${stLat}-${stLon}`),
-            name: brand,
-            bestPrice: null,
-            distance: Number.isFinite(dist) ? parseFloat(dist.toFixed(2)) : null,
-            distanceUnit: 'mi',
-            address: {
-              line1: road || 'Nearby E85 listing',
-              city: nameParts[2] ? nameParts[2].trim() : '',
-              region: nameParts[3] ? nameParts[3].trim() : '',
-              postalCode: ''
-            },
-            latitude: Number.isFinite(stLat) ? stLat : null,
-            longitude: Number.isFinite(stLon) ? stLon : null
-          });
+      const e85Query = `[out:json][timeout:15];(
+        node(around:30000,${lat},${lon})[amenity=fuel][fuel:e85=yes];
+        way(around:30000,${lat},${lon})[amenity=fuel][fuel:e85=yes];
+        relation(around:30000,${lat},${lon})[amenity=fuel][fuel:e85=yes];
+      );out center tags;`;
+      const e85Elements = await fetchOverpassStations(e85Query);
+      for (const el of e85Elements) {
+        const station = buildOverpassStation({
+          ...el,
+          lat: el.lat ?? el.center?.lat,
+          lon: el.lon ?? el.center?.lon
+        }, lat, lon, 'E85 Station');
+        if (station) {
+          if (!locationName && (station.address.city || station.address.region)) {
+            locationName = [station.address.city, station.address.region].filter(Boolean).join(', ');
+          }
+          e85Stations.push(station);
         }
       }
     } catch (e) {}
 
-    // 3. Query OSM Nominatim for nearby gas stations
+    // 3. Query Overpass for real nearby fuel stations (93 candidates)
     try {
-      const osmUrl = `https://nominatim.openstreetmap.org/search?format=json&q=gas+station&bounded=1&viewbox=${lon-0.15},${lat+0.15},${lon+0.15},${lat-0.15}&limit=10`;
-      const osmRes = await fetch(osmUrl, {
-        headers: {
-          'User-Agent': 'SCRK-FlexFuel/2.0 (contact: charans1089@gmail.com)',
-          'Accept-Language': 'en'
-        }
-      });
-      if (osmRes.ok) {
-        const osmData = await osmRes.json();
-        for (const el of (Array.isArray(osmData) ? osmData : [])) {
-          const stLat = parseFloat(el.lat);
-          const stLon = parseFloat(el.lon);
-          const dist = calculateDistanceMiles(lat, lon, stLat, stLon);
-          const nameParts = (el.display_name || '').split(',');
-          const brand = nameParts[0] || 'Gas Station';
-          const road = nameParts[1] ? nameParts[1].trim() : '';
-
-          p93Stations.push({
-            id: String(el.place_id || el.osm_id),
-            name: brand,
-            bestPrice: 3.79,
-            distance: Number.isFinite(dist) ? parseFloat(dist.toFixed(2)) : null,
-            distanceUnit: 'mi',
-            address: {
-              line1: road || 'Nearby Station',
-              city: nameParts[2] ? nameParts[2].trim() : '',
-              region: nameParts[3] ? nameParts[3].trim() : '',
-              postalCode: ''
-            },
-            latitude: Number.isFinite(stLat) ? stLat : null,
-            longitude: Number.isFinite(stLon) ? stLon : null
-          });
+      const p93Query = `[out:json][timeout:15];(
+        node(around:12000,${lat},${lon})[amenity=fuel];
+        way(around:12000,${lat},${lon})[amenity=fuel];
+        relation(around:12000,${lat},${lon})[amenity=fuel];
+      );out center tags;`;
+      const p93Elements = await fetchOverpassStations(p93Query);
+      for (const el of p93Elements) {
+        const station = buildOverpassStation({
+          ...el,
+          lat: el.lat ?? el.center?.lat,
+          lon: el.lon ?? el.center?.lon
+        }, lat, lon, 'Fuel Station');
+        if (station) {
+          if (!locationName && (station.address.city || station.address.region)) {
+            locationName = [station.address.city, station.address.region].filter(Boolean).join(', ');
+          }
+          p93Stations.push(station);
         }
       }
     } catch (e) {}
@@ -216,8 +239,8 @@ export default {
     e85Stations.sort((a, b) => (a.distance ?? 999) - (b.distance ?? 999));
     p93Stations.sort((a, b) => (a.distance ?? 999) - (b.distance ?? 999));
 
-    const minE85 = Number.isFinite(Number(e85Stations[0]?.bestPrice)) ? e85Stations[0].bestPrice : null;
-    const min93 = Number.isFinite(Number(p93Stations[0]?.bestPrice)) ? p93Stations[0].bestPrice : null;
+    const minE85 = e85Stations.map(st => Number(st?.bestPrice)).find(value => Number.isFinite(value) && value > 0) ?? null;
+    const min93 = p93Stations.map(st => Number(st?.bestPrice)).find(value => Number.isFinite(value) && value > 0) ?? null;
 
     const payload = {
       status: 'ok',

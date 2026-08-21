@@ -596,6 +596,8 @@ function applyFuelSnapshotData(data, sourceLabel) {
     updatedCount++;
   }
 
+  const stationsFound = Boolean(e85Station || p93Station);
+
   setFuelStationLine('fuel-station-e85', 'E85', e85Station, e85Alternate);
   setFuelStationLine('fuel-station-93', '93', p93Station, p93Alternate);
 
@@ -608,7 +610,9 @@ function applyFuelSnapshotData(data, sourceLabel) {
   updateFuelUIStatus(
     updatedCount > 0
       ? `Auto-filled E85 and 93 prices${ageDisplay}.`
-      : 'Manual price edits override auto-filled values.',
+      : stationsFound
+        ? 'Nearby stations found, but verified live prices were unavailable. Manual prices remain active.'
+        : 'No nearby station data found. Manual prices remain active.',
     updatedCount > 0 ? 'live' : 'info'
   );
 
