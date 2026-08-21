@@ -553,6 +553,22 @@ async function fetchFuelPrices(lat, lon) {
   }
 }
 
+function classifyFuelError(error) {
+  const message = String(error?.message || '').toLowerCase();
+  const name = String(error?.name || '').toLowerCase();
+
+  if (name.includes('abort') || message.includes('abort') || message.includes('timeout')) {
+    return 'timeout';
+  }
+  if (message.includes('403') || message.includes('forbidden') || message.includes('cors') || message.includes('origin')) {
+    return 'blocked/origin';
+  }
+  if (message.includes('network') || message.includes('failed to fetch') || message.includes('dns')) {
+    return 'network';
+  }
+  return 'unavailable';
+}
+
 function applyFuelSnapshotData(data, sourceLabel) {
   if (!data || typeof data !== 'object') return false;
 
@@ -620,9 +636,10 @@ function applyLiveFuelPrices(data) {
   applyFuelSnapshotData(payload, 'Live fuel prices');
 }
 
-function handleFuelPricesUnavailable() {
+function handleFuelPricesUnavailable(reason) {
+  const detail = reason ? ` (${reason})` : '';
   setFuelSourceLabel('Prices unavailable · manual input', 'info');
-  updateFuelUIStatus('Prices unavailable · manual entry active.', 'info');
+  updateFuelUIStatus(`Prices unavailable${detail} · manual entry active.`, 'info');
 }
 
 function applyAmbientWeather(tempF, sourceLabel, detailLabel, persist = true) {
@@ -794,7 +811,10 @@ async function useLiveWeather() {
     if (fuelRes.status === 'fulfilled' && fuelRes.value) {
       applyLiveFuelPrices(fuelRes.value);
     } else {
-      handleFuelPricesUnavailable();
+      const reason = fuelRes.status === 'rejected'
+        ? classifyFuelError(fuelRes.reason)
+        : 'unavailable';
+      handleFuelPricesUnavailable(reason);
     }
   } catch (error) {
     const cachedWeather = getWeatherCache();
@@ -810,7 +830,7 @@ async function useLiveWeather() {
     } else {
       updateWeatherUIStatus(`Live weather unavailable · ${error?.message || 'Manual input still available'}`, 'error');
     }
-    handleFuelPricesUnavailable();
+    handleFuelPricesUnavailable(classifyFuelError(error));
   }
 }
 
