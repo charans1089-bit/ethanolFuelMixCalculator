@@ -773,10 +773,50 @@ function getCurrentPosition() {
     }
     navigator.geolocation.getCurrentPosition(resolve, reject, {
       enableHighAccuracy: false,
-      timeout: 10000,
+      timeout: 8000,
       maximumAge: 300000
     });
   });
+}
+
+async function fetchIpLocation() {
+  try {
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 5000);
+    const res = await fetch('https://ipwho.is/', { signal: controller.signal });
+    clearTimeout(timeoutId);
+    if (!res.ok) return null;
+    const data = await res.json();
+    if (data && data.success && Number.isFinite(data.latitude) && Number.isFinite(data.longitude)) {
+      const city = data.city || '';
+      const region = data.region_code || data.region || '';
+      const place = [city, region].filter(Boolean).join(', ');
+      return {
+        latitude: data.latitude,
+        longitude: data.longitude,
+        place: place || null,
+        isIpApprox: true
+      };
+    }
+  } catch (e) {
+  }
+  return null;
+}
+
+async function resolveLocation() {
+  try {
+    const pos = await getCurrentPosition();
+    return {
+      latitude: pos.coords.latitude,
+      longitude: pos.coords.longitude,
+      place: null,
+      isIpApprox: false
+    };
+  } catch (geoErr) {
+    const ipLoc = await fetchIpLocation();
+    if (ipLoc) return ipLoc;
+    throw geoErr;
+  }
 }
 
 async function useLiveWeather() {
@@ -793,20 +833,21 @@ async function useLiveWeather() {
   }
 
   try {
-    const position = await getCurrentPosition();
-    const { latitude, longitude } = position.coords;
+    const coords = await resolveLocation();
+    const { latitude, longitude } = coords;
 
     const [weatherRes, fuelRes, placeRes] = await Promise.allSettled([
       fetchOpenMeteoWeather(latitude, longitude),
       fetchFuelPrices(latitude, longitude),
-      reverseGeocodeLocation(latitude, longitude)
+      coords.place ? Promise.resolve(coords.place) : reverseGeocodeLocation(latitude, longitude)
     ]);
 
     if (weatherRes.status === 'fulfilled' && weatherRes.value) {
       const weather = weatherRes.value;
       const place = placeRes.status === 'fulfilled' ? placeRes.value : null;
       const loc = place || 'Location unavailable';
-      applyAmbientWeather(weather.tempF, 'Open-Meteo live weather', loc, true);
+      const approxSuffix = coords.isIpApprox ? ' (approx IP)' : '';
+      applyAmbientWeather(weather.tempF, `Open-Meteo live weather${approxSuffix}`, loc, true);
     } else {
       const cached = getWeatherCache();
       if (cached) {
