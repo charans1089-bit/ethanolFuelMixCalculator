@@ -39,8 +39,8 @@ function calculateDistanceMiles(lat1, lon1, lat2, lon2) {
   const dLat = (lat2 - lat1) * Math.PI / 180;
   const dLon = (lon2 - lon1) * Math.PI / 180;
   const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-            Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
-            Math.sin(dLon / 2) * Math.sin(dLon / 2);
+    Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+    Math.sin(dLon / 2) * Math.sin(dLon / 2);
   const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
   return R * c;
 }
@@ -211,7 +211,7 @@ export default {
           });
         }
       }
-    } catch (e) {}
+    } catch (e) { }
 
     // 2. Query Overpass for amenity=fuel stations explicitly tagged with E85 support
     try {
@@ -237,7 +237,7 @@ export default {
           e85Stations.push(station);
         }
       }
-    } catch (e) {}
+    } catch (e) { }
 
     // 3. Query Overpass for real nearby fuel stations (93 candidates)
     try {
@@ -261,7 +261,7 @@ export default {
           p93Stations.push(station);
         }
       }
-    } catch (e) {}
+    } catch (e) { }
 
     e85Stations = dedupeStations(e85Stations);
     p93Stations = dedupeStations(p93Stations);
