@@ -340,23 +340,140 @@ function formatStationAddress(station) {
   return combined || 'Address unavailable';
 }
 
+function getPricedStations(group) {
+  const stations = Array.isArray(group?.stations) ? group.stations : (Array.isArray(group) ? group : []);
+  if (!stations.length) return [];
+
+  const normalized = stations.map(station => {
+    const bestPrice = Number(station?.bestPrice ?? station?.cash ?? station?.credit ?? station?.price);
+    const distance = Number(station?.distance);
+    return {
+      station,
+      bestPrice: Number.isFinite(bestPrice) && bestPrice > 0 ? bestPrice : Number.POSITIVE_INFINITY,
+      distance: Number.isFinite(distance) ? distance : Number.POSITIVE_INFINITY
+    };
+  }).filter(item => Number.isFinite(item.bestPrice));
+
+  return normalized;
+}
+
+function getBestStation(group) {
+  const normalized = getPricedStations(group);
+  if (!normalized.length) return null;
+  normalized.sort((a, b) => (a.bestPrice - b.bestPrice) || (a.distance - b.distance));
+  return normalized[0].station;
+}
+
+function getNearestStation(group) {
+  const normalized = getPricedStations(group).filter(item => Number.isFinite(item.distance));
+  if (!normalized.length) return null;
+  normalized.sort((a, b) => (a.distance - b.distance) || (a.bestPrice - b.bestPrice));
+  return normalized[0].station;
+}
+
+function stationIdentity(station) {
+  if (!station || typeof station !== 'object') return '';
+  const name = String(station?.name || '').trim().toLowerCase();
+  const addr = formatStationAddress(station).trim().toLowerCase();
+  const id = String(station?.id ?? '').trim().toLowerCase();
+  return `${id}|${name}|${addr}`;
+}
+
+function getNearestDifferentStation(group, selectedStation) {
+  const selectedKey = stationIdentity(selectedStation);
+  const normalized = getPricedStations(group)
+    .filter(item => Number.isFinite(item.distance))
+    .filter(item => stationIdentity(item.station) !== selectedKey);
+
+  if (!normalized.length) return null;
+  normalized.sort((a, b) => (a.distance - b.distance) || (a.bestPrice - b.bestPrice));
+  return normalized[0].station;
+}
+
+function toMiles(distanceValue, unitValue) {
+  const d = Number(distanceValue);
+  if (!Number.isFinite(d)) return null;
+
+  const unit = String(unitValue || '').trim().toLowerCase();
+  if (unit === 'mi' || unit === 'mile' || unit === 'miles') return d;
+  if (unit === 'km' || unit === 'kilometer' || unit === 'kilometers') return d * 0.621371;
+  if (unit === 'm' || unit === 'meter' || unit === 'meters') return d / 1609.344;
+  if (unit === 'ft' || unit === 'foot' || unit === 'feet') return d / 5280;
+
+  return d;
+}
+
+function pickCoordinate(station, keys) {
+  for (const key of keys) {
+    const value = Number(station?.[key]);
+    if (Number.isFinite(value)) return value;
+  }
+  return null;
+}
+
+function buildGoogleMapsUrl(station) {
+  if (!station || typeof station !== 'object') return null;
+
+  const lat = pickCoordinate(station, ['latitude', 'lat']);
+  const lon = pickCoordinate(station, ['longitude', 'lng', 'lon']);
+  if (Number.isFinite(lat) && Number.isFinite(lon)) {
+    return `https://www.google.com/maps?q=${encodeURIComponent(`${lat},${lon}`)}`;
+  }
+
+  const address = formatStationAddress(station);
+  const name = String(station?.name || '').trim();
+  const query = [name, address].filter(Boolean).join(' ').trim();
+  if (!query) return null;
+  return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(query)}`;
+}
+
+function formatStationDistanceMiles(station) {
+  const miles = toMiles(
+    station?.distance,
+    station?.distanceUnit ?? station?.distance_unit ?? station?.distanceUnits
+  );
+  if (!Number.isFinite(miles)) return 'distance n/a';
+  if (miles === 0) return 'at search point';
+  if (miles < 0.1) return '<0.1 mi';
+  if (miles < 10) return `${miles.toFixed(2)} mi`;
+  return `${miles.toFixed(1)} mi`;
+}
+
+function formatStationSummary(station) {
+  if (!station) return 'no station data';
+  const name = station?.name || 'Unknown station';
+  const addr = formatStationAddress(station);
+  const price = Number(station?.bestPrice ?? station?.cash ?? station?.credit ?? station?.price);
+  const priceText = Number.isFinite(price) && price > 0 ? `$${price.toFixed(2)}/gal` : 'Price unavailable';
+  const distanceText = formatStationDistanceMiles(station);
+  return `${name} · ${addr} · ${priceText} · ${distanceText}`;
+}
+
+function formatStationSummaryHtml(station) {
+  if (!station) return 'no station data';
+  const summary = formatStationSummary(station);
+  const mapsUrl = buildGoogleMapsUrl(station);
+  if (!mapsUrl) return escHtml(summary);
+  return `${escHtml(summary)} · <a class="fuel-map-link" href="${mapsUrl}" target="_blank" rel="noopener noreferrer">map</a>`;
+}
+
+function setFuelStationLine(id, label, cheapestStation, nearestStation) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  const cheapestText = formatStationSummaryHtml(cheapestStation);
+  const nearestText = nearestStation
+    ? formatStationSummaryHtml(nearestStation)
+    : 'same as lowest (no different nearby station in snapshot)';
+  el.innerHTML = `${escHtml(label)} lowest: ${cheapestText} | nearest: ${nearestText}`;
+}
+
 function isManualPriceE85() {
   if (manualPriceOverrideE85) return true;
   if (safeGetItem('manualPriceOverrideE85', '0') === '1') {
     manualPriceOverrideE85 = true;
     return true;
   }
-  const cached = getFuelPriceCache();
-  if (cached && cached.prices && Number.isFinite(Number(cached.prices.e85))) {
-    const currentE85 = clampNumber(getValue('inp-price-e85', DEFAULTS.priceE85), 0, 999, DEFAULTS.priceE85);
-    if (Math.abs(currentE85 - Number(cached.prices.e85)) > 0.001) {
-      manualPriceOverrideE85 = true;
-      safeSetItem('manualPriceOverrideE85', '1');
-      return true;
-    }
-    return false;
-  }
-  return true;
+  return false;
 }
 
 function isManualPrice93() {
@@ -365,46 +482,20 @@ function isManualPrice93() {
     manualPriceOverride93 = true;
     return true;
   }
-  const cached = getFuelPriceCache();
-  if (cached && cached.prices && Number.isFinite(Number(cached.prices.premium))) {
-    const current93 = clampNumber(getValue('inp-price-93', DEFAULTS.price93), 0, 999, DEFAULTS.price93);
-    if (Math.abs(current93 - Number(cached.prices.premium)) > 0.001) {
-      manualPriceOverride93 = true;
-      safeSetItem('manualPriceOverride93', '1');
-      return true;
-    }
-    return false;
-  }
-  return true;
+  return false;
 }
 
 function syncFuelModeFromCurrentInput() {
-  const cached = getFuelPriceCache();
   const currentE85 = clampNumber(getValue('inp-price-e85', DEFAULTS.priceE85), 0, 999, DEFAULTS.priceE85);
   const current93 = clampNumber(getValue('inp-price-93', DEFAULTS.price93), 0, 999, DEFAULTS.price93);
 
-  if (cached && cached.prices) {
-    const cachedE85 = Number(cached.prices.e85);
-    const cached93 = Number(cached.prices.premium);
-    if (Number.isFinite(cachedE85) && Math.abs(currentE85 - cachedE85) > 0.001) {
-      manualPriceOverrideE85 = true;
-      safeSetItem('manualPriceOverrideE85', '1');
-    }
-    if (Number.isFinite(cached93) && Math.abs(current93 - cached93) > 0.001) {
-      manualPriceOverride93 = true;
-      safeSetItem('manualPriceOverride93', '1');
-    }
-  } else {
-    manualPriceOverrideE85 = true;
-    manualPriceOverride93 = true;
-    safeSetItem('manualPriceOverrideE85', '1');
-    safeSetItem('manualPriceOverride93', '1');
-  }
+  manualPriceOverrideE85 = true;
+  manualPriceOverride93 = true;
+  safeSetItem('manualPriceOverrideE85', '1');
+  safeSetItem('manualPriceOverride93', '1');
 
-  if (manualPriceOverrideE85 || manualPriceOverride93) {
-    setFuelSourceLabel('Manual prices · not using API', 'info');
-    updateFuelUIStatus('Manual price edits override auto-filled values.', 'info');
-  }
+  setFuelSourceLabel('Manual prices · not using API', 'info');
+  updateFuelUIStatus('Manual price edits override auto-filled values.', 'info');
 }
 
 async function fetchFuelPrices(lat, lon) {
@@ -434,6 +525,64 @@ async function fetchFuelPrices(lat, lon) {
   }
 }
 
+async function fetchFuelPriceSnapshot() {
+  try {
+    const res = await fetch(`data/fuel-prices.json?v=${Date.now()}`, { cache: 'no-store' });
+    if (res.ok) {
+      return await res.json();
+    }
+  } catch (e) {}
+  return null;
+}
+
+function applyFuelSnapshotData(data, sourceLabel) {
+  if (!data || typeof data !== 'object') return false;
+
+  const e85Station = getBestStation(data?.e85 || data?.stations || data);
+  const p93Station = getBestStation(data?.premium93 || data?.stations || data);
+  const e85Nearest = getNearestDifferentStation(data?.e85 || data?.stations || data, e85Station);
+  const p93Nearest = getNearestDifferentStation(data?.premium93 || data?.stations || data, p93Station);
+
+  const e85Price = Number(e85Station?.bestPrice ?? e85Station?.cash ?? e85Station?.credit ?? data?.prices?.e85);
+  const p93Price = Number(p93Station?.bestPrice ?? p93Station?.cash ?? p93Station?.credit ?? data?.prices?.premium);
+
+  const isE85Manual = isManualPriceE85();
+  const is93Manual = isManualPrice93();
+  let updatedCount = 0;
+
+  if (!isE85Manual && Number.isFinite(e85Price) && e85Price > 0) {
+    setValue('inp-price-e85', e85Price.toFixed(2));
+    safeSetItem('priceE85', e85Price.toFixed(2));
+    updatedCount++;
+  }
+
+  if (!is93Manual && Number.isFinite(p93Price) && p93Price > 0) {
+    setValue('inp-price-93', p93Price.toFixed(2));
+    safeSetItem('price93', p93Price.toFixed(2));
+    updatedCount++;
+  }
+
+  setFuelStationLine('fuel-station-e85', 'E85', e85Station, e85Nearest);
+  setFuelStationLine('fuel-station-93', '93', p93Station, p93Nearest);
+
+  const generatedAt = data?.generatedAt || data?.fetchedAt || Date.now();
+  const ageText = formatFuelPriceAge(generatedAt);
+  const ageDisplay = ageText ? ` · ${ageText}` : '';
+  const search = data?.search ? ` · ${data.search}` : '';
+
+  setFuelSourceLabel(`${sourceLabel || 'Fuel prices'}${search}${ageDisplay}`, 'live');
+  updateFuelUIStatus(
+    updatedCount > 0
+      ? `Auto-filled E85 and 93 prices${ageDisplay}.`
+      : 'Manual price edits override auto-filled values.',
+    updatedCount > 0 ? 'live' : 'info'
+  );
+
+  saveFuelPriceCache(data);
+  calculateBlend();
+  return true;
+}
+
 function parseFuelPricesResponse(data) {
   if (!data || typeof data !== 'object') return null;
 
@@ -448,8 +597,8 @@ function parseFuelPricesResponse(data) {
   if (stations.length > 0) {
     const station = stations[0];
     stationName = station?.name || '';
-    const p85 = Number(station?.prices?.e85 ?? station?.prices?.E85);
-    const pPrem = Number(station?.prices?.premium ?? station?.prices?.premium93 ?? station?.prices?.['93']);
+    const p85 = Number(station?.prices?.e85 ?? station?.prices?.E85 ?? station?.bestPrice);
+    const pPrem = Number(station?.prices?.premium ?? station?.prices?.premium93 ?? station?.prices?.['93'] ?? station?.bestPrice);
     if (Number.isFinite(p85) && p85 > 0) e85 = p85;
     if (Number.isFinite(pPrem) && pPrem > 0) premium = pPrem;
   } else if (data?.prices) {
@@ -457,6 +606,8 @@ function parseFuelPricesResponse(data) {
     const pPrem = Number(data.prices.premium ?? data.prices.premium93 ?? data.prices['93']);
     if (Number.isFinite(p85) && p85 > 0) e85 = p85;
     if (Number.isFinite(pPrem) && pPrem > 0) premium = pPrem;
+  } else if (data?.e85 || data?.premium93) {
+    return data;
   }
 
   if (e85 === null && premium === null) {
@@ -465,6 +616,7 @@ function parseFuelPricesResponse(data) {
 
   return {
     prices: { e85, premium },
+    stations,
     stationName,
     fetchedAt: Date.now()
   };
@@ -477,6 +629,11 @@ function applyLiveFuelPrices(data) {
     return;
   }
 
+  if (parsed.e85 || parsed.premium93) {
+    applyFuelSnapshotData(parsed, 'Live fuel prices');
+    return;
+  }
+
   saveFuelPriceCache(parsed);
 
   const ageText = formatFuelPriceAge(parsed.fetchedAt);
@@ -486,13 +643,13 @@ function applyLiveFuelPrices(data) {
   const isE85Manual = isManualPriceE85();
   const is93Manual = isManualPrice93();
 
-  if (!isE85Manual && Number.isFinite(parsed.prices.e85)) {
+  if (!isE85Manual && Number.isFinite(parsed.prices?.e85)) {
     setValue('inp-price-e85', parsed.prices.e85.toFixed(2));
     safeSetItem('priceE85', parsed.prices.e85.toFixed(2));
     updatedCount++;
   }
 
-  if (!is93Manual && Number.isFinite(parsed.prices.premium)) {
+  if (!is93Manual && Number.isFinite(parsed.prices?.premium)) {
     setValue('inp-price-93', parsed.prices.premium.toFixed(2));
     safeSetItem('price93', parsed.prices.premium.toFixed(2));
     updatedCount++;
@@ -510,12 +667,12 @@ function applyLiveFuelPrices(data) {
   const stE85El = document.getElementById('fuel-station-e85');
   const st93El = document.getElementById('fuel-station-93');
   if (stE85El) {
-    stE85El.textContent = Number.isFinite(parsed.prices.e85)
+    stE85El.textContent = Number.isFinite(parsed.prices?.e85)
       ? `E85: $${parsed.prices.e85.toFixed(2)}/gal${ageDisplay}`
       : 'E85: price unavailable';
   }
   if (st93El) {
-    st93El.textContent = Number.isFinite(parsed.prices.premium)
+    st93El.textContent = Number.isFinite(parsed.prices?.premium)
       ? `93: $${parsed.prices.premium.toFixed(2)}/gal${ageDisplay}`
       : '93: price unavailable';
   }
@@ -523,20 +680,15 @@ function applyLiveFuelPrices(data) {
   calculateBlend();
 }
 
-function handleFuelPricesUnavailable() {
+async function handleFuelPricesUnavailable() {
   const cached = getFuelPriceCache();
-  if (cached && cached.prices && (cached.prices.e85 !== null || cached.prices.premium !== null)) {
-    const ageText = formatFuelPriceAge(cached.fetchedAt);
-    const ageDisplay = ageText ? ` · ${ageText}` : '';
-    setFuelSourceLabel(`Cached prices${ageDisplay}`, 'cache');
-    updateFuelUIStatus(`Using cached fuel prices${ageDisplay}`, 'cache');
-
-    if (!manualPriceOverrideE85 && Number.isFinite(cached.prices.e85)) {
-      setValue('inp-price-e85', cached.prices.e85.toFixed(2));
-    }
-    if (!manualPriceOverride93 && Number.isFinite(cached.prices.premium)) {
-      setValue('inp-price-93', cached.prices.premium.toFixed(2));
-    }
+  if (cached && (cached.e85 || cached.premium93 || cached.stations)) {
+    applyFuelSnapshotData(cached, 'Cached fuel prices');
+    return;
+  }
+  const snapshot = await fetchFuelPriceSnapshot();
+  if (snapshot) {
+    applyFuelSnapshotData(snapshot, 'Fuel snapshot');
     return;
   }
 
@@ -1655,5 +1807,15 @@ window.onload = function () {
   calculateBlend();
   const liveStatus = document.getElementById('weather-status');
   if (liveStatus) liveStatus.textContent = 'Live weather is optional. Manual input stays available.';
+
+  const cachedFuel = getFuelPriceCache();
+  if (cachedFuel && (cachedFuel.e85 || cachedFuel.premium93 || cachedFuel.stations)) {
+    applyFuelSnapshotData(cachedFuel, 'Cached fuel prices');
+  } else {
+    fetchFuelPriceSnapshot().then(snap => {
+      if (snap) applyFuelSnapshotData(snap, 'Fuel snapshot');
+    });
+  }
+
   document.addEventListener('keydown', handleGlobalKeydown);
 };
