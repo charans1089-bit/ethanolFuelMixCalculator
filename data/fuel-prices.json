@@ -3,7 +3,7 @@
   "source": "Apify johnvc/fuelprices",
   "search": "Dearborn, MI",
   "maxAgeDays": 3,
-  "generatedAt": "2026-08-22T04:47:23.896Z",
+  "generatedAt": "2026-08-22T08:45:45.107Z",
   "e85": {
     "fuelCode": 5,
     "count": 1,
@@ -389,29 +389,6 @@
         "bestPrice": 5.59
       },
       {
-        "id": "71408",
-        "name": "BP",
-        "address": {
-          "line1": "10001 MICHIGAN AVE",
-          "line2": "",
-          "city": "Dearborn",
-          "region": "MI",
-          "postalCode": "48126"
-        },
-        "distance": null,
-        "distanceUnit": null,
-        "latitude": null,
-        "longitude": null,
-        "starRating": 3.9,
-        "ratingsCount": 157,
-        "priceUnit": "dollars_per_gallon",
-        "cash": 5.69,
-        "cashPostedTime": "2026-08-21T03:03:24.653Z",
-        "credit": 5.89,
-        "creditPostedTime": "2026-08-22T03:02:51.468Z",
-        "bestPrice": 5.69
-      },
-      {
         "id": "110300",
         "name": "BP",
         "address": {
@@ -432,6 +409,29 @@
         "cashPostedTime": "2026-08-22T03:00:41.260Z",
         "credit": null,
         "creditPostedTime": null,
+        "bestPrice": 5.69
+      },
+      {
+        "id": "71408",
+        "name": "BP",
+        "address": {
+          "line1": "10001 MICHIGAN AVE",
+          "line2": "",
+          "city": "Dearborn",
+          "region": "MI",
+          "postalCode": "48126"
+        },
+        "distance": null,
+        "distanceUnit": null,
+        "latitude": null,
+        "longitude": null,
+        "starRating": 3.9,
+        "ratingsCount": 157,
+        "priceUnit": "dollars_per_gallon",
+        "cash": 5.69,
+        "cashPostedTime": "2026-08-21T03:03:24.653Z",
+        "credit": 5.89,
+        "creditPostedTime": "2026-08-22T03:02:51.468Z",
         "bestPrice": 5.69
       },
       {
@@ -459,5 +459,5 @@
       }
     ]
   },
-  "fingerprint": "7050f96f346e775989c58ea0decefe264a6cea0cc7dbc8f5fcbed96fb04fed70"
+  "fingerprint": "404c969db434f9fe9b910a9ba86eeabc39e6c287d2612a3d05c95fdb956f64a6"
 }
