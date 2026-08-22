@@ -315,6 +315,7 @@
       <button class="mode-btn" id="btn-log" onclick="setMode('log')">📓 Logbook</button>
       <button class="mode-btn mode-btn-accent" id="btn-sim" onclick="openSim()">🧪 Trap Simulator</button>
       <button class="mode-btn mode-btn-accent" id="btn-ref" onclick="openRef()">🎛 AP Reference</button>
+      <button class="mode-btn mode-btn-accent" type="button" onclick="window.location.href='blend-planner.html'">⛽ Blend Planner</button>
       <button class="mode-btn" type="button" onclick="document.getElementById('app-docs').scrollIntoView({ behavior: 'smooth', block: 'start' });">📘 Docs</button>
     </div>
 
@@ -743,6 +744,27 @@
           <div class="docs-mini">What users can learn: how ethanol percentage moves with tank state, why a full tank
             can limit achievable target, how temperature influences drivability guidance, and how real fill logs improve
             future station decisions.</div>
+        </article>
+
+        <article class="docs-block" style="grid-column: 1 / -1;">
+          <h3>Seasonal Blend Planner (Standalone Page)</h3>
+          <p>The companion <a href="blend-planner.html" style="color:var(--fuel-orange,#ff6b35);font-weight:700;">Seasonal Blend Planner (blend-planner.html)</a> provides an interactive 12-month calendar and telemetry analytics suite:</p>
+          <div class="docs-chip-row">
+            <span class="docs-chip">12-Month Calendar</span>
+            <span class="docs-chip">Compliance Speedometer</span>
+            <span class="docs-chip">Streak Tracking</span>
+            <span class="docs-chip">Achievement Badges</span>
+            <span class="docs-chip">ICS Calendar Export</span>
+            <span class="docs-chip">CSV & JSON Archives</span>
+            <span class="docs-chip">GitHub Backup</span>
+          </div>
+          <ul style="margin-top:10px;">
+            <li><strong>Ambient Temperature Mapping:</strong> Cold winter baseline (E30–E40) prioritizes cold-start vapor pressure, while peak summer heat (E70+) maximizes charge cooling and knock resistance.</li>
+            <li><strong>Logbook Telemetry Reading:</strong> Reads saved <code>wrxFuelLogs</code> directly from your browser with zero data loss or mutation.</li>
+            <li><strong>Export & Calendar Sync:</strong> Export an <code>.ics</code> calendar schedule for Google/Apple/Outlook calendars, download CSV/JSON archives, or follow the guided Git workflow to commit logs to <code>data/blend-history/</code>.</li>
+            <li><strong>Gamified Badges & Resume:</strong> Earn achievements like <em>Winter Warrior</em>, <em>Summer Specialist</em>, and <em>Streak Master</em>, and copy your Racing Resume to share with fellow enthusiasts.</li>
+          </ul>
+          <div class="docs-mini">Launch the planner anytime via the <strong>⛽ Blend Planner</strong> button in the top navigation bar.</div>
         </article>
       </div>
     </section>

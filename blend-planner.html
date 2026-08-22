@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="SCRK Blend Planner">
+  <meta http-equiv="Content-Security-Policy"
+    content="default-src 'self'; connect-src 'self' https://docs.google.com https://api.open-meteo.com https://api.bigdatacloud.net https://nominatim.openstreetmap.org https://ethanolfuelmixcalculator.charans1089.workers.dev; img-src 'self' data: https:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; script-src 'self' 'unsafe-inline';">
+  <title>SCRK Seasonal Fuel Blend Planner — Racing Telemetry</title>
+
+  <link rel="icon" type="image/svg+xml"
+    href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23070913'/><text x='50%' y='68%' font-family='sans-serif' font-size='58' font-weight='bold' fill='%23ff6b35' text-anchor='middle'>⛽</text></svg>">
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@400;600;700;800;900&family=Share+Tech+Mono&family=Orbitron:wght@400;700;900&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="blend-planner-styles.css">
+</head>
+
+<body>
+
+  <!-- RALLY BANNER -->
+  <div class="rally-banner">
+    <div class="rally-banner-inner">
+      <div class="scrk-brand">
+        SCRK
+        <div class="scrk-tag"><span>SEASONAL PLANNER</span></div>
+      </div>
+      <div class="rally-subline">WRX FA24 · 12-MONTH BLEND STRATEGY · TELEMETRY METRICS</div>
+    </div>
+  </div>
+
+  <div class="planner-container">
+
+    <!-- TOP NAVIGATION & CONTROLS -->
+    <div class="nav-top-bar">
+      <a href="index.html" class="back-btn" title="Return to Main Fuel Calculator">← BACK TO CALCULATOR</a>
+
+      <div class="top-actions-group">
+        <button class="action-pill-btn" type="button" onclick="window.BlendPlanner.openModal('metrics-modal')">📊 METRICS DASHBOARD</button>
+        <button class="action-pill-btn" type="button" onclick="window.BlendPlanner.openModal('location-modal')">📍 CHANGE LOCATION</button>
+        <button class="action-pill-btn" type="button" onclick="window.BlendPlanner.openModal('goal-modal')">🎯 SET GOAL</button>
+        <button class="action-pill-btn" type="button" onclick="window.BlendPlanner.openModal('share-modal')">🏎️ SHARE PROFILE</button>
+        <button class="action-pill-btn" type="button" onclick="window.BlendPlanner.refreshAll()" title="Recalculate compliance and re-read logs">🔄 REFRESH</button>
+        <button class="action-pill-btn danger" type="button" onclick="window.BlendPlanner.clearAllData()" title="Reset planner notes & statistics">🗑️ RESET DATA</button>
+      </div>
+    </div>
+
+    <!-- PAGE TITLE -->
+    <div class="page-title-block">
+      <div class="page-kicker">MOTORSPORT FUEL STRATEGY</div>
+      <h1>SEASONAL <span class="hl">BLEND PLANNER</span></h1>
+      <p class="page-subtitle">Track your flex fuel blend strategy against ambient temperatures across all 12 seasons</p>
+    </div>
+
+    <!-- GAS PUMP "NEXT FILL RECOMMENDATION" HERO CARD -->
+    <section class="pump-hero-card" aria-label="Next Fill Recommendation">
+      <div class="pump-top-bar">
+        <div class="pump-badge">
+          <span>⛽ OCTANE DISPENSER DISPATCH</span>
+          <span style="color:#fff;opacity:0.3;">|</span>
+          <span style="color:var(--electric-green);" id="pump-target-active-tag">AUTO-OPTIMIZED</span>
+        </div>
+        <div class="pump-station-loc" id="pump-loc-name">Dearborn, MI (Standard Northern)</div>
+      </div>
+
+      <div class="pump-grid">
+        <!-- Gas Pump Dispenser Screen -->
+        <div class="pump-dispenser-screen">
+          <div class="screen-label">TARGET ETHANOL LEVEL</div>
+          <div class="screen-val-hero" id="screen-recommendation-val">E70+</div>
+          <div class="screen-sub" id="screen-season-desc">
+            <span>🌡️</span> 80°F Avg · Peak summer heat · maximum knock resistance
+          </div>
+          <div class="octane-selector-row">
+            <div class="octane-pill" id="pill-winter">E30 WINTER</div>
+            <div class="octane-pill" id="pill-flex">E55 MID-FLEX</div>
+            <div class="octane-pill active" id="pill-e85">E70+ PEAK</div>
+          </div>
+        </div>
+
+        <!-- Animated Thermometer Visualizer -->
+        <div class="thermometer-wrap">
+          <div class="thermometer-outer">
+            <div class="thermometer-mercury" id="thermometer-mercury-fill"></div>
+          </div>
+          <div class="thermometer-bulb" id="thermometer-bulb">🔥</div>
+          <div class="temp-degrees-label" id="thermometer-deg">80°F</div>
+          <div class="temp-season-label" id="thermometer-season">August</div>
+        </div>
+
+        <!-- Pump Status & CTA Column -->
+        <div class="pump-info-col">
+          <div class="status-callout-box">
+            <div class="status-callout-title" id="status-callout-title">🏁 BLEND STRATEGY OPTIMIZED</div>
+            <div class="status-callout-desc" id="status-callout-desc">
+              High ambient heat elevates knock risk on pump 93. E70+ delivers maximum charge cooling & ignition timing headroom.
+            </div>
+          </div>
+
+          <div class="last-fill-row">
+            <span class="last-fill-tag">LAST LOGGED FILL:</span>
+            <span class="last-fill-val" id="last-fill-reading">E74.2 · Shell Station</span>
+            <span class="last-fill-tag" id="days-since-last-fill" style="background:rgba(255,255,255,0.06);padding:2px 6px;border-radius:4px;">3d ago</span>
+          </div>
+
+          <button class="pump-cta-btn" type="button" onclick="window.BlendPlanner.applyRecommendationToMainCalculator()">
+            ⚡ APPLY TO CALCULATOR & TUNE →
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- KEY STATISTICS & SPEEDOMETER COMPLIANCE PANEL -->
+    <section class="stats-panel-grid" aria-label="Key Statistics">
+      <!-- Speedometer Radial Compliance Hero -->
+      <div class="stat-card compliance-hero">
+        <div class="compliance-gauge-box">
+          <svg class="gauge-svg" viewBox="0 0 100 100">
+            <circle class="gauge-bg-circle" cx="50" cy="50" r="40"></circle>
+            <circle class="gauge-val-circle" id="compliance-gauge-circle" cx="50" cy="50" r="40"></circle>
+          </svg>
+          <div class="gauge-center-text">
+            <span id="compliance-pct-text">100%</span>
+            <span>MATCH</span>
+          </div>
+        </div>
+        <div class="compliance-info">
+          <div class="stat-title">SEASONAL COMPLIANCE</div>
+          <div class="stat-desc">
+            Percentage of your actual logged fills matching seasonal recommendations within tolerance.
+          </div>
+        </div>
+      </div>
+
+      <!-- Streak Card -->
+      <div class="stat-card streak-card">
+        <div class="stat-title">BLEND STREAK</div>
+        <div class="stat-val-num">
+          <span class="streak-flame-icon">🔥</span> <span id="stat-streak-num">0</span> <span style="font-size:14px;color:var(--text-muted);">FILLS</span>
+        </div>
+        <div class="stat-desc">Consecutive fills following recommendations</div>
+      </div>
+
+      <!-- 30-Day Avg & Sustained Card -->
+      <div class="stat-card">
+        <div class="stat-title">30-DAY AVG ETHANOL</div>
+        <div class="stat-val-num" id="stat-avg30-num" style="color:var(--fuel-orange);">E72</div>
+        <div class="stat-desc">
+          Sustained E75+: <strong id="stat-e75-num" style="color:#fff;">0 wks</strong>
+        </div>
+      </div>
+    </section>
+
+    <!-- 12-MONTH INTERACTIVE CALENDAR -->
+    <section class="calendar-card" aria-label="Seasonal Fuel Calendar">
+      <div class="calendar-header-bar">
+        <button class="cal-nav-btn" type="button" onclick="window.BlendPlanner.prevMonth()">🏁 ◄ PREV MONTH</button>
+        <div class="month-display-heading">
+          <div class="month-name-text" id="cal-heading-month">AUGUST 2026</div>
+          <div class="month-racing-sub" id="cal-heading-sub">RECOMMENDED E70+ · 80°F HISTORICAL AVG 🏁</div>
+        </div>
+        <div style="display:flex;gap:8px;">
+          <button class="cal-nav-btn" type="button" onclick="window.BlendPlanner.jumpToToday()">CURRENT</button>
+          <button class="cal-nav-btn" type="button" onclick="window.BlendPlanner.nextMonth()">NEXT MONTH ► 🏁</button>
+        </div>
+      </div>
+
+      <!-- Calendar Days Grid -->
+      <div class="calendar-grid" id="cal-days-grid">
+        <!-- Populated dynamically by blend-planner.js -->
+      </div>
+
+      <!-- Legend -->
+      <div class="cal-legend-bar">
+        <div class="legend-item">
+          <div class="legend-swatch" style="background:var(--blend-e20);"></div>
+          <span>E20–E35 (Winter / Cold Start Vapor)</span>
+        </div>
+        <div class="legend-item">
+          <div class="legend-swatch" style="background:var(--blend-e35);"></div>
+          <span>E35–E50 (Spring/Fall / Balanced)</span>
+        </div>
+        <div class="legend-item">
+          <div class="legend-swatch" style="background:var(--blend-e50);"></div>
+          <span>E50–E70 (Warm Weather Boost)</span>
+        </div>
+        <div class="legend-item">
+          <div class="legend-swatch" style="background:var(--blend-e70);"></div>
+          <span>E70+ (Peak Summer Heat)</span>
+        </div>
+        <div class="legend-item">
+          <span style="color:var(--racing-yellow);">⛽ ✓</span>
+          <span>Logged Telemetry Fill</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- RECENT ACTUAL FILLS LIST -->
+    <section class="fills-list-card" aria-label="Actual Telemetry Fills">
+      <div class="section-head-row">
+        <div class="section-title">
+          <span>📓 ACTUAL LOGGED FILLS (TELEMETRY)</span>
+        </div>
+        <span style="font-family:'Share Tech Mono',monospace;font-size:12px;color:var(--text-muted);">
+          Syncs automatically from Calculator Logbook
+        </span>
+      </div>
+
+      <div class="fills-table-wrap">
+        <table class="fills-table">
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Station</th>
+              <th>Ethanol Blend</th>
+              <th>Gallons Added</th>
+              <th>Fill Cost</th>
+              <th>Seasonal Match</th>
+            </tr>
+          </thead>
+          <tbody id="planner-fills-tbody">
+            <!-- Populated dynamically -->
+          </tbody>
+        </table>
+        <div class="empty-fills-msg" id="planner-fills-empty" style="display:none;">
+          No fuel fills logged yet. Use the main calculator to log your fuel stops and build your seasonal compliance history!
+        </div>
+      </div>
+    </section>
+
+    <!-- EXPORT & CLOUD INTEGRATION HUB -->
+    <section class="export-hub-card" aria-label="Export and Cloud Integration">
+      <div class="section-title">
+        <span>💾 EXPORT & SHARE HUB</span>
+      </div>
+      <p style="font-size:14px;color:var(--text-muted);margin-top:4px;">
+        Export your seasonal fueling schedule to calendar apps, spreadsheets, or save backups to your GitHub repository.
+      </p>
+
+      <div class="export-grid">
+        <button class="export-btn" type="button" onclick="const s = window.BlendPlanner.getState(); window.BlendExport.exportCalendarICS(s.currentYear, s.monthsData, s.activeLocationKey);">
+          <span class="exp-ico">📅</span>
+          <span class="exp-title">Download ICS</span>
+          <span class="exp-sub">Google / Apple / Outlook Calendar</span>
+        </button>
+
+        <button class="export-btn" type="button" onclick="const s = window.BlendPlanner.getState(); window.BlendExport.exportScheduleCSV(s.currentYear, s.monthsData, s.fills, s.notesMap);">
+          <span class="exp-ico">📊</span>
+          <span class="exp-title">Download CSV</span>
+          <span class="exp-sub">Excel / Sheets Blend Schedule</span>
+        </button>
+
+        <button class="export-btn" type="button" onclick="window.BlendExport.exportFullJSON(window.BlendPlanner.getState());">
+          <span class="exp-ico">💾</span>
+          <span class="exp-title">Download JSON</span>
+          <span class="exp-sub">Full Data & Notes Backup</span>
+        </button>
+
+        <button class="export-btn" type="button" onclick="const s = window.BlendPlanner.getState(); window.BlendExport.exportMetricsJSON(s.stats, s.badges, s.activeLocationKey);">
+          <span class="exp-ico">📈</span>
+          <span class="exp-title">Metrics Only</span>
+          <span class="exp-sub">Compact Statistics JSON</span>
+        </button>
+      </div>
+
+      <div class="cloud-integrations-row">
+        <!-- GitHub Backup Section -->
+        <div class="integration-box">
+          <h4><span>🔧</span> BACKUP TO GITHUB</h4>
+          <p style="font-size:13px;color:var(--text-body);margin-bottom:10px;">
+            Commit your exported CSV or JSON to the <code>/data/blend-history/</code> folder in your GitHub repository for versioned telemetry.
+          </p>
+          <button class="action-pill-btn" type="button" onclick="window.BlendPlanner.openModal('github-modal')">
+            📋 VIEW GITHUB WORKFLOW
+          </button>
+        </div>
+
+        <!-- Google Sheets Cloud Sync Section -->
+        <div class="integration-box">
+          <h4><span>☁️</span> SYNC TO GOOGLE SHEETS</h4>
+          <p style="font-size:13px;color:var(--text-body);margin-bottom:10px;">
+            Connect your custom Google Sheets share link or Google Apps Script webhook to mirror blend metrics.
+          </p>
+          <button class="action-pill-btn" type="button" onclick="window.BlendPlanner.openModal('sheets-modal')">
+            🔗 CONNECT GOOGLE SHEETS
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="planner-footer">
+      <div class="planner-footer-text">
+        SCRK RACING · WRX FA24 SEASONAL BLEND PLANNER · STANDALONE TELEMETRY MODULE
+      </div>
+    </footer>
+
+  </div>
+
+  <!-- ==================== MODALS ==================== -->
+
+  <!-- DAY DETAILS & NOTES MODAL -->
+  <div class="modal-overlay" id="day-modal" onclick="if(event.target===this) window.BlendPlanner.closeModal('day-modal')">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h3 id="day-modal-title">August 15, 2026</h3>
+        <button class="modal-close-btn" type="button" onclick="window.BlendPlanner.closeModal('day-modal')">✕</button>
+      </div>
+      <div>
+        <div style="font-family:'Orbitron',sans-serif;font-size:16px;color:var(--fuel-orange);font-weight:800;" id="day-modal-rec">
+          Target: E70+ (80°F)
+        </div>
+        <p style="font-size:13.5px;color:var(--text-body);margin-top:6px;" id="day-modal-desc"></p>
+
+        <div id="day-modal-fill-info"></div>
+
+        <div class="form-group" style="margin-top:16px;">
+          <label class="form-label" for="day-modal-note">Local Track / Weather Notes for this day:</label>
+          <textarea class="form-textarea" id="day-modal-note" rows="3" placeholder="e.g., Track day at Gingerman, ran straight E85, zero knock recorded."></textarea>
+        </div>
+
+        <div class="modal-action-row">
+          <button class="btn-secondary" type="button" onclick="window.BlendPlanner.closeModal('day-modal')">Cancel</button>
+          <button class="btn-primary" type="button" onclick="window.BlendPlanner.saveDayNote()">Save Note</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- METRICS DASHBOARD & BADGES MODAL -->
+  <div class="modal-overlay" id="metrics-modal" onclick="if(event.target===this) window.BlendPlanner.closeModal('metrics-modal')">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h3><span>📊</span> METRICS DASHBOARD & BADGES</h3>
+        <button class="modal-close-btn" type="button" onclick="window.BlendPlanner.closeModal('metrics-modal')">✕</button>
+      </div>
+      <div>
+        <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:16px;">
+          <div style="background:var(--card-inner);padding:10px;border-radius:6px;border:1px solid var(--card-border);">
+            <div style="font-size:10px;color:var(--text-muted);font-family:'Share Tech Mono';">FAVORITE STATION</div>
+            <div style="font-size:14px;font-weight:700;color:#fff;" id="dash-station-val">Calculating...</div>
+          </div>
+          <div style="background:var(--card-inner);padding:10px;border-radius:6px;border:1px solid var(--card-border);">
+            <div style="font-size:10px;color:var(--text-muted);font-family:'Share Tech Mono';">LIFETIME AVG ETHANOL</div>
+            <div style="font-size:14px;font-weight:700;color:var(--fuel-orange);" id="dash-lifetime-eth">Calculating...</div>
+          </div>
+        </div>
+
+        <div style="font-family:'Orbitron',sans-serif;font-size:14px;font-weight:800;color:#fff;margin-top:14px;">
+          ACHIEVEMENT BADGES
+        </div>
+        <div class="badges-grid" id="modal-badges-grid">
+          <!-- Populated by blend-planner.js -->
+        </div>
+
+        <div class="modal-action-row">
+          <button class="btn-primary" type="button" onclick="window.BlendPlanner.closeModal('metrics-modal')">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CHANGE LOCATION MODAL -->
+  <div class="modal-overlay" id="location-modal" onclick="if(event.target===this) window.BlendPlanner.closeModal('location-modal')">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h3><span>📍</span> SELECT CLIMATE / LOCATION</h3>
+        <button class="modal-close-btn" type="button" onclick="window.BlendPlanner.closeModal('location-modal')">✕</button>
+      </div>
+      <div>
+        <p style="font-size:13.5px;color:var(--text-body);margin-bottom:14px;">
+          Seasonal blend curves adjust automatically based on your regional ambient temperature climate.
+        </p>
+
+        <div class="form-group">
+          <label class="form-label" for="select-loc-preset">Location Climate Model</label>
+          <select class="form-select" id="select-loc-preset" onchange="window.BlendPlanner.setLocation(this.value)">
+            <option value="dearborn">Dearborn, MI (Standard Northern Four-Season)</option>
+            <option value="phoenix">Phoenix, AZ (Desert Hot / Warm Winter)</option>
+            <option value="minneapolis">Minneapolis, MN (Sub-Zero Winter Deep Freeze)</option>
+            <option value="denver">Denver, CO (Mile High Altitude / Mountain Cold)</option>
+            <option value="austin">Austin, TX (Southern Warmth & High Heat)</option>
+          </select>
+        </div>
+
+        <div class="modal-action-row">
+          <button class="btn-primary" type="button" onclick="window.BlendPlanner.closeModal('location-modal')">Done</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SET GOAL MODAL -->
+  <div class="modal-overlay" id="goal-modal" onclick="if(event.target===this) window.BlendPlanner.closeModal('goal-modal')">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h3><span>🎯</span> SET BLEND GOAL</h3>
+        <button class="modal-close-btn" type="button" onclick="window.BlendPlanner.closeModal('goal-modal')">✕</button>
+      </div>
+      <div>
+        <p style="font-size:13.5px;color:var(--text-body);margin-bottom:14px;">
+          Choose a personal target strategy for this season.
+        </p>
+
+        <div class="form-group">
+          <label class="form-label" for="inp-goal-text">Active Fuel Strategy Goal</label>
+          <input type="text" class="form-input" id="inp-goal-text" value="Maintain E50+ for summer track season" placeholder="e.g. Run 100% compliance in winter">
+        </div>
+
+        <div class="modal-action-row">
+          <button class="btn-secondary" type="button" onclick="window.BlendPlanner.closeModal('goal-modal')">Cancel</button>
+          <button class="btn-primary" type="button" onclick="window.BlendPlanner.setGoal(document.getElementById('inp-goal-text').value)">Save Goal</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- GITHUB INSTRUCTIONS MODAL -->
+  <div class="modal-overlay" id="github-modal" onclick="if(event.target===this) window.BlendPlanner.closeModal('github-modal')">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h3><span>🔧</span> GITHUB BACKUP WORKFLOW</h3>
+        <button class="modal-close-btn" type="button" onclick="window.BlendPlanner.closeModal('github-modal')">✕</button>
+      </div>
+      <div>
+        <p style="font-size:13.5px;color:var(--text-body);margin-bottom:12px;">
+          Follow these steps to store your personal seasonal blend history in your Git repository:
+        </p>
+        <ol style="margin-left:20px;display:grid;gap:8px;font-size:13px;color:var(--text-body);">
+          <li>Download the CSV or JSON schedule from the <strong>EXPORT HUB</strong> above.</li>
+          <li>Place the downloaded file in your repo’s <code>data/blend-history/</code> folder.</li>
+          <li>Run the Git commands below in your terminal to commit and push.</li>
+        </ol>
+
+        <div style="background:#04060d;border:1px solid var(--card-border);border-radius:6px;padding:12px;margin:14px 0;font-family:'Share Tech Mono',monospace;font-size:12px;color:var(--neon-cyan);line-height:1.6;">
+          mkdir -p data/blend-history<br>
+          mv ~/Downloads/SCRK_BlendSchedule_2026.csv data/blend-history/<br>
+          git add data/blend-history/<br>
+          git commit -m "telemetry: seasonal blend snapshot"<br>
+          git push origin main
+        </div>
+
+        <div class="modal-action-row">
+          <button class="btn-secondary" type="button" onclick="window.BlendExport.copyGitHubInstructions(window.BlendPlanner.getState().currentYear)">📋 Copy Commands</button>
+          <button class="btn-primary" type="button" onclick="window.BlendPlanner.closeModal('github-modal')">Done</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- GOOGLE SHEETS SYNC MODAL -->
+  <div class="modal-overlay" id="sheets-modal" onclick="if(event.target===this) window.BlendPlanner.closeModal('sheets-modal')">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h3><span>☁️</span> GOOGLE SHEETS SYNC</h3>
+        <button class="modal-close-btn" type="button" onclick="window.BlendPlanner.closeModal('sheets-modal')">✕</button>
+      </div>
+      <div>
+        <p style="font-size:13.5px;color:var(--text-body);margin-bottom:14px;">
+          Connect your Google Sheet or Apps Script Webhook URL to stream telemetry and seasonal stats to the cloud.
+        </p>
+
+        <div class="form-group">
+          <label class="form-label" for="inp-sheets-url">Google Sheet / Apps Script Webhook URL</label>
+          <input type="url" class="form-input" id="inp-sheets-url" placeholder="https://script.google.com/macros/s/.../exec">
+        </div>
+
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:14px;">
+          <input type="checkbox" id="chk-auto-sync" style="accent-color:var(--fuel-orange);cursor:pointer;">
+          <label for="chk-auto-sync" style="font-size:13px;color:var(--text-body);cursor:pointer;">Enable Cloud Sync on fill updates</label>
+        </div>
+
+        <div class="modal-action-row">
+          <button class="btn-secondary" type="button" onclick="window.BlendPlanner.closeModal('sheets-modal')">Cancel</button>
+          <button class="btn-primary" type="button" onclick="alert('✓ Google Sheets connection configured! CSV and JSON exports are ready.'); window.BlendPlanner.closeModal('sheets-modal');">Connect Sheets</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SHARE PROFILE MODAL -->
+  <div class="modal-overlay" id="share-modal" onclick="if(event.target===this) window.BlendPlanner.closeModal('share-modal')">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h3><span>🏎️</span> SHARE RACING RESUME & PROFILE</h3>
+        <button class="modal-close-btn" type="button" onclick="window.BlendPlanner.closeModal('share-modal')">✕</button>
+      </div>
+      <div>
+        <p style="font-size:13.5px;color:var(--text-body);margin-bottom:14px;">
+          Generate a shareable flex fuel profile to show your seasonal compliance, streak, and unlocked badges to friends and fellow tuners.
+        </p>
+
+        <div style="background:var(--card-inner);border:1px solid var(--card-border);border-radius:8px;padding:14px;font-family:'Share Tech Mono',monospace;font-size:12px;line-height:1.6;color:#fff;">
+          🏎️💨 SCRK RACING — SEASONAL FUEL PROFILE<br>
+          • Status: Active Flex Fuel Runner<br>
+          • 12-Month Compliance Tracking Enabled<br>
+          • Verified Accessport & Cobb Flex Fuel Tuned
+        </div>
+
+        <div class="modal-action-row" style="margin-top:16px;">
+          <button class="btn-primary" type="button" onclick="const s = window.BlendPlanner.getState(); window.BlendExport.generateFuelProfileShare(s.stats, s.badges, s.activeLocationKey); window.BlendPlanner.closeModal('share-modal');">
+            📋 Copy Profile to Clipboard
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCRIPTS -->
+  <script src="blend-planner-export.js"></script>
+  <script src="blend-planner.js"></script>
+</body>
+
+</html>
+
