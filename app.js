@@ -108,9 +108,15 @@ function parseOptionalNumber(id) {
 }
 
 function formatOptionalNumber(value) {
-  return value === null || value === undefined || value === ''
-    ? '—'
-    : Number(value).toFixed(2);
+  if (value === null || value === undefined || value === '') return '—';
+  const num = Number(value);
+  if (!Number.isFinite(num)) return '—';
+  const str = String(value);
+  if (str.includes('.')) {
+    const decCount = str.split('.')[1].length;
+    return num.toFixed(Math.max(2, Math.min(decCount, 4)));
+  }
+  return num.toFixed(2);
 }
 
 function formatMoney(value) {
@@ -205,12 +211,14 @@ function getHistoricalHighEthStreaks(logs) {
 
     if (!isHigh) {
       streak = 0;
-      streakMap[log.id] = {
+      const cleanObj = {
         count: 0,
         isHigh: false,
         badgeClass: 'clean',
-        label: ethVal <= 40 ? '✓ Clean Tank' : 'Mid Blend'
+        label: ethVal <= 40 ? '✓ Clean Tank' : 'Mid Blend (<E70)'
       };
+      streakMap[log.id] = cleanObj;
+      streakMap[String(log.id)] = cleanObj;
       return;
     }
 
@@ -231,12 +239,14 @@ function getHistoricalHighEthStreaks(logs) {
       label = `Fill ${streak}/4 (🚨 Clean Next)`;
     }
 
-    streakMap[log.id] = {
+    const streakObj = {
       count: streak,
       isHigh: true,
       badgeClass,
       label
     };
+    streakMap[log.id] = streakObj;
+    streakMap[String(log.id)] = streakObj;
   });
 
   return streakMap;
@@ -1100,17 +1110,38 @@ function getInputs() {
 
 function sanitizeAndPersistInputs() {
   const inputs = getInputs();
+  const activeId = document.activeElement ? document.activeElement.id : '';
 
-  setValue('inp-gal', inputs.curGal.toFixed(1));
-  setValue('inp-eth', inputs.curEth.toFixed(0));
-  setValue('inp-tgt', inputs.tgtEth.toFixed(0));
-  setValue('inp-max-eth', inputs.maxEth.toFixed(0));
-  setValue('inp-pump-e85', inputs.pumpE85.toFixed(0));
-  setValue('inp-pump-gas', inputs.pumpGas.toFixed(0));
-  setValue('inp-amb-temp', inputs.ambientTempF.toFixed(0));
-  setValue('inp-price-e85', inputs.priceE85.toFixed(2));
-  setValue('inp-price-93', inputs.price93.toFixed(2));
-  setValue('inp-add-gal', inputs.addGallons.toFixed(1));
+  if (activeId !== 'inp-gal') {
+    setValue('inp-gal', Number.isInteger(inputs.curGal) ? inputs.curGal.toFixed(1) : parseFloat(inputs.curGal.toFixed(3)));
+  }
+  if (activeId !== 'inp-eth') {
+    setValue('inp-eth', parseFloat(inputs.curEth.toFixed(2)));
+  }
+  if (activeId !== 'inp-tgt') {
+    setValue('inp-tgt', parseFloat(inputs.tgtEth.toFixed(2)));
+  }
+  if (activeId !== 'inp-max-eth') {
+    setValue('inp-max-eth', parseFloat(inputs.maxEth.toFixed(2)));
+  }
+  if (activeId !== 'inp-pump-e85') {
+    setValue('inp-pump-e85', parseFloat(inputs.pumpE85.toFixed(2)));
+  }
+  if (activeId !== 'inp-pump-gas') {
+    setValue('inp-pump-gas', parseFloat(inputs.pumpGas.toFixed(2)));
+  }
+  if (activeId !== 'inp-amb-temp') {
+    setValue('inp-amb-temp', inputs.ambientTempF.toFixed(0));
+  }
+  if (activeId !== 'inp-price-e85') {
+    setValue('inp-price-e85', inputs.priceE85.toFixed(2));
+  }
+  if (activeId !== 'inp-price-93') {
+    setValue('inp-price-93', inputs.price93.toFixed(2));
+  }
+  if (activeId !== 'inp-add-gal') {
+    setValue('inp-add-gal', Number.isInteger(inputs.addGallons) ? inputs.addGallons.toFixed(1) : parseFloat(inputs.addGallons.toFixed(3)));
+  }
 
   const matchIndex = LEVELS.findIndex(l => Math.abs(l.gal - inputs.curGal) < 0.1);
   document.getElementById('sl').value = matchIndex === -1 ? 0 : matchIndex;
@@ -1679,26 +1710,44 @@ function deleteAllLogs() {
 function sendToGoogleForm(log, sourceNote) {
   const fd = new FormData();
   fd.append(FORM_ENTRY_DATE, log.date);
-  let stationStr = log.station || '';
-  if (sourceNote) {
-    stationStr = stationStr ? `${stationStr} · ${sourceNote}` : sourceNote;
+
+  let streakTag = '';
+  const streakMap = getHistoricalHighEthStreaks(fuelLogs.length ? fuelLogs : [log]);
+  if (log.id && streakMap[log.id] && streakMap[log.id].isHigh) {
+    streakTag = `[${streakMap[log.id].label}]`;
+  } else {
+    const ethVal = Number(log.eth ?? log.apEth ?? 0);
+    const curEthVal = Number(log.curEth ?? 0);
+    if (ethVal >= 70 || Number(log.apEth) >= 70) {
+      const count = curEthVal >= 70 ? 2 : 1;
+      streakTag = `[Fill ${count}/4 (E70+)]`;
+    }
   }
+
+  let stationStr = log.station || 'Station Stop';
+  if (streakTag) {
+    stationStr = `${stationStr} ${streakTag}`;
+  }
+  if (sourceNote) {
+    stationStr = `${stationStr} · ${sourceNote}`;
+  }
+
   fd.append(FORM_ENTRY_STATION, stationStr);
-  fd.append(FORM_ENTRY_E85, log.e85 ?? '');
-  fd.append(FORM_ENTRY_93, log.c93 ?? '');
-  fd.append(FORM_ENTRY_ETH, log.eth ?? '');
+  fd.append(FORM_ENTRY_E85, log.e85 !== null && log.e85 !== undefined ? String(log.e85) : '');
+  fd.append(FORM_ENTRY_93, log.c93 !== null && log.c93 !== undefined ? String(log.c93) : '');
+  fd.append(FORM_ENTRY_ETH, log.eth !== null && log.eth !== undefined ? String(log.eth) : '');
 
   if (typeof FORM_ENTRY_AP_ETH === 'string' && FORM_ENTRY_AP_ETH.startsWith('entry.')) {
-    fd.append(FORM_ENTRY_AP_ETH, log.apEth === null || log.apEth === undefined ? '' : log.apEth);
+    fd.append(FORM_ENTRY_AP_ETH, log.apEth === null || log.apEth === undefined || log.apEth === '' ? '' : String(log.apEth));
   }
   if (typeof FORM_ENTRY_ACTUAL_E85 === 'string' && FORM_ENTRY_ACTUAL_E85.startsWith('entry.')) {
-    fd.append(FORM_ENTRY_ACTUAL_E85, log.actualE85 === null || log.actualE85 === undefined ? '' : log.actualE85);
+    fd.append(FORM_ENTRY_ACTUAL_E85, log.actualE85 === null || log.actualE85 === undefined || log.actualE85 === '' ? '' : String(log.actualE85));
   }
   if (typeof FORM_ENTRY_ACTUAL_93 === 'string' && FORM_ENTRY_ACTUAL_93.startsWith('entry.')) {
-    fd.append(FORM_ENTRY_ACTUAL_93, log.actual93 === null || log.actual93 === undefined ? '' : log.actual93);
+    fd.append(FORM_ENTRY_ACTUAL_93, log.actual93 === null || log.actual93 === undefined || log.actual93 === '' ? '' : String(log.actual93));
   }
   if (typeof FORM_ENTRY_FILL_COST === 'string' && FORM_ENTRY_FILL_COST.startsWith('entry.')) {
-    fd.append(FORM_ENTRY_FILL_COST, log.fillCost === null || log.fillCost === undefined ? '' : Number(log.fillCost).toFixed(2));
+    fd.append(FORM_ENTRY_FILL_COST, log.fillCost === null || log.fillCost === undefined || log.fillCost === '' ? '' : Number(log.fillCost).toFixed(2));
   }
   fetch(GOOGLE_FORM_ACTION_URL, { method: 'POST', mode: 'no-cors', body: fd }).catch(() => { });
 }

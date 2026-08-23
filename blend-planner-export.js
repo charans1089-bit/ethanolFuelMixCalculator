@@ -329,7 +329,9 @@
         const isHigh = ethVal >= 70 || apEthVal >= 70;
         if (!isHigh) {
           streak = 0;
-          streakMap[log.id] = { count: 0, label: ethVal <= 40 ? '✓ Clean Tank' : 'Mid Blend' };
+          const cleanObj = { count: 0, label: ethVal <= 40 ? '✓ Clean Tank' : 'Mid Blend (<E70)' };
+          streakMap[log.id] = cleanObj;
+          streakMap[String(log.id)] = cleanObj;
           return;
         }
         if (streak === 0 && curEthVal >= 70) {
@@ -340,7 +342,9 @@
         let label = `Fill ${streak}/4 (E70+)`;
         if (streak === 3) label = `Fill 3/4 (⚠ 1 Left)`;
         else if (streak >= 4) label = `Fill ${streak}/4 (🚨 Clean Next)`;
-        streakMap[log.id] = { count: streak, label };
+        const streakObj = { count: streak, label };
+        streakMap[log.id] = streakObj;
+        streakMap[String(log.id)] = streakObj;
       });
     }
 
@@ -424,7 +428,9 @@
       const isHigh = ethVal >= 70 || apEthVal >= 70;
       if (!isHigh) {
         streak = 0;
-        streakMap[log.id] = { count: 0, label: ethVal <= 40 ? '✓ Clean Tank' : 'Mid Blend' };
+        const cleanObj = { count: 0, label: ethVal <= 40 ? '✓ Clean Tank' : 'Mid Blend (<E70)' };
+        streakMap[log.id] = cleanObj;
+        streakMap[String(log.id)] = cleanObj;
         return;
       }
       if (streak === 0 && curEthVal >= 70) {
@@ -435,7 +441,9 @@
       let label = `Fill ${streak}/4 (E70+)`;
       if (streak === 3) label = `Fill 3/4 (⚠ 1 Left)`;
       else if (streak >= 4) label = `Fill ${streak}/4 (🚨 Clean Next)`;
-      streakMap[log.id] = { count: streak, label };
+      const streakObj = { count: streak, label };
+      streakMap[log.id] = streakObj;
+      streakMap[String(log.id)] = streakObj;
     });
 
     const headers = [
