@@ -1275,12 +1275,19 @@ function updateStaticTable(targetEth) {
   tbody.innerHTML = LEVELS.map((l, i) => {
     const row = computeBlend(l.gal, inputs.curEth, targetEth, inputs.pumpE85, inputs.pumpGas, 'full', 0);
     const empty = row.fillVolume;
-    const w = (l.gal / TANK) * 100;
+    const w = Math.min(100, Math.max(0, (l.gal / TANK) * 100));
     return `<tr ${i === 0 ? 'class="lf"' : ''}>
-     <td><div class="gcell"><div><div class="glv">${l.label} Tank</div><div class="gsub">~${l.gal.toFixed(1)} gal remaining<div class="fbw"><div class="fb" style="width:${w}%"></div></div></div></div></div></td>
-     <td><span class="tv">${empty.toFixed(1)} gal</span></td>
-     <td><span class="ev">${row.e85Display.toFixed(2)}<span class="u">gal</span></span></td>
-     <td><span class="cv">${row.c93Display.toFixed(2)}<span class="u">gal</span></span></td>
+     <td>
+       <div class="gcell">
+         <div class="glv">${l.label} Tank</div>
+         <div class="gsub">~${l.gal.toFixed(1)} gal remaining (${w.toFixed(0)}%)
+           <div class="fbw"><div class="fb" style="width:${w}%"></div></div>
+         </div>
+       </div>
+     </td>
+     <td><span class="tv">${empty.toFixed(1)} gal empty</span></td>
+     <td><span class="ev">${row.e85Display.toFixed(2)}<span class="u"> gal</span></span></td>
+     <td><span class="cv">${row.c93Display.toFixed(2)}<span class="u"> gal</span></span></td>
    </tr>`;
   }).join('');
 }
@@ -2024,10 +2031,19 @@ function runSim() {
 
 function setMode(m) {
   currentMode = m;
-  document.getElementById('calc-view').style.display = m === 'calc' ? 'block' : 'none';
-  document.getElementById('table-view').style.display = m === 'table' ? 'block' : 'none';
-  document.getElementById('log-view').style.display = m === 'log' ? 'block' : 'none';
+  const calcView = document.getElementById('calc-view');
+  const tableView = document.getElementById('table-view');
+  const logView = document.getElementById('log-view');
+  if (calcView) calcView.style.display = m === 'calc' ? 'block' : 'none';
+  if (tableView) tableView.style.display = m === 'table' ? 'block' : 'none';
+  if (logView) logView.style.display = m === 'log' ? 'block' : 'none';
   setActiveButton(m === 'calc' ? 'btn-calc' : m === 'table' ? 'btn-table' : 'btn-log');
+  
+  if (m === 'table') {
+    const inputs = getInputs();
+    const targetState = getEffectiveTarget(inputs);
+    updateStaticTable(targetState.targetEth);
+  }
 }
 
 function resetDefault() {
