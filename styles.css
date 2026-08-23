@@ -1455,6 +1455,18 @@ tbody td {
   color: var(--e85);
 }
 
+.sheets-btn {
+  border: 1px solid rgba(0, 220, 130, .4);
+  background: rgba(0, 220, 130, .12);
+  color: #00dc82;
+}
+
+.sync-cache-btn {
+  border: 1px solid rgba(94, 184, 255, .4);
+  background: rgba(94, 184, 255, .12);
+  color: var(--c93);
+}
+
 .del-all-btn {
   border: 1px solid rgba(255, 69, 69, .4);
   background: rgba(255, 69, 69, .1);

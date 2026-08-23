@@ -18,16 +18,10 @@ const FORM_ENTRY_STATION = "entry.490270945";
 const FORM_ENTRY_E85 = "entry.391979914";
 const FORM_ENTRY_93 = "entry.1998665240";
 const FORM_ENTRY_ETH = "entry.1111191565";
-const TODO_FORM_ENTRY_AP_ETH = "TODO_SET_AP_ETH_FORM_ENTRY_ID";
-const TODO_FORM_ENTRY_STATION_ETH = "TODO_SET_STATION_ETH_FORM_ENTRY_ID";
-const TODO_FORM_ENTRY_FILL_COST = "TODO_SET_FILL_COST_FORM_ENTRY_ID";
-const TODO_FORM_ENTRY_FILL_MODE = "TODO_SET_FILL_MODE_FORM_ENTRY_ID";
-const TODO_FORM_ENTRY_AMBIENT_TEMP = "TODO_SET_AMBIENT_TEMP_FORM_ENTRY_ID";
-const TODO_FORM_ENTRY_MAX_ETH = "TODO_SET_MAX_ETH_FORM_ENTRY_ID";
-const TODO_FORM_ENTRY_PRICE_E85 = "TODO_SET_PRICE_E85_FORM_ENTRY_ID";
-const TODO_FORM_ENTRY_PRICE_93 = "TODO_SET_PRICE_93_FORM_ENTRY_ID";
-const TODO_FORM_ENTRY_ACTUAL_E85 = "TODO_SET_ACTUAL_E85_FORM_ENTRY_ID";
-const TODO_FORM_ENTRY_ACTUAL_93 = "TODO_SET_ACTUAL_93_FORM_ENTRY_ID";
+const FORM_ENTRY_AP_ETH = "entry.424502369";
+const FORM_ENTRY_ACTUAL_E85 = "entry.1245489936";
+const FORM_ENTRY_ACTUAL_93 = "entry.1287886529";
+const FORM_ENTRY_FILL_COST = "entry.1454448689";
 
 const DEFAULTS = {
   curEth: 10,
@@ -1576,24 +1570,99 @@ function deleteAllLogs() {
   }
 }
 
-function sendToGoogleForm(log) {
+function sendToGoogleForm(log, sourceNote) {
   const fd = new FormData();
   fd.append(FORM_ENTRY_DATE, log.date);
-  fd.append(FORM_ENTRY_STATION, log.station);
-  fd.append(FORM_ENTRY_E85, log.e85);
-  fd.append(FORM_ENTRY_93, log.c93);
-  fd.append(FORM_ENTRY_ETH, log.eth);
-  fd.append(TODO_FORM_ENTRY_AP_ETH, log.apEth === null || log.apEth === undefined ? '' : log.apEth);
-  fd.append(TODO_FORM_ENTRY_STATION_ETH, log.stationEthEstimate === null || log.stationEthEstimate === undefined ? '' : log.stationEthEstimate);
-  fd.append(TODO_FORM_ENTRY_FILL_COST, log.fillCost === null || log.fillCost === undefined ? '' : log.fillCost);
-  fd.append(TODO_FORM_ENTRY_FILL_MODE, log.fillMode || '');
-  fd.append(TODO_FORM_ENTRY_AMBIENT_TEMP, log.ambientTempF === null || log.ambientTempF === undefined ? '' : log.ambientTempF);
-  fd.append(TODO_FORM_ENTRY_MAX_ETH, log.maxEth === null || log.maxEth === undefined ? '' : log.maxEth);
-  fd.append(TODO_FORM_ENTRY_PRICE_E85, log.priceE85 === null || log.priceE85 === undefined ? '' : log.priceE85);
-  fd.append(TODO_FORM_ENTRY_PRICE_93, log.price93 === null || log.price93 === undefined ? '' : log.price93);
-  fd.append(TODO_FORM_ENTRY_ACTUAL_E85, log.actualE85 === null || log.actualE85 === undefined ? '' : log.actualE85);
-  fd.append(TODO_FORM_ENTRY_ACTUAL_93, log.actual93 === null || log.actual93 === undefined ? '' : log.actual93);
+  let stationStr = log.station || '';
+  if (sourceNote) {
+    stationStr = stationStr ? `${stationStr} · ${sourceNote}` : sourceNote;
+  }
+  fd.append(FORM_ENTRY_STATION, stationStr);
+  fd.append(FORM_ENTRY_E85, log.e85 ?? '');
+  fd.append(FORM_ENTRY_93, log.c93 ?? '');
+  fd.append(FORM_ENTRY_ETH, log.eth ?? '');
+
+  if (typeof FORM_ENTRY_AP_ETH === 'string' && FORM_ENTRY_AP_ETH.startsWith('entry.')) {
+    fd.append(FORM_ENTRY_AP_ETH, log.apEth === null || log.apEth === undefined ? '' : log.apEth);
+  }
+  if (typeof FORM_ENTRY_ACTUAL_E85 === 'string' && FORM_ENTRY_ACTUAL_E85.startsWith('entry.')) {
+    fd.append(FORM_ENTRY_ACTUAL_E85, log.actualE85 === null || log.actualE85 === undefined ? '' : log.actualE85);
+  }
+  if (typeof FORM_ENTRY_ACTUAL_93 === 'string' && FORM_ENTRY_ACTUAL_93.startsWith('entry.')) {
+    fd.append(FORM_ENTRY_ACTUAL_93, log.actual93 === null || log.actual93 === undefined ? '' : log.actual93);
+  }
+  if (typeof FORM_ENTRY_FILL_COST === 'string' && FORM_ENTRY_FILL_COST.startsWith('entry.')) {
+    fd.append(FORM_ENTRY_FILL_COST, log.fillCost === null || log.fillCost === undefined ? '' : Number(log.fillCost).toFixed(2));
+  }
   fetch(GOOGLE_FORM_ACTION_URL, { method: 'POST', mode: 'no-cors', body: fd }).catch(() => { });
+}
+
+function copyLogsForGoogleSheets() {
+  if (!fuelLogs || fuelLogs.length === 0) {
+    alert('No logs in browser cache to copy.');
+    return;
+  }
+  const headers = [
+    'Date / Time (EST)',
+    'Gas Station / Notes',
+    'Planned E85 (gal)',
+    'Planned 93 (gal)',
+    'Target Eth %',
+    'Actual E85 Pumped (gal)',
+    'Actual 93 Pumped (gal)',
+    'AP Confirmed Eth %',
+    'Station E85 Quality Est',
+    'Total Fill Cost ($)',
+    'Starting Tank (gal)',
+    'Starting Eth %',
+    'Data Source'
+  ];
+
+  const rows = fuelLogs.map(log => [
+    log.date,
+    log.station ?? '',
+    log.e85 ?? '',
+    log.c93 ?? '',
+    log.eth ?? '',
+    log.actualE85 ?? '',
+    log.actual93 ?? '',
+    log.apEth ?? '',
+    log.stationEthEstimate ? `E${log.stationEthEstimate}` : '',
+    log.fillCost !== null && log.fillCost !== undefined && log.fillCost !== '' ? `$${Number(log.fillCost).toFixed(2)}` : '',
+    log.curGal ?? '',
+    log.curEth ? `E${log.curEth}` : '',
+    'Copied from browser cache'
+  ].join('\t'));
+
+  const tsv = [headers.join('\t'), ...rows].join('\n');
+
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(tsv).then(() => {
+      alert(`✓ ${fuelLogs.length} fuel logs copied to clipboard!\n\nTo paste into Google Sheets / Excel:\n1. Open your sheet\n2. Click the cell where you want data to start (e.g. A1)\n3. Press Ctrl+V (or Cmd+V) to paste into columns.\n\nEach row contains 'Copied from browser cache' in the Data Source column.`);
+    }).catch(() => {
+      prompt('Copy your fuel logs for Google Sheets below:', tsv);
+    });
+  } else {
+    prompt('Copy your fuel logs for Google Sheets below:', tsv);
+  }
+}
+
+function syncAllCachedLogsToGoogleForm() {
+  if (!fuelLogs || fuelLogs.length === 0) {
+    alert('No logs in browser cache to sync.');
+    return;
+  }
+  if (!confirm(`Sync ${fuelLogs.length} cached fuel logs to your Google Form?\nEach row will be labeled with 'Copied from browser cache'.`)) {
+    return;
+  }
+
+  fuelLogs.forEach((log, index) => {
+    setTimeout(() => {
+      sendToGoogleForm(log, 'Copied from browser cache');
+    }, index * 300);
+  });
+
+  alert(`✓ Sent ${fuelLogs.length} cached logs to your Google Form!\nCheck your connected Google Sheet in a few seconds.`);
 }
 
 function downloadCSV() {

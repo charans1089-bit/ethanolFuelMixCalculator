@@ -242,6 +242,12 @@
       </p>
 
       <div class="export-grid">
+        <button class="export-btn" type="button" onclick="const s = window.BlendPlanner.getState(); window.BlendExport.copyLogsForGoogleSheets(s.fills);">
+          <span class="exp-ico">📋</span>
+          <span class="exp-title">Copy for Sheets</span>
+          <span class="exp-sub">Formatted for Google Sheets / Excel</span>
+        </button>
+
         <button class="export-btn" type="button" onclick="const s = window.BlendPlanner.getState(); window.BlendExport.exportTelemetryLogsCSV(s.fills);">
           <span class="exp-ico">📓</span>
           <span class="exp-title">Logbook CSV</span>

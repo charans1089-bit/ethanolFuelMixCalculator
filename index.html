@@ -635,6 +635,8 @@
           <h2>Fill-up History</h2>
           <div class="log-actions">
             <button class="download-btn" onclick="downloadCSV()">⬇ Export CSV</button>
+            <button class="download-btn sheets-btn" onclick="copyLogsForGoogleSheets()" title="Copy tab-delimited log to clipboard for pasting directly into Google Sheets or Excel">📋 Copy for Sheets</button>
+            <button class="download-btn sync-cache-btn" onclick="syncAllCachedLogsToGoogleForm()" title="Sync all cached browser logs to your connected Google Form">☁ Sync Cache to Form</button>
             <button class="del-all-btn" onclick="deleteAllLogs()">✕ Delete All</button>
           </div>
         </div>

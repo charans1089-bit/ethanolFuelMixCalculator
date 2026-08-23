@@ -376,10 +376,64 @@
     downloadBlob(`SCRK_FuelLogs_${Date.now()}.csv`, csvContent, 'text/csv;charset=utf-8');
   }
 
+  /**
+   * Copies all browser cached logs formatted as TSV for pasting into Google Sheets / Excel
+   */
+  function copyLogsForGoogleSheets(fillsList) {
+    if (!fillsList || !fillsList.length) {
+      alert('No fuel logs in browser cache to copy.');
+      return;
+    }
+    const headers = [
+      'Date / Time (EST)',
+      'Gas Station / Notes',
+      'Planned E85 (gal)',
+      'Planned 93 (gal)',
+      'Target Eth %',
+      'Actual E85 Pumped (gal)',
+      'Actual 93 Pumped (gal)',
+      'AP Confirmed Eth %',
+      'Station E85 Quality Est',
+      'Total Fill Cost ($)',
+      'Starting Tank (gal)',
+      'Starting Eth %',
+      'Data Source'
+    ];
+
+    const rows = fillsList.map(log => [
+      log.date,
+      log.station ?? '',
+      log.e85 ?? '',
+      log.c93 ?? '',
+      log.eth ?? '',
+      log.actualE85 ?? '',
+      log.actual93 ?? '',
+      log.apEth ?? '',
+      log.stationEthEstimate ? `E${log.stationEthEstimate}` : '',
+      log.fillCost !== null && log.fillCost !== undefined && log.fillCost !== '' ? `$${Number(log.fillCost).toFixed(2)}` : '',
+      log.curGal ?? '',
+      log.curEth ? `E${log.curEth}` : '',
+      'Copied from browser cache'
+    ].join('\t'));
+
+    const tsv = [headers.join('\t'), ...rows].join('\n');
+
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(tsv).then(() => {
+        alert(`✓ ${fillsList.length} fuel logs copied to clipboard!\n\nTo paste into Google Sheets / Excel:\n1. Open your sheet\n2. Click cell A1\n3. Press Ctrl+V (or Cmd+V) to paste into individual columns.\n\nEach row contains 'Copied from browser cache'.`);
+      }).catch(() => {
+        prompt('Copy your fuel logs for Google Sheets below:', tsv);
+      });
+    } else {
+      prompt('Copy your fuel logs for Google Sheets below:', tsv);
+    }
+  }
+
   window.BlendExport = {
     exportCalendarICS,
     exportScheduleCSV,
     exportTelemetryLogsCSV,
+    copyLogsForGoogleSheets,
     exportFullJSON,
     exportMetricsJSON,
     copyGitHubInstructions,
