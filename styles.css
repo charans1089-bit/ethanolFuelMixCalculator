@@ -2583,3 +2583,581 @@ tbody td {
     font-size: 28px;
   }
 }
+
+
+/* ═══════════════════════════════════════════════════════════════
+   SCRK WOW FACTOR LAYER v3.0
+   High-octane visual upgrades: animations, textures, drama
+═══════════════════════════════════════════════════════════════ */
+
+/* ---------- KEYFRAME ANIMATIONS ---------- */
+@keyframes neonPulse {
+  0%, 100% { text-shadow: 0 0 8px rgba(204,255,0,0.3); }
+  50% { text-shadow: 0 0 22px rgba(204,255,0,0.7), 0 0 40px rgba(204,255,0,0.25); }
+}
+
+@keyframes badgePulse {
+  0%, 100% { box-shadow: 0 0 18px rgba(245,200,66,0.2), 0 0 0 1px rgba(245,200,66,0.15); }
+  50% { box-shadow: 0 0 36px rgba(245,200,66,0.5), 0 0 0 2px rgba(245,200,66,0.35); }
+}
+
+@keyframes cardScan {
+  0% { transform: translateY(-100%); opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { transform: translateY(200%); opacity: 0; }
+}
+
+@keyframes counterFlicker {
+  0%, 100% { opacity: 1; }
+  92% { opacity: 1; }
+  93% { opacity: 0.7; }
+  94% { opacity: 1; }
+}
+
+@keyframes borderRace {
+  0% { border-color: var(--e85); }
+  33% { border-color: var(--neon); }
+  66% { border-color: var(--c93); }
+  100% { border-color: var(--e85); }
+}
+
+@keyframes revUp {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(2px); }
+  75% { transform: translateX(-2px); }
+}
+
+/* ---------- BODY & BACKGROUND TEXTURE ---------- */
+body {
+  background-image:
+    radial-gradient(ellipse at 20% 0%, rgba(2, 43, 107, 0.45) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 100%, rgba(204, 255, 0, 0.04) 0%, transparent 50%),
+    linear-gradient(rgba(255,255,255,0.018) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.018) 1px, transparent 1px);
+  background-size: 100% 100%, 100% 100%, 32px 32px, 32px 32px;
+}
+
+/* ---------- CARBON FIBRE TEXTURE ON KEY CARDS ---------- */
+.solid-card {
+  background-image:
+    repeating-linear-gradient(
+      45deg,
+      rgba(255,255,255,0.018) 0px,
+      rgba(255,255,255,0.018) 1px,
+      transparent 1px,
+      transparent 50%
+    ),
+    repeating-linear-gradient(
+      -45deg,
+      rgba(255,255,255,0.018) 0px,
+      rgba(255,255,255,0.018) 1px,
+      transparent 1px,
+      transparent 50%
+    );
+  background-size: 6px 6px, 6px 6px;
+}
+
+/* ---------- CALC CARD: RACING DIAGONAL STRIPE ---------- */
+.calc-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.calc-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 55%;
+  height: 100%;
+  background: linear-gradient(
+    105deg,
+    transparent 55%,
+    rgba(204, 255, 0, 0.018) 55%,
+    rgba(204, 255, 0, 0.018) 57.5%,
+    transparent 57.5%,
+    transparent 60%,
+    rgba(204, 255, 0, 0.012) 60%,
+    rgba(204, 255, 0, 0.012) 62%,
+    transparent 62%
+  );
+  pointer-events: none;
+  z-index: 0;
+}
+
+.calc-card > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* ---------- RALLY BANNER UPGRADE ---------- */
+.rally-banner {
+  overflow: hidden;
+}
+
+.rally-banner::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    rgba(204,255,0,0.6) 20%,
+    #ccff00 50%,
+    rgba(204,255,0,0.6) 80%,
+    transparent 100%
+  );
+  box-shadow: 0 0 12px rgba(204,255,0,0.6);
+}
+
+.scrk-brand {
+  position: relative;
+}
+
+/* ---------- DRAMATIC RESULT CARDS ---------- */
+.result-card {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.25s ease;
+  border-top-width: 3px;
+}
+
+.result-card:hover {
+  transform: translateY(-4px);
+}
+
+/* Subtle scan line animation on result cards */
+.result-card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+  animation: cardScan 5s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.result-card.ec {
+  background: linear-gradient(155deg, rgba(245,200,66,0.09) 0%, transparent 55%) !important;
+  box-shadow: 0 0 0 1px var(--card-border), 0 6px 24px rgba(0,0,0,0.6);
+}
+
+.result-card.ec:hover {
+  box-shadow: 0 0 0 1px rgba(245,200,66,0.5), 0 10px 30px rgba(245,200,66,0.18);
+}
+
+.result-card.cc {
+  background: linear-gradient(155deg, rgba(94,184,255,0.09) 0%, transparent 55%) !important;
+  box-shadow: 0 0 0 1px var(--card-border), 0 6px 24px rgba(0,0,0,0.6);
+}
+
+.result-card.cc:hover {
+  box-shadow: 0 0 0 1px rgba(94,184,255,0.5), 0 10px 30px rgba(94,184,255,0.18);
+}
+
+.result-card.xc {
+  background: linear-gradient(155deg, rgba(204,255,0,0.07) 0%, transparent 55%) !important;
+  box-shadow: 0 0 0 1px var(--card-border), 0 6px 24px rgba(0,0,0,0.6);
+}
+
+.result-card.xc:hover {
+  box-shadow: 0 0 0 1px rgba(204,255,0,0.45), 0 10px 30px rgba(204,255,0,0.15);
+}
+
+/* MUCH BIGGER RESULT NUMBERS */
+.rval {
+  font-size: 54px !important;
+  letter-spacing: -1px;
+  animation: counterFlicker 8s ease-in-out infinite;
+}
+
+.result-card.ec .rval {
+  color: var(--e85);
+  text-shadow: 0 0 18px rgba(245,200,66,0.45), 0 0 36px rgba(245,200,66,0.2);
+}
+
+.result-card.cc .rval {
+  color: var(--c93);
+  text-shadow: 0 0 18px rgba(94,184,255,0.45), 0 0 36px rgba(94,184,255,0.2);
+}
+
+.result-card.xc .rval {
+  color: var(--neon);
+  text-shadow: 0 0 18px rgba(204,255,0,0.45), 0 0 36px rgba(204,255,0,0.2);
+  animation: neonPulse 3s ease-in-out infinite;
+}
+
+.result-card .rlbl {
+  font-size: 13px;
+  letter-spacing: 1.5px;
+}
+
+/* ---------- HEADER UPGRADE ---------- */
+h1 {
+  line-height: 0.88 !important;
+  filter: drop-shadow(0 4px 18px rgba(0,0,0,0.7));
+}
+
+h1 .hl {
+  color: var(--e85);
+  text-shadow: 0 0 30px rgba(245,200,66,0.3);
+}
+
+.badge {
+  font-size: 12.5px;
+  letter-spacing: 3px;
+}
+
+/* ---------- DIGITAL TANK READING ---------- */
+.tank-reading {
+  font-size: 26px !important;
+  letter-spacing: 4px !important;
+  font-family: 'Orbitron', sans-serif !important;
+  text-shadow: 0 0 10px rgba(255,255,255,0.15);
+}
+
+.tank-reading em {
+  font-size: 16px !important;
+  letter-spacing: 2px !important;
+}
+
+/* ---------- GAUGE TRACK: SCAN LINE ---------- */
+.fuel-level-module {
+  position: relative;
+}
+
+.gauge-track {
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.06), 0 0 20px rgba(0,0,0,0.8);
+  height: 52px !important;
+}
+
+.gauge-track::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  background: repeating-linear-gradient(
+    90deg,
+    rgba(255,255,255,0) 0px,
+    rgba(255,255,255,0) 19px,
+    rgba(255,255,255,0.025) 19px,
+    rgba(255,255,255,0.025) 20px
+  );
+  pointer-events: none;
+  z-index: 10;
+}
+
+/* ---------- ETHANOL BADGE: ANIMATED GLOW ---------- */
+.ebadge.sweet {
+  animation: badgePulse 3.5s ease-in-out infinite;
+  font-family: 'Orbitron', monospace !important;
+  letter-spacing: 3px;
+  font-size: 13px;
+}
+
+.ebadge.low {
+  animation: borderRace 2s linear infinite;
+  border-width: 2px;
+}
+
+/* ---------- MODE BAR: COCKPIT SELECTOR ---------- */
+.mode-bar {
+  background: linear-gradient(135deg, rgba(0,0,0,0.6), rgba(8,10,17,0.8)) !important;
+  border: 1px solid var(--card-border) !important;
+  border-radius: 12px !important;
+  padding: 6px !important;
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  gap: 5px !important;
+  display: flex !important;
+  flex-wrap: wrap;
+}
+
+.mode-btn {
+  border-radius: 8px !important;
+  border: 1px solid transparent !important;
+  background: transparent !important;
+  font-size: 12.5px !important;
+  letter-spacing: 0.8px !important;
+  transition: all 0.18s ease !important;
+}
+
+.mode-btn:hover {
+  background: rgba(255,255,255,0.06) !important;
+  border-color: var(--card-border-bright) !important;
+}
+
+.mode-btn.active {
+  background: rgba(245,166,35,0.15) !important;
+  border: 1px solid rgba(245,166,35,0.5) !important;
+  color: var(--gold) !important;
+  box-shadow: 0 0 12px rgba(245,166,35,0.15) inset !important;
+}
+
+.mode-btn-accent {
+  color: rgba(204,255,0,0.8) !important;
+  border-color: rgba(204,255,0,0.15) !important;
+}
+
+.mode-btn-accent:hover {
+  border-color: rgba(204,255,0,0.45) !important;
+  background: rgba(204,255,0,0.06) !important;
+  box-shadow: 0 0 14px rgba(204,255,0,0.12) !important;
+}
+
+/* ---------- TUNER BANNER UPGRADE ---------- */
+.banner.grn {
+  background: linear-gradient(135deg, rgba(245,200,66,0.06) 0%, rgba(17,22,43,0.9) 100%) !important;
+  border: 1px solid rgba(245,200,66,0.2) !important;
+  border-left: 4px solid var(--e85) !important;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+}
+
+.banner .bico {
+  font-size: 22px;
+  line-height: 1.5;
+  flex-shrink: 0;
+}
+
+/* ---------- INPUT BOX FOCUS LIFT ---------- */
+.input-box {
+  transition: transform 0.15s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.input-box:focus-within {
+  transform: translateY(-2px);
+}
+
+/* ---------- STEP BOX UPGRADE ---------- */
+.step-box {
+  background: var(--card-inner) !important;
+  border: 1px solid var(--card-border) !important;
+  border-left: 4px solid var(--e85) !important;
+}
+
+.step-title {
+  color: var(--e85) !important;
+  font-size: 13px;
+  letter-spacing: 2.5px;
+}
+
+.snum {
+  background: linear-gradient(135deg, rgba(245,200,66,0.15), rgba(0,0,0,0.8)) !important;
+  border-color: rgba(245,200,66,0.4) !important;
+  color: var(--e85) !important;
+  font-size: 18px !important;
+  box-shadow: 0 0 12px rgba(245,200,66,0.2);
+}
+
+/* ---------- MATH BOX UPGRADE ---------- */
+.math-box {
+  background: linear-gradient(135deg, rgba(204,255,0,0.04), var(--card-inner)) !important;
+  border-color: rgba(204,255,0,0.3) !important;
+}
+
+.math-title {
+  font-size: 12.5px;
+  letter-spacing: 3px;
+}
+
+.math-live {
+  color: var(--neon) !important;
+  font-size: 15px;
+  animation: neonPulse 4s ease-in-out infinite;
+}
+
+/* ---------- SECTION DIVIDERS ---------- */
+.section-title {
+  font-size: 13.5px;
+  letter-spacing: 3px;
+  color: var(--text-muted) !important;
+  margin: 44px 0 20px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--card-border) !important;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.section-title::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, var(--card-border), transparent);
+}
+
+/* ---------- GALLERY: MASONRY LAYOUT WITH WRX VIBES ---------- */
+.gallery-grid {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr 1fr !important;
+  grid-template-rows: 220px 220px !important;
+  height: 460px !important;
+  gap: 14px !important;
+}
+
+.photo-card {
+  aspect-ratio: unset !important;
+  height: 100% !important;
+  border-radius: 14px !important;
+}
+
+.photo-card:nth-child(1) {
+  grid-row: 1 / 3;
+  grid-column: 1;
+}
+
+.photo-card:nth-child(2) {
+  grid-row: 1;
+  grid-column: 2;
+}
+
+.photo-card:nth-child(3) {
+  grid-row: 2;
+  grid-column: 2;
+}
+
+.photo-card:nth-child(4) {
+  grid-row: 1 / 3;
+  grid-column: 3;
+}
+
+.photo-overlay {
+  transform: translateY(0) !important;
+  background: linear-gradient(transparent 20%, rgba(0,0,0,0.92) 100%) !important;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 4px;
+}
+
+.photo-badge {
+  display: inline-block;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #000;
+  background: var(--neon);
+  padding: 2px 8px;
+  border-radius: 3px;
+  transform: skewX(-8deg);
+  margin-bottom: 4px;
+  align-self: flex-start;
+}
+
+.photo-badge span {
+  display: inline-block;
+  transform: skewX(8deg);
+}
+
+.photo-caption {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  color: #fff;
+  line-height: 1.35;
+}
+
+.photo-sub {
+  font-size: 10.5px;
+  color: rgba(255,255,255,0.55);
+  font-family: 'Share Tech Mono', monospace;
+  letter-spacing: 1px;
+}
+
+/* ---------- SAVE TELEMETRY BUTTON UPGRADE ---------- */
+.save-log-btn {
+  background: linear-gradient(135deg, #f5c842 0%, #f59500 50%, #f5c842 100%) !important;
+  background-size: 200% 100% !important;
+  transition: background-position 0.4s ease, transform 0.2s ease, box-shadow 0.2s ease !important;
+  letter-spacing: 2px !important;
+  font-size: 13.5px !important;
+  box-shadow: 0 4px 20px rgba(245,166,35,0.3), 0 0 0 1px rgba(245,200,66,0.2) !important;
+  text-transform: uppercase;
+}
+
+.save-log-btn:hover {
+  background-position: right center !important;
+  transform: translateY(-3px) !important;
+  box-shadow: 0 8px 28px rgba(245,166,35,0.5), 0 0 0 1px rgba(245,200,66,0.4) !important;
+}
+
+/* ---------- NAV HEADER POLISH ---------- */
+.scrk-nav-header {
+  border-bottom: 1px solid rgba(204,255,0,0.12) !important;
+  box-shadow: 0 4px 30px rgba(0,0,0,0.7) !important;
+}
+
+.scrk-brand-badge {
+  filter: drop-shadow(0 0 8px rgba(255,255,255,0.1));
+}
+
+.scrk-nav-item.active a {
+  animation: neonPulse 4s ease-in-out infinite;
+}
+
+/* ---------- RESPONSIVE ADJUSTMENTS FOR WOW LAYER ---------- */
+@media(max-width: 768px) {
+  .gallery-grid {
+    grid-template-columns: 1fr 1fr !important;
+    grid-template-rows: 200px 200px 200px !important;
+    height: auto !important;
+  }
+
+  .photo-card:nth-child(1) {
+    grid-row: 1;
+    grid-column: 1 / 3;
+  }
+
+  .photo-card:nth-child(2) {
+    grid-row: 2;
+    grid-column: 1;
+  }
+
+  .photo-card:nth-child(3) {
+    grid-row: 2;
+    grid-column: 2;
+  }
+
+  .photo-card:nth-child(4) {
+    grid-row: 3;
+    grid-column: 1 / 3;
+  }
+
+  .rval {
+    font-size: 42px !important;
+  }
+
+  .result-card::after {
+    display: none;
+  }
+}
+
+@media(max-width: 480px) {
+  .gallery-grid {
+    grid-template-columns: 1fr !important;
+    grid-template-rows: repeat(4, 220px) !important;
+    height: auto !important;
+  }
+
+  .photo-card:nth-child(1),
+  .photo-card:nth-child(2),
+  .photo-card:nth-child(3),
+  .photo-card:nth-child(4) {
+    grid-row: auto;
+    grid-column: auto;
+  }
+
+  .rval {
+    font-size: 36px !important;
+  }
+}

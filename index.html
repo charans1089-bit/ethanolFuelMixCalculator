@@ -19,7 +19,7 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@400;600;700;800;900&family=Share+Tech+Mono&family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;600;700&display=swap"
     rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=3.0">
+  <link rel="stylesheet" href="styles.css?v=3.1">
 </head>
 
 <body>
@@ -448,21 +448,52 @@
     </div>
 
     <!-- GALLERY SECTION -->
-    <div class="section-title">// RALLY GALLERY</div>
+    <!-- HERITAGE GALLERY -->
+    <div class="section-title">// SUBARU MOTORSPORT HERITAGE</div>
     <div class="gallery-grid">
-      <div class="photo-card" onclick="openLightbox('https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?auto=format&fit=crop&w=1200&q=80', 'Trackside Telemetry — Tuning Session')">
-        <img src="https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?auto=format&fit=crop&w=600&q=80" alt="Subaru WRX Track">
-        <div class="photo-overlay">Trackside Telemetry — Tuning Session</div>
+
+      <!-- FEATURED: WRX VB -->
+      <div class="photo-card" onclick="openLightbox('https://images.unsplash.com/photo-1544636331-e26879cd4d9b?auto=format&fit=crop&w=1200&q=85', 'FA24 WRX — SCRK Flex Fuel Daily Driver')">
+        <img src="https://images.unsplash.com/photo-1544636331-e26879cd4d9b?auto=format&fit=crop&w=800&q=80" alt="WRX FA24" loading="lazy">
+        <div class="photo-overlay">
+          <div class="photo-badge"><span>WRX · FA24</span></div>
+          <div class="photo-caption">Daily Driver · SCRK Flex Tune</div>
+          <div class="photo-sub">E85 / 93 Precision Blend Platform</div>
+        </div>
       </div>
-      <div class="photo-card" onclick="openLightbox('https://images.unsplash.com/photo-1617814076367-b759c7d7e738?auto=format&fit=crop&w=1200&q=80', 'E85 High-Pressure Rail Dynamics')">
-        <img src="https://images.unsplash.com/photo-1617814076367-b759c7d7e738?auto=format&fit=crop&w=600&q=80" alt="Engine Bay">
-        <div class="photo-overlay">E85 High-Pressure Rail Dynamics</div>
+
+      <!-- WRC Heritage -->
+      <div class="photo-card" onclick="openLightbox('https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=1200&q=85', 'WRC Rally Heritage — Impreza Spirit')">
+        <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=700&q=80" alt="WRC Rally" loading="lazy">
+        <div class="photo-overlay">
+          <div class="photo-badge"><span>WRC · HERITAGE</span></div>
+          <div class="photo-caption">Rally Bloodline</div>
+          <div class="photo-sub">Colin McRae · Petter Solberg Era</div>
+        </div>
       </div>
-      <div class="photo-card" onclick="openLightbox('https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1200&q=80', 'Dyno Pull & Knock Verification')">
-        <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=600&q=80" alt="Dyno Pull">
-        <div class="photo-overlay">Dyno Pull & Knock Verification</div>
+
+      <!-- JDM STI -->
+      <div class="photo-card" onclick="openLightbox('https://images.unsplash.com/photo-1494976388531-d1058494cdd8?auto=format&fit=crop&w=1200&q=85', 'JDM STI — Touge Mountain Pass')">
+        <img src="https://images.unsplash.com/photo-1494976388531-d1058494cdd8?auto=format&fit=crop&w=700&q=80" alt="JDM STI" loading="lazy">
+        <div class="photo-overlay">
+          <div class="photo-badge"><span>JDM · STI</span></div>
+          <div class="photo-caption">Touge Mountain Pass</div>
+          <div class="photo-sub">GDB · GRB · GR Chassis Legacy</div>
+        </div>
       </div>
+
+      <!-- FA24 Engine Bay -->
+      <div class="photo-card" onclick="openLightbox('https://images.unsplash.com/photo-1617814076367-b759c7d7e738?auto=format&fit=crop&w=1200&q=85', 'FA24 — HPFP &amp; Flex Fuel Sensor')">
+        <img src="https://images.unsplash.com/photo-1617814076367-b759c7d7e738?auto=format&fit=crop&w=800&q=80" alt="FA24 Engine Bay" loading="lazy">
+        <div class="photo-overlay">
+          <div class="photo-badge"><span>FA24 · HPFP</span></div>
+          <div class="photo-caption">High-Pressure Fuel System</div>
+          <div class="photo-sub">Flex Ethanol Sensor · Cobb AP V3</div>
+        </div>
+      </div>
+
     </div>
+
 
   </div>
 
@@ -748,7 +779,7 @@
     </div>
   </div>
 
-  <script src="app.js?v=3.0"></script>
+  <script src="app.js?v=3.1"></script>
   <script>
     function tiltCard(e, id) {
       if (window.innerWidth < 600) return;
