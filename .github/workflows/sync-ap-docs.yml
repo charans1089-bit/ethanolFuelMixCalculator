@@ -1,0 +1,40 @@
+name: SCRK — Sync AP Log Analyzer Docs
+
+on:
+  schedule:
+    # Run every 6 hours automatically
+    - cron: '0 */6 * * *'
+  workflow_dispatch:
+  repository_dispatch:
+    types: [ap_docs_updated]
+
+permissions:
+  contents: write
+
+jobs:
+  sync-docs:
+    name: Sync Remote AP Log Analyzer Documentation
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Check remote AP Log Analyzer docs for updates
+        id: sync_check
+        run: |
+          node scripts/sync-ap-analyzer-docs.mjs || echo "CHANGES_DETECTED=true" >> $GITHUB_ENV
+
+      - name: Commit and push updated docs if remote changed
+        if: env.CHANGES_DETECTED == 'true'
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add docs.html data/ap-analyzer-docs-snapshot.json
+          git commit -m "docs(sync): auto-update AP Log Analyzer documentation summary [skip ci]"
+          git push origin main
