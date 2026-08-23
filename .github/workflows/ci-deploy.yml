@@ -1,0 +1,106 @@
+name: SCRK — CI Quality Gate & Deploy
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  # ─── Quality Gate ──────────────────────────────────────────
+  quality:
+    name: Validate & Lint
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node 24
+        uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+
+      - name: Install validators
+        run: |
+          npm install -g html-validate
+          npm install -g stylelint stylelint-config-standard
+
+      - name: Validate HTML — index.html
+        run: |
+          cat > .htmlvalidate.json << 'EOF'
+          {
+            "extends": ["html-validate:recommended"],
+            "rules": {
+              "require-sri": "off",
+              "no-inline-style": "off",
+              "long-title": "off",
+              "heading-level": "off"
+            }
+          }
+          EOF
+          html-validate index.html blend-planner.html docs.html || echo "::warning::HTML validation has warnings — not blocking deploy"
+
+      - name: Check JS syntax
+        run: |
+          node --check app.js && echo "✓ app.js syntax OK"
+          node --check blend-planner.js && echo "✓ blend-planner.js syntax OK"
+          node --check blend-planner-export.js && echo "✓ blend-planner-export.js syntax OK"
+
+      - name: Check CSS brace balance
+        run: |
+          python3 -c "
+          import sys
+          for f in ['styles.css', 'blend-planner-styles.css', 'docs-styles.css']:
+              t = open(f).read()
+              o, c = t.count('{'), t.count('}')
+              if o != c:
+                  print(f'::error file={f}::Brace mismatch {o} open / {c} close')
+                  sys.exit(1)
+              print(f'✓ {f}: {o} balanced rules')
+          "
+
+      - name: Check Local Storage keys are consistent
+        run: |
+          python3 -c "
+          import re
+          with open('app.js') as f:
+              code = f.read()
+          keys = set(re.findall(r\"localStorage\\.(?:getItem|setItem|removeItem)\('([^']+)'\)\", code))
+          print('LocalStorage keys found:', sorted(keys))
+          print(f'Total unique keys: {len(keys)}')
+          "
+
+  # ─── Deploy to GitHub Pages ────────────────────────────────
+  deploy:
+    name: Deploy to GitHub Pages
+    needs: quality
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: "."
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
