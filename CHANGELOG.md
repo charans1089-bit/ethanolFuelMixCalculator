@@ -2,6 +2,17 @@
 
 All notable changes to the WRX Flex Fuel Mix Calculator project will be documented in this file.
 
+## [3.2.0] - 2026-08-23
+
+### Added
+- **Vite + TypeScript Build System**: Migrated to a modern Vite build pipeline with multi-page support.
+- **GitHub Actions CI/CD**: Added robust CI pipeline (`ci-deploy.yml`) with HTML validation, JS syntax checks, CSS brace balancing, localStorage audits, and automated deployment to GitHub Pages.
+- **Security Hardening**: Implemented strict Content-Security-Policy (CSP), `X-Content-Type-Options: nosniff`, `referrerpolicy="no-referrer"` for images, and `rel="noopener noreferrer"` for external links.
+- **SCRK Sound Engine**: Developed a pure Web Audio API synthesizer modeling the FA24 boxer rumble, turbo spool, cold-air intake, catback crackle, and BOV pop.
+- **SOUND CHECK Button**: Added an interactive "Sound Check" button to the mode bar with RPM revving animations.
+- **Brand UI Overhaul (WOW Factor)**: Upgraded design with carbon-fibre textures, animated scan lines, neon pulsing text, and a redesigned responsive mode bar.
+- **SCRK WRX Garage**: Replaced generic stock photos with a curated 3-card masonry gallery featuring the owner's actual FA24 WRX action shot, cockpit, and 6MT shifter.
+
 ## [Unreleased]
 
 ### Added (Seasonal Blend Planner Feature)
