@@ -3,7 +3,7 @@
   "source": "Apify johnvc/fuelprices",
   "search": "Dearborn, MI",
   "maxAgeDays": 3,
-  "generatedAt": "2026-08-23T04:51:04.475Z",
+  "generatedAt": "2026-08-23T08:46:59.882Z",
   "e85": {
     "fuelCode": 5,
     "count": 1,
@@ -38,8 +38,8 @@
   },
   "premium93": {
     "fuelCode": 3,
-    "count": 20,
-    "avg": 5.42,
+    "count": 19,
+    "avg": 5.422,
     "min": 4.99,
     "max": 5.79,
     "stations": [
@@ -297,29 +297,6 @@
         "bestPrice": 5.39
       },
       {
-        "id": "98820",
-        "name": "Mobil",
-        "address": {
-          "line1": "10000 Ford Rd",
-          "line2": "",
-          "city": "Dearborn",
-          "region": "MI",
-          "postalCode": "48126-3329"
-        },
-        "distance": null,
-        "distanceUnit": null,
-        "latitude": null,
-        "longitude": null,
-        "starRating": 3.6,
-        "ratingsCount": 21,
-        "priceUnit": "dollars_per_gallon",
-        "cash": 5.39,
-        "cashPostedTime": "2026-08-21T03:01:26.217Z",
-        "credit": 5.49,
-        "creditPostedTime": "2026-08-21T03:01:26.356Z",
-        "bestPrice": 5.39
-      },
-      {
         "id": "108615",
         "name": "Shell",
         "address": {
@@ -389,29 +366,6 @@
         "bestPrice": 5.59
       },
       {
-        "id": "83820",
-        "name": "Mobil",
-        "address": {
-          "line1": "22600 Michigan Ave",
-          "line2": "",
-          "city": "Dearborn",
-          "region": "MI",
-          "postalCode": "48124-2116"
-        },
-        "distance": null,
-        "distanceUnit": null,
-        "latitude": null,
-        "longitude": null,
-        "starRating": 4.6,
-        "ratingsCount": 145,
-        "priceUnit": "dollars_per_gallon",
-        "cash": null,
-        "cashPostedTime": null,
-        "credit": 5.59,
-        "creditPostedTime": "2026-08-23T03:02:16.645Z",
-        "bestPrice": 5.59
-      },
-      {
         "id": "99496",
         "name": "Mobil",
         "address": {
@@ -432,6 +386,29 @@
         "cashPostedTime": "2026-08-21T03:01:50.947Z",
         "credit": 5.59,
         "creditPostedTime": "2026-08-22T03:01:23.825Z",
+        "bestPrice": 5.59
+      },
+      {
+        "id": "83820",
+        "name": "Mobil",
+        "address": {
+          "line1": "22600 Michigan Ave",
+          "line2": "",
+          "city": "Dearborn",
+          "region": "MI",
+          "postalCode": "48124-2116"
+        },
+        "distance": null,
+        "distanceUnit": null,
+        "latitude": null,
+        "longitude": null,
+        "starRating": 4.6,
+        "ratingsCount": 145,
+        "priceUnit": "dollars_per_gallon",
+        "cash": null,
+        "cashPostedTime": null,
+        "credit": 5.59,
+        "creditPostedTime": "2026-08-23T03:02:16.645Z",
         "bestPrice": 5.59
       },
       {
@@ -505,5 +482,5 @@
       }
     ]
   },
-  "fingerprint": "69dd48ba61aa431bb64adb12adfedb107e19aab2a1c1fb14be4a6d163364d169"
+  "fingerprint": "1545798390d308de77f48173c3e13d63b081133b0a027c2802364cbb7953f560"
 }
