@@ -447,44 +447,54 @@
     });
 
     const headers = [
-      'Date / Time (EST)',
-      'Gas Station / Notes',
-      'Planned E85 (gal)',
-      'Planned 93 (gal)',
-      'Target Eth %',
-      'Actual E85 Pumped (gal)',
-      'Actual 93 Pumped (gal)',
+      'Date/Time',
+      'Gas Station',
+      'E85 Gallons',
+      'Actual E85 Gallons',
+      '93 Gallons',
+      'Actual 93 Gallons',
+      'Eth %',
       'AP Confirmed Eth %',
-      'High Eth Fill Count / Advisory',
-      'Station E85 Quality Est',
-      'Total Fill Cost ($)',
-      'Starting Tank (gal)',
-      'Starting Eth %',
-      'Data Source'
+      'Fill Cost'
     ];
 
-    const rows = fillsList.map(log => [
-      log.date,
-      log.station ?? '',
-      log.e85 ?? '',
-      log.c93 ?? '',
-      log.eth ?? '',
-      log.actualE85 ?? '',
-      log.actual93 ?? '',
-      log.apEth ?? '',
-      streakMap[log.id]?.label ?? '',
-      log.stationEthEstimate ? `E${log.stationEthEstimate}` : '',
-      log.fillCost !== null && log.fillCost !== undefined && log.fillCost !== '' ? `$${Number(log.fillCost).toFixed(2)}` : '',
-      log.curGal ?? '',
-      log.curEth ? `E${log.curEth}` : '',
-      'Copied from browser cache'
-    ].join('\t'));
+    const rows = fillsList.map(log => {
+      const streakInfo = (log.id && streakMap[log.id]) || (log.id && streakMap[String(log.id)]);
+      let streakLabel = streakInfo ? streakInfo.label : '';
+      if (!streakLabel) {
+        const ethVal = Number(log.eth ?? log.apEth ?? 0);
+        const curEthVal = Number(log.curEth ?? 0);
+        const apEthVal = Number(log.apEth ?? 0);
+        if (ethVal >= 70 || apEthVal >= 70) {
+          const count = curEthVal >= 70 ? 2 : 1;
+          streakLabel = `Fill ${count}/4 (E70+)`;
+        }
+      }
+
+      let stationStr = log.station ? log.station.trim() : 'Speedway';
+      if (streakLabel && !stationStr.includes('[Fill')) {
+        stationStr = `[${streakLabel}] ${stationStr}`;
+      }
+      stationStr = `${stationStr} (Copied from browser cache)`;
+
+      return [
+        log.date,
+        stationStr,
+        log.e85 !== null && log.e85 !== undefined ? log.e85 : '',
+        log.actualE85 !== null && log.actualE85 !== undefined && log.actualE85 !== '' ? log.actualE85 : '',
+        log.c93 !== null && log.c93 !== undefined ? log.c93 : '',
+        log.actual93 !== null && log.actual93 !== undefined && log.actual93 !== '' ? log.actual93 : '',
+        log.eth !== null && log.eth !== undefined ? log.eth : '',
+        log.apEth !== null && log.apEth !== undefined && log.apEth !== '' ? log.apEth : '',
+        log.fillCost !== null && log.fillCost !== undefined && log.fillCost !== '' ? Number(log.fillCost).toFixed(2) : ''
+      ].join('\t');
+    });
 
     const tsv = [headers.join('\t'), ...rows].join('\n');
 
     if (navigator.clipboard && navigator.clipboard.writeText) {
       navigator.clipboard.writeText(tsv).then(() => {
-        alert(`✓ ${fillsList.length} fuel logs copied to clipboard!\n\nTo paste into Google Sheets / Excel:\n1. Open your sheet\n2. Click cell A1\n3. Press Ctrl+V (or Cmd+V) to paste into columns.\n\nIncludes 'High Eth Fill Count / Advisory' (e.g. Fill 2/4) and 'Copied from browser cache'.`);
+        alert(`✓ ${fillsList.length} fuel logs copied to clipboard!\n\nTo paste into your Google Sheet:\n1. Open your sheet\n2. Click cell B1 (or B2)\n3. Press Cmd+V (or Ctrl+V) to drop all columns in 1-to-1 exact order.`);
       }).catch(() => {
         prompt('Copy your fuel logs for Google Sheets below:', tsv);
       });

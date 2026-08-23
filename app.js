@@ -1736,21 +1736,13 @@ function sendToGoogleForm(log, sourceNote) {
 
   fd.append(FORM_ENTRY_STATION, stationStr);
   fd.append(FORM_ENTRY_E85, log.e85 !== null && log.e85 !== undefined ? String(log.e85) : '');
+  fd.append(FORM_ENTRY_ACTUAL_E85, log.actualE85 !== null && log.actualE85 !== undefined && log.actualE85 !== '' ? String(log.actualE85) : '');
   fd.append(FORM_ENTRY_93, log.c93 !== null && log.c93 !== undefined ? String(log.c93) : '');
+  fd.append(FORM_ENTRY_ACTUAL_93, log.actual93 !== null && log.actual93 !== undefined && log.actual93 !== '' ? String(log.actual93) : '');
   fd.append(FORM_ENTRY_ETH, log.eth !== null && log.eth !== undefined ? String(log.eth) : '');
+  fd.append(FORM_ENTRY_AP_ETH, log.apEth !== null && log.apEth !== undefined && log.apEth !== '' ? String(log.apEth) : '');
+  fd.append(FORM_ENTRY_FILL_COST, log.fillCost !== null && log.fillCost !== undefined && log.fillCost !== '' ? Number(log.fillCost).toFixed(2) : '');
 
-  if (typeof FORM_ENTRY_AP_ETH === 'string' && FORM_ENTRY_AP_ETH.startsWith('entry.')) {
-    fd.append(FORM_ENTRY_AP_ETH, log.apEth === null || log.apEth === undefined || log.apEth === '' ? '' : String(log.apEth));
-  }
-  if (typeof FORM_ENTRY_ACTUAL_E85 === 'string' && FORM_ENTRY_ACTUAL_E85.startsWith('entry.')) {
-    fd.append(FORM_ENTRY_ACTUAL_E85, log.actualE85 === null || log.actualE85 === undefined || log.actualE85 === '' ? '' : String(log.actualE85));
-  }
-  if (typeof FORM_ENTRY_ACTUAL_93 === 'string' && FORM_ENTRY_ACTUAL_93.startsWith('entry.')) {
-    fd.append(FORM_ENTRY_ACTUAL_93, log.actual93 === null || log.actual93 === undefined || log.actual93 === '' ? '' : String(log.actual93));
-  }
-  if (typeof FORM_ENTRY_FILL_COST === 'string' && FORM_ENTRY_FILL_COST.startsWith('entry.')) {
-    fd.append(FORM_ENTRY_FILL_COST, log.fillCost === null || log.fillCost === undefined || log.fillCost === '' ? '' : Number(log.fillCost).toFixed(2));
-  }
   fetch(GOOGLE_FORM_ACTION_URL, { method: 'POST', mode: 'no-cors', body: fd }).catch(() => { });
 }
 
@@ -1761,20 +1753,15 @@ function copyLogsForGoogleSheets() {
   }
   const streakMap = getHistoricalHighEthStreaks(fuelLogs);
   const headers = [
-    'Date / Time (EST)',
-    'Gas Station / Notes',
-    'High Eth Fill #',
-    'Planned E85 (gal)',
-    'Planned 93 (gal)',
-    'Target Eth %',
-    'Actual E85 Pumped (gal)',
-    'Actual 93 Pumped (gal)',
+    'Date/Time',
+    'Gas Station',
+    'E85 Gallons',
+    'Actual E85 Gallons',
+    '93 Gallons',
+    'Actual 93 Gallons',
+    'Eth %',
     'AP Confirmed Eth %',
-    'Station E85 Quality Est',
-    'Total Fill Cost ($)',
-    'Starting Tank (gal)',
-    'Starting Eth %',
-    'Data Source'
+    'Fill Cost'
   ];
 
   const rows = fuelLogs.map(log => {
@@ -1790,21 +1777,22 @@ function copyLogsForGoogleSheets() {
       }
     }
 
+    let stationStr = log.station ? log.station.trim() : 'Speedway';
+    if (streakLabel && !stationStr.includes('[Fill')) {
+      stationStr = `[${streakLabel}] ${stationStr}`;
+    }
+    stationStr = `${stationStr} (Copied from browser cache)`;
+
     return [
       log.date,
-      log.station ?? '',
-      streakLabel,
-      log.e85 ?? '',
-      log.c93 ?? '',
-      log.eth ?? '',
+      stationStr,
+      log.e85 !== null && log.e85 !== undefined ? log.e85 : '',
       log.actualE85 !== null && log.actualE85 !== undefined && log.actualE85 !== '' ? log.actualE85 : '',
+      log.c93 !== null && log.c93 !== undefined ? log.c93 : '',
       log.actual93 !== null && log.actual93 !== undefined && log.actual93 !== '' ? log.actual93 : '',
+      log.eth !== null && log.eth !== undefined ? log.eth : '',
       log.apEth !== null && log.apEth !== undefined && log.apEth !== '' ? log.apEth : '',
-      log.stationEthEstimate ? `E${log.stationEthEstimate}` : '',
-      log.fillCost !== null && log.fillCost !== undefined && log.fillCost !== '' ? `$${Number(log.fillCost).toFixed(2)}` : '',
-      log.curGal ?? '',
-      log.curEth ? `E${log.curEth}` : '',
-      'Copied from browser cache'
+      log.fillCost !== null && log.fillCost !== undefined && log.fillCost !== '' ? Number(log.fillCost).toFixed(2) : ''
     ].join('\t');
   });
 
@@ -1812,7 +1800,7 @@ function copyLogsForGoogleSheets() {
 
   if (navigator.clipboard && navigator.clipboard.writeText) {
     navigator.clipboard.writeText(tsv).then(() => {
-      alert(`✓ ${fuelLogs.length} fuel logs copied to clipboard!\n\nTo paste into Google Sheets / Excel:\n1. Open your sheet\n2. Click cell A1\n3. Press Ctrl+V (or Cmd+V) to paste.\n\nIncludes High Eth Fill Numbers (e.g. Fill 2/4) and all telemetry.`);
+      alert(`✓ ${fuelLogs.length} fuel logs copied to clipboard!\n\nTo paste into your Google Sheet:\n1. Open your sheet\n2. Click cell B1 (or B2)\n3. Press Cmd+V (or Ctrl+V) to drop all columns in 1-to-1 exact order.`);
     }).catch(() => {
       prompt('Copy your fuel logs for Google Sheets below:', tsv);
     });
