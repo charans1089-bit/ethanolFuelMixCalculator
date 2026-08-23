@@ -42,7 +42,7 @@
           <li class="scrk-nav-item"><a href="index.html">⛽ Fuel Calculator</a></li>
           <li class="scrk-nav-item"><a href="blend-planner.html">📅 Seasonal Planner</a></li>
           <li class="scrk-nav-item active"><a href="docs.html">📖 Engineering Docs</a></li>
-          <li class="scrk-nav-item"><a href="https://charans1089-bit.github.io/ap-log-analyzer/" target="_blank" rel="noopener">📊 AP Log Analyzer ↗</a></li>
+          <li class="scrk-nav-item"><a href="https://charans1089-bit.github.io/ap-log-analyzer/docs.html" target="_blank" rel="noopener noreferrer">📊 AP Log Analyzer Docs ↗</a></li>
         </ul>
       </nav>
     </div>
@@ -64,6 +64,7 @@
         <li><a href="#ap-telemetry">7. Cobb AP Gauge Guide</a></li>
         <li><a href="#weather-dynamics">8. Seasonal Dynamics</a></li>
         <li><a href="#telemetry-sync">9. Telemetry & Cloud Sync</a></li>
+        <li><a href="#ap-log-analyzer">10. AP Datalog Analyzer Docs ↗</a></li>
       </ul>
     </aside>
 
@@ -363,6 +364,31 @@
         <ol>
           <li><strong>Headless Google Form Sync:</strong> Automatically maps all 9 telemetry fields (Date/Time, Station notes with streak tag, planned gallons, actual pumped gallons, target %, AP verified %, and fill cost) directly to your linked Google Form.</li>
           <li><strong>1-Click Clipboard TSV Export:</strong> Generates a tab-separated value matrix formatted exactly to drop into cell <code>B1</code> of your Google Sheet with matching headers and decimal precision.</li>
+        </ol>
+      </section>
+
+      <!-- CHAPTER 10: COBB AP DATALOG ANALYZER INTEGRATION -->
+      <section class="doc-section" id="ap-log-analyzer">
+        <h2><span class="section-num">10</span> SCRK Ecosystem & Cobb AP Datalog Analyzer</h2>
+        <div class="section-sub">End-to-End Flex Fuel Datalog Analysis · Telemetry Verification</div>
+
+        <p>The <strong>SCRK Flex Fuel Calculator</strong> operates as one half of a unified motorsport tuning suite. For post-fill verification, CSV datalog analysis, and engine health diagnostic auditing, use the dedicated sister application:</p>
+
+        <div class="callout info" style="border-left-color: var(--neon); background: rgba(204, 255, 0, 0.05); margin: 20px 0;">
+          <div class="callout-icon">📊</div>
+          <div class="callout-body">
+            <div class="callout-title" style="color: var(--neon); font-size: 16px;">SCRK Accessport Datalog Analyzer</div>
+            <p style="margin: 6px 0 12px; font-size: 14px;">Upload Cobb AP V3 CSV logs to instantly chart DAM stability, AFR curves, boost targets, ignition timing, and high-pressure fuel pump (HPFP) duty cycles.</p>
+            <a href="https://charans1089-bit.github.io/ap-log-analyzer/docs.html" target="_blank" rel="noopener noreferrer" class="doc-link-btn" style="display: inline-flex; align-items: center; gap: 6px; font-family: 'Share Tech Mono', monospace; font-size: 13px; color: #080a11; background: var(--neon); padding: 10px 20px; border-radius: 6px; text-decoration: none; font-weight: 800; text-transform: uppercase; letter-spacing: 1px;">📖 Open AP Log Analyzer Documentation ↗</a>
+          </div>
+        </div>
+
+        <h3 style="margin-top: 24px; font-family: 'Orbitron', monospace; font-size: 15px; color: #fff; letter-spacing: 1px;">Unified Tuning & Diagnostic Workflow</h3>
+        <ol style="margin: 12px 0 0 20px; color: var(--text-body); line-height: 1.8;">
+          <li><strong>Step 1 (Calculate):</strong> Use the SCRK Ethanol Calculator to compute your exact E85 and 93 pump volumes for your desired target (e.g. E30, E50, E70).</li>
+          <li><strong>Step 2 (Fill & Verify):</strong> Pump the prescribed fuel volumes and verify your live ethanol percentage on your Cobb Accessport gauge reading.</li>
+          <li><strong>Step 3 (Datalog):</strong> Perform a 3rd-gear WOT pull on a closed course while recording a CSV log on your Accessport V3.</li>
+          <li><strong>Step 4 (Analyze):</strong> Open the <a href="https://charans1089-bit.github.io/ap-log-analyzer/" target="_blank" rel="noopener noreferrer" style="color: var(--neon); text-decoration: underline;">SCRK AP Log Analyzer</a> (or read the full <a href="https://charans1089-bit.github.io/ap-log-analyzer/docs.html" target="_blank" rel="noopener noreferrer" style="color: var(--neon); text-decoration: underline;">AP Log Analyzer Engineering Docs</a>) to inspect DAM, Fine Knock Learn, Feedback Knock, and Fuel Trims for 100% compliance.</li>
         </ol>
       </section>
 
