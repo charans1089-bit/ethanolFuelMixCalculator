@@ -1712,24 +1712,26 @@ function sendToGoogleForm(log, sourceNote) {
   fd.append(FORM_ENTRY_DATE, log.date);
 
   let streakTag = '';
-  const streakMap = getHistoricalHighEthStreaks(fuelLogs.length ? fuelLogs : [log]);
-  if (log.id && streakMap[log.id] && streakMap[log.id].isHigh) {
-    streakTag = `[${streakMap[log.id].label}]`;
+  const streakMap = getHistoricalHighEthStreaks(fuelLogs && fuelLogs.length ? fuelLogs : [log]);
+  const streakInfo = (log.id && streakMap[log.id]) || (log.id && streakMap[String(log.id)]) || null;
+  if (streakInfo && streakInfo.label) {
+    streakTag = `[${streakInfo.label}]`;
   } else {
     const ethVal = Number(log.eth ?? log.apEth ?? 0);
     const curEthVal = Number(log.curEth ?? 0);
-    if (ethVal >= 70 || Number(log.apEth) >= 70) {
+    const apEthVal = Number(log.apEth ?? 0);
+    if (ethVal >= 70 || apEthVal >= 70) {
       const count = curEthVal >= 70 ? 2 : 1;
       streakTag = `[Fill ${count}/4 (E70+)]`;
     }
   }
 
-  let stationStr = log.station || 'Station Stop';
-  if (streakTag) {
-    stationStr = `${stationStr} ${streakTag}`;
+  let stationStr = log.station ? log.station.trim() : 'Speedway';
+  if (streakTag && !stationStr.includes('[Fill')) {
+    stationStr = `${streakTag} ${stationStr}`;
   }
   if (sourceNote) {
-    stationStr = `${stationStr} · ${sourceNote}`;
+    stationStr = `${stationStr} (${sourceNote})`;
   }
 
   fd.append(FORM_ENTRY_STATION, stationStr);
@@ -1761,13 +1763,13 @@ function copyLogsForGoogleSheets() {
   const headers = [
     'Date / Time (EST)',
     'Gas Station / Notes',
+    'High Eth Fill #',
     'Planned E85 (gal)',
     'Planned 93 (gal)',
     'Target Eth %',
     'Actual E85 Pumped (gal)',
     'Actual 93 Pumped (gal)',
     'AP Confirmed Eth %',
-    'High Eth Fill Count / Advisory',
     'Station E85 Quality Est',
     'Total Fill Cost ($)',
     'Starting Tank (gal)',
@@ -1775,28 +1777,42 @@ function copyLogsForGoogleSheets() {
     'Data Source'
   ];
 
-  const rows = fuelLogs.map(log => [
-    log.date,
-    log.station ?? '',
-    log.e85 ?? '',
-    log.c93 ?? '',
-    log.eth ?? '',
-    log.actualE85 ?? '',
-    log.actual93 ?? '',
-    log.apEth ?? '',
-    streakMap[log.id]?.label ?? '',
-    log.stationEthEstimate ? `E${log.stationEthEstimate}` : '',
-    log.fillCost !== null && log.fillCost !== undefined && log.fillCost !== '' ? `$${Number(log.fillCost).toFixed(2)}` : '',
-    log.curGal ?? '',
-    log.curEth ? `E${log.curEth}` : '',
-    'Copied from browser cache'
-  ].join('\t'));
+  const rows = fuelLogs.map(log => {
+    const streakInfo = (log.id && streakMap[log.id]) || (log.id && streakMap[String(log.id)]);
+    let streakLabel = streakInfo ? streakInfo.label : '';
+    if (!streakLabel) {
+      const ethVal = Number(log.eth ?? log.apEth ?? 0);
+      const curEthVal = Number(log.curEth ?? 0);
+      const apEthVal = Number(log.apEth ?? 0);
+      if (ethVal >= 70 || apEthVal >= 70) {
+        const count = curEthVal >= 70 ? 2 : 1;
+        streakLabel = `Fill ${count}/4 (E70+)`;
+      }
+    }
+
+    return [
+      log.date,
+      log.station ?? '',
+      streakLabel,
+      log.e85 ?? '',
+      log.c93 ?? '',
+      log.eth ?? '',
+      log.actualE85 !== null && log.actualE85 !== undefined && log.actualE85 !== '' ? log.actualE85 : '',
+      log.actual93 !== null && log.actual93 !== undefined && log.actual93 !== '' ? log.actual93 : '',
+      log.apEth !== null && log.apEth !== undefined && log.apEth !== '' ? log.apEth : '',
+      log.stationEthEstimate ? `E${log.stationEthEstimate}` : '',
+      log.fillCost !== null && log.fillCost !== undefined && log.fillCost !== '' ? `$${Number(log.fillCost).toFixed(2)}` : '',
+      log.curGal ?? '',
+      log.curEth ? `E${log.curEth}` : '',
+      'Copied from browser cache'
+    ].join('\t');
+  });
 
   const tsv = [headers.join('\t'), ...rows].join('\n');
 
   if (navigator.clipboard && navigator.clipboard.writeText) {
     navigator.clipboard.writeText(tsv).then(() => {
-      alert(`✓ ${fuelLogs.length} fuel logs copied to clipboard!\n\nTo paste into Google Sheets / Excel:\n1. Open your sheet\n2. Click cell A1\n3. Press Ctrl+V (or Cmd+V) to paste into columns.\n\nIncludes 'High Eth Fill Count / Advisory' (e.g. Fill 2/4) and 'Copied from browser cache'.`);
+      alert(`✓ ${fuelLogs.length} fuel logs copied to clipboard!\n\nTo paste into Google Sheets / Excel:\n1. Open your sheet\n2. Click cell A1\n3. Press Ctrl+V (or Cmd+V) to paste.\n\nIncludes High Eth Fill Numbers (e.g. Fill 2/4) and all telemetry.`);
     }).catch(() => {
       prompt('Copy your fuel logs for Google Sheets below:', tsv);
     });
