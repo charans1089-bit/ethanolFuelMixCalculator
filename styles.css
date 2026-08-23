@@ -1073,10 +1073,10 @@ h1 .hl {
 /* ==================== UPGRADED DATA LOGGING ==================== */
 .log-action-bar {
   display: flex;
+  flex-direction: column;
   gap: 16px;
-  align-items: flex-end;
   margin-bottom: 28px;
-  padding: 20px;
+  padding: 22px;
   background: var(--card-inner);
   border: 1px solid var(--card-border);
   border-radius: 12px;
@@ -1084,14 +1084,14 @@ h1 .hl {
 }
 
 .log-input-group {
-  flex: 1;
+  width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 10px;
 }
 
 .log-actuals {
-  margin-top: 10px;
+  margin-top: 8px;
   display: flex;
   flex-direction: column;
   gap: 8px;
@@ -1111,7 +1111,7 @@ h1 .hl {
 
 .log-actual-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: repeat(3, 1fr);
   gap: 12px;
 }
 
@@ -1143,7 +1143,7 @@ h1 .hl {
   gap: 12px;
   align-items: center;
   padding: 12px 14px;
-  margin-top: 10px;
+  margin-top: 6px;
   border: 1px solid rgba(204, 255, 0, 0.28);
   border-radius: 10px;
   background: rgba(204, 255, 0, 0.06);
@@ -1202,12 +1202,14 @@ h1 .hl {
   background: #000;
   border: 1px solid var(--card-border-bright);
   border-radius: 8px;
-  padding: 16px;
+  padding: 14px 16px;
   font-family: 'Share Tech Mono';
   font-size: 16px;
   color: var(--text);
   outline: none;
   transition: border-color .2s;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .station-input:focus {
@@ -1216,26 +1218,31 @@ h1 .hl {
 }
 
 .save-log-btn {
-  font-family: 'Share Tech Mono';
+  width: 100%;
+  font-family: 'Orbitron', 'Share Tech Mono', sans-serif;
   font-size: 14px;
-  letter-spacing: 1px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
   padding: 16px 24px;
   border-radius: 8px;
   cursor: pointer;
   border: none;
-  background: var(--gold);
+  background: linear-gradient(135deg, #f5c842 0%, #f5a623 100%);
   color: #000;
-  font-weight: bold;
   transition: all .2s ease;
   display: flex;
   align-items: center;
-  gap: 8px;
+  justify-content: center;
+  gap: 10px;
+  min-height: 48px;
+  box-shadow: 0 4px 15px rgba(245, 166, 35, 0.25);
+  touch-action: manipulation;
 }
 
 .save-log-btn:hover {
-  background: #ffc74a;
+  background: linear-gradient(135deg, #ffd700 0%, #ffb732 100%);
   transform: translateY(-2px);
-  box-shadow: 0 6px 16px rgba(245, 166, 35, 0.4);
+  box-shadow: 0 6px 20px rgba(245, 166, 35, 0.45);
 }
 
 .btn-icon {
