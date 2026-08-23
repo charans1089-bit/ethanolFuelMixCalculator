@@ -94,13 +94,19 @@
       'AvgTemp_F',
       'Recommended_Blend',
       'Target_Midpoint',
-      'Actual_Logged_Blend',
-      'Station',
-      'Gallons_E85',
-      'Gallons_93',
+      'Calculated_Target_Eth',
+      'AP_Confirmed_Eth',
+      'Planned_E85_Gal',
+      'Planned_93_Gal',
+      'Actual_E85_Pumped_Gal',
+      'Actual_93_Pumped_Gal',
+      'Station_Name',
+      'Station_E85_Quality_Est',
+      'Starting_Tank_Gal',
+      'Starting_Eth_Pct',
       'Fill_Cost_USD',
       'Compliance_Status',
-      'Notes'
+      'Daily_Notes'
     ];
 
     const rows = [headers.map(sanitizeCSVField).join(',')];
@@ -118,19 +124,31 @@
         });
 
         const dayNote = notesMap[dateStr] || '';
-        let actualBlend = '';
+        let calcEth = '';
+        let apEth = '';
+        let plannedE85 = '';
+        let planned93 = '';
+        let actualE85 = '';
+        let actual93 = '';
         let station = '';
-        let e85Gal = '';
-        let c93Gal = '';
+        let stationEthEst = '';
+        let curGal = '';
+        let curEth = '';
         let cost = '';
         let compliance = 'No fill logged';
 
         if (dayFill) {
-          actualBlend = dayFill.eth !== undefined ? `E${dayFill.eth}` : '';
+          calcEth = dayFill.eth !== undefined && dayFill.eth !== null ? `E${dayFill.eth}` : '';
+          apEth = dayFill.apEth !== undefined && dayFill.apEth !== null && dayFill.apEth !== '' ? `E${dayFill.apEth}` : '';
+          plannedE85 = dayFill.e85 !== undefined && dayFill.e85 !== null ? dayFill.e85 : '';
+          planned93 = dayFill.c93 !== undefined && dayFill.c93 !== null ? dayFill.c93 : '';
+          actualE85 = dayFill.actualE85 !== undefined && dayFill.actualE85 !== null && dayFill.actualE85 !== '' ? dayFill.actualE85 : '';
+          actual93 = dayFill.actual93 !== undefined && dayFill.actual93 !== null && dayFill.actual93 !== '' ? dayFill.actual93 : '';
           station = dayFill.station || '';
-          e85Gal = dayFill.fillE85 || dayFill.e85 || '';
-          c93Gal = dayFill.fill93 || dayFill.c93 || '';
-          cost = dayFill.fillCost !== undefined && dayFill.fillCost !== null ? Number(dayFill.fillCost).toFixed(2) : '';
+          stationEthEst = dayFill.stationEthEstimate !== undefined && dayFill.stationEthEstimate !== null && dayFill.stationEthEstimate !== '' ? `E${dayFill.stationEthEstimate}` : '';
+          curGal = dayFill.curGal !== undefined && dayFill.curGal !== null ? dayFill.curGal : '';
+          curEth = dayFill.curEth !== undefined && dayFill.curEth !== null ? `E${dayFill.curEth}` : '';
+          cost = dayFill.fillCost !== undefined && dayFill.fillCost !== null && dayFill.fillCost !== '' ? Number(dayFill.fillCost).toFixed(2) : '';
           
           const ethVal = Number(dayFill.eth);
           if (Number.isFinite(ethVal)) {
@@ -146,10 +164,16 @@
           sanitizeCSVField(monthObj.temp),
           sanitizeCSVField(monthObj.recommendation),
           sanitizeCSVField(`E${monthObj.midpoint}`),
-          sanitizeCSVField(actualBlend),
+          sanitizeCSVField(calcEth),
+          sanitizeCSVField(apEth),
+          sanitizeCSVField(plannedE85),
+          sanitizeCSVField(planned93),
+          sanitizeCSVField(actualE85),
+          sanitizeCSVField(actual93),
           sanitizeCSVField(station),
-          sanitizeCSVField(e85Gal),
-          sanitizeCSVField(c93Gal),
+          sanitizeCSVField(stationEthEst),
+          sanitizeCSVField(curGal),
+          sanitizeCSVField(curEth),
           sanitizeCSVField(cost),
           sanitizeCSVField(compliance),
           sanitizeCSVField(dayNote)
@@ -285,9 +309,77 @@
     }
   }
 
+  /**
+   * Generates a 1-to-1 exact CSV dump of all saved browser fuel logs
+   */
+  function exportTelemetryLogsCSV(fillsList) {
+    if (!fillsList || !fillsList.length) {
+      alert('No logged fuel fills to export.');
+      return;
+    }
+    const headers = [
+      'Date (EST)',
+      'Station / Notes',
+      'Planned E85 Gallons',
+      'Planned 93 Gallons',
+      'Actual E85 Gallons',
+      'Actual 93 Gallons',
+      'AP Confirmed Eth %',
+      'Resulting Calculated Eth %',
+      'Starting Tank Gallons',
+      'Starting Eth %',
+      'Target Eth %',
+      'Max Eth Ceiling %',
+      'Station E85 Quality Est',
+      'E85 Price ($/gal)',
+      '93 Price ($/gal)',
+      'E85 Cost ($)',
+      '93 Cost ($)',
+      'Total Fill Cost ($)',
+      'Fill Mode',
+      'Ambient Temp F',
+      'Pump E85 % Assumption',
+      'Pump Gas % Assumption'
+    ];
+
+    const rows = [headers.map(sanitizeCSVField).join(',')];
+
+    fillsList.forEach(log => {
+      const row = [
+        sanitizeCSVField(log.date),
+        sanitizeCSVField(log.station ?? ''),
+        sanitizeCSVField(log.e85 ?? ''),
+        sanitizeCSVField(log.c93 ?? ''),
+        sanitizeCSVField(log.actualE85 ?? ''),
+        sanitizeCSVField(log.actual93 ?? ''),
+        sanitizeCSVField(log.apEth ?? ''),
+        sanitizeCSVField(log.eth ?? ''),
+        sanitizeCSVField(log.curGal ?? ''),
+        sanitizeCSVField(log.curEth ?? ''),
+        sanitizeCSVField(log.tgtEth ?? ''),
+        sanitizeCSVField(log.maxEth ?? ''),
+        sanitizeCSVField(log.stationEthEstimate ?? ''),
+        sanitizeCSVField(log.priceE85 ?? ''),
+        sanitizeCSVField(log.price93 ?? ''),
+        sanitizeCSVField(log.costE85 ?? ''),
+        sanitizeCSVField(log.cost93 ?? ''),
+        sanitizeCSVField(log.fillCost ?? ''),
+        sanitizeCSVField(log.fillMode ?? ''),
+        sanitizeCSVField(log.ambientTempF ?? ''),
+        sanitizeCSVField(log.pumpE85 ?? ''),
+        sanitizeCSVField(log.pumpGas ?? '')
+      ];
+      rows.push(row.join(','));
+    });
+
+    const csvContent = '\uFEFF' + rows.join('\r\n');
+    downloadBlob(`SCRK_FuelLogs_${Date.now()}.csv`, csvContent, 'text/csv;charset=utf-8');
+  }
+
   window.BlendExport = {
     exportCalendarICS,
     exportScheduleCSV,
+    exportTelemetryLogsCSV,
     exportFullJSON,
     exportMetricsJSON,
     copyGitHubInstructions,

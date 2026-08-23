@@ -242,16 +242,22 @@
       </p>
 
       <div class="export-grid">
-        <button class="export-btn" type="button" onclick="const s = window.BlendPlanner.getState(); window.BlendExport.exportCalendarICS(s.currentYear, s.monthsData, s.activeLocationKey);">
-          <span class="exp-ico">📅</span>
-          <span class="exp-title">Download ICS</span>
-          <span class="exp-sub">Google / Apple / Outlook Calendar</span>
+        <button class="export-btn" type="button" onclick="const s = window.BlendPlanner.getState(); window.BlendExport.exportTelemetryLogsCSV(s.fills);">
+          <span class="exp-ico">📓</span>
+          <span class="exp-title">Logbook CSV</span>
+          <span class="exp-sub">Exact Planned vs Actual Fills</span>
         </button>
 
         <button class="export-btn" type="button" onclick="const s = window.BlendPlanner.getState(); window.BlendExport.exportScheduleCSV(s.currentYear, s.monthsData, s.fills, s.notesMap);">
           <span class="exp-ico">📊</span>
-          <span class="exp-title">Download CSV</span>
-          <span class="exp-sub">Excel / Sheets Blend Schedule</span>
+          <span class="exp-title">Schedule CSV</span>
+          <span class="exp-sub">12-Month Calendar Schedule</span>
+        </button>
+
+        <button class="export-btn" type="button" onclick="const s = window.BlendPlanner.getState(); window.BlendExport.exportCalendarICS(s.currentYear, s.monthsData, s.activeLocationKey);">
+          <span class="exp-ico">📅</span>
+          <span class="exp-title">Download ICS</span>
+          <span class="exp-sub">Google / Apple / Outlook Calendar</span>
         </button>
 
         <button class="export-btn" type="button" onclick="window.BlendExport.exportFullJSON(window.BlendPlanner.getState());">
