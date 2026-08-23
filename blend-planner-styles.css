@@ -59,8 +59,10 @@ body {
   background-color: var(--bg-page);
   color: var(--text-body);
   min-height: 100vh;
-  padding: 0 0 80px;
+  padding: 0 0 max(80px, env(safe-area-inset-bottom, 80px));
   overflow-x: hidden;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
   background-image:
     radial-gradient(ellipse at 50% 0%, rgba(2, 43, 107, 0.35) 0%, transparent 60%),
     linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),

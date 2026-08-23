@@ -48,8 +48,10 @@ body {
   background-color: var(--bg-page);
   color: var(--text-body);
   min-height: 100vh;
-  padding: 0 0 72px;
+  padding: 0 0 max(72px, env(safe-area-inset-bottom, 72px));
   overflow-x: hidden;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
   background-image:
     linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
     linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
@@ -431,6 +433,8 @@ h1 .hl {
 
 .tactile-slider {
   -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
   width: 100%;
   background: transparent;
   height: 40px;
@@ -448,8 +452,19 @@ h1 .hl {
   box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.9);
 }
 
+.tactile-slider::-moz-range-track {
+  width: 100%;
+  height: 14px;
+  cursor: pointer;
+  background: #000;
+  border-radius: 7px;
+  border: 1px solid var(--card-border-bright);
+  box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.9);
+}
+
 .tactile-slider::-webkit-slider-thumb {
   -webkit-appearance: none;
+  appearance: none;
   height: 36px;
   width: 28px;
   background: #12141f;
@@ -461,12 +476,33 @@ h1 .hl {
   background-image: repeating-linear-gradient(90deg, transparent, transparent 2px, rgba(255, 255, 255, 0.1) 2px, rgba(255, 255, 255, 0.1) 4px);
 }
 
+.tactile-slider::-moz-range-thumb {
+  height: 36px;
+  width: 28px;
+  background: #12141f;
+  border: 2px solid var(--gold);
+  border-radius: 6px;
+  cursor: pointer;
+  box-shadow: 0 0 12px var(--e85-glow), inset 0 0 4px rgba(255, 255, 255, 0.2);
+  background-image: repeating-linear-gradient(90deg, transparent, transparent 2px, rgba(255, 255, 255, 0.1) 2px, rgba(255, 255, 255, 0.1) 4px);
+}
+
 .tactile-slider::-webkit-slider-thumb:active {
   transform: scale(1.1);
   border-color: #fff;
 }
 
+.tactile-slider::-moz-range-thumb:active {
+  transform: scale(1.1);
+  border-color: #fff;
+}
+
 .neon-slider::-webkit-slider-thumb {
+  border-color: var(--neon);
+  box-shadow: 0 0 12px rgba(204, 255, 0, 0.4);
+}
+
+.neon-slider::-moz-range-thumb {
   border-color: var(--neon);
   box-shadow: 0 0 12px rgba(204, 255, 0, 0.4);
 }
@@ -1962,137 +1998,19 @@ tbody td {
   color: var(--c93);
 }
 
-/* ==================== RESPONSIVE ==================== */
-@media(max-width:768px) {
-  .header {
-    flex-direction: column;
-    align-items: stretch;
-  }
-
-  .header-right {
-    align-items: flex-start;
-    flex-direction: row-reverse;
-    justify-content: space-between;
-  }
-
-  .hpills {
-    align-items: flex-start;
-  }
-
-  h1 {
-    font-size: 42px;
-  }
-
-  .custom-inputs {
-    grid-template-columns: 1fr 1fr;
-  }
-
-  .custom-inputs .tgt {
-    grid-column: 1 / -1;
-  }
-
-  .result-grid {
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
-  }
-
-  .result-grid .xc {
-    grid-column: 1/-1;
-  }
-
-  .log-action-bar {
-    flex-direction: column;
-    align-items: stretch;
-  }
-
-  .log-actual-grid {
-    grid-template-columns: 1fr 1fr;
-  }
-
-  .log-edit-banner {
-    flex-direction: column;
-    align-items: stretch;
-  }
-
-  .save-log-btn {
-    width: 100%;
-    justify-content: center;
-    padding: 20px;
-  }
-
-  .mode-bar {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 8px;
-  }
-
-  .gallery-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .scrk-brand {
-    font-size: 36px;
-    letter-spacing: 6px;
-  }
-
-  .fill-mode-head {
-    flex-direction: column;
-  }
-
-  .fill-mode-options {
-    justify-content: flex-start;
-  }
-
-  .advanced-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .station-insights-head {
-    flex-direction: column;
-  }
-
-  .station-insights-body {
-    grid-template-columns: 1fr;
-  }
-}
-
-@media(max-width:560px) {
-  .custom-inputs {
-    grid-template-columns: 1fr;
-  }
-
-  .custom-inputs .tgt {
-    grid-column: auto;
-  }
-
-  .input-row input {
-    font-size: 28px;
-  }
-
-  .log-actual-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .log-edit-banner {
-    padding: 12px;
-  }
-
-  .advanced-price-row {
-    grid-template-columns: 1fr;
-  }
-}
-
-/* ==================== EDIT LOG MODAL & IOS LOGBOOK ==================== */
+/* ==================== EDIT LOG MODAL ==================== */
 .table-wrap {
   width: 100%;
+  max-width: 100%;
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
   border-radius: 8px;
   margin-top: 8px;
+  position: relative;
 }
 
 .table-wrap table {
-  min-width: 680px;
+  min-width: 760px;
   border-collapse: collapse;
   width: 100%;
 }
@@ -2116,6 +2034,7 @@ tbody td {
   align-items: center;
   justify-content: center;
   margin-right: 4px;
+  touch-action: manipulation;
 }
 
 .row-btn.edit-btn {
@@ -2139,12 +2058,6 @@ tbody td {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 12px;
-}
-
-@media (max-width: 480px) {
-  .edit-two-col {
-    grid-template-columns: 1fr;
-  }
 }
 
 .edit-field-group {
@@ -2171,6 +2084,7 @@ tbody td {
   width: 100%;
   box-sizing: border-box;
   -webkit-appearance: none;
+  -moz-appearance: textfield;
 }
 
 .modal-inp:focus {
@@ -2198,6 +2112,7 @@ tbody td {
   cursor: pointer;
   min-height: 48px;
   box-shadow: 0 4px 14px rgba(0, 220, 130, 0.35);
+  touch-action: manipulation;
 }
 
 .modal-cancel-btn {
@@ -2211,30 +2126,178 @@ tbody td {
   border-radius: 8px;
   cursor: pointer;
   min-height: 48px;
+  touch-action: manipulation;
 }
 
-@media (max-width: 768px) {
+/* ==================== UNIFIED RESPONSIVE BREAKPOINTS ==================== */
+@media(max-width: 768px) {
+  .header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .header-right {
+    align-items: flex-start;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+  }
+
+  .hpills {
+    align-items: flex-start;
+  }
+
+  h1 {
+    font-size: 42px;
+  }
+
+  .scrk-brand {
+    font-size: clamp(28px, 8vw, 42px);
+    letter-spacing: clamp(4px, 1.5vw, 8px);
+    gap: 10px;
+  }
+
+  .mode-bar {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+  }
+
+  .mode-bar > button:last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+  }
+
+  .custom-inputs {
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  .custom-inputs .tgt {
+    grid-column: 1 / -1;
+  }
+
+  .result-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  .result-grid .xc {
+    grid-column: 1 / -1;
+  }
+
+  .log-action-bar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .log-actual-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .log-edit-banner {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .save-log-btn {
+    width: 100%;
+    justify-content: center;
+    padding: 18px;
+  }
+
+  .gallery-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .fill-mode-head {
+    flex-direction: column;
+  }
+
+  .fill-mode-options {
+    justify-content: flex-start;
+  }
+
+  .advanced-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .advanced-price-row {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .station-insights-head {
+    flex-direction: column;
+  }
+
+  .station-insights-body {
+    grid-template-columns: 1fr;
+  }
+
   .log-header {
     flex-direction: column;
     align-items: flex-start;
     gap: 14px;
   }
+
   .log-actions {
     width: 100%;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 8px;
   }
-  .log-actions .download-btn,
-  .log-actions .del-all-btn {
+
+  .log-actions > button,
+  .download-btn,
+  .sheets-btn,
+  .sync-cache-btn,
+  .del-all-btn {
     width: 100%;
     padding: 12px 6px;
     font-size: 11.5px;
     text-align: center;
-    display: flex;
+    display: inline-flex;
     align-items: center;
     justify-content: center;
     min-height: 44px;
     box-sizing: border-box;
+    touch-action: manipulation;
+  }
+}
+
+@media(max-width: 480px) {
+  .container {
+    padding: 0 12px;
+  }
+
+  .calc-card {
+    padding: 20px 14px;
+  }
+
+  .custom-inputs {
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+
+  .input-row input {
+    font-size: 26px;
+  }
+
+  .input-box {
+    padding: 12px 10px;
+  }
+
+  .edit-two-col {
+    grid-template-columns: 1fr;
+  }
+
+  .log-actual-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .advanced-price-row {
+    grid-template-columns: 1fr;
+  }
+
+  .result-card .rval {
+    font-size: 28px;
   }
 }
