@@ -2044,7 +2044,11 @@ function handleGlobalKeydown(e) {
 window.onload = function () {
   const curEth = safeGetItem('curEth', DEFAULTS.curEth);
   const tgtEth = safeGetItem('tgtEth', DEFAULTS.tgtEth);
-  const maxEth = safeGetItem('maxEth', DEFAULTS.maxEth);
+  let maxEth = safeGetItem('maxEth', DEFAULTS.maxEth);
+  if (maxEth === '70' || maxEth === 70) {
+    maxEth = DEFAULTS.maxEth;
+    safeSetItem('maxEth', maxEth);
+  }
   const pumpE85 = safeGetItem('pumpE85', DEFAULTS.pumpE85);
   const pumpGas = safeGetItem('pumpGas', DEFAULTS.pumpGas);
   const ambientTempF = safeGetItem('ambientTempF', defaultAmbientFromSeason());
