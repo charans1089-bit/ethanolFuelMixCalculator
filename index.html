@@ -19,7 +19,7 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@400;600;700;800;900&family=Share+Tech+Mono&family=Orbitron:wght@400;700;900&display=swap"
     rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles.css?v=2.7">
 
   <style>
     /* ============================================================
@@ -514,7 +514,7 @@
 
         <div class="log-action-bar">
           <div class="log-input-group">
-            <label>Location / Notes</label>
+            <label for="inp-station">Location / Notes</label>
             <input type="text" id="inp-station" placeholder="e.g. Shell, Meijer..." class="station-input">
             <div class="log-edit-banner" id="log-edit-banner" hidden>
               <div>
@@ -541,9 +541,11 @@
               </div>
             </div>
           </div>
-          <button class="save-log-btn" onclick="saveFillUpLog()">
-            <span class="btn-icon">💾</span> SAVE TELEMETRY
-          </button>
+          <div class="log-save-row">
+            <button type="button" class="save-log-btn" onclick="saveFillUpLog()">
+              <span class="btn-icon">💾</span> SAVE TELEMETRY
+            </button>
+          </div>
         </div>
 
         <div class="step-box">
@@ -1097,7 +1099,7 @@
     </div>
   </div>
 
-  <script src="app.js"></script>
+  <script src="app.js?v=2.7"></script>
   <script>
     function tiltCard(e, id) {
       if (window.innerWidth < 600) return;

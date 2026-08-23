@@ -1217,24 +1217,33 @@ h1 .hl {
   box-shadow: 0 0 10px var(--e85-glow);
 }
 
+.log-save-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-top: 8px;
+}
+
 .save-log-btn {
   width: 100%;
+  max-width: 480px;
   font-family: 'Orbitron', 'Share Tech Mono', sans-serif;
   font-size: 14px;
   font-weight: 800;
   letter-spacing: 1.5px;
-  padding: 16px 24px;
+  padding: 16px 32px;
   border-radius: 8px;
   cursor: pointer;
   border: none;
   background: linear-gradient(135deg, #f5c842 0%, #f5a623 100%);
   color: #000;
   transition: all .2s ease;
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 10px;
-  min-height: 48px;
+  min-height: 50px;
   box-shadow: 0 4px 15px rgba(245, 166, 35, 0.25);
   touch-action: manipulation;
 }
