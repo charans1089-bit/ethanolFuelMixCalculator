@@ -3,7 +3,9 @@
 
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
+  <meta name="theme-color" content="#0a0b10">
+  <meta name="format-detection" content="telephone=no">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="SCRK Flex">
@@ -355,7 +357,7 @@
           <div class="input-box">
             <label for="inp-gal">Fuel Remaining</label>
             <div class="input-row">
-              <input type="number" id="inp-gal" value="0.0" min="0" max="16.6" step="any" oninput="handleInput()"
+              <input type="number" id="inp-gal" value="0.0" min="0" max="16.6" step="any" inputmode="decimal" oninput="handleInput()"
                 onchange="commitInput()" onblur="commitInput()">
               <span class="unit">GAL</span>
             </div>
@@ -363,7 +365,7 @@
           <div class="input-box">
             <label for="inp-eth">AP Eth Gauge</label>
             <div class="input-row">
-              <input type="number" id="inp-eth" value="10" min="0" max="100" step="any" oninput="handleInput()"
+              <input type="number" id="inp-eth" value="10" min="0" max="100" step="any" inputmode="decimal" oninput="handleInput()"
                 onchange="commitInput()" onblur="commitInput()">
               <span class="unit">%</span>
             </div>
@@ -371,7 +373,7 @@
           <div class="input-box tgt">
             <label for="inp-tgt" style="color: var(--neon);">Target Eth</label>
             <div class="input-row">
-              <input type="number" id="inp-tgt" value="45" min="0" max="100" step="any" oninput="handleInput()"
+              <input type="number" id="inp-tgt" value="45" min="0" max="100" step="any" inputmode="decimal" oninput="handleInput()"
                 onchange="commitInput()" onblur="commitInput()" style="color: var(--neon);">
               <span class="unit" style="color: var(--neon);">%</span>
             </div>
@@ -379,7 +381,7 @@
           <div class="input-box">
             <label for="inp-pump-e85">Pump E85 %</label>
             <div class="input-row">
-              <input type="number" id="inp-pump-e85" value="85" min="40" max="100" step="any" oninput="handleInput()"
+              <input type="number" id="inp-pump-e85" value="85" min="40" max="100" step="any" inputmode="decimal" oninput="handleInput()"
                 onchange="commitInput()" onblur="commitInput()">
               <span class="unit">%</span>
             </div>
@@ -387,7 +389,7 @@
           <div class="input-box">
             <label for="inp-pump-gas">Pump Gas E%</label>
             <div class="input-row">
-              <input type="number" id="inp-pump-gas" value="10" min="0" max="15" step="any" oninput="handleInput()"
+              <input type="number" id="inp-pump-gas" value="10" min="0" max="15" step="any" inputmode="decimal" oninput="handleInput()"
                 onchange="commitInput()" onblur="commitInput()">
               <span class="unit">%</span>
             </div>
@@ -414,7 +416,7 @@
           <div class="fill-mode-extra" id="add-volume-wrap" hidden>
             <label for="inp-add-gal">Gallons to add</label>
             <div class="input-row">
-              <input type="number" id="inp-add-gal" value="0.0" min="0" max="16.6" step="any" oninput="handleInput()"
+              <input type="number" id="inp-add-gal" value="0.0" min="0" max="16.6" step="any" inputmode="decimal" oninput="handleInput()"
                 onchange="commitInput()" onblur="commitInput()">
               <span class="unit">GAL</span>
             </div>
@@ -427,7 +429,7 @@
             <div class="advanced-row">
               <label for="inp-amb-temp">Ambient Temp</label>
               <div class="input-row small-row">
-                <input type="number" id="inp-amb-temp" value="70" min="-40" max="140" step="1" oninput="handleInput()"
+                <input type="number" id="inp-amb-temp" value="70" min="-40" max="140" step="1" inputmode="numeric" oninput="handleInput()"
                   onchange="commitInput()" onblur="commitInput()">
                 <span class="unit">°F</span>
               </div>
@@ -448,7 +450,7 @@
             <div class="advanced-row">
               <label for="inp-max-eth">Max Ethanol</label>
               <div class="input-row small-row">
-                <input type="number" id="inp-max-eth" value="85" min="0" max="100" step="any" oninput="handleInput()"
+                <input type="number" id="inp-max-eth" value="85" min="0" max="100" step="any" inputmode="decimal" oninput="handleInput()"
                   onchange="commitInput()" onblur="commitInput()">
                 <span class="unit">%</span>
               </div>
@@ -463,14 +465,14 @@
               <div>
                 <label for="inp-price-e85">E85 $/gal</label>
                 <div class="input-row small-row">
-                  <input type="number" id="inp-price-e85" value="2.89" min="0" max="999" step="0.01"
+                  <input type="number" id="inp-price-e85" value="2.89" min="0" max="999" step="0.01" inputmode="decimal"
                     oninput="handleInput()" onchange="commitInput()" onblur="commitInput()">
                 </div>
               </div>
               <div>
                 <label for="inp-price-93">93 $/gal</label>
                 <div class="input-row small-row">
-                  <input type="number" id="inp-price-93" value="3.79" min="0" max="999" step="0.01"
+                  <input type="number" id="inp-price-93" value="3.79" min="0" max="999" step="0.01" inputmode="decimal"
                     oninput="handleInput()" onchange="commitInput()" onblur="commitInput()">
                 </div>
               </div>
@@ -526,15 +528,15 @@
               <div class="log-actual-grid">
                 <div class="log-actual-field">
                   <label for="inp-act-e85">E85 Gal</label>
-                  <input type="number" id="inp-act-e85" step="any" min="0" placeholder="—" class="station-input">
+                  <input type="number" id="inp-act-e85" step="any" min="0" inputmode="decimal" placeholder="—" class="station-input">
                 </div>
                 <div class="log-actual-field">
                   <label for="inp-act-93">93 Gal</label>
-                  <input type="number" id="inp-act-93" step="any" min="0" placeholder="—" class="station-input">
+                  <input type="number" id="inp-act-93" step="any" min="0" inputmode="decimal" placeholder="—" class="station-input">
                 </div>
                 <div class="log-actual-field">
                   <label for="inp-ap-eth">AP Confirmed Eth %</label>
-                  <input type="number" id="inp-ap-eth" step="any" min="0" max="100" placeholder="—" class="station-input">
+                  <input type="number" id="inp-ap-eth" step="any" min="0" max="100" inputmode="decimal" placeholder="—" class="station-input">
                 </div>
               </div>
             </div>
@@ -812,50 +814,50 @@
             <div class="edit-two-col">
               <div class="edit-field-group">
                 <label for="modal-inp-e85" style="color:var(--e85);">Planned E85 (gal)</label>
-                <input type="number" step="any" id="modal-inp-e85" class="modal-inp">
+                <input type="number" step="any" id="modal-inp-e85" inputmode="decimal" class="modal-inp">
               </div>
               <div class="edit-field-group">
                 <label for="modal-inp-93" style="color:var(--c93);">Planned 93 (gal)</label>
-                <input type="number" step="any" id="modal-inp-93" class="modal-inp">
+                <input type="number" step="any" id="modal-inp-93" inputmode="decimal" class="modal-inp">
               </div>
             </div>
 
             <div class="edit-two-col">
               <div class="edit-field-group">
                 <label for="modal-inp-act-e85" style="color:var(--e85);">Actual E85 Pumped (gal)</label>
-                <input type="number" step="any" id="modal-inp-act-e85" class="modal-inp" placeholder="Meter gal">
+                <input type="number" step="any" id="modal-inp-act-e85" inputmode="decimal" class="modal-inp" placeholder="Meter gal">
               </div>
               <div class="edit-field-group">
                 <label for="modal-inp-act-93" style="color:var(--c93);">Actual 93 Pumped (gal)</label>
-                <input type="number" step="any" id="modal-inp-act-93" class="modal-inp" placeholder="Meter gal">
+                <input type="number" step="any" id="modal-inp-act-93" inputmode="decimal" class="modal-inp" placeholder="Meter gal">
               </div>
             </div>
 
             <div class="edit-two-col">
               <div class="edit-field-group">
                 <label for="modal-inp-ap-eth" style="color:var(--neon);">AP Confirmed Eth %</label>
-                <input type="number" step="any" id="modal-inp-ap-eth" class="modal-inp" placeholder="e.g. 75">
+                <input type="number" step="any" id="modal-inp-ap-eth" inputmode="decimal" class="modal-inp" placeholder="e.g. 75">
               </div>
               <div class="edit-field-group">
                 <label for="modal-inp-eth" style="color:var(--gold);">Resulting Mix Eth %</label>
-                <input type="number" step="any" id="modal-inp-eth" class="modal-inp" placeholder="e.g. 75">
+                <input type="number" step="any" id="modal-inp-eth" inputmode="decimal" class="modal-inp" placeholder="e.g. 75">
               </div>
             </div>
 
             <div class="edit-two-col">
               <div class="edit-field-group">
                 <label for="modal-inp-cur-gal">Starting Tank (gal)</label>
-                <input type="number" step="any" id="modal-inp-cur-gal" class="modal-inp">
+                <input type="number" step="any" id="modal-inp-cur-gal" inputmode="decimal" class="modal-inp">
               </div>
               <div class="edit-field-group">
                 <label for="modal-inp-cur-eth">Starting Eth %</label>
-                <input type="number" step="any" id="modal-inp-cur-eth" class="modal-inp">
+                <input type="number" step="any" id="modal-inp-cur-eth" inputmode="decimal" class="modal-inp">
               </div>
             </div>
 
             <div class="edit-field-group">
               <label for="modal-inp-fill-cost" style="color:var(--gold);">Total Fill Cost ($)</label>
-              <input type="number" step="any" id="modal-inp-fill-cost" class="modal-inp" placeholder="e.g. 45.50">
+              <input type="number" step="any" id="modal-inp-fill-cost" inputmode="decimal" class="modal-inp" placeholder="e.g. 45.50">
             </div>
           </div>
 
