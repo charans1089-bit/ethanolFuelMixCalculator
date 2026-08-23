@@ -317,6 +317,33 @@
       alert('No logged fuel fills to export.');
       return;
     }
+    // Calculate high ethanol streaks
+    const streakMap = {};
+    if (Array.isArray(fillsList) && fillsList.length) {
+      const sorted = [...fillsList].sort((a, b) => (Number(a?.id) || 0) - (Number(b?.id) || 0));
+      let streak = 0;
+      sorted.forEach(log => {
+        const ethVal = Number(log.eth ?? log.apEth ?? 0);
+        const curEthVal = Number(log.curEth ?? 0);
+        const apEthVal = Number(log.apEth ?? 0);
+        const isHigh = ethVal >= 70 || apEthVal >= 70;
+        if (!isHigh) {
+          streak = 0;
+          streakMap[log.id] = { count: 0, label: ethVal <= 40 ? '✓ Clean Tank' : 'Mid Blend' };
+          return;
+        }
+        if (streak === 0 && curEthVal >= 70) {
+          streak = 2;
+        } else {
+          streak++;
+        }
+        let label = `Fill ${streak}/4 (E70+)`;
+        if (streak === 3) label = `Fill 3/4 (⚠ 1 Left)`;
+        else if (streak >= 4) label = `Fill ${streak}/4 (🚨 Clean Next)`;
+        streakMap[log.id] = { count: streak, label };
+      });
+    }
+
     const headers = [
       'Date (EST)',
       'Station / Notes',
@@ -326,6 +353,7 @@
       'Actual 93 Gallons',
       'AP Confirmed Eth %',
       'Resulting Calculated Eth %',
+      'High Eth Fill Count / Advisory',
       'Starting Tank Gallons',
       'Starting Eth %',
       'Target Eth %',
@@ -354,6 +382,7 @@
         sanitizeCSVField(log.actual93 ?? ''),
         sanitizeCSVField(log.apEth ?? ''),
         sanitizeCSVField(log.eth ?? ''),
+        sanitizeCSVField(streakMap[log.id]?.label ?? ''),
         sanitizeCSVField(log.curGal ?? ''),
         sanitizeCSVField(log.curEth ?? ''),
         sanitizeCSVField(log.tgtEth ?? ''),
@@ -384,6 +413,31 @@
       alert('No fuel logs in browser cache to copy.');
       return;
     }
+
+    const streakMap = {};
+    const sorted = [...fillsList].sort((a, b) => (Number(a?.id) || 0) - (Number(b?.id) || 0));
+    let streak = 0;
+    sorted.forEach(log => {
+      const ethVal = Number(log.eth ?? log.apEth ?? 0);
+      const curEthVal = Number(log.curEth ?? 0);
+      const apEthVal = Number(log.apEth ?? 0);
+      const isHigh = ethVal >= 70 || apEthVal >= 70;
+      if (!isHigh) {
+        streak = 0;
+        streakMap[log.id] = { count: 0, label: ethVal <= 40 ? '✓ Clean Tank' : 'Mid Blend' };
+        return;
+      }
+      if (streak === 0 && curEthVal >= 70) {
+        streak = 2;
+      } else {
+        streak++;
+      }
+      let label = `Fill ${streak}/4 (E70+)`;
+      if (streak === 3) label = `Fill 3/4 (⚠ 1 Left)`;
+      else if (streak >= 4) label = `Fill ${streak}/4 (🚨 Clean Next)`;
+      streakMap[log.id] = { count: streak, label };
+    });
+
     const headers = [
       'Date / Time (EST)',
       'Gas Station / Notes',
@@ -393,6 +447,7 @@
       'Actual E85 Pumped (gal)',
       'Actual 93 Pumped (gal)',
       'AP Confirmed Eth %',
+      'High Eth Fill Count / Advisory',
       'Station E85 Quality Est',
       'Total Fill Cost ($)',
       'Starting Tank (gal)',
@@ -409,6 +464,7 @@
       log.actualE85 ?? '',
       log.actual93 ?? '',
       log.apEth ?? '',
+      streakMap[log.id]?.label ?? '',
       log.stationEthEstimate ? `E${log.stationEthEstimate}` : '',
       log.fillCost !== null && log.fillCost !== undefined && log.fillCost !== '' ? `$${Number(log.fillCost).toFixed(2)}` : '',
       log.curGal ?? '',
@@ -420,7 +476,7 @@
 
     if (navigator.clipboard && navigator.clipboard.writeText) {
       navigator.clipboard.writeText(tsv).then(() => {
-        alert(`✓ ${fillsList.length} fuel logs copied to clipboard!\n\nTo paste into Google Sheets / Excel:\n1. Open your sheet\n2. Click cell A1\n3. Press Ctrl+V (or Cmd+V) to paste into individual columns.\n\nEach row contains 'Copied from browser cache'.`);
+        alert(`✓ ${fillsList.length} fuel logs copied to clipboard!\n\nTo paste into Google Sheets / Excel:\n1. Open your sheet\n2. Click cell A1\n3. Press Ctrl+V (or Cmd+V) to paste into columns.\n\nIncludes 'High Eth Fill Count / Advisory' (e.g. Fill 2/4) and 'Copied from browser cache'.`);
       }).catch(() => {
         prompt('Copy your fuel logs for Google Sheets below:', tsv);
       });

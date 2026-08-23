@@ -26,7 +26,7 @@ const FORM_ENTRY_FILL_COST = "entry.1454448689";
 const DEFAULTS = {
   curEth: 10,
   tgtEth: 45,
-  maxEth: 70,
+  maxEth: 85,
   pumpE85: 85,
   pumpGas: 10,
   ambientTempF: 70,
@@ -187,37 +187,69 @@ function updateWeatherUIStatus(message, kind) {
 let manualPriceOverrideE85 = safeGetItem('manualPriceOverrideE85', '0') === '1';
 let manualPriceOverride93 = safeGetItem('manualPriceOverride93', '0') === '1';
 
-function getCleaningTankStreak(logs) {
-  if (!Array.isArray(logs) || logs.length === 0) return 0;
+function getHistoricalHighEthStreaks(logs) {
+  if (!Array.isArray(logs) || logs.length === 0) return {};
+  // Sort oldest to newest (chronological order)
+  const sorted = [...logs].sort((a, b) => (Number(a?.id) || 0) - (Number(b?.id) || 0));
+  
+  const streakMap = {};
+  let streak = 0;
 
-  const sorted = [...logs].sort((a, b) => {
-    const idA = Number(a?.id) || 0;
-    const idB = Number(b?.id) || 0;
-    return idB - idA;
+  sorted.forEach((log) => {
+    if (!log || typeof log !== 'object') return;
+    const ethVal = Number(log.eth ?? log.apEth ?? 0);
+    const curEthVal = Number(log.curEth ?? 0);
+    const apEthVal = Number(log.apEth ?? 0);
+
+    const isHigh = ethVal >= 70 || apEthVal >= 70;
+
+    if (!isHigh) {
+      streak = 0;
+      streakMap[log.id] = {
+        count: 0,
+        isHigh: false,
+        badgeClass: 'clean',
+        label: ethVal <= 40 ? '✓ Clean Tank' : 'Mid Blend'
+      };
+      return;
+    }
+
+    // If starting tank was already >= 70% before first logged fill, count starting tank as Fill 1
+    if (streak === 0 && curEthVal >= 70) {
+      streak = 2;
+    } else {
+      streak++;
+    }
+
+    let badgeClass = 'info';
+    let label = `Fill ${streak}/4 (E70+)`;
+    if (streak === 3) {
+      badgeClass = 'warn';
+      label = `Fill 3/4 (⚠ 1 Left)`;
+    } else if (streak >= 4) {
+      badgeClass = 'danger';
+      label = `Fill ${streak}/4 (🚨 Clean Next)`;
+    }
+
+    streakMap[log.id] = {
+      count: streak,
+      isHigh: true,
+      badgeClass,
+      label
+    };
   });
 
-  let highEthTankStreak = 0;
-  for (const log of sorted) {
-    if (!log || typeof log !== 'object') continue;
+  return streakMap;
+}
 
-    const ethRaw = log.eth;
-    if (ethRaw === null || ethRaw === undefined || ethRaw === '') {
-      continue;
-    }
-
-    const ethVal = Number(ethRaw);
-    if (!Number.isFinite(ethVal)) {
-      continue;
-    }
-
-    if (ethVal >= 75) {
-      highEthTankStreak++;
-    } else {
-      break;
-    }
-  }
-
-  return highEthTankStreak;
+function getCleaningTankStreak(logs) {
+  if (!Array.isArray(logs) || logs.length === 0) return 0;
+  const streakMap = getHistoricalHighEthStreaks(logs);
+  // Find the latest log
+  const sorted = [...logs].sort((a, b) => (Number(b?.id) || 0) - (Number(a?.id) || 0));
+  const latestLog = sorted[0];
+  if (!latestLog) return 0;
+  return streakMap[latestLog.id]?.count || 0;
 }
 
 function renderCleaningTankAdvisory() {
@@ -241,32 +273,49 @@ function renderCleaningTankAdvisory() {
 
   const streak = getCleaningTankStreak(logs);
 
-  if (streak < 3) {
+  if (streak === 0) {
     container.style.display = 'none';
     container.innerHTML = '';
     return;
   }
 
-  const explanatoryText = 'Sustained high ethanol increases oil dilution and fuel system wear. Running one tank at E20–E35 periodically gives the system a break.';
+  container.style.display = 'flex';
+  const explanatoryText = 'Tuner guidance: Sustained high ethanol increases oil dilution and fuel pump wear. Running an E20–E35 cleaning tank after 3–4 consecutive fills gives the direct injection system and fuel pump a lubricated break.';
 
-  if (streak === 3) {
-    container.style.display = 'flex';
+  if (streak === 1) {
     container.className = 'cleaning-advisory info';
     container.innerHTML = `
       <div class="cleaning-advisory-icon">ℹ</div>
       <div class="cleaning-advisory-content">
-        <div class="cleaning-advisory-title">3 consecutive tanks at E75+. Consider a cleaning tank (E20–E35) soon.</div>
-        <div class="cleaning-advisory-text">${escHtml(explanatoryText)}</div>
+        <div class="cleaning-advisory-title">High Ethanol Fill 1 of 4 (E70+ / E75+)</div>
+        <div class="cleaning-advisory-text">You are on fill 1 at high ethanol. Tuner recommends limiting to 3–4 consecutive fills before running an E20–E35 cleaning tank. ${escHtml(explanatoryText)}</div>
       </div>
     `;
-  } else {
-    container.style.display = 'flex';
+  } else if (streak === 2) {
+    container.className = 'cleaning-advisory info';
+    container.innerHTML = `
+      <div class="cleaning-advisory-icon">ℹ</div>
+      <div class="cleaning-advisory-content">
+        <div class="cleaning-advisory-title">High Ethanol Fill 2 of 4 (E70+ / E75+) · 2 Fills Remaining</div>
+        <div class="cleaning-advisory-text">You are currently on <strong>Fill 2 of 4</strong> at high ethanol (previous tank started at ~70%). You have 2 fills remaining before an E20–E35 cleaning tank is recommended.</div>
+      </div>
+    `;
+  } else if (streak === 3) {
     container.className = 'cleaning-advisory warning';
     container.innerHTML = `
       <div class="cleaning-advisory-icon">⚠</div>
       <div class="cleaning-advisory-content">
-        <div class="cleaning-advisory-title">${streak} consecutive tanks at E75+. A cleaning tank at E20–E35 is recommended.</div>
-        <div class="cleaning-advisory-text">${escHtml(explanatoryText)}</div>
+        <div class="cleaning-advisory-title">⚠ High Ethanol Fill 3 of 4 · 1 Fill Left Before Cleaning Tank</div>
+        <div class="cleaning-advisory-text">Tuner Warning: 3 consecutive tanks at E70+/E75+. <strong>1 high-ethanol fill remaining.</strong> Plan to run an E20–E35 cleaning tank next fill or the fill after to reduce oil dilution.</div>
+      </div>
+    `;
+  } else {
+    container.className = 'cleaning-advisory alert';
+    container.innerHTML = `
+      <div class="cleaning-advisory-icon">🚨</div>
+      <div class="cleaning-advisory-content">
+        <div class="cleaning-advisory-title">🚨 High Ethanol Fill ${streak} of 4 (TUNER LIMIT REACHED)</div>
+        <div class="cleaning-advisory-text">Tuner Maximum of 3–4 Fills Reached! You have run ${streak} consecutive fills at E70+/E75+. <strong>Running a cleaning tank at E20–E35 is strongly recommended next fill</strong> to lubricate the high-pressure fuel pump and maintain oil viscosity.</div>
       </div>
     `;
   }
@@ -1459,12 +1508,19 @@ function renderLogs() {
   const empty = document.getElementById('log-empty-msg');
   if (!tbody || !empty) return;
   empty.style.display = fuelLogs.length ? 'none' : 'block';
+  
+  const streakMap = getHistoricalHighEthStreaks(fuelLogs);
+
   tbody.innerHTML = fuelLogs.map(log => {
     const stationEthValue = Number.isFinite(Number(log.stationEthEstimate)) ? Number(log.stationEthEstimate) : estimateStationEthFromLog(log);
     const stationEth = Number.isFinite(Number(stationEthValue)) ? `E${Number(stationEthValue).toFixed(1)}` : '—';
     const fallbackCost = calcFillCost(Number(log.fillE85 ?? log.actualE85 ?? 0), Number(log.fill93 ?? log.actual93 ?? 0), Number(log.priceE85 ?? DEFAULTS.priceE85), Number(log.price93 ?? DEFAULTS.price93));
     const costValue = Number.isFinite(Number(log.fillCost)) ? log.fillCost : fallbackCost;
-    return `<tr><td>${escHtml(log.date)}</td><td>${escHtml(log.station)}</td><td style="color:var(--e85);font-weight:bold;">${escHtml(log.e85)}</td><td style="color:var(--c93);font-weight:bold;">${escHtml(log.c93)}</td><td style="color:var(--neon);font-weight:bold;">${formatOptionalNumber(log.apEth)}</td><td style="color:var(--e85);font-weight:bold;">${formatOptionalNumber(log.actualE85)}</td><td style="color:var(--c93);font-weight:bold;">${formatOptionalNumber(log.actual93)}</td><td style="color:var(--neon);font-weight:bold;">${stationEth}</td><td style="color:var(--gold);font-weight:bold;">${formatMoney(costValue)}</td><td style="color:var(--gold);font-family:'Orbitron',sans-serif;font-size:20px;">E${escHtml(log.eth)}</td><td><button class="row-btn edit-btn" onclick="beginLogEdit(${log.id})">Edit</button><button class="del-btn" onclick="deleteLog(${log.id})">✕</button></td></tr>`;
+    
+    const streakInfo = streakMap[log.id];
+    const streakTag = streakInfo ? `<div class="table-streak-tag ${streakInfo.badgeClass}">${escHtml(streakInfo.label)}</div>` : '';
+
+    return `<tr><td>${escHtml(log.date)}</td><td>${escHtml(log.station)}</td><td style="color:var(--e85);font-weight:bold;">${escHtml(log.e85)}</td><td style="color:var(--c93);font-weight:bold;">${escHtml(log.c93)}</td><td style="color:var(--neon);font-weight:bold;">${formatOptionalNumber(log.apEth)}</td><td style="color:var(--e85);font-weight:bold;">${formatOptionalNumber(log.actualE85)}</td><td style="color:var(--c93);font-weight:bold;">${formatOptionalNumber(log.actual93)}</td><td style="color:var(--neon);font-weight:bold;">${stationEth}</td><td style="color:var(--gold);font-weight:bold;">${formatMoney(costValue)}</td><td style="color:var(--gold);font-family:'Orbitron',sans-serif;font-size:18px;">E${escHtml(log.eth)}${streakTag}</td><td><button class="row-btn edit-btn" onclick="beginLogEdit(${log.id})">Edit</button><button class="del-btn" onclick="deleteLog(${log.id})">✕</button></td></tr>`;
   }).join('');
   renderStationInsights();
   renderCleaningTankAdvisory();
@@ -1543,7 +1599,7 @@ function renderAdvisorPanels(inputs, result, targetState) {
   if (ceilingNote) {
     ceilingNote.textContent = targetState.capped
       ? `Target capped to E${inputs.maxEth.toFixed(0)} because the ceiling is set lower than your requested target.`
-      : `Ceiling set to E${inputs.maxEth.toFixed(0)}. Raise it only if your tune explicitly supports it.`;
+      : `Ceiling set to E${inputs.maxEth.toFixed(0)}. Straight E85 supported (limit to 3–4 consecutive fills per tuner).`;
   }
 
   const fillCost = calcFillCost(result.e85Display, result.c93Display, inputs.priceE85, inputs.price93);
@@ -1602,6 +1658,7 @@ function copyLogsForGoogleSheets() {
     alert('No logs in browser cache to copy.');
     return;
   }
+  const streakMap = getHistoricalHighEthStreaks(fuelLogs);
   const headers = [
     'Date / Time (EST)',
     'Gas Station / Notes',
@@ -1611,6 +1668,7 @@ function copyLogsForGoogleSheets() {
     'Actual E85 Pumped (gal)',
     'Actual 93 Pumped (gal)',
     'AP Confirmed Eth %',
+    'High Eth Fill Count / Advisory',
     'Station E85 Quality Est',
     'Total Fill Cost ($)',
     'Starting Tank (gal)',
@@ -1627,6 +1685,7 @@ function copyLogsForGoogleSheets() {
     log.actualE85 ?? '',
     log.actual93 ?? '',
     log.apEth ?? '',
+    streakMap[log.id]?.label ?? '',
     log.stationEthEstimate ? `E${log.stationEthEstimate}` : '',
     log.fillCost !== null && log.fillCost !== undefined && log.fillCost !== '' ? `$${Number(log.fillCost).toFixed(2)}` : '',
     log.curGal ?? '',
@@ -1638,7 +1697,7 @@ function copyLogsForGoogleSheets() {
 
   if (navigator.clipboard && navigator.clipboard.writeText) {
     navigator.clipboard.writeText(tsv).then(() => {
-      alert(`✓ ${fuelLogs.length} fuel logs copied to clipboard!\n\nTo paste into Google Sheets / Excel:\n1. Open your sheet\n2. Click the cell where you want data to start (e.g. A1)\n3. Press Ctrl+V (or Cmd+V) to paste into columns.\n\nEach row contains 'Copied from browser cache' in the Data Source column.`);
+      alert(`✓ ${fuelLogs.length} fuel logs copied to clipboard!\n\nTo paste into Google Sheets / Excel:\n1. Open your sheet\n2. Click cell A1\n3. Press Ctrl+V (or Cmd+V) to paste into columns.\n\nIncludes 'High Eth Fill Count / Advisory' (e.g. Fill 2/4) and 'Copied from browser cache'.`);
     }).catch(() => {
       prompt('Copy your fuel logs for Google Sheets below:', tsv);
     });
@@ -1670,6 +1729,7 @@ function downloadCSV() {
     alert('No logs to download.');
     return;
   }
+  const streakMap = getHistoricalHighEthStreaks(fuelLogs);
   const headers = [
     'Date (EST)',
     'Station / Notes',
@@ -1679,6 +1739,7 @@ function downloadCSV() {
     'Actual 93 Gallons',
     'AP Confirmed Eth %',
     'Resulting Calculated Eth %',
+    'High Eth Fill Count / Advisory',
     'Starting Tank Gallons',
     'Starting Eth %',
     'Target Eth %',
@@ -1703,6 +1764,7 @@ function downloadCSV() {
     log.actual93 ?? '',
     log.apEth ?? '',
     log.eth ?? '',
+    streakMap[log.id]?.label ?? '',
     log.curGal ?? '',
     log.curEth ?? '',
     log.tgtEth ?? '',
