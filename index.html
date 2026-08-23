@@ -36,7 +36,7 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@400;600;700;800;900&family=Share+Tech+Mono&family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;600;700&display=swap"
     rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=3.1">
+  <link rel="stylesheet" href="styles.css?v=3.2">
 </head>
 
 <body>
@@ -371,7 +371,15 @@
           </div>
         </div>
 
-      </div>
+      
+      <button class="sound-check-btn" id="soundCheckBtn"
+        onclick="SCRKSound.toggle(this)"
+        title="FA24 WRX Synthetic Sound Experience — Web Audio API">
+        <span class="sc-ico">🔊</span>
+        <span class="sc-label">SOUND CHECK</span>
+        <span class="sc-sub">OH YEAH</span>
+      </button>
+    </div>
     </div>
 
     <!-- TABLE VIEW -->
@@ -465,13 +473,14 @@
     </div>
 
     <!-- GALLERY SECTION -->
-    <!-- HERITAGE GALLERY — ACTUAL WRX PHOTOS -->
-    <div class="section-title">// SUBARU MOTORSPORT HERITAGE</div>
-    <div class="gallery-grid">
+    <!-- SCRK WRX GARAGE — Owner's actual FA24 WRX build photos -->
+    <div class="section-title">// SCRK WRX GARAGE</div>
+    <p class="gallery-note">📸 Photos from the SCRK owner's FA24 Subaru WRX build · All rights reserved.</p>
+    <div class="gallery-grid gallery-three">
 
-      <!-- FEATURED: WRX Action Shot -->
+      <!-- FEATURED: WRX Action -->
       <div class="photo-card" onclick="openLightbox('wrx-action.jpg', 'FA24 WRX — SCRK Flex Fuel Platform · Full Send')">
-        <img src="wrx-action.jpg" alt="WRX FA24 Action" loading="lazy" referrerpolicy="no-referrer">
+        <img src="wrx-action.jpg" alt="WRX FA24 Action Shot" loading="lazy" referrerpolicy="no-referrer">
         <div class="photo-overlay">
           <div class="photo-badge"><span>WRX · FA24</span></div>
           <div class="photo-caption">Full Send · SCRK Flex Tune</div>
@@ -479,19 +488,9 @@
         </div>
       </div>
 
-      <!-- WRX E45 Dyno Sheet -->
-      <div class="photo-card" onclick="openLightbox('e70dynoimage.png', 'FA24 Dyno Pull · E70 Blend · RevHang Calibration')">
-        <img src="e70dynoimage.png" alt="E70 Dyno Sheet" loading="lazy" style="object-fit: contain; background: #000; padding: 8px;">
-        <div class="photo-overlay">
-          <div class="photo-badge"><span>E70 · DYNO</span></div>
-          <div class="photo-caption">Dyno Pull · RevHang Tune</div>
-          <div class="photo-sub">FA24 · 15–19 psi · Full Power Map</div>
-        </div>
-      </div>
-
-      <!-- WRX Interior / Cockpit -->
-      <div class="photo-card" onclick="openLightbox('wrx-interior.jpg', 'WRX Cockpit · Cobb Accessport V3 · SCRK Telemetry')">
-        <img src="wrx-interior.jpg" alt="WRX Interior Cockpit" loading="lazy" referrerpolicy="no-referrer">
+      <!-- WRX Cockpit -->
+      <div class="photo-card" onclick="openLightbox('wrx-interior.jpg', 'WRX Cockpit · Cobb AP V3 · Live Telemetry')">
+        <img src="wrx-interior.jpg" alt="WRX Interior with Cobb Accessport V3" loading="lazy" referrerpolicy="no-referrer">
         <div class="photo-overlay">
           <div class="photo-badge"><span>COCKPIT · AP V3</span></div>
           <div class="photo-caption">Cobb Accessport V3</div>
@@ -499,17 +498,18 @@
         </div>
       </div>
 
-      <!-- WRX Shifter Close-up -->
-      <div class="photo-card" onclick="openLightbox('wrx-shifter.jpg', 'WRX 6-Speed · Short Throw · Driver Engagement')">
-        <img src="wrx-shifter.jpg" alt="WRX Shifter" loading="lazy" referrerpolicy="no-referrer">
+      <!-- WRX 6MT Shifter -->
+      <div class="photo-card" onclick="openLightbox('wrx-shifter.jpg', 'WRX 6MT · Short Throw Shifter · Rally Pedigree')">
+        <img src="wrx-shifter.jpg" alt="WRX 6-Speed Manual Shifter" loading="lazy" referrerpolicy="no-referrer">
         <div class="photo-overlay">
-          <div class="photo-badge"><span>6-SPEED · MT</span></div>
+          <div class="photo-badge"><span>6MT · SHORT THROW</span></div>
           <div class="photo-caption">Driver-Focused · Short Throw</div>
           <div class="photo-sub">Manual Gearbox · Rally Pedigree</div>
         </div>
       </div>
 
     </div>
+
 
 
   </div>
@@ -796,7 +796,7 @@
     </div>
   </div>
 
-  <script src="app.js?v=3.1"></script>
+  <script src="app.js?v=3.2"></script>
   <script>
     function tiltCard(e, id) {
       if (window.innerWidth < 600) return;
@@ -819,6 +819,7 @@
       document.getElementById('lightbox').classList.remove('show');
     }
   </script>
+  <script src="sound-engine.js"></script>
 </body>
 
 </html>
