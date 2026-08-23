@@ -4,299 +4,69 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
-  <meta name="theme-color" content="#0a0b10">
+  <meta name="theme-color" content="#080a11">
   <meta name="format-detection" content="telephone=no">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="SCRK Flex">
   <meta http-equiv="Content-Security-Policy"
     content="default-src 'self'; connect-src 'self' https://docs.google.com https://api.open-meteo.com https://api.bigdatacloud.net https://nominatim.openstreetmap.org https://ethanolfuelmixcalculator.charans1089.workers.dev; img-src 'self' data: https:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; script-src 'self' 'unsafe-inline';">
-  <title>SCRK Flex Fuel Mix — Interactive</title>
+  <title>SCRK Flex Fuel Mix — Motorsport Telemetry & Mixing Calculator</title>
 
   <link rel="icon" type="image/svg+xml"
     href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23080b12'/><text x='50%' y='68%' font-family='sans-serif' font-size='58' font-weight='bold' fill='%23ccff00' text-anchor='middle'>S</text></svg>">
 
   <link
-    href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@400;600;700;800;900&family=Share+Tech+Mono&family=Orbitron:wght@400;700;900&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@400;600;700;800;900&family=Share+Tech+Mono&family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;600;700&display=swap"
     rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=2.7">
-
-  <style>
-    /* ============================================================
-   AP REFERENCE MODAL — additions only, namespaced to avoid
-   colliding with anything already defined in styles.css
-   ============================================================ */
-    .ref-scenario {
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      border-left: 3px solid var(--neon, #ccff00);
-      border-radius: 10px;
-      padding: 16px 18px;
-      margin-bottom: 14px;
-    }
-
-    .ref-scenario h3 {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-weight: 700;
-      font-size: 17px;
-      letter-spacing: 0.5px;
-      color: #fff;
-      margin: 0 0 4px 0;
-      text-transform: uppercase;
-    }
-
-    .ref-condition {
-      font-family: 'Share Tech Mono', monospace;
-      font-size: 11px;
-      color: #8a93ad;
-      margin-bottom: 10px;
-      letter-spacing: 0.3px;
-    }
-
-    .ref-data-row {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 8px;
-      margin-bottom: 8px;
-    }
-
-    .ref-data-item {
-      background: rgba(0, 0, 0, 0.25);
-      border-radius: 6px;
-      padding: 7px 8px;
-    }
-
-    .ref-data-item .lbl {
-      font-family: 'Share Tech Mono', monospace;
-      font-size: 9.5px;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      color: #6b7a99;
-      margin-bottom: 3px;
-    }
-
-    .ref-data-item .val {
-      font-family: 'Orbitron', sans-serif;
-      font-size: 13.5px;
-      font-weight: 700;
-      color: var(--neon, #ccff00);
-      line-height: 1.2;
-    }
-
-    .ref-status {
-      font-family: 'Share Tech Mono', monospace;
-      font-size: 11px;
-      color: #7fd88f;
-      margin-top: 2px;
-    }
-
-    .ref-flags-box {
-      background: linear-gradient(135deg, rgba(224, 60, 60, 0.16), rgba(224, 60, 60, 0.05));
-      border: 1px solid rgba(224, 60, 60, 0.35);
-      border-radius: 10px;
-      padding: 16px 18px;
-      margin-top: 18px;
-    }
-
-    .ref-flags-box h3 {
-      color: #ff6b6b;
-      font-family: 'Barlow Condensed', sans-serif;
-      text-transform: uppercase;
-      font-size: 16px;
-      letter-spacing: 0.5px;
-      margin: 0 0 10px 0;
-    }
-
-    .ref-flag-item {
-      font-family: 'Share Tech Mono', monospace;
-      font-size: 11.5px;
-      color: #f0d9d9;
-      background: rgba(0, 0, 0, 0.22);
-      border-left: 2px solid #ff6b6b;
-      padding: 8px 10px;
-      margin-bottom: 6px;
-      border-radius: 4px;
-      line-height: 1.4;
-    }
-
-    .ref-flag-item strong {
-      color: #fff;
-    }
-
-    .ref-footer-note {
-      font-family: 'Share Tech Mono', monospace;
-      font-size: 10px;
-      color: #5c6580;
-      text-align: center;
-      margin-top: 16px;
-      letter-spacing: 1px;
-    }
-
-    #ref-modal {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: rgba(5, 7, 12, 0.92);
-      z-index: 99998;
-      align-items: flex-start;
-      justify-content: center;
-      padding: 20px;
-      overflow-y: auto;
-    }
-
-    #ref-modal .ref-modal-content {
-      max-width: 640px;
-      width: 100%;
-      position: relative;
-      margin: 20px auto;
-    }
-
-    #ref-modal .ref-close-btn {
-      position: absolute;
-      top: 12px;
-      right: 12px;
-      background: #1e2235;
-      border: 1px solid #2e3555;
-      border-radius: 50%;
-      width: 34px;
-      height: 34px;
-      color: #fff;
-      font-size: 16px;
-      cursor: pointer;
-      z-index: 2;
-    }
-
-    @media (max-width: 600px) {
-      .ref-data-row {
-        grid-template-columns: 1fr 1fr;
-      }
-    }
-
-    /* ============================================================
-   EMBEDDED DOCUMENTATION
-   ============================================================ */
-    .docs-card {
-      margin-top: 24px;
-      padding: 22px;
-    }
-
-    .docs-head {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: 14px;
-    }
-
-    .docs-head h2 {
-      font-family: 'Orbitron', sans-serif;
-      font-size: 24px;
-      color: #fff;
-      margin: 0;
-    }
-
-    .docs-kicker {
-      font-family: 'Share Tech Mono', monospace;
-      font-size: 10px;
-      letter-spacing: 1px;
-      color: var(--text-muted);
-      text-transform: uppercase;
-    }
-
-    .docs-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 14px;
-    }
-
-    .docs-block {
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: 10px;
-      padding: 14px;
-    }
-
-    .docs-block h3 {
-      font-family: 'Share Tech Mono', monospace;
-      font-size: 12px;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      color: var(--neon, #ccff00);
-      margin: 0 0 10px;
-    }
-
-    .docs-block p,
-    .docs-block li {
-      color: var(--text-body);
-      font-size: 14px;
-      line-height: 1.55;
-    }
-
-    .docs-block ul,
-    .docs-block ol {
-      margin: 0;
-      padding-left: 18px;
-      display: grid;
-      gap: 6px;
-    }
-
-    .docs-mini {
-      margin-top: 10px;
-      font-family: 'Share Tech Mono', monospace;
-      font-size: 11px;
-      color: var(--text-muted);
-      line-height: 1.5;
-    }
-
-    .docs-chip-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-top: 8px;
-    }
-
-    .docs-chip {
-      font-family: 'Share Tech Mono', monospace;
-      font-size: 10px;
-      letter-spacing: 0.6px;
-      text-transform: uppercase;
-      color: var(--text-body);
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      border-radius: 999px;
-      padding: 5px 9px;
-      background: rgba(0, 0, 0, 0.25);
-    }
-
-    @media (max-width: 760px) {
-      .docs-grid {
-        grid-template-columns: 1fr;
-      }
-    }
-  </style>
+  <link rel="stylesheet" href="styles.css?v=3.0">
 </head>
 
 <body>
 
+  <!-- GLOBAL SCRK TOP NAVIGATION -->
+  <header class="scrk-nav-header">
+    <div class="scrk-nav-inner">
+      <a href="index.html" class="scrk-brand-link">
+        <div class="scrk-brand-badge">
+          SCRK
+          <div class="scrk-brand-tag"><span>PERFORMANCE</span></div>
+        </div>
+      </a>
+
+      <nav>
+        <ul class="scrk-nav-links">
+          <li class="scrk-nav-item active"><a href="index.html">⛽ Fuel Calculator</a></li>
+          <li class="scrk-nav-item"><a href="blend-planner.html">📅 Seasonal Planner</a></li>
+          <li class="scrk-nav-item"><a href="docs.html">📖 Engineering Docs</a></li>
+          <li class="scrk-nav-item"><a href="https://charans1089-bit.github.io/ap-log-analyzer/" target="_blank" rel="noopener">📊 AP Log Analyzer ↗</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- RALLY HERO BANNER -->
   <div class="rally-banner">
     <div class="rally-banner-inner">
       <div class="scrk-brand">
         SCRK
-        <div class="scrk-tag"><span>WISH I TUNE</span></div>
+        <div class="scrk-tag"><span>MOTORSPORT TELEMETRY</span></div>
       </div>
-      <div class="rally-subline">WRX FA24 · FLEX FUEL CALCULATOR · EST. 2024</div>
+      <div class="rally-subline">WRX FA24 · FLEX FUEL CALCULATOR · PRECISION MIXING</div>
     </div>
   </div>
 
   <div class="container">
 
+    <!-- MAIN PAGE HEADER -->
     <div class="header">
       <div class="header-left">
         <div class="badge"><span>FA24 FLEX FUEL · WRX</span></div>
         <h1>FLEX FUEL<br><span class="hl">CUSTOM BLEND</span><br>CALCULATOR</h1>
-        <div class="subtitle">16.6-Gallon Tank · E85 + 93 Octane</div>
+        <div class="subtitle">16.6-Gallon Tank · E85 + 93 Octane Precision Ratio</div>
       </div>
       <div class="header-right">
-        <button class="reset-btn" onclick="resetDefault()" title="Reset Calculator">⟳ RESET</button>
+        <button type="button" class="reset-btn" onclick="resetDefault()" title="Reset Calculator">⟳ RESET</button>
         <div class="hpills">
           <div class="pill safe">✓ STRAIGHT E85 SAFE</div>
           <div class="pill safe">✓ FULL E10–E85 FLEX CAPABLE</div>
@@ -304,26 +74,26 @@
       </div>
     </div>
 
+    <!-- TUNER STATUS BANNER -->
     <div class="banner grn">
       <span class="bico">⚡</span>
-      <p><strong class="g">SCRK Tuning:</strong> Full Flex Fuel capability unlocked. You can maintain 70%+ ethanol, run
-        straight pump E85, or run straight 93 octane without issue. It is not necessary to always have E85 in the tank.
-      </p>
+      <p><strong class="g">SCRK Tuning:</strong> Full Flex Fuel capability unlocked. Maintain 70%+ ethanol, run straight pump E85 (3–4 consecutive fills recommended), or run straight 93 octane. Consult <a href="docs.html" style="color:var(--neon);text-decoration:underline;">Engineering Docs</a> for HPFP maintenance guidelines.</p>
     </div>
 
+    <!-- MODE SELECTOR -->
     <div class="mode-bar">
       <button class="mode-btn active" id="btn-calc" onclick="setMode('calc')">⚙ Calculator</button>
-      <button class="mode-btn" id="btn-table" onclick="setMode('table')">📋 Static Chart</button>
+      <button class="mode-btn" id="btn-table" onclick="setMode('table')">📋 Blend Chart</button>
       <button class="mode-btn" id="btn-log" onclick="setMode('log')">📓 Logbook</button>
       <button class="mode-btn mode-btn-accent" id="btn-sim" onclick="openSim()">🧪 Trap Simulator</button>
       <button class="mode-btn mode-btn-accent" id="btn-ref" onclick="openRef()">🎛 AP Reference</button>
-      <button class="mode-btn mode-btn-accent" type="button" onclick="window.location.href='blend-planner.html'">⛽ Blend Planner</button>
-      <button class="mode-btn" type="button" onclick="document.getElementById('app-docs').scrollIntoView({ behavior: 'smooth', block: 'start' });">📘 Docs</button>
     </div>
 
+    <!-- CALCULATOR VIEW -->
     <div id="calc-view">
       <div class="calc-card solid-card">
 
+        <!-- FUEL LEVEL MODULE & TACTILE SLIDER -->
         <div class="fuel-level-module">
           <div class="tank-header">
             <span class="tank-title">Current Fuel Level</span>
@@ -353,6 +123,7 @@
           </div>
         </div>
 
+        <!-- 5-BOX CUSTOM INPUTS -->
         <div class="custom-inputs">
           <div class="input-box">
             <label for="inp-gal">Fuel Remaining</label>
@@ -396,16 +167,17 @@
           </div>
         </div>
 
+        <!-- FILL MODE BOX -->
         <div class="fill-mode-box solid-card">
           <div class="fill-mode-head">
             <div>
               <div class="fill-mode-title">Fill Mode</div>
-              <div class="fill-mode-note">Choose whether to top off the tank or add a fixed amount.</div>
+              <div class="fill-mode-note">Choose whether to top off the tank to 16.6 gal or add a fixed amount.</div>
             </div>
             <div class="fill-mode-options">
               <label class="fill-mode-option">
                 <input type="radio" name="fill-mode" value="full" checked onchange="setFillMode('full')">
-                <span>Fill to full</span>
+                <span>Fill to full (16.6 gal)</span>
               </label>
               <label class="fill-mode-option">
                 <input type="radio" name="fill-mode" value="add" onchange="setFillMode('add')">
@@ -423,6 +195,7 @@
           </div>
         </div>
 
+        <!-- ADVANCED GRID (Weather, Ceiling, Prices) -->
         <div class="advanced-grid">
           <div class="advanced-card solid-card" aria-live="polite" aria-atomic="true">
             <div class="advanced-title">Weather Advisory</div>
@@ -441,8 +214,7 @@
             <div class="advanced-value" id="season-target-label">Suggested E45 for current weather</div>
             <div class="advanced-sub" id="season-temp-label">70°F · SUMMER</div>
             <div class="advanced-note" id="season-note">Advisory only.</div>
-            <div class="advanced-note weather-status" id="weather-status">Live weather is optional. Manual input stays
-              available.</div>
+            <div class="advanced-note weather-status" id="weather-status">Live weather is optional. Manual input stays available.</div>
           </div>
 
           <div class="advanced-card solid-card" aria-live="polite" aria-atomic="true">
@@ -487,6 +259,7 @@
           </div>
         </div>
 
+        <!-- 3-CARD RESULT GRID -->
         <div class="result-grid">
           <div class="result-card ec" aria-live="polite" aria-atomic="true">
             <div class="rlbl">⬡ Pump E85 First</div>
@@ -506,12 +279,15 @@
           </div>
         </div>
 
+        <!-- ADVISORY CONTAINER -->
         <div id="cleaning-advisory-container" class="cleaning-advisory" style="display: none;" aria-live="polite"></div>
 
+        <!-- ETHANOL STATUS BADGE -->
         <div class="eth-status">
           <div class="ebadge sweet" id="ebadge">✓ SCRK TUNED — SAFE FOR ALL BLENDS</div>
         </div>
 
+        <!-- TELEMETRY ACTION BAR -->
         <div class="log-action-bar">
           <div class="log-input-group">
             <label for="inp-station">Location / Notes</label>
@@ -548,337 +324,156 @@
           </div>
         </div>
 
+        <!-- PIT STOP SEQUENCE -->
         <div class="step-box">
           <div class="step-title">// PIT STOP SEQUENCE</div>
           <div class="steps">
             <div class="step">
               <div class="snum s1">1</div>
-              <div class="stxt">Pump exactly <span class="se" id="i1">8.30 gallons</span> of <strong>E85</strong> first.
-              </div>
+              <div class="stxt">Pump exactly <span class="se" id="i1">8.30 gallons</span> of <strong>E85</strong> first.</div>
             </div>
             <div class="step">
               <div class="snum s2">2</div>
-              <div class="stxt">Switch to <strong>93 Octane</strong>. Fill until the nozzle clicks off (approx. <span
-                  class="sc" id="i2">8.30 gallons</span>).</div>
+              <div class="stxt">Top off to full with <span class="sc" id="i2">8.30 gallons</span> of <strong>93 Octane</strong>.</div>
             </div>
             <div class="step">
               <div class="snum s3">3</div>
-              <div class="stxt">Check your Accessport after a few miles. It should stabilize near <span id="i3"
-                  style="color:var(--neon);font-weight:bold;">~45%</span>.</div>
+              <div class="stxt">Start driving. The in-tank mix stabilizes within 1–2 miles. Result: <strong id="i3">E45 blend</strong>.</div>
             </div>
           </div>
         </div>
 
+        <!-- VOLUMETRIC MATH -->
         <div class="math-box">
-          <div class="math-title">⟨ Math Verification ⟩</div>
-          <div class="math-formula">E85 gal = (Target% × TankSize - CurrentEth% × CurrentGal - PumpGas% × FillVolume) ÷
-            (PumpE85% - PumpGas%)</div>
-          <div class="math-live" id="live-math">E85 Needed = [(45 × 16.6) - (10 × 0.0) - (10 × 16.6)] ÷ 75 = 8.30</div>
+          <div class="math-title">// MATHEMATICAL DERIVATION</div>
+          <div class="math-formula">
+            Formula: Target Eth % = [ (Current Vol × Current Eth) + (E85 Vol × Pump E85%) + (93 Vol × Pump Gas E%) ] ÷ Total Tank Capacity
+          </div>
+          <div class="math-live" id="math-live">
+            Calculation: 0.0 gal @ 10% + 8.30 gal @ 85% + 8.30 gal @ 10% = 16.60 gal @ 45.0% Ethanol
+          </div>
         </div>
+
       </div>
     </div>
 
-    <div id="table-view" style="display:none;">
-      <div class="table-legend">
-        <div>
-          <div class="dot d-e85"></div><span> E85 Pump</span>
+    <!-- TABLE VIEW -->
+    <div id="table-view" style="display: none;">
+      <div class="calc-card solid-card">
+        <div class="table-legend">
+          <div><span class="dot d-e85"></span> E85 to Add</div>
+          <div><span class="dot d-c93"></span> 93 to Add</div>
+          <div><span class="dot d-dim"></span> Empty Capacity</div>
         </div>
-        <div>
-          <div class="dot d-c93"></div><span> 93 Octane</span>
-        </div>
-        <div>
-          <div class="dot d-dim"></div><span>Total: 16.6 gal</span>
-        </div>
-      </div>
-      <div class="table-wrap solid-card">
-        <div style="overflow-x:auto;">
-          <table>
+        <div class="table-wrap">
+          <table id="mix-table">
             <thead>
               <tr>
-                <th>Gauge Needle</th>
-                <th>Total Needed</th>
-                <th>⬡ E85 Pump</th>
-                <th>◈ 93 Octane</th>
+                <th>Gauge Reading</th>
+                <th>E30 Target</th>
+                <th>E45 Target</th>
+                <th>E50 Target</th>
+                <th>E60 Target</th>
               </tr>
             </thead>
-            <tbody id="static-chart-body">
+            <tbody>
+              <!-- Populated via JavaScript -->
             </tbody>
           </table>
         </div>
       </div>
     </div>
 
-    <div id="log-view" style="display:none;">
-      <div class="log-info-box solid-card">
-        <div class="info-block">
-          <span class="info-icon">🔒</span>
-          <div>
-            <strong>Local Telemetry Storage</strong>
-            <p>Fill-up history is saved locally on this device and can optionally sync to a private Google Form. Export
-              to CSV frequently to back up your data.</p>
-            <label class="sync-option">
-              <input type="checkbox" id="chk-sync" checked onchange="setSyncEnabled(this.checked)">
-              <span>Sync saved logs to private Google Form</span>
-            </label>
-          </div>
-        </div>
-      </div>
-      <div class="station-insights solid-card">
-        <div class="station-insights-head">
-          <div>
-            <div class="station-insights-title">Station Back-Calculation</div>
-            <div class="station-insights-sub">Uses actual pumped gallons + AP-confirmed ethanol.</div>
-          </div>
-          <div class="station-insights-caveat">Rolling average keeps the latest five valid estimates per station.</div>
-        </div>
-        <div class="station-insights-body" id="station-insights-body"></div>
-        <div class="station-insights-empty" id="station-insights-empty">No valid AP-confirmed logs yet.</div>
-      </div>
-      <div class="solid-card log-container">
+    <!-- LOGBOOK VIEW -->
+    <div id="log-view" style="display: none;">
+      <div class="calc-card solid-card">
         <div class="log-header">
-          <h2>Fill-up History</h2>
+          <h2>TELEMETRY LOGBOOK</h2>
           <div class="log-actions">
-            <button class="download-btn" onclick="downloadCSV()">⬇ Export CSV</button>
-            <button class="download-btn sheets-btn" onclick="copyLogsForGoogleSheets()" title="Copy tab-delimited log to clipboard for pasting directly into Google Sheets or Excel">📋 Copy for Sheets</button>
-            <button class="download-btn sync-cache-btn" onclick="syncAllCachedLogsToGoogleForm()" title="Sync all cached browser logs to your connected Google Form">☁ Sync Cache to Form</button>
-            <button class="del-all-btn" onclick="deleteAllLogs()">✕ Delete All</button>
+            <button class="download-btn" onclick="exportLogs()">📥 Export CSV</button>
+            <button class="sheets-btn" onclick="copyLogsForGoogleSheets()" title="Copy 9 columns formatted for Google Sheets">📋 Copy for Sheets</button>
+            <button class="sync-cache-btn" onclick="syncAllCachedLogsToGoogleForm()" title="Resubmit cached logs to Google Form">☁ Sync to Form</button>
+            <button class="del-all-btn" onclick="clearLogs()">🗑 Delete All</button>
           </div>
         </div>
+
+        <div class="log-info-box">
+          <div class="info-block">
+            <span class="info-icon">⚡</span>
+            <div>
+              <strong>Instant Telemetry Persistence</strong>
+              <p>Logs are safely cached in browser local storage and submitted to your private Google Form.</p>
+              <label class="sync-option">
+                <input type="checkbox" id="google-form-sync-toggle" checked onchange="toggleGoogleFormSync(this.checked)">
+                <span>Auto-submit new logs to Google Form</span>
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <div class="station-insights solid-card" id="station-insights" style="display: none;">
+          <div class="station-insights-head">
+            <div>
+              <div class="station-insights-title">Station Quality Telemetry</div>
+              <div class="station-insights-sub">Estimated pump ethanol concentration derived from Cobb AP readings.</div>
+            </div>
+            <div class="station-insights-caveat">Derived from AP actuals</div>
+          </div>
+          <div class="station-insights-body" id="station-insights-body"></div>
+        </div>
+
         <div class="table-wrap">
-          <div style="overflow-x:auto;">
-            <table>
-              <thead>
-                <tr>
-                  <th>Date / Time (EST)</th>
-                  <th>Gas Station</th>
-                  <th>Planned E85</th>
-                  <th>Planned 93</th>
-                  <th>AP Eth</th>
-                  <th>Actual E85</th>
-                  <th>Actual 93</th>
-                  <th>Station E85 Est</th>
-                  <th>Fuel Cost</th>
-                  <th>◎ Eth %</th>
-                  <th>Actions</th>
-                </tr>
-              </thead>
-              <tbody id="log-table-body"></tbody>
-            </table>
-          </div>
+          <table id="log-table">
+            <thead>
+              <tr>
+                <th>Date / Time</th>
+                <th>Gas Station</th>
+                <th>Planned E85</th>
+                <th>Planned 93</th>
+                <th>Target Eth %</th>
+                <th>Actual E85</th>
+                <th>Actual 93</th>
+                <th>AP Confirmed %</th>
+                <th>Fill Cost</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="log-body">
+              <!-- Populated via JavaScript -->
+            </tbody>
+          </table>
         </div>
-        <div class="log-empty" id="log-empty-msg">No telemetry logged yet. Calculate a mix and tap "Save Telemetry".
-        </div>
+        <div class="log-empty" id="log-empty">No telemetry logs recorded yet.</div>
       </div>
     </div>
 
-    <div class="section-title" style="margin-top: 24px;">// TECHNICAL REFERENCE & GALLERY</div>
+    <!-- GALLERY SECTION -->
+    <div class="section-title">// RALLY GALLERY</div>
     <div class="gallery-grid">
-      <div class="photo-card" id="pc1" onmousemove="tiltCard(event,'pc1')" onmouseleave="resetCard('pc1')"
-        onclick="openLightbox('wrx-action.jpg','2022 Subaru WRX Driving')">
-        <img src="wrx-action.jpg" alt="2022 Subaru WRX Driving">
-        <div class="photo-overlay">2022 WRX · On Track</div>
+      <div class="photo-card" onclick="openLightbox('https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?auto=format&fit=crop&w=1200&q=80', 'Trackside Telemetry — Tuning Session')">
+        <img src="https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?auto=format&fit=crop&w=600&q=80" alt="Subaru WRX Track">
+        <div class="photo-overlay">Trackside Telemetry — Tuning Session</div>
       </div>
-      <div class="photo-card" id="pc2" onmousemove="tiltCard(event,'pc2')" onmouseleave="resetCard('pc2')"
-        onclick="openLightbox('wrx-shifter.jpg','FA24 WRX Manual Shifter')">
-        <img src="wrx-shifter.jpg" alt="FA24 WRX Manual Shifter">
-        <div class="photo-overlay">FA24 · 6-Speed Manual</div>
+      <div class="photo-card" onclick="openLightbox('https://images.unsplash.com/photo-1617814076367-b759c7d7e738?auto=format&fit=crop&w=1200&q=80', 'E85 High-Pressure Rail Dynamics')">
+        <img src="https://images.unsplash.com/photo-1617814076367-b759c7d7e738?auto=format&fit=crop&w=600&q=80" alt="Engine Bay">
+        <div class="photo-overlay">E85 High-Pressure Rail Dynamics</div>
       </div>
-      <div class="photo-card" id="pc3" onmousemove="tiltCard(event,'pc3')" onmouseleave="resetCard('pc3')"
-        onclick="openLightbox('wrx-interior.jpg','WRX Interior Dashboard')">
-        <img src="wrx-interior.jpg" alt="WRX Interior Dashboard">
-        <div class="photo-overlay">Cockpit · Accessport</div>
+      <div class="photo-card" onclick="openLightbox('https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1200&q=80', 'Dyno Pull & Knock Verification')">
+        <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=600&q=80" alt="Dyno Pull">
+        <div class="photo-overlay">Dyno Pull & Knock Verification</div>
       </div>
-    </div>
-
-    <div class="disclaimer solid-card" style="margin-top: 24px;">
-      <strong>DISCLAIMER & LIABILITY:</strong> This calculator relies on mathematical estimates. The creator assumes no
-      liability for engine or vehicle damage. Use at your own risk.
-    </div>
-
-    <section id="app-docs" class="docs-card solid-card" aria-label="Application documentation">
-      <div class="docs-head">
-        <div>
-          <div class="docs-kicker">Embedded Documentation</div>
-          <h2>SCRK Flex Fuel Calculator Docs</h2>
-        </div>
-      </div>
-
-      <div class="docs-grid">
-        <article class="docs-block">
-          <h3>Technical Implementation</h3>
-          <p>This is a static client-side web application. Core blend computation is performed in-browser with
-            JavaScript and no runtime database.</p>
-          <div class="docs-chip-row">
-            <span class="docs-chip">HTML5</span>
-            <span class="docs-chip">CSS3</span>
-            <span class="docs-chip">Vanilla JavaScript</span>
-            <span class="docs-chip">LocalStorage</span>
-            <span class="docs-chip">Cloudflare Worker</span>
-            <span class="docs-chip">GitHub Pages</span>
-          </div>
-          <ul style="margin-top:10px;">
-            <li><strong>Blend engine:</strong> deterministic calculation for E85 + 93 volumes based on current gallons,
-              current ethanol, target ethanol, and pump compositions.</li>
-            <li><strong>Weather advisory:</strong> Open-Meteo current weather lookup, reverse geocode labeling,
-              advisory-only target guidance.</li>
-            <li><strong>Fuel price path:</strong> on-demand request only (triggered by Use Live Weather action), routed
-              through a Cloudflare Worker endpoint.</li>
-            <li><strong>Persistence:</strong> user settings, logs, and cached weather/fuel data are stored in browser
-              localStorage with safe access wrappers.</li>
-            <li><strong>Telemetry sync:</strong> optional no-cors Google Form post for personal log mirroring.</li>
-            <li><strong>Automation:</strong> GitHub Actions + Node script update snapshot data from Apify for offline
-              fallback workflows and maintenance operations.</li>
-          </ul>
-          <div class="docs-mini">Security posture: restrictive CSP, no client-side secret storage, origin-controlled
-            worker CORS, input clamping, DOM-safe rendering for station lines, and CSV formula-injection mitigation for
-            exports.</div>
-        </article>
-
-        <article class="docs-block">
-          <h3>User Guide (How To Use)</h3>
-          <ol>
-            <li><strong>Set your current tank:</strong> use the tick slider or Fuel Remaining gallons input.</li>
-            <li><strong>Enter current ethanol:</strong> AP Eth Gauge value from your Accessport.</li>
-            <li><strong>Set your target:</strong> choose Target Eth and confirm Max Eth ceiling for your tune.</li>
-            <li><strong>Confirm pump assumptions:</strong> Pump E85 % and Pump Gas E% for your region.</li>
-            <li><strong>Optional live update:</strong> tap <em>Use Live Weather</em> to fetch weather + fuel prices in one action.</li>
-            <li><strong>Read outputs:</strong> Pump E85 First, Top Off 93, and Estimated Blend cards show planned fill.</li>
-            <li><strong>Save telemetry:</strong> add station/actuals and save to build history + station insights.</li>
-            <li><strong>Review advisory panels:</strong> weather suggestion, ceiling notes, and cleaning tank streak reminders are advisory only.</li>
-            <li><strong>Export backup:</strong> use Export CSV regularly for personal archive.</li>
-          </ol>
-          <div class="docs-mini">What users can learn: how ethanol percentage moves with tank state, why a full tank
-            can limit achievable target, how temperature influences drivability guidance, and how real fill logs improve
-            future station decisions.</div>
-        </article>
-
-        <article class="docs-block" style="grid-column: 1 / -1;">
-          <h3>Seasonal Blend Planner (Standalone Page)</h3>
-          <p>The companion <a href="blend-planner.html" style="color:var(--fuel-orange,#ff6b35);font-weight:700;">Seasonal Blend Planner (blend-planner.html)</a> provides an interactive 12-month calendar and telemetry analytics suite:</p>
-          <div class="docs-chip-row">
-            <span class="docs-chip">12-Month Calendar</span>
-            <span class="docs-chip">Compliance Speedometer</span>
-            <span class="docs-chip">Streak Tracking</span>
-            <span class="docs-chip">Achievement Badges</span>
-            <span class="docs-chip">ICS Calendar Export</span>
-            <span class="docs-chip">CSV & JSON Archives</span>
-            <span class="docs-chip">GitHub Backup</span>
-          </div>
-          <ul style="margin-top:10px;">
-            <li><strong>Ambient Temperature Mapping:</strong> Cold winter baseline (E30–E40) prioritizes cold-start vapor pressure, while peak summer heat (E70+) maximizes charge cooling and knock resistance.</li>
-            <li><strong>Logbook Telemetry Reading:</strong> Reads saved <code>wrxFuelLogs</code> directly from your browser with zero data loss or mutation.</li>
-            <li><strong>Export & Calendar Sync:</strong> Export an <code>.ics</code> calendar schedule for Google/Apple/Outlook calendars, download CSV/JSON archives, or follow the guided Git workflow to commit logs to <code>data/blend-history/</code>.</li>
-            <li><strong>Gamified Badges & Resume:</strong> Earn achievements like <em>Winter Warrior</em>, <em>Summer Specialist</em>, and <em>Streak Master</em>, and copy your Racing Resume to share with fellow enthusiasts.</li>
-          </ul>
-          <div class="docs-mini">Launch the planner anytime via the <strong>⛽ Blend Planner</strong> button in the top navigation bar.</div>
-        </article>
-      </div>
-    </section>
-
-    <div class="footer">
-      <div class="fn">FA24 · Accessport Required · Verify ETH% at pump · Cobb Flex Fuel Kit · Cold Air Intake · SCRK
-        Custom Tune</div>
-      <div class="fm">22 WRX</div>
     </div>
 
   </div>
 
-  <div id="lightbox"
-    style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.95);z-index:99999;align-items:center;justify-content:center;padding:20px;"
-    onclick="closeLightbox()">
-    <div style="max-width:900px;width:100%;position:relative;">
-      <img id="lb-img" src="" alt="" style="width:100%;height:auto;border-radius:12px;border:1px solid #2e3555;">
-      <div id="lb-cap"
-        style="font-family:'Share Tech Mono',monospace;font-size:12px;color:#6b7a99;text-align:center;margin-top:12px;letter-spacing:2px;">
-      </div>
-      <button
-        style="position:absolute;top:-20px;right:-20px;background:#1e2235;border:1px solid #2e3555;border-radius:50%;width:40px;height:40px;color:#fff;font-size:20px;cursor:pointer;">✕</button>
-    </div>
-  </div>
-
-  <!-- EDIT FUEL LOG MODAL (iOS & Desktop Friendly) -->
-  <div id="edit-log-modal" class="modal-overlay" onclick="closeEditLogModal(event)">
-    <div class="modal-content" style="max-width: 540px;" onclick="event.stopPropagation()">
-      <button class="close-btn" onclick="closeEditLogModal(null)">✕</button>
-      <div class="modal-inner">
-        <div class="sim-header" style="margin-bottom: 20px;">
-          <h2 style="font-size: 20px;">✏️ Edit <span>Fuel Log</span></h2>
-          <p id="edit-modal-date" style="font-family:'Share Tech Mono',monospace;color:var(--text-muted);font-size:12px;margin-top:4px;">Date: —</p>
-        </div>
-
-        <form id="edit-log-form" onsubmit="saveModalLogEdit(event)">
-          <div class="edit-modal-grid">
-            <div class="edit-field-group">
-              <label for="modal-inp-station">Station / Location Notes</label>
-              <input type="text" id="modal-inp-station" class="modal-inp" placeholder="e.g. Sheetz / Sunoco #12">
-            </div>
-
-            <div class="edit-two-col">
-              <div class="edit-field-group">
-                <label for="modal-inp-e85" style="color:var(--e85);">Planned E85 (gal)</label>
-                <input type="number" step="any" id="modal-inp-e85" inputmode="decimal" class="modal-inp">
-              </div>
-              <div class="edit-field-group">
-                <label for="modal-inp-93" style="color:var(--c93);">Planned 93 (gal)</label>
-                <input type="number" step="any" id="modal-inp-93" inputmode="decimal" class="modal-inp">
-              </div>
-            </div>
-
-            <div class="edit-two-col">
-              <div class="edit-field-group">
-                <label for="modal-inp-act-e85" style="color:var(--e85);">Actual E85 Pumped (gal)</label>
-                <input type="number" step="any" id="modal-inp-act-e85" inputmode="decimal" class="modal-inp" placeholder="Meter gal">
-              </div>
-              <div class="edit-field-group">
-                <label for="modal-inp-act-93" style="color:var(--c93);">Actual 93 Pumped (gal)</label>
-                <input type="number" step="any" id="modal-inp-act-93" inputmode="decimal" class="modal-inp" placeholder="Meter gal">
-              </div>
-            </div>
-
-            <div class="edit-two-col">
-              <div class="edit-field-group">
-                <label for="modal-inp-ap-eth" style="color:var(--neon);">AP Confirmed Eth %</label>
-                <input type="number" step="any" id="modal-inp-ap-eth" inputmode="decimal" class="modal-inp" placeholder="e.g. 75">
-              </div>
-              <div class="edit-field-group">
-                <label for="modal-inp-eth" style="color:var(--gold);">Resulting Mix Eth %</label>
-                <input type="number" step="any" id="modal-inp-eth" inputmode="decimal" class="modal-inp" placeholder="e.g. 75">
-              </div>
-            </div>
-
-            <div class="edit-two-col">
-              <div class="edit-field-group">
-                <label for="modal-inp-cur-gal">Starting Tank (gal)</label>
-                <input type="number" step="any" id="modal-inp-cur-gal" inputmode="decimal" class="modal-inp">
-              </div>
-              <div class="edit-field-group">
-                <label for="modal-inp-cur-eth">Starting Eth %</label>
-                <input type="number" step="any" id="modal-inp-cur-eth" inputmode="decimal" class="modal-inp">
-              </div>
-            </div>
-
-            <div class="edit-field-group">
-              <label for="modal-inp-fill-cost" style="color:var(--gold);">Total Fill Cost ($)</label>
-              <input type="number" step="any" id="modal-inp-fill-cost" inputmode="decimal" class="modal-inp" placeholder="e.g. 45.50">
-            </div>
-          </div>
-
-          <div class="modal-actions-row">
-            <button type="submit" class="modal-save-btn">✓ SAVE CHANGES</button>
-            <button type="button" class="modal-cancel-btn" onclick="closeEditLogModal(null)">CANCEL</button>
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
-
+  <!-- TRAP SIMULATOR MODAL -->
   <div id="sim-modal" class="modal-overlay" onclick="closeSim(event)">
     <div class="modal-content" onclick="event.stopPropagation()">
       <button class="close-btn" onclick="closeSim(null)">✕</button>
       <div class="modal-inner">
         <div class="sim-header">
           <h2>⚠ The Flex-Fuel <span>Trap</span> Simulator</h2>
-          <p>Discover why targets are missed when the tank is too full.</p>
+          <p>Discover why ethanol targets are physically limited when the tank is too full.</p>
         </div>
 
         <div class="sim-visual-wrapper">
@@ -901,7 +496,6 @@
 
         <div class="sim-grid">
           <div class="sim-controls">
-
             <div class="sim-slider-group">
               <div class="sim-slider-header">
                 <label>Current Fuel in Tank</label>
@@ -952,12 +546,13 @@
     </div>
   </div>
 
-  <div id="ref-modal" onclick="closeRef(event)">
+  <!-- LIVE AP REFERENCE MODAL -->
+  <div id="ref-modal" class="modal-overlay" onclick="closeRef(event)">
     <div class="ref-modal-content solid-card" onclick="event.stopPropagation()">
       <button class="ref-close-btn" onclick="closeRef()">✕</button>
       <div class="sim-header">
         <h2>🎛 Live Gauge <span>Reference</span></h2>
-        <p>Normal Accessport ranges by driving scenario — RevHang E85WRK2</p>
+        <p>Normal Cobb Accessport ranges by driving scenario — RevHang E85WRK2</p>
       </div>
 
       <div class="ref-scenario">
@@ -1056,50 +651,104 @@
         <div class="ref-status">✓ Rich fuel, conservative timing at peak boost</div>
       </div>
 
-      <div class="ref-scenario">
-        <h3>Lift-Off / Fuel Cut</h3>
-        <div class="ref-condition">▸ Coasting after cruise or a pull</div>
-        <div class="ref-data-row">
-          <div class="ref-data-item">
-            <div class="lbl">AFR</div>
-            <div class="val">19.0–21.9</div>
-          </div>
-          <div class="ref-data-item">
-            <div class="lbl">Timing</div>
-            <div class="val">-0.5 to +2.0°</div>
-          </div>
-          <div class="ref-data-item">
-            <div class="lbl">DAM</div>
-            <div class="val">1.000</div>
-          </div>
-          <div class="ref-data-item">
-            <div class="lbl">FK / FKL</div>
-            <div class="val">0 / 0</div>
-          </div>
-        </div>
-        <div class="ref-status">✓ RevHang cut active — lean, efficient coast</div>
-      </div>
-
       <div class="ref-flags-box">
         <h3>⚠ Back Off If You See</h3>
-        <div class="ref-flag-item"><strong>DAM below 0.900</strong> — ease off, drive gentle until it recovers to 1.000
-        </div>
-        <div class="ref-flag-item"><strong>FK below -1.05°</strong> — reduce load, avoid lugging in a tall gear at low
-          RPM</div>
-        <div class="ref-flag-item"><strong>FKL below -0.70°</strong> — retard is accumulating, back off and cruise easy
-        </div>
-        <div class="ref-flag-item"><strong>6th gear under ~1,600 RPM + throttle</strong> — lugging zone, downshift to
-          5th/4th</div>
-        <div class="ref-flag-item"><strong>Timing jumping erratically</strong> — possible active knock, lift immediately
-        </div>
+        <div class="ref-flag-item"><strong>DAM below 0.900</strong> — ease off, drive gentle until it recovers to 1.000</div>
+        <div class="ref-flag-item"><strong>FK below -1.05°</strong> — reduce load, avoid lugging in a tall gear at low RPM</div>
+        <div class="ref-flag-item"><strong>FKL below -0.70°</strong> — retard is accumulating, back off and cruise easy</div>
       </div>
 
-      <div class="ref-footer-note">FA24 · RevHang E85WRK2 · Dman E-Tune · Reference only — always defer to logs &amp;
-        your tuner</div>
+      <div class="ref-footer-note">
+        Need full telemetry analysis? Read the <a href="docs.html#ap-telemetry" target="_blank">Complete Accessport Engineering Guide ↗</a>
+      </div>
     </div>
   </div>
 
-  <script src="app.js?v=2.7"></script>
+  <!-- EDIT LOG MODAL -->
+  <div id="edit-log-modal" class="modal-overlay" onclick="closeEditLogModal(event)">
+    <div class="modal-content" onclick="event.stopPropagation()">
+      <button class="close-btn" onclick="closeEditLogModal(null)">✕</button>
+      <div class="modal-inner">
+        <div class="sim-header" style="margin-bottom: 20px;">
+          <h2 style="font-size: 20px;">✏️ Edit <span>Fuel Log</span></h2>
+          <p id="edit-modal-date" style="font-family:'Share Tech Mono',monospace;color:var(--text-muted);font-size:12px;margin-top:4px;">Date: —</p>
+        </div>
+
+        <form id="edit-log-form" onsubmit="saveModalLogEdit(event)">
+          <div class="edit-modal-grid">
+            <div class="edit-field-group">
+              <label for="modal-inp-station">Station / Location Notes</label>
+              <input type="text" id="modal-inp-station" class="modal-inp" placeholder="e.g. Sheetz / Sunoco #12">
+            </div>
+
+            <div class="edit-two-col">
+              <div class="edit-field-group">
+                <label for="modal-inp-e85" style="color:var(--e85);">Planned E85 (gal)</label>
+                <input type="number" step="any" id="modal-inp-e85" inputmode="decimal" class="modal-inp">
+              </div>
+              <div class="edit-field-group">
+                <label for="modal-inp-93" style="color:var(--c93);">Planned 93 (gal)</label>
+                <input type="number" step="any" id="modal-inp-93" inputmode="decimal" class="modal-inp">
+              </div>
+            </div>
+
+            <div class="edit-two-col">
+              <div class="edit-field-group">
+                <label for="modal-inp-act-e85" style="color:var(--e85);">Actual E85 Pumped (gal)</label>
+                <input type="number" step="any" id="modal-inp-act-e85" inputmode="decimal" class="modal-inp" placeholder="Meter gal">
+              </div>
+              <div class="edit-field-group">
+                <label for="modal-inp-act-93" style="color:var(--c93);">Actual 93 Pumped (gal)</label>
+                <input type="number" step="any" id="modal-inp-act-93" inputmode="decimal" class="modal-inp" placeholder="Meter gal">
+              </div>
+            </div>
+
+            <div class="edit-two-col">
+              <div class="edit-field-group">
+                <label for="modal-inp-ap-eth" style="color:var(--neon);">AP Confirmed Eth %</label>
+                <input type="number" step="any" id="modal-inp-ap-eth" inputmode="decimal" class="modal-inp" placeholder="e.g. 75">
+              </div>
+              <div class="edit-field-group">
+                <label for="modal-inp-eth" style="color:var(--gold);">Resulting Mix Eth %</label>
+                <input type="number" step="any" id="modal-inp-eth" inputmode="decimal" class="modal-inp" placeholder="e.g. 75">
+              </div>
+            </div>
+
+            <div class="edit-two-col">
+              <div class="edit-field-group">
+                <label for="modal-inp-cur-gal">Starting Tank (gal)</label>
+                <input type="number" step="any" id="modal-inp-cur-gal" inputmode="decimal" class="modal-inp">
+              </div>
+              <div class="edit-field-group">
+                <label for="modal-inp-cur-eth">Starting Eth %</label>
+                <input type="number" step="any" id="modal-inp-cur-eth" inputmode="decimal" class="modal-inp">
+              </div>
+            </div>
+
+            <div class="edit-field-group">
+              <label for="modal-inp-fill-cost" style="color:var(--gold);">Total Fill Cost ($)</label>
+              <input type="number" step="any" id="modal-inp-fill-cost" inputmode="decimal" class="modal-inp" placeholder="e.g. 45.50">
+            </div>
+          </div>
+
+          <div class="modal-actions-row">
+            <button type="submit" class="modal-save-btn">✓ SAVE CHANGES</button>
+            <button type="button" class="modal-cancel-btn" onclick="closeEditLogModal(null)">CANCEL</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- LIGHTBOX MODAL -->
+  <div id="lightbox" class="modal-overlay" onclick="closeLightbox()">
+    <div style="max-width:90vw; max-height:90vh; display:flex; flex-direction:column; align-items:center;">
+      <img id="lb-img" src="" alt="Enlarged" style="max-width:100%; max-height:80vh; border-radius:8px; border:1px solid #364275;">
+      <div id="lb-cap" style="margin-top:12px; font-family:'Share Tech Mono'; color:#fff; font-size:14px; text-align:center;"></div>
+    </div>
+  </div>
+
+  <script src="app.js?v=3.0"></script>
   <script>
     function tiltCard(e, id) {
       if (window.innerWidth < 600) return;
@@ -1107,7 +756,7 @@
       const rect = card.getBoundingClientRect();
       const x = (e.clientX - rect.left) / rect.width - 0.5;
       const y = (e.clientY - rect.top) / rect.height - 0.5;
-      card.style.transform = `perspective(600px) rotateY(${x * 12}deg) rotateX(${-y * 10}deg) scale(1.03)`;
+      card.style.transform = ;
     }
     function resetCard(id) {
       const card = document.getElementById(id);
@@ -1116,10 +765,10 @@
     function openLightbox(src, cap) {
       document.getElementById('lb-img').src = src;
       document.getElementById('lb-cap').textContent = cap;
-      document.getElementById('lightbox').style.display = 'flex';
+      document.getElementById('lightbox').classList.add('show');
     }
     function closeLightbox() {
-      document.getElementById('lightbox').style.display = 'none';
+      document.getElementById('lightbox').classList.remove('show');
     }
   </script>
 </body>

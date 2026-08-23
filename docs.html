@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
+  <meta name="theme-color" content="#080a11">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="SCRK Engineering Docs">
+  <title>SCRK Engineering & System Architecture — Motorsport Telemetry Hub</title>
+
+  <link rel="icon" type="image/svg+xml"
+    href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23080b12'/><text x='50%' y='68%' font-family='sans-serif' font-size='58' font-weight='bold' fill='%23ccff00' text-anchor='middle'>S</text></svg>">
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@400;600;700;800;900&family=Share+Tech+Mono&family=Orbitron:wght@400;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="docs-styles.css?v=1.0">
+</head>
+
+<body>
+
+  <!-- GLOBAL SCRK TOP NAVIGATION -->
+  <header class="scrk-nav-header">
+    <div class="scrk-nav-inner">
+      <a href="index.html" class="scrk-brand-link">
+        <div class="scrk-brand-badge">
+          SCRK
+          <div class="scrk-brand-tag"><span>PERFORMANCE</span></div>
+        </div>
+      </a>
+
+      <nav>
+        <ul class="scrk-nav-links">
+          <li class="scrk-nav-item"><a href="index.html">⛽ Fuel Calculator</a></li>
+          <li class="scrk-nav-item"><a href="blend-planner.html">📅 Seasonal Planner</a></li>
+          <li class="scrk-nav-item active"><a href="docs.html">📖 Engineering Docs</a></li>
+          <li class="scrk-nav-item"><a href="https://charans1089-bit.github.io/ap-log-analyzer/" target="_blank" rel="noopener">📊 AP Log Analyzer ↗</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- DOCS MAIN LAYOUT -->
+  <div class="docs-wrapper">
+
+    <!-- STICKY SIDEBAR -->
+    <aside class="docs-sidebar">
+      <div class="sidebar-title">⚙️ System Docs</div>
+      <ul class="sidebar-nav">
+        <li><a href="#overview" class="active">1. Platform Overview</a></li>
+        <li><a href="#architecture">2. Software Architecture</a></li>
+        <li><a href="#math-model">3. Mathematical Formulation</a></li>
+        <li><a href="#persona">4. Vehicle & User Persona</a></li>
+        <li><a href="#pitstop">5. Pit Stop Fueling Sequence</a></li>
+        <li><a href="#high-eth-safeguards">6. High-Ethanol Safeguards</a></li>
+        <li><a href="#ap-telemetry">7. Cobb AP Gauge Guide</a></li>
+        <li><a href="#weather-dynamics">8. Seasonal Dynamics</a></li>
+        <li><a href="#telemetry-sync">9. Telemetry & Cloud Sync</a></li>
+      </ul>
+    </aside>
+
+    <!-- MAIN CONTENT AREA -->
+    <main class="docs-content">
+
+      <!-- HERO SECTION -->
+      <section class="doc-hero" id="overview">
+        <div class="doc-hero-badge">SCRK Engineering Brief v2.7</div>
+        <h1>SCRK Motorsport Telemetry & Flex Fuel Architecture</h1>
+        <p>A precision volumetric mixing calculator, seasonal compliance planner, and live Accessport telemetry diagnostic suite engineered for high-performance turbocharged direct-injection platforms.</p>
+      </section>
+
+      <!-- CHAPTER 1: PLATFORM OVERVIEW -->
+      <section class="doc-section">
+        <h2><span class="section-num">01</span> Platform Overview & Philosophy</h2>
+        <div class="section-sub">Precision Engineering · Volumetric Mixing · Tuner Safety</div>
+
+        <p>The <strong>SCRK Flex Fuel Mix Platform</strong> is built to solve a critical challenge in modern motorsport and modified street tuning: achieving consistent, repeatable ethanol targets without costly over-fueling, leaning out under high boost, or degrading sensitive direct-injection fuel system components.</p>
+
+        <p>Ethanol offers exceptional anti-knock characteristics (effective octane ratings in excess of 100–105 RON+MON/2) and tremendous charge-cooling latent heat of vaporization. However, pump E85 varies drastically by season (ranging between 54% in winter to 85%+ in summer) and standard pump 93 octane contains up to 10% ethanol (E10). The SCRK platform dynamically accounts for residual tank volume, current tank ethanol concentration, and supplier pump variances to deliver exact pump gallon prescriptions.</p>
+
+        <div class="callout info">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <div class="callout-title">Core Engineering Objective</div>
+            Deliver exact, reproducible blends (such as E30, E45, E60, or E75+) within a tight tolerance of ±1.0% ethanol, eliminating the guesswork that often leads to inconsistent ignition timing or unexpected fuel trim compensations.
+          </div>
+        </div>
+      </section>
+
+      <!-- CHAPTER 2: SOFTWARE ARCHITECTURE -->
+      <section class="doc-section" id="architecture">
+        <h2><span class="section-num">02</span> Software Architecture & Technical Stack</h2>
+        <div class="section-sub">Zero-Latency Client Computation · Edge Worker Proxy · Progressive Web App</div>
+
+        <p>The platform is engineered as a zero-latency client-side application with offline capability and resilient telemetry sync pipelines:</p>
+
+        <div class="doc-table-wrap">
+          <table class="doc-table">
+            <thead>
+              <tr>
+                <th>Layer</th>
+                <th>Technology / Endpoint</th>
+                <th>Purpose</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Core Engine</strong></td>
+                <td>Vanilla JavaScript (ES6+), Web Storage API</td>
+                <td>Instantaneous calculation loop (&lt;1ms execution), reactive input sanitization, dynamic tank state persistence.</td>
+              </tr>
+              <tr>
+                <td><strong>Edge API Proxy</strong></td>
+                <td>Cloudflare Workers (V8 Isolate)</td>
+                <td>CORS elimination, API key protection, request deduplication, and intelligent edge caching for station metadata.</td>
+              </tr>
+              <tr>
+                <td><strong>Weather Telemetry</strong></td>
+                <td>Open-Meteo & BigDataCloud APIs</td>
+                <td>Live ambient temperature acquisition, seasonal blend target suggestions (ASTM D5798 volatility matching).</td>
+              </tr>
+              <tr>
+                <td><strong>Telemetry Logging</strong></td>
+                <td>Google Form Headless Submissions & Clipboard TSV</td>
+                <td>No-cors direct log transmission to Google Sheets database + 1-click 1-to-1 clipboard spreadsheet sync.</td>
+              </tr>
+              <tr>
+                <td><strong>Offline Support</strong></td>
+                <td>Service Worker (sw.js), CacheStorage API</td>
+                <td>Full offline operation at remote track days, fuel stations with poor cell reception, or drag strips.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- CHAPTER 3: MATHEMATICAL FORMULATION -->
+      <section class="doc-section" id="math-model">
+        <h2><span class="section-num">03</span> Mathematical Formulation & Conservation Laws</h2>
+        <div class="section-sub">Volumetric Mass Balance · Multi-Source Ethanol Solution</div>
+
+        <p>The calculator operates on the physical principle of <strong>Conservation of Ethanol Volume</strong> under the assumption of ideal liquid mixing across gasoline and ethanol hydrocarbons.</p>
+
+        <div class="math-card">
+          <div class="math-formula-title">General Mixing Equation</div>
+          <div class="math-equation">
+            V_total · E_target = (V_cur · E_cur) + (V_e85 · E_pump85) + (V_93 · E_pump93)
+          </div>
+          <p style="font-size: 13px; color: var(--text-muted); margin: 0;">
+            Where \(V_{	ext{total}} = V_{	ext{cur}} + V_{	ext{e85}} + V_{93}\).
+          </p>
+        </div>
+
+        <h3>Solving for Planned E85 and 93 Octane Gallons</h3>
+        <p>Let \(V_{	ext{added}} = V_{	ext{total}} - V_{	ext{cur}}\) represent the total capacity being filled. Substituting \(V_{93} = V_{	ext{added}} - V_{	ext{e85}}\) into the conservation formula yields the closed-form solution for required E85 gallons:</p>
+
+        <div class="math-card">
+          <div class="math-formula-title">Exact Analytical Solution for E85 Gallons (V_e85)</div>
+          <div class="math-equation">
+            V_e85 = [ V_total · E_target - V_cur · E_cur - V_added · E_pump93 ] / [ E_pump85 - E_pump93 ]
+          </div>
+        </div>
+
+        <p>Once \(V_{	ext{e85}}\) is computed, the required 93 pump gas is immediately determined:</p>
+        <div class="math-card">
+          <div class="math-formula-title">Top-Off 93 Octane Gallons (V_93)</div>
+          <div class="math-equation">
+            V_93 = V_added - V_e85
+          </div>
+        </div>
+
+        <div class="callout warn">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">Physical Boundary Conditions & Tank Traps</div>
+            If the requested target ethanol \(E_{	ext{target}}\) exceeds the mathematical maximum achievable with remaining fuel (i.e. \(V_{	ext{e85}} &gt; V_{	ext{added}}\)), the application enters the <strong>Trap Simulator</strong> advisory mode, warning the driver of physical tank constraints.
+          </div>
+        </div>
+      </section>
+
+      <!-- CHAPTER 4: VEHICLE & USER PERSONA -->
+      <section class="doc-section" id="persona">
+        <h2><span class="section-num">04</span> Target Vehicle Platform & User Persona</h2>
+        <div class="section-sub">2022+ Subaru WRX (VB Chassis) · FA24 2.4L Turbocharged DIT Boxer</div>
+
+        <h3>Primary Driver Profile</h3>
+        <ul>
+          <li><strong>Daily Commuter & Weekend Enthusiast:</strong> The driver relies on the vehicle as a dependable daily driver while seeking maximum engine response, knock resistance, and thermal efficiency.</li>
+          <li><strong>Tuning Hardware:</strong> Cobb Accessport V3 with custom protune / e-tune flex fuel maps (e.g. RevHang calibration, 93 octane base map, and scalable high-ethanol maps).</li>
+          <li><strong>Fuel System Hardware:</strong> Direct-injection High Pressure Fuel Pump (HPFP), in-tank low pressure lift pump, high-pressure direct injectors, and in-line CAN flex fuel ethanol sensor.</li>
+        </ul>
+
+        <h3>Engine Specifics: FA24F Direct Injection Turbo (DIT)</h3>
+        <p>The 2.4-liter FA24 engine features a 10.6:1 static compression ratio and high boost pressure (15–19 psi peak). Because direct injection delivers fuel straight into the combustion chamber at up to 20 MPa (2,900 psi), ethanol's latent cooling power drastically suppresses pre-ignition (LSPI) and cylinder wall heat soak.</p>
+      </section>
+
+      <!-- CHAPTER 5: PIT STOP FUELING SEQUENCE -->
+      <section class="doc-section" id="pitstop">
+        <h2><span class="section-num">05</span> Pit Stop Protocol & Fueling Sequence</h2>
+        <div class="section-sub">Pump E85 First · Mechanical Mixing Dynamics · Nozzle Precision</div>
+
+        <div class="doc-table-wrap">
+          <table class="doc-table">
+            <thead>
+              <tr>
+                <th>Step</th>
+                <th>Action</th>
+                <th>Engineering Justification</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><span class="doc-tag neon">Step 1</span></td>
+                <td><strong>Pump Planned E85 First</strong></td>
+                <td>E85 has a higher specific density (~0.785 g/cm³) than pure gasoline (~0.740 g/cm³). Pumping E85 first deposits the denser fuel at the base of the tank.</td>
+              </tr>
+              <tr>
+                <td><span class="doc-tag blue">Step 2</span></td>
+                <td><strong>Top Off 93 Octane Second</strong></td>
+                <td>The high-flow turbulence of the subsequent 93 octane fill thoroughly agitates and mixes the fuel throughout the tank baffles and fuel pump basket.</td>
+              </tr>
+              <tr>
+                <td><span class="doc-tag gold">Step 3</span></td>
+                <td><strong>Verify on Cobb Accessport</strong></td>
+                <td>Drive 1.5–3.0 miles in light vacuum cruise to cycle the fuel line volume through the high-pressure fuel rail until the in-line ethanol sensor stabilizes.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- CHAPTER 6: HIGH-ETHANOL SAFEGUARDS -->
+      <section class="doc-section" id="high-eth-safeguards">
+        <h2><span class="section-num">06</span> High-Ethanol Safeguards & 3–4 Fill Rule</h2>
+        <div class="section-sub">HPFP Lubricity · Hygroscopic Moisture Management · Detergent Washing</div>
+
+        <p>While ethanol delivers exceptional octane benefits, prolonged continuous operation at extreme ethanol concentrations (E75 to E85+) presents unique mechanical considerations for direct injection engines:</p>
+
+        <div class="callout danger">
+          <div class="callout-icon">🚨</div>
+          <div class="callout-body">
+            <div class="callout-title">The 3–4 Consecutive Fill Rule (E75+ Advisory)</div>
+            Tuner advisory recommends limiting consecutive E75+ fills to a maximum of <strong>3 to 4 fill cycles</strong>. After reaching this threshold, run one full tank of top-tier 93 pump gas (or E10/E20 mild blend) before returning to high-ethanol blends.
+          </div>
+        </div>
+
+        <h3>Why the 93 Octane Cleaning Run is Critical</h3>
+        <ol>
+          <li><strong>High Pressure Fuel Pump Lubrication:</strong> Gasoline contains specialized lubricating hydrocarbons that protect the tight tolerances of the HPFP plunger and cam follower. Pure ethanol has lower lubricity.</li>
+          <li><strong>Detergent Fuel Additives:</strong> Top-tier 93 octane gasoline contains deposit-control detergents (polyetheramines) that wash away organic injector gumming and clean intake valve backsides.</li>
+          <li><strong>Moisture & Hygroscopic Scavenging:</strong> Ethanol naturally absorbs atmospheric moisture over time. A periodic tank of 93 gasoline displaces accumulated moisture in the tank sump.</li>
+        </ol>
+      </section>
+
+      <!-- CHAPTER 7: COBB AP GAUGE REFERENCE -->
+      <section class="doc-section" id="ap-telemetry">
+        <h2><span class="section-num">07</span> Cobb Accessport Live Gauge Diagnostic Guide</h2>
+        <div class="section-sub">Nominal Operating Windows · Knock Diagnostics · RevHang Calibration</div>
+
+        <p>Use the following telemetry guide to monitor engine health on your Cobb Accessport across standard driving scenarios:</p>
+
+        <div class="doc-table-wrap">
+          <table class="doc-table">
+            <thead>
+              <tr>
+                <th>Driving Scenario</th>
+                <th>AFR (Air-Fuel)</th>
+                <th>Ignition Timing</th>
+                <th>DAM</th>
+                <th>Feedback Knock (FK)</th>
+                <th>Fine Knock Learn (FKL)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Idle (600–900 RPM)</strong></td>
+                <td><span class="doc-tag neon">14.0–15.0</span></td>
+                <td>8.0–11.0°</td>
+                <td><span class="doc-tag neon">1.000</span></td>
+                <td>0.00°</td>
+                <td>0.00°</td>
+              </tr>
+              <tr>
+                <td><strong>Light Cruise (Vacuum)</strong></td>
+                <td><span class="doc-tag neon">14.5–15.5</span></td>
+                <td>10.0–15.0°</td>
+                <td><span class="doc-tag neon">1.000</span></td>
+                <td>0.00°</td>
+                <td>0.00°</td>
+              </tr>
+              <tr>
+                <td><strong>Partial Accel (1–6 psi)</strong></td>
+                <td><span class="doc-tag blue">12.0–13.5</span></td>
+                <td>6.0–10.0°</td>
+                <td><span class="doc-tag neon">1.000</span></td>
+                <td>≥ -0.35° (acceptable)</td>
+                <td>0.00°</td>
+              </tr>
+              <tr>
+                <td><strong>WOT Pull (15–19 psi)</strong></td>
+                <td><span class="doc-tag gold">10.9–12.0</span></td>
+                <td>2.5–14.0°</td>
+                <td><span class="doc-tag neon">1.000</span></td>
+                <td><span class="doc-tag neon">0.00°</span></td>
+                <td><span class="doc-tag neon">0.00°</span></td>
+              </tr>
+              <tr>
+                <td><strong>Lift-Off / Fuel Cut</strong></td>
+                <td>19.0–21.9</td>
+                <td>-0.5 to +2.0°</td>
+                <td><span class="doc-tag neon">1.000</span></td>
+                <td>0.00°</td>
+                <td>0.00°</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="callout danger">
+          <div class="callout-icon">⚠️</div>
+          <div class="callout-body">
+            <div class="callout-title">Safety Thresholds & When to Back Off</div>
+            <ul style="margin: 4px 0 0 16px;">
+              <li><strong>DAM below 0.900:</strong> Ease off the throttle immediately; drive gently until DAM recovers to 1.000.</li>
+              <li><strong>FK below -1.05°:</strong> Reduce engine load; avoid lugging in high gears at low engine RPM.</li>
+              <li><strong>FKL below -0.70°:</strong> Active timing retard is learning into the ECU table; check fuel quality and AP ethanol percentage.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- CHAPTER 8: WEATHER & SEASONAL BLEND DYNAMICS -->
+      <section class="doc-section" id="weather-dynamics">
+        <h2><span class="section-num">08</span> Weather & Seasonal Volatility Compliance</h2>
+        <div class="section-sub">ASTM D5798 Standards · Vapor Pressure · Cold Start Protection</div>
+
+        <p>Pump ethanol blends change across the calendar year to maintain adequate Reid Vapor Pressure (RVP) for reliable cold starting during winter months:</p>
+
+        <ul>
+          <li><strong>Summer (Class 1 / June–August):</strong> Minimum 79% to 85% ethanol concentration. Maximum power potential, highest knock suppression.</li>
+          <li><strong>Transition (Class 2 / Spring & Fall):</strong> 70% to 79% ethanol. Excellent balance of power and ignition stability.</li>
+          <li><strong>Winter (Class 3 & 4 / November–March):</strong> 54% to 70% ethanol blended with high-volatility winter gasoline to prevent hard cold-starts.</li>
+        </ul>
+
+        <p>The <strong>Seasonal Blend Planner</strong> module in the SCRK suite calculates compliance against your local meteorological temperature profiles, suggesting target blend schedules customized to your region.</p>
+      </section>
+
+      <!-- CHAPTER 9: TELEMETRY & CLOUD SYNC -->
+      <section class="doc-section" id="telemetry-sync">
+        <h2><span class="section-num">09</span> Telemetry Persistence & Spreadsheet Sync</h2>
+        <div class="section-sub">Google Forms Headless Submission · 9-Column Precision TSV Export</div>
+
+        <p>All fill logs recorded in the calculator are maintained in local browser storage and can be mirrored seamlessly to your central telemetry spreadsheet:</p>
+
+        <ol>
+          <li><strong>Headless Google Form Sync:</strong> Automatically maps all 9 telemetry fields (Date/Time, Station notes with streak tag, planned gallons, actual pumped gallons, target %, AP verified %, and fill cost) directly to your linked Google Form.</li>
+          <li><strong>1-Click Clipboard TSV Export:</strong> Generates a tab-separated value matrix formatted exactly to drop into cell <code>B1</code> of your Google Sheet with matching headers and decimal precision.</li>
+        </ol>
+      </section>
+
+    </main>
+  </div>
+
+</body>
+</html>

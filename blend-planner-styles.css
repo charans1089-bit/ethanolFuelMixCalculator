@@ -82,6 +82,101 @@ body.modal-open {
   z-index: 1;
 }
 
+/* ==================== GLOBAL SCRK TOP NAVIGATION ==================== */
+.scrk-nav-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(8, 10, 17, 0.92);
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--card-border);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.6);
+  margin-bottom: 0;
+}
+
+.scrk-nav-inner {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 12px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+}
+
+.scrk-brand-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+}
+
+.scrk-brand-badge {
+  font-family: 'Orbitron', sans-serif;
+  font-weight: 900;
+  font-size: 22px;
+  letter-spacing: 4px;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.scrk-brand-tag {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  color: #000;
+  background: var(--fuel-orange);
+  padding: 3px 8px;
+  border-radius: 3px;
+  transform: skewX(-12deg);
+}
+
+.scrk-brand-tag span {
+  display: inline-block;
+  transform: skewX(12deg);
+}
+
+.scrk-nav-links {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  list-style: none;
+}
+
+.scrk-nav-item a {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  text-decoration: none;
+  padding: 8px 14px;
+  border-radius: 6px;
+  border: 1px solid transparent;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.scrk-nav-item a:hover {
+  color: var(--text-main);
+  background: rgba(255, 255, 255, 0.05);
+  border-color: var(--card-border-bright);
+}
+
+.scrk-nav-item.active a {
+  color: var(--fuel-orange);
+  background: rgba(255, 107, 53, 0.12);
+  border-color: rgba(255, 107, 53, 0.4);
+  box-shadow: 0 0 14px rgba(255, 107, 53, 0.2);
+}
+
 /* ==================== RALLY HEADER BANNER ==================== */
 .rally-banner {
   width: 100%;
