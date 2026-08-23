@@ -9,8 +9,25 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="SCRK Flex">
+  <!-- ── SCRK Security Headers (Phase 2) ── -->
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <meta name="referrer" content="no-referrer">
   <meta http-equiv="Content-Security-Policy"
-    content="default-src 'self'; connect-src 'self' https://docs.google.com https://api.open-meteo.com https://api.bigdatacloud.net https://nominatim.openstreetmap.org https://ethanolfuelmixcalculator.charans1089.workers.dev; img-src 'self' data: https:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; script-src 'self' 'unsafe-inline';">
+    content="
+      default-src 'self';
+      connect-src 'self'
+        https://docs.google.com
+        https://api.open-meteo.com
+        https://api.bigdatacloud.net
+        https://nominatim.openstreetmap.org
+        https://ethanolfuelmixcalculator.charans1089.workers.dev;
+      img-src 'self' data: https://images.unsplash.com;
+      style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
+      font-src https://fonts.gstatic.com;
+      script-src 'self' 'unsafe-inline';
+      frame-ancestors 'none';
+      upgrade-insecure-requests;
+    ">
   <title>SCRK Flex Fuel Mix — Motorsport Telemetry & Mixing Calculator</title>
 
   <link rel="icon" type="image/svg+xml"
@@ -454,7 +471,7 @@
 
       <!-- FEATURED: WRX Action Shot -->
       <div class="photo-card" onclick="openLightbox('wrx-action.jpg', 'FA24 WRX — SCRK Flex Fuel Platform · Full Send')">
-        <img src="wrx-action.jpg" alt="WRX FA24 Action" loading="lazy">
+        <img src="wrx-action.jpg" alt="WRX FA24 Action" loading="lazy" referrerpolicy="no-referrer">
         <div class="photo-overlay">
           <div class="photo-badge"><span>WRX · FA24</span></div>
           <div class="photo-caption">Full Send · SCRK Flex Tune</div>
@@ -474,7 +491,7 @@
 
       <!-- WRX Interior / Cockpit -->
       <div class="photo-card" onclick="openLightbox('wrx-interior.jpg', 'WRX Cockpit · Cobb Accessport V3 · SCRK Telemetry')">
-        <img src="wrx-interior.jpg" alt="WRX Interior Cockpit" loading="lazy">
+        <img src="wrx-interior.jpg" alt="WRX Interior Cockpit" loading="lazy" referrerpolicy="no-referrer">
         <div class="photo-overlay">
           <div class="photo-badge"><span>COCKPIT · AP V3</span></div>
           <div class="photo-caption">Cobb Accessport V3</div>
@@ -484,7 +501,7 @@
 
       <!-- WRX Shifter Close-up -->
       <div class="photo-card" onclick="openLightbox('wrx-shifter.jpg', 'WRX 6-Speed · Short Throw · Driver Engagement')">
-        <img src="wrx-shifter.jpg" alt="WRX Shifter" loading="lazy">
+        <img src="wrx-shifter.jpg" alt="WRX Shifter" loading="lazy" referrerpolicy="no-referrer">
         <div class="photo-overlay">
           <div class="photo-badge"><span>6-SPEED · MT</span></div>
           <div class="photo-caption">Driver-Focused · Short Throw</div>
@@ -690,7 +707,7 @@
       </div>
 
       <div class="ref-footer-note">
-        Need full telemetry analysis? Read the <a href="docs.html#ap-telemetry" target="_blank">Complete Accessport Engineering Guide ↗</a>
+        Need full telemetry analysis? Read the <a href="docs.html#ap-telemetry" target="_blank" rel="noopener noreferrer">Complete Accessport Engineering Guide ↗</a>
       </div>
     </div>
   </div>

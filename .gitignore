@@ -3,3 +3,16 @@
 .idea/
 .vscode/
 
+# Vite build output
+dist/
+
+# Node dependencies
+node_modules/
+
+# TypeScript build info
+*.tsbuildinfo
+
+# Local env
+.env
+.env.local
+.env.*.local

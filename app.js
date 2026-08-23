@@ -1,3 +1,45 @@
+// @ts-check
+/**
+ * @fileoverview SCRK Ethanol Fuel Mix Calculator — Core Engine
+ * @description  Client-side flex-fuel mix calculator for the FA24 Subaru WRX.
+ *               All state persists in browser localStorage (no server).
+ *               Cloudflare Worker proxy used for weather + fuel price APIs.
+ *
+ * @version 3.2.0
+ * @license MIT
+ *
+ * ─── Type Definitions (see src/types.ts for full TypeScript interfaces) ───
+ *
+ * @typedef {Object} FillLogEntry
+ * @property {string} id
+ * @property {string} date
+ * @property {string} station
+ * @property {number} e85Needed
+ * @property {number} c93Needed
+ * @property {number|null} actualE85
+ * @property {number|null} actualC93
+ * @property {number} ethResult
+ * @property {number|null} apEth
+ * @property {number|null} fillCost
+ * @property {number} tick
+ * @property {'full'|'partial'|'custom'} fillMode
+ *
+ * @typedef {Object} WeatherCache
+ * @property {number} tempF
+ * @property {string} sourceLabel
+ * @property {string} detailLabel
+ * @property {number} fetchedAt
+ *
+ * @typedef {Object} FuelPriceCache
+ * @property {Object} payload
+ * @property {number} fetchedAt
+ * @property {number} lat
+ * @property {number} lon
+ *
+ * @typedef {'ok'|'warn'|'error'|'info'|'loading'} StatusKind
+ * @typedef {'full'|'partial'|'custom'} FillMode
+ */
+
 const TANK = 16.6;
 // 9 Full Ticks to properly support 'F' = 16.6
 const LEVELS = [

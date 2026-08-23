@@ -1,0 +1,17 @@
+{
+  "name": "scrk-ethanolcalc",
+  "version": "3.2.0",
+  "description": "SCRK Ethanol Fuel Mix Calculator — FA24 WRX Flex Fuel Platform",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview",
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "typescript": "^5.5.4",
+    "vite": "^5.4.3"
+  }
+}
