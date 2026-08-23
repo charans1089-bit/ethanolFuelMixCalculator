@@ -2081,3 +2081,160 @@ tbody td {
     grid-template-columns: 1fr;
   }
 }
+
+/* ==================== EDIT LOG MODAL & IOS LOGBOOK ==================== */
+.table-wrap {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  border-radius: 8px;
+  margin-top: 8px;
+}
+
+.table-wrap table {
+  min-width: 680px;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.table-wrap th,
+.table-wrap td {
+  padding: 12px 10px;
+  white-space: nowrap;
+  vertical-align: middle;
+}
+
+.row-btn.edit-btn,
+.del-btn {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 12px;
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  min-height: 38px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 4px;
+}
+
+.row-btn.edit-btn {
+  background: rgba(94, 184, 255, 0.15);
+  border: 1px solid rgba(94, 184, 255, 0.4);
+  color: var(--c93);
+}
+
+.row-btn.edit-btn:hover {
+  background: rgba(94, 184, 255, 0.3);
+}
+
+.edit-modal-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-top: 16px;
+}
+
+.edit-two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+@media (max-width: 480px) {
+  .edit-two-col {
+    grid-template-columns: 1fr;
+  }
+}
+
+.edit-field-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.edit-field-group label {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 11.5px;
+  font-weight: 700;
+  color: var(--text-body);
+}
+
+.modal-inp {
+  background: #0d101d;
+  border: 1px solid var(--card-border-bright);
+  border-radius: 8px;
+  color: #fff;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 16px; /* 16px prevents iOS Safari auto-zoom */
+  padding: 10px 12px;
+  width: 100%;
+  box-sizing: border-box;
+  -webkit-appearance: none;
+}
+
+.modal-inp:focus {
+  outline: none;
+  border-color: var(--neon);
+  box-shadow: 0 0 10px rgba(0, 220, 130, 0.25);
+}
+
+.modal-actions-row {
+  display: flex;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.modal-save-btn {
+  flex: 2;
+  background: linear-gradient(135deg, #00dc82 0%, #00a862 100%);
+  color: #000;
+  border: none;
+  font-family: 'Orbitron', monospace;
+  font-size: 13px;
+  font-weight: 800;
+  padding: 14px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  min-height: 48px;
+  box-shadow: 0 4px 14px rgba(0, 220, 130, 0.35);
+}
+
+.modal-cancel-btn {
+  flex: 1;
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text-muted);
+  border: 1px solid var(--card-border);
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 12px;
+  padding: 14px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  min-height: 48px;
+}
+
+@media (max-width: 768px) {
+  .log-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
+  }
+  .log-actions {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+  }
+  .log-actions .download-btn,
+  .log-actions .del-all-btn {
+    width: 100%;
+    padding: 12px 6px;
+    font-size: 11.5px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+    box-sizing: border-box;
+  }
+}

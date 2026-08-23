@@ -792,6 +792,82 @@
     </div>
   </div>
 
+  <!-- EDIT FUEL LOG MODAL (iOS & Desktop Friendly) -->
+  <div id="edit-log-modal" class="modal-overlay" onclick="closeEditLogModal(event)">
+    <div class="modal-content" style="max-width: 540px;" onclick="event.stopPropagation()">
+      <button class="close-btn" onclick="closeEditLogModal(null)">✕</button>
+      <div class="modal-inner">
+        <div class="sim-header" style="margin-bottom: 20px;">
+          <h2 style="font-size: 20px;">✏️ Edit <span>Fuel Log</span></h2>
+          <p id="edit-modal-date" style="font-family:'Share Tech Mono',monospace;color:var(--text-muted);font-size:12px;margin-top:4px;">Date: —</p>
+        </div>
+
+        <form id="edit-log-form" onsubmit="saveModalLogEdit(event)">
+          <div class="edit-modal-grid">
+            <div class="edit-field-group">
+              <label for="modal-inp-station">Station / Location Notes</label>
+              <input type="text" id="modal-inp-station" class="modal-inp" placeholder="e.g. Sheetz / Sunoco #12">
+            </div>
+
+            <div class="edit-two-col">
+              <div class="edit-field-group">
+                <label for="modal-inp-e85" style="color:var(--e85);">Planned E85 (gal)</label>
+                <input type="number" step="0.01" id="modal-inp-e85" class="modal-inp">
+              </div>
+              <div class="edit-field-group">
+                <label for="modal-inp-93" style="color:var(--c93);">Planned 93 (gal)</label>
+                <input type="number" step="0.01" id="modal-inp-93" class="modal-inp">
+              </div>
+            </div>
+
+            <div class="edit-two-col">
+              <div class="edit-field-group">
+                <label for="modal-inp-act-e85" style="color:var(--e85);">Actual E85 Pumped (gal)</label>
+                <input type="number" step="0.01" id="modal-inp-act-e85" class="modal-inp" placeholder="Meter gal">
+              </div>
+              <div class="edit-field-group">
+                <label for="modal-inp-act-93" style="color:var(--c93);">Actual 93 Pumped (gal)</label>
+                <input type="number" step="0.01" id="modal-inp-act-93" class="modal-inp" placeholder="Meter gal">
+              </div>
+            </div>
+
+            <div class="edit-two-col">
+              <div class="edit-field-group">
+                <label for="modal-inp-ap-eth" style="color:var(--neon);">AP Confirmed Eth %</label>
+                <input type="number" step="1" id="modal-inp-ap-eth" class="modal-inp" placeholder="e.g. 75">
+              </div>
+              <div class="edit-field-group">
+                <label for="modal-inp-eth" style="color:var(--gold);">Resulting Mix Eth %</label>
+                <input type="number" step="1" id="modal-inp-eth" class="modal-inp" placeholder="e.g. 75">
+              </div>
+            </div>
+
+            <div class="edit-two-col">
+              <div class="edit-field-group">
+                <label for="modal-inp-cur-gal">Starting Tank (gal)</label>
+                <input type="number" step="0.1" id="modal-inp-cur-gal" class="modal-inp">
+              </div>
+              <div class="edit-field-group">
+                <label for="modal-inp-cur-eth">Starting Eth %</label>
+                <input type="number" step="1" id="modal-inp-cur-eth" class="modal-inp">
+              </div>
+            </div>
+
+            <div class="edit-field-group">
+              <label for="modal-inp-fill-cost" style="color:var(--gold);">Total Fill Cost ($)</label>
+              <input type="number" step="0.01" id="modal-inp-fill-cost" class="modal-inp" placeholder="e.g. 45.50">
+            </div>
+          </div>
+
+          <div class="modal-actions-row">
+            <button type="submit" class="modal-save-btn">✓ SAVE CHANGES</button>
+            <button type="button" class="modal-cancel-btn" onclick="closeEditLogModal(null)">CANCEL</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
   <div id="sim-modal" class="modal-overlay" onclick="closeSim(event)">
     <div class="modal-content" onclick="event.stopPropagation()">
       <button class="close-btn" onclick="closeSim(null)">✕</button>

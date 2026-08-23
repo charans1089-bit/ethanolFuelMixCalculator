@@ -1382,37 +1382,87 @@ function clearLogEditMode() {
   setEditBanner(false);
 }
 
+let currentEditingLogId = null;
+
 function beginLogEdit(id) {
   const log = fuelLogs.find(item => item.id === id);
   if (!log) return;
 
-  editingLogId = id;
-  setSaveButtonState(true);
-  setEditBanner(true, log);
+  currentEditingLogId = id;
 
-  setValue('inp-gal', log.curGal ?? getValue('inp-gal', 0));
-  setValue('inp-eth', log.curEth ?? getValue('inp-eth', DEFAULTS.curEth));
-  setValue('inp-tgt', log.tgtEth ?? getValue('inp-tgt', DEFAULTS.tgtEth));
-  setValue('inp-max-eth', log.maxEth ?? getValue('inp-max-eth', DEFAULTS.maxEth));
-  setValue('inp-pump-e85', log.pumpE85 ?? getValue('inp-pump-e85', DEFAULTS.pumpE85));
-  setValue('inp-pump-gas', log.pumpGas ?? getValue('inp-pump-gas', DEFAULTS.pumpGas));
-  setValue('inp-amb-temp', log.ambientTempF ?? getValue('inp-amb-temp', defaultAmbientFromSeason()));
-  setValue('inp-price-e85', log.priceE85 ?? getValue('inp-price-e85', DEFAULTS.priceE85));
-  setValue('inp-price-93', log.price93 ?? getValue('inp-price-93', DEFAULTS.price93));
-  setValue('inp-add-gal', log.addGallons ?? getValue('inp-add-gal', DEFAULTS.addGallons));
-  syncModeUI(log.fillMode ?? getCheckedMode());
-  setValue('inp-station', log.station ?? '');
-  setValue('inp-act-e85', log.actualE85 ?? '');
-  setValue('inp-act-93', log.actual93 ?? '');
-  setValue('inp-ap-eth', log.apEth ?? '');
+  const dateEl = document.getElementById('edit-modal-date');
+  if (dateEl) dateEl.textContent = `Fill Date: ${log.date}`;
 
-  calculateBlend();
+  setValue('modal-inp-station', log.station ?? '');
+  setValue('modal-inp-e85', log.e85 ?? '');
+  setValue('modal-inp-93', log.c93 ?? '');
+  setValue('modal-inp-act-e85', log.actualE85 ?? '');
+  setValue('modal-inp-act-93', log.actual93 ?? '');
+  setValue('modal-inp-ap-eth', log.apEth ?? '');
+  setValue('modal-inp-eth', log.eth ?? '');
+  setValue('modal-inp-cur-gal', log.curGal ?? '');
+  setValue('modal-inp-cur-eth', log.curEth ?? '');
+  setValue('modal-inp-fill-cost', log.fillCost !== null && log.fillCost !== undefined && log.fillCost !== '' ? Number(log.fillCost).toFixed(2) : '');
 
-  const stationInput = document.getElementById('inp-station');
-  if (stationInput && typeof stationInput.focus === 'function') {
-    stationInput.focus({ preventScroll: true });
+  const modal = document.getElementById('edit-log-modal');
+  if (modal) {
+    modal.classList.add('show');
+    lockBodyScroll(true);
   }
-  stationInput?.scrollIntoView?.({ behavior: 'smooth', block: 'center' });
+}
+
+function closeEditLogModal(e) {
+  if (e && e.target && e.target !== e.currentTarget && !e.target.classList.contains('close-btn') && !e.target.classList.contains('modal-cancel-btn')) {
+    return;
+  }
+  const modal = document.getElementById('edit-log-modal');
+  if (modal) {
+    modal.classList.remove('show');
+    lockBodyScroll(false);
+  }
+  currentEditingLogId = null;
+}
+
+function saveModalLogEdit(event) {
+  if (event) event.preventDefault();
+  if (!currentEditingLogId) return;
+
+  const idx = fuelLogs.findIndex(l => l.id === currentEditingLogId);
+  if (idx === -1) return;
+
+  const station = document.getElementById('modal-inp-station').value.trim() || 'Unknown';
+  const e85 = document.getElementById('modal-inp-e85').value.trim();
+  const c93 = document.getElementById('modal-inp-93').value.trim();
+  const actualE85 = parseOptionalNumber('modal-inp-act-e85');
+  const actual93 = parseOptionalNumber('modal-inp-act-93');
+  const apEth = parseOptionalNumber('modal-inp-ap-eth');
+  const eth = parseOptionalNumber('modal-inp-eth') ?? fuelLogs[idx].eth;
+  const curGal = parseOptionalNumber('modal-inp-cur-gal') ?? fuelLogs[idx].curGal;
+  const curEth = parseOptionalNumber('modal-inp-cur-eth') ?? fuelLogs[idx].curEth;
+  const fillCost = parseOptionalNumber('modal-inp-fill-cost');
+
+  const updatedLog = {
+    ...fuelLogs[idx],
+    station,
+    e85,
+    c93,
+    eth,
+    actualE85,
+    actual93,
+    apEth,
+    curGal,
+    curEth,
+    fillCost: Number.isFinite(fillCost) ? fillCost : fuelLogs[idx].fillCost
+  };
+
+  updatedLog.stationEthEstimate = estimateStationEthFromLog(updatedLog);
+  fuelLogs[idx] = updatedLog;
+
+  safeSetItem('wrxFuelLogs', JSON.stringify(fuelLogs));
+  renderLogs();
+
+  closeEditLogModal(null);
+  alert('✓ Fuel fill log updated successfully in browser cache!');
 }
 
 function cancelLogEdit() {
