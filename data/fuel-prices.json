@@ -3,7 +3,7 @@
   "source": "Apify johnvc/fuelprices",
   "search": "Dearborn, MI",
   "maxAgeDays": 3,
-  "generatedAt": "2026-08-25T13:09:38.441Z",
+  "generatedAt": "2026-08-25T16:53:06.788Z",
   "e85": {
     "fuelCode": 5,
     "count": 1,
@@ -39,7 +39,7 @@
   "premium93": {
     "fuelCode": 3,
     "count": 24,
-    "avg": 5.415,
+    "avg": 5.427,
     "min": 4.99,
     "max": 5.79,
     "stations": [
@@ -61,9 +61,9 @@
         "ratingsCount": 75,
         "priceUnit": "dollars_per_gallon",
         "cash": 4.99,
-        "cashPostedTime": "2026-08-24T04:02:18.278Z",
+        "cashPostedTime": "2026-08-25T14:56:12.121Z",
         "credit": 5.09,
-        "creditPostedTime": "2026-08-24T04:02:18.278Z",
+        "creditPostedTime": "2026-08-25T14:56:12.137Z",
         "bestPrice": 4.99
       },
       {
@@ -179,29 +179,6 @@
         "cashPostedTime": "2026-08-25T03:04:55.136Z",
         "credit": 5.39,
         "creditPostedTime": "2026-08-25T03:04:55.105Z",
-        "bestPrice": 5.29
-      },
-      {
-        "id": "3309",
-        "name": "Speedway",
-        "address": {
-          "line1": "20180 Outer Dr",
-          "line2": "",
-          "city": "Dearborn",
-          "region": "MI",
-          "postalCode": "48124-2647"
-        },
-        "distance": null,
-        "distanceUnit": null,
-        "latitude": null,
-        "longitude": null,
-        "starRating": 4,
-        "ratingsCount": 153,
-        "priceUnit": "dollars_per_gallon",
-        "cash": null,
-        "cashPostedTime": null,
-        "credit": 5.29,
-        "creditPostedTime": "2026-08-24T02:25:52.843Z",
         "bestPrice": 5.29
       },
       {
@@ -527,6 +504,29 @@
         "bestPrice": 5.59
       },
       {
+        "id": "3309",
+        "name": "Speedway",
+        "address": {
+          "line1": "20180 Outer Dr",
+          "line2": "",
+          "city": "Dearborn",
+          "region": "MI",
+          "postalCode": "48124-2647"
+        },
+        "distance": null,
+        "distanceUnit": null,
+        "latitude": null,
+        "longitude": null,
+        "starRating": 4,
+        "ratingsCount": 153,
+        "priceUnit": "dollars_per_gallon",
+        "cash": null,
+        "cashPostedTime": null,
+        "credit": 5.59,
+        "creditPostedTime": "2026-08-25T16:23:13.056Z",
+        "bestPrice": 5.59
+      },
+      {
         "id": "110300",
         "name": "BP",
         "address": {
@@ -597,5 +597,5 @@
       }
     ]
   },
-  "fingerprint": "0b3422c5a93c7fa58996a688d28fbfe9d262ed520d06c03c82b50b4122b93453"
+  "fingerprint": "036372de6a22dfc49679453a18f392e3bc659868422b25a4b31a70e0fc65dc24"
 }
