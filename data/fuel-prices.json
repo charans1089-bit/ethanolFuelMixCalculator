@@ -3,7 +3,7 @@
   "source": "Apify johnvc/fuelprices",
   "search": "Dearborn, MI",
   "maxAgeDays": 3,
-  "generatedAt": "2026-08-26T13:14:17.876Z",
+  "generatedAt": "2026-08-26T16:57:38.237Z",
   "e85": {
     "fuelCode": 5,
     "count": 1,
@@ -320,29 +320,6 @@
         "bestPrice": 5.39
       },
       {
-        "id": "98820",
-        "name": "Mobil",
-        "address": {
-          "line1": "10000 Ford Rd",
-          "line2": "",
-          "city": "Dearborn",
-          "region": "MI",
-          "postalCode": "48126-3329"
-        },
-        "distance": null,
-        "distanceUnit": null,
-        "latitude": null,
-        "longitude": null,
-        "starRating": 3.6,
-        "ratingsCount": 21,
-        "priceUnit": "dollars_per_gallon",
-        "cash": 5.39,
-        "cashPostedTime": "2026-08-25T10:54:23.725Z",
-        "credit": 5.49,
-        "creditPostedTime": "2026-08-25T10:54:23.740Z",
-        "bestPrice": 5.39
-      },
-      {
         "id": "99496",
         "name": "Mobil",
         "address": {
@@ -363,6 +340,29 @@
         "cashPostedTime": "2026-08-26T03:00:44.882Z",
         "credit": 5.49,
         "creditPostedTime": "2026-08-26T03:00:44.897Z",
+        "bestPrice": 5.39
+      },
+      {
+        "id": "98820",
+        "name": "Mobil",
+        "address": {
+          "line1": "10000 Ford Rd",
+          "line2": "",
+          "city": "Dearborn",
+          "region": "MI",
+          "postalCode": "48126-3329"
+        },
+        "distance": null,
+        "distanceUnit": null,
+        "latitude": null,
+        "longitude": null,
+        "starRating": 3.6,
+        "ratingsCount": 21,
+        "priceUnit": "dollars_per_gallon",
+        "cash": 5.39,
+        "cashPostedTime": "2026-08-25T10:54:23.725Z",
+        "credit": 5.49,
+        "creditPostedTime": "2026-08-25T10:54:23.740Z",
         "bestPrice": 5.39
       },
       {
@@ -620,5 +620,5 @@
       }
     ]
   },
-  "fingerprint": "3c023cf32d790ceb9aa7ec526527c8500748dcd754a70b6e2d09b7e5d1ff6427"
+  "fingerprint": "c711ce2e08ff7487af6965d7fd7707a359af710f3901e7409df7f79fd3f36cdb"
 }
