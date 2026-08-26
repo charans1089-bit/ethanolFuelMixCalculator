@@ -3,7 +3,7 @@
   "source": "Apify johnvc/fuelprices",
   "search": "Dearborn, MI",
   "maxAgeDays": 3,
-  "generatedAt": "2026-08-26T04:54:20.320Z",
+  "generatedAt": "2026-08-26T09:00:38.040Z",
   "e85": {
     "fuelCode": 5,
     "count": 1,
@@ -297,29 +297,6 @@
         "bestPrice": 5.39
       },
       {
-        "id": "98820",
-        "name": "Mobil",
-        "address": {
-          "line1": "10000 Ford Rd",
-          "line2": "",
-          "city": "Dearborn",
-          "region": "MI",
-          "postalCode": "48126-3329"
-        },
-        "distance": null,
-        "distanceUnit": null,
-        "latitude": null,
-        "longitude": null,
-        "starRating": 3.6,
-        "ratingsCount": 21,
-        "priceUnit": "dollars_per_gallon",
-        "cash": 5.39,
-        "cashPostedTime": "2026-08-25T10:54:23.725Z",
-        "credit": 5.49,
-        "creditPostedTime": "2026-08-25T10:54:23.740Z",
-        "bestPrice": 5.39
-      },
-      {
         "id": "109058",
         "name": "Mobil",
         "address": {
@@ -340,6 +317,29 @@
         "cashPostedTime": "2026-08-26T03:00:02.998Z",
         "credit": 5.49,
         "creditPostedTime": "2026-08-26T03:00:02.947Z",
+        "bestPrice": 5.39
+      },
+      {
+        "id": "98820",
+        "name": "Mobil",
+        "address": {
+          "line1": "10000 Ford Rd",
+          "line2": "",
+          "city": "Dearborn",
+          "region": "MI",
+          "postalCode": "48126-3329"
+        },
+        "distance": null,
+        "distanceUnit": null,
+        "latitude": null,
+        "longitude": null,
+        "starRating": 3.6,
+        "ratingsCount": 21,
+        "priceUnit": "dollars_per_gallon",
+        "cash": 5.39,
+        "cashPostedTime": "2026-08-25T10:54:23.725Z",
+        "credit": 5.49,
+        "creditPostedTime": "2026-08-25T10:54:23.740Z",
         "bestPrice": 5.39
       },
       {
@@ -620,5 +620,5 @@
       }
     ]
   },
-  "fingerprint": "a41e996813164e3767749c42d1459cadf8e486a735cc679faed55f2c913152d7"
+  "fingerprint": "cfad87a21ae7e0d12686a95cbd62448e1634f4978ce09e14fe244f2cb12bd1cd"
 }
