@@ -3,7 +3,7 @@
   "source": "Apify johnvc/fuelprices",
   "search": "Dearborn, MI",
   "maxAgeDays": 3,
-  "generatedAt": "2026-08-28T11:19:34.791Z",
+  "generatedAt": "2026-08-28T22:15:43.279Z",
   "e85": {
     "fuelCode": 5,
     "count": 1,
@@ -38,57 +38,11 @@
   },
   "premium93": {
     "fuelCode": 3,
-    "count": 21,
-    "avg": 5.347,
+    "count": 20,
+    "avg": 5.365,
     "min": 5.09,
     "max": 5.79,
     "stations": [
-      {
-        "id": "133403",
-        "name": "CITGO",
-        "address": {
-          "line1": "14921 Michigan Ave",
-          "line2": "",
-          "city": "Dearborn",
-          "region": "MI",
-          "postalCode": "48126"
-        },
-        "distance": null,
-        "distanceUnit": null,
-        "latitude": null,
-        "longitude": null,
-        "starRating": 4,
-        "ratingsCount": 133,
-        "priceUnit": "dollars_per_gallon",
-        "cash": 5.09,
-        "cashPostedTime": "2026-08-26T17:55:52.880Z",
-        "credit": 5.19,
-        "creditPostedTime": "2026-08-26T17:55:52.976Z",
-        "bestPrice": 5.09
-      },
-      {
-        "id": "172876",
-        "name": "Kroger",
-        "address": {
-          "line1": "23170 Michigan Ave",
-          "line2": "",
-          "city": "Dearborn",
-          "region": "MI",
-          "postalCode": "48124"
-        },
-        "distance": null,
-        "distanceUnit": null,
-        "latitude": null,
-        "longitude": null,
-        "starRating": 4.6,
-        "ratingsCount": 675,
-        "priceUnit": "dollars_per_gallon",
-        "cash": null,
-        "cashPostedTime": null,
-        "credit": 5.09,
-        "creditPostedTime": "2026-08-27T14:54:17.228Z",
-        "bestPrice": 5.09
-      },
       {
         "id": "94021",
         "name": "Mobil",
@@ -156,6 +110,29 @@
         "cashPostedTime": "2026-08-26T03:00:19.917Z",
         "credit": 5.19,
         "creditPostedTime": "2026-08-28T03:00:10.272Z",
+        "bestPrice": 5.19
+      },
+      {
+        "id": "172876",
+        "name": "Kroger",
+        "address": {
+          "line1": "23170 Michigan Ave",
+          "line2": "",
+          "city": "Dearborn",
+          "region": "MI",
+          "postalCode": "48124"
+        },
+        "distance": null,
+        "distanceUnit": null,
+        "latitude": null,
+        "longitude": null,
+        "starRating": 4.6,
+        "ratingsCount": 675,
+        "priceUnit": "dollars_per_gallon",
+        "cash": null,
+        "cashPostedTime": null,
+        "credit": 5.19,
+        "creditPostedTime": "2026-08-28T12:22:41.262Z",
         "bestPrice": 5.19
       },
       {
@@ -293,7 +270,7 @@
         "cash": null,
         "cashPostedTime": null,
         "credit": 5.29,
-        "creditPostedTime": "2026-08-27T16:21:23.491Z",
+        "creditPostedTime": "2026-08-28T20:41:08.236Z",
         "bestPrice": 5.29
       },
       {
@@ -389,26 +366,26 @@
         "bestPrice": 5.39
       },
       {
-        "id": "37791",
-        "name": "Marathon",
+        "id": "45079",
+        "name": "CITGO",
         "address": {
-          "line1": "1300 Southfield Fwy",
+          "line1": "22096 MICHIGAN AVE",
           "line2": "",
           "city": "Dearborn",
           "region": "MI",
-          "postalCode": "48124-4031"
+          "postalCode": "48124"
         },
         "distance": null,
         "distanceUnit": null,
         "latitude": null,
         "longitude": null,
-        "starRating": 3.5,
-        "ratingsCount": 43,
+        "starRating": 4.2,
+        "ratingsCount": 660,
         "priceUnit": "dollars_per_gallon",
         "cash": 5.49,
-        "cashPostedTime": "2026-08-26T20:07:26.987Z",
-        "credit": 5.49,
-        "creditPostedTime": "2026-08-26T20:07:27.066Z",
+        "cashPostedTime": "2026-08-28T20:59:58.424Z",
+        "credit": 5.59,
+        "creditPostedTime": "2026-08-28T20:59:58.488Z",
         "bestPrice": 5.49
       },
       {
@@ -528,5 +505,5 @@
       }
     ]
   },
-  "fingerprint": "3131571b12ececc5e86f2c1b73891a48c1c24da59bda49429c7606a8828ad97c"
+  "fingerprint": "82bb348dcaaf490e2a1f79f7e5cda82f0cc0b326fe5f1848140bb4acd468d31f"
 }
