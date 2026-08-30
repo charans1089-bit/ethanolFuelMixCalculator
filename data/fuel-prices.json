@@ -3,7 +3,7 @@
   "source": "Apify johnvc/fuelprices",
   "search": "Dearborn, MI",
   "maxAgeDays": 3,
-  "generatedAt": "2026-08-30T05:20:25.353Z",
+  "generatedAt": "2026-08-30T19:18:08.590Z",
   "e85": {
     "fuelCode": 5,
     "count": 1,
@@ -38,8 +38,8 @@
   },
   "premium93": {
     "fuelCode": 3,
-    "count": 20,
-    "avg": 5.33,
+    "count": 21,
+    "avg": 5.342,
     "min": 4.99,
     "max": 5.69,
     "stations": [
@@ -61,9 +61,9 @@
         "ratingsCount": 75,
         "priceUnit": "dollars_per_gallon",
         "cash": 4.99,
-        "cashPostedTime": "2026-08-30T04:03:09.513Z",
+        "cashPostedTime": "2026-08-30T18:22:27.481Z",
         "credit": 5.09,
-        "creditPostedTime": "2026-08-30T04:03:09.650Z",
+        "creditPostedTime": "2026-08-30T18:22:27.496Z",
         "bestPrice": 4.99
       },
       {
@@ -153,9 +153,9 @@
         "ratingsCount": 151,
         "priceUnit": "dollars_per_gallon",
         "cash": 5.19,
-        "cashPostedTime": "2026-08-30T04:02:59.785Z",
+        "cashPostedTime": "2026-08-30T18:22:22.340Z",
         "credit": 5.29,
-        "creditPostedTime": "2026-08-30T04:02:59.863Z",
+        "creditPostedTime": "2026-08-30T18:22:22.356Z",
         "bestPrice": 5.19
       },
       {
@@ -316,7 +316,7 @@
         "cash": null,
         "cashPostedTime": null,
         "credit": 5.29,
-        "creditPostedTime": "2026-08-29T03:36:51.870Z",
+        "creditPostedTime": "2026-08-30T16:20:43.968Z",
         "bestPrice": 5.29
       },
       {
@@ -475,9 +475,32 @@
         "ratingsCount": 157,
         "priceUnit": "dollars_per_gallon",
         "cash": 5.59,
-        "cashPostedTime": "2026-08-30T03:03:26.695Z",
+        "cashPostedTime": "2026-08-30T18:12:33.935Z",
         "credit": null,
         "creditPostedTime": null,
+        "bestPrice": 5.59
+      },
+      {
+        "id": "102162",
+        "name": "CITGO",
+        "address": {
+          "line1": "15500 MICHIGAN AVE",
+          "line2": "",
+          "city": "Dearborn",
+          "region": "MI",
+          "postalCode": "48126"
+        },
+        "distance": null,
+        "distanceUnit": null,
+        "latitude": null,
+        "longitude": null,
+        "starRating": 4.2,
+        "ratingsCount": 269,
+        "priceUnit": "dollars_per_gallon",
+        "cash": 5.59,
+        "cashPostedTime": "2026-08-30T16:07:29.895Z",
+        "credit": 5.69,
+        "creditPostedTime": "2026-08-30T16:07:29.976Z",
         "bestPrice": 5.59
       },
       {
@@ -505,5 +528,5 @@
       }
     ]
   },
-  "fingerprint": "0cb08f9ee6ea92462a0f0f77fe796e0bb6a3d7623d83956f156ac0f045c78a6f"
+  "fingerprint": "12c68131de6ee4fe8f27dc89a7ae026e446ddda20f7f34d06b0de9c4c8c59433"
 }
