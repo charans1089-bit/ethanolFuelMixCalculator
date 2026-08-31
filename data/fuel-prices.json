@@ -3,7 +3,7 @@
   "source": "Apify johnvc/fuelprices",
   "search": "Dearborn, MI",
   "maxAgeDays": 3,
-  "generatedAt": "2026-08-31T05:29:03.357Z",
+  "generatedAt": "2026-08-31T16:08:25.286Z",
   "e85": {
     "fuelCode": 5,
     "count": 1,
@@ -38,8 +38,8 @@
   },
   "premium93": {
     "fuelCode": 3,
-    "count": 20,
-    "avg": 5.35,
+    "count": 19,
+    "avg": 5.348,
     "min": 4.99,
     "max": 5.89,
     "stations": [
@@ -132,7 +132,7 @@
         "cash": null,
         "cashPostedTime": null,
         "credit": 5.19,
-        "creditPostedTime": "2026-08-30T03:36:14.376Z",
+        "creditPostedTime": "2026-08-31T12:23:17.882Z",
         "bestPrice": 5.19
       },
       {
@@ -159,29 +159,6 @@
         "bestPrice": 5.19
       },
       {
-        "id": "108615",
-        "name": "Shell",
-        "address": {
-          "line1": "13841 Ford Rd",
-          "line2": "",
-          "city": "Dearborn",
-          "region": "MI",
-          "postalCode": "48126-3224"
-        },
-        "distance": null,
-        "distanceUnit": null,
-        "latitude": null,
-        "longitude": null,
-        "starRating": 4.2,
-        "ratingsCount": 15,
-        "priceUnit": "dollars_per_gallon",
-        "cash": 5.19,
-        "cashPostedTime": "2026-08-30T03:01:56.949Z",
-        "credit": 5.29,
-        "creditPostedTime": "2026-08-30T03:01:57.027Z",
-        "bestPrice": 5.19
-      },
-      {
         "id": "108616",
         "name": "Shell",
         "address": {
@@ -205,27 +182,27 @@
         "bestPrice": 5.19
       },
       {
-        "id": "86112",
-        "name": "BP",
+        "id": "108615",
+        "name": "Shell",
         "address": {
-          "line1": "3525 S Telegraph Rd",
+          "line1": "13841 Ford Rd",
           "line2": "",
           "city": "Dearborn",
           "region": "MI",
-          "postalCode": "48124-3244"
+          "postalCode": "48126-3224"
         },
         "distance": null,
         "distanceUnit": null,
         "latitude": null,
         "longitude": null,
-        "starRating": 4,
-        "ratingsCount": 29,
+        "starRating": 4.2,
+        "ratingsCount": 15,
         "priceUnit": "dollars_per_gallon",
-        "cash": 5.29,
-        "cashPostedTime": "2026-08-31T03:01:02.282Z",
-        "credit": null,
-        "creditPostedTime": null,
-        "bestPrice": 5.29
+        "cash": 5.19,
+        "cashPostedTime": "2026-08-30T03:01:56.949Z",
+        "credit": 5.29,
+        "creditPostedTime": "2026-08-30T03:01:57.027Z",
+        "bestPrice": 5.19
       },
       {
         "id": "110300",
@@ -248,6 +225,29 @@
         "cashPostedTime": "2026-08-31T02:59:42.714Z",
         "credit": 5.39,
         "creditPostedTime": "2026-08-31T02:59:42.714Z",
+        "bestPrice": 5.29
+      },
+      {
+        "id": "86112",
+        "name": "BP",
+        "address": {
+          "line1": "3525 S Telegraph Rd",
+          "line2": "",
+          "city": "Dearborn",
+          "region": "MI",
+          "postalCode": "48124-3244"
+        },
+        "distance": null,
+        "distanceUnit": null,
+        "latitude": null,
+        "longitude": null,
+        "starRating": 4,
+        "ratingsCount": 29,
+        "priceUnit": "dollars_per_gallon",
+        "cash": 5.29,
+        "cashPostedTime": "2026-08-31T03:01:02.282Z",
+        "credit": null,
+        "creditPostedTime": null,
         "bestPrice": 5.29
       },
       {
@@ -318,29 +318,6 @@
         "credit": 5.29,
         "creditPostedTime": "2026-08-30T16:20:43.968Z",
         "bestPrice": 5.29
-      },
-      {
-        "id": "81117",
-        "name": "Amoco",
-        "address": {
-          "line1": "23785 Michigan Ave",
-          "line2": "",
-          "city": "Dearborn",
-          "region": "MI",
-          "postalCode": "48124"
-        },
-        "distance": null,
-        "distanceUnit": null,
-        "latitude": null,
-        "longitude": null,
-        "starRating": 4.5,
-        "ratingsCount": 232,
-        "priceUnit": "dollars_per_gallon",
-        "cash": 5.39,
-        "cashPostedTime": "2026-08-29T03:02:11.064Z",
-        "credit": null,
-        "creditPostedTime": null,
-        "bestPrice": 5.39
       },
       {
         "id": "70578",
@@ -505,5 +482,5 @@
       }
     ]
   },
-  "fingerprint": "254dd8c6e68cb8313a4068196ca4736a7a1b88de72b6dfef33300018022f7c94"
+  "fingerprint": "771b072714da6ad0efe51a409a193067e24e07d53c912729945d439cdbef770b"
 }
