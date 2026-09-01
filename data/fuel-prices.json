@@ -3,7 +3,7 @@
   "source": "Apify johnvc/fuelprices",
   "search": "Dearborn, MI",
   "maxAgeDays": 3,
-  "generatedAt": "2026-09-01T05:03:07.087Z",
+  "generatedAt": "2026-09-01T13:28:51.545Z",
   "e85": {
     "fuelCode": 5,
     "count": 1,
@@ -38,8 +38,8 @@
   },
   "premium93": {
     "fuelCode": 3,
-    "count": 20,
-    "avg": 5.345,
+    "count": 21,
+    "avg": 5.352,
     "min": 4.99,
     "max": 5.89,
     "stations": [
@@ -155,7 +155,7 @@
         "cash": null,
         "cashPostedTime": null,
         "credit": 5.19,
-        "creditPostedTime": "2026-08-31T22:07:40.694Z",
+        "creditPostedTime": "2026-09-01T12:23:27.477Z",
         "bestPrice": 5.19
       },
       {
@@ -205,29 +205,6 @@
         "bestPrice": 5.19
       },
       {
-        "id": "86112",
-        "name": "BP",
-        "address": {
-          "line1": "3525 S Telegraph Rd",
-          "line2": "",
-          "city": "Dearborn",
-          "region": "MI",
-          "postalCode": "48124-3244"
-        },
-        "distance": null,
-        "distanceUnit": null,
-        "latitude": null,
-        "longitude": null,
-        "starRating": 4,
-        "ratingsCount": 29,
-        "priceUnit": "dollars_per_gallon",
-        "cash": 5.29,
-        "cashPostedTime": "2026-08-31T03:01:02.282Z",
-        "credit": null,
-        "creditPostedTime": null,
-        "bestPrice": 5.29
-      },
-      {
         "id": "110300",
         "name": "BP",
         "address": {
@@ -248,6 +225,29 @@
         "cashPostedTime": "2026-09-01T03:00:06.461Z",
         "credit": 5.39,
         "creditPostedTime": "2026-08-31T02:59:42.714Z",
+        "bestPrice": 5.29
+      },
+      {
+        "id": "86112",
+        "name": "BP",
+        "address": {
+          "line1": "3525 S Telegraph Rd",
+          "line2": "",
+          "city": "Dearborn",
+          "region": "MI",
+          "postalCode": "48124-3244"
+        },
+        "distance": null,
+        "distanceUnit": null,
+        "latitude": null,
+        "longitude": null,
+        "starRating": 4,
+        "ratingsCount": 29,
+        "priceUnit": "dollars_per_gallon",
+        "cash": 5.29,
+        "cashPostedTime": "2026-08-31T03:01:02.282Z",
+        "credit": null,
+        "creditPostedTime": null,
         "bestPrice": 5.29
       },
       {
@@ -364,6 +364,29 @@
         "credit": 5.49,
         "creditPostedTime": "2026-09-01T03:00:24.588Z",
         "bestPrice": 5.39
+      },
+      {
+        "id": "45079",
+        "name": "CITGO",
+        "address": {
+          "line1": "22096 MICHIGAN AVE",
+          "line2": "",
+          "city": "Dearborn",
+          "region": "MI",
+          "postalCode": "48124"
+        },
+        "distance": null,
+        "distanceUnit": null,
+        "latitude": null,
+        "longitude": null,
+        "starRating": 4.2,
+        "ratingsCount": 660,
+        "priceUnit": "dollars_per_gallon",
+        "cash": 5.49,
+        "cashPostedTime": "2026-09-01T09:02:19.802Z",
+        "credit": 5.59,
+        "creditPostedTime": "2026-09-01T09:02:19.865Z",
+        "bestPrice": 5.49
       },
       {
         "id": "83820",
@@ -505,5 +528,5 @@
       }
     ]
   },
-  "fingerprint": "ce7800e58a3c4a70c6e9f1964d008f96c468f3de71aec22fea73045517906868"
+  "fingerprint": "7ff7956e592bc68e3c7090c7285e50bace5e107f7b4efc23a547697ec14e4d91"
 }
