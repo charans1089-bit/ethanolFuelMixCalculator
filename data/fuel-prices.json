@@ -3,7 +3,7 @@
   "source": "Apify johnvc/fuelprices",
   "search": "Dearborn, MI",
   "maxAgeDays": 3,
-  "generatedAt": "2026-09-02T04:27:58.860Z",
+  "generatedAt": "2026-09-02T12:45:09.410Z",
   "e85": {
     "fuelCode": 5,
     "count": 1,
@@ -38,8 +38,8 @@
   },
   "premium93": {
     "fuelCode": 3,
-    "count": 21,
-    "avg": 5.297,
+    "count": 20,
+    "avg": 5.312,
     "min": 4.89,
     "max": 5.89,
     "stations": [
@@ -67,29 +67,6 @@
         "bestPrice": 4.89
       },
       {
-        "id": "94021",
-        "name": "Mobil",
-        "address": {
-          "line1": "19309 Carlysle St",
-          "line2": "",
-          "city": "Dearborn",
-          "region": "MI",
-          "postalCode": "48124-3802"
-        },
-        "distance": null,
-        "distanceUnit": null,
-        "latitude": null,
-        "longitude": null,
-        "starRating": 4,
-        "ratingsCount": 75,
-        "priceUnit": "dollars_per_gallon",
-        "cash": 4.99,
-        "cashPostedTime": "2026-08-31T04:28:12.796Z",
-        "credit": 5.09,
-        "creditPostedTime": "2026-08-31T04:28:12.827Z",
-        "bestPrice": 4.99
-      },
-      {
         "id": "108613",
         "name": "Exxon",
         "address": {
@@ -106,8 +83,8 @@
         "starRating": 4.2,
         "ratingsCount": 18,
         "priceUnit": "dollars_per_gallon",
-        "cash": 5.09,
-        "cashPostedTime": "2026-08-31T02:59:33.488Z",
+        "cash": null,
+        "cashPostedTime": null,
         "credit": 5.09,
         "creditPostedTime": "2026-09-01T02:59:31.557Z",
         "bestPrice": 5.09
@@ -224,7 +201,7 @@
         "cash": null,
         "cashPostedTime": null,
         "credit": 5.19,
-        "creditPostedTime": "2026-09-01T12:23:27.477Z",
+        "creditPostedTime": "2026-09-02T12:25:45.225Z",
         "bestPrice": 5.19
       },
       {
@@ -406,9 +383,9 @@
         "ratingsCount": 660,
         "priceUnit": "dollars_per_gallon",
         "cash": 5.49,
-        "cashPostedTime": "2026-09-01T09:02:19.802Z",
+        "cashPostedTime": "2026-09-02T11:33:18.542Z",
         "credit": 5.59,
-        "creditPostedTime": "2026-09-01T09:02:19.865Z",
+        "creditPostedTime": "2026-09-02T11:33:18.557Z",
         "bestPrice": 5.49
       },
       {
@@ -528,5 +505,5 @@
       }
     ]
   },
-  "fingerprint": "5b9528174ac8f30176109d9e915dd072301fa09b3494eb5a6e0cd65045de1de6"
+  "fingerprint": "6d76108260251dbca42c06f1a301986ea75a482208f9597dfad35e89cec10ac0"
 }
