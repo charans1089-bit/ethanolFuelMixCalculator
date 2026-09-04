@@ -3,7 +3,7 @@
   "source": "Apify johnvc/fuelprices",
   "search": "Dearborn, MI",
   "maxAgeDays": 3,
-  "generatedAt": "2026-09-04T04:26:56.417Z",
+  "generatedAt": "2026-09-04T12:42:07.670Z",
   "e85": {
     "fuelCode": 5,
     "count": 1,
@@ -182,29 +182,6 @@
         "bestPrice": 5.19
       },
       {
-        "id": "108615",
-        "name": "Shell",
-        "address": {
-          "line1": "13841 Ford Rd",
-          "line2": "",
-          "city": "Dearborn",
-          "region": "MI",
-          "postalCode": "48126-3224"
-        },
-        "distance": null,
-        "distanceUnit": null,
-        "latitude": null,
-        "longitude": null,
-        "starRating": 4.2,
-        "ratingsCount": 15,
-        "priceUnit": "dollars_per_gallon",
-        "cash": 5.19,
-        "cashPostedTime": "2026-09-04T04:02:06.871Z",
-        "credit": 5.29,
-        "creditPostedTime": "2026-09-04T04:02:06.988Z",
-        "bestPrice": 5.19
-      },
-      {
         "id": "108616",
         "name": "Shell",
         "address": {
@@ -225,6 +202,29 @@
         "cashPostedTime": "2026-09-04T04:01:33.009Z",
         "credit": 5.19,
         "creditPostedTime": "2026-09-04T04:01:33.024Z",
+        "bestPrice": 5.19
+      },
+      {
+        "id": "108615",
+        "name": "Shell",
+        "address": {
+          "line1": "13841 Ford Rd",
+          "line2": "",
+          "city": "Dearborn",
+          "region": "MI",
+          "postalCode": "48126-3224"
+        },
+        "distance": null,
+        "distanceUnit": null,
+        "latitude": null,
+        "longitude": null,
+        "starRating": 4.2,
+        "ratingsCount": 15,
+        "priceUnit": "dollars_per_gallon",
+        "cash": 5.19,
+        "cashPostedTime": "2026-09-04T04:02:06.871Z",
+        "credit": 5.29,
+        "creditPostedTime": "2026-09-04T04:02:06.988Z",
         "bestPrice": 5.19
       },
       {
@@ -505,5 +505,5 @@
       }
     ]
   },
-  "fingerprint": "115faaa96f9ed29e733c5ac24bff5b35f4d52e5737abaaefd6de6a7287d29f06"
+  "fingerprint": "9606b1449761f8fbd4b2873754e09aa00a56c88a03b3856f90a3e5964825c030"
 }
