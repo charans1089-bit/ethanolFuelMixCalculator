@@ -3,7 +3,7 @@
   "source": "Apify johnvc/fuelprices",
   "search": "Dearborn, MI",
   "maxAgeDays": 3,
-  "generatedAt": "2026-09-05T04:21:50.208Z",
+  "generatedAt": "2026-09-05T11:49:01.003Z",
   "e85": {
     "fuelCode": 5,
     "count": 1,
@@ -39,32 +39,32 @@
   "premium93": {
     "fuelCode": 3,
     "count": 21,
-    "avg": 5.314,
-    "min": 4.89,
+    "avg": 5.319,
+    "min": 4.99,
     "max": 5.69,
     "stations": [
       {
-        "id": "133403",
-        "name": "CITGO",
+        "id": "94021",
+        "name": "Mobil",
         "address": {
-          "line1": "14921 Michigan Ave",
+          "line1": "19309 Carlysle St",
           "line2": "",
           "city": "Dearborn",
           "region": "MI",
-          "postalCode": "48126"
+          "postalCode": "48124-3802"
         },
         "distance": null,
         "distanceUnit": null,
         "latitude": null,
         "longitude": null,
         "starRating": 4,
-        "ratingsCount": 134,
+        "ratingsCount": 75,
         "priceUnit": "dollars_per_gallon",
-        "cash": 4.89,
-        "cashPostedTime": "2026-09-03T11:14:59.141Z",
-        "credit": 4.99,
-        "creditPostedTime": "2026-09-03T11:14:59.156Z",
-        "bestPrice": 4.89
+        "cash": 4.99,
+        "cashPostedTime": "2026-09-05T09:42:27.283Z",
+        "credit": 5.09,
+        "creditPostedTime": "2026-09-05T09:42:27.361Z",
+        "bestPrice": 4.99
       },
       {
         "id": "109274",
@@ -173,7 +173,7 @@
         "latitude": null,
         "longitude": null,
         "starRating": 4.6,
-        "ratingsCount": 675,
+        "ratingsCount": 676,
         "priceUnit": "dollars_per_gallon",
         "cash": null,
         "cashPostedTime": null,
@@ -199,9 +199,9 @@
         "ratingsCount": 151,
         "priceUnit": "dollars_per_gallon",
         "cash": 5.19,
-        "cashPostedTime": "2026-09-05T03:28:26.624Z",
+        "cashPostedTime": "2026-09-05T06:06:35.408Z",
         "credit": 5.29,
-        "creditPostedTime": "2026-09-05T03:28:26.687Z",
+        "creditPostedTime": "2026-09-05T06:06:35.498Z",
         "bestPrice": 5.19
       },
       {
@@ -528,5 +528,5 @@
       }
     ]
   },
-  "fingerprint": "d6342679c80465ed753edbdeafe8d4a3655f06bcd3288ed651f806b3a4f06d37"
+  "fingerprint": "4177210559f70693f68b8b9bfe139ac7b290539bc9dff8526e2c6a32e9dff53c"
 }
