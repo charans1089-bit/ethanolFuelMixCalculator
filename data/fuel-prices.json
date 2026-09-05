@@ -3,7 +3,7 @@
   "source": "Apify johnvc/fuelprices",
   "search": "Dearborn, MI",
   "maxAgeDays": 3,
-  "generatedAt": "2026-09-05T15:10:21.388Z",
+  "generatedAt": "2026-09-05T22:02:53.461Z",
   "e85": {
     "fuelCode": 5,
     "count": 1,
@@ -38,8 +38,8 @@
   },
   "premium93": {
     "fuelCode": 3,
-    "count": 21,
-    "avg": 5.319,
+    "count": 20,
+    "avg": 5.33,
     "min": 4.99,
     "max": 5.69,
     "stations": [
@@ -87,29 +87,6 @@
         "cashPostedTime": "2026-09-05T02:59:54.889Z",
         "credit": 5.19,
         "creditPostedTime": "2026-09-05T02:59:54.873Z",
-        "bestPrice": 5.09
-      },
-      {
-        "id": "99496",
-        "name": "Mobil",
-        "address": {
-          "line1": "7954 Greenfield Rd",
-          "line2": "",
-          "city": "Dearborn",
-          "region": "MI",
-          "postalCode": "48126-1061"
-        },
-        "distance": null,
-        "distanceUnit": null,
-        "latitude": null,
-        "longitude": null,
-        "starRating": 4.2,
-        "ratingsCount": 52,
-        "priceUnit": "dollars_per_gallon",
-        "cash": 5.09,
-        "cashPostedTime": "2026-09-03T19:44:27.968Z",
-        "credit": 5.09,
-        "creditPostedTime": "2026-09-03T19:44:27.984Z",
         "bestPrice": 5.09
       },
       {
@@ -528,5 +505,5 @@
       }
     ]
   },
-  "fingerprint": "f56ed1745aa5b0e4cba612cf8b981a76d8e061912f85f6d1bbcc4a27673eac3a"
+  "fingerprint": "d81ad785eeb9aef8d18a28c1898411df6849dcc9b3bff170021ed071fec266e3"
 }
