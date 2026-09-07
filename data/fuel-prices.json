@@ -3,7 +3,7 @@
   "source": "Apify johnvc/fuelprices",
   "search": "Dearborn, MI",
   "maxAgeDays": 3,
-  "generatedAt": "2026-09-07T04:34:43.300Z",
+  "generatedAt": "2026-09-07T14:13:38.081Z",
   "e85": {
     "fuelCode": 5,
     "count": 1,
@@ -61,9 +61,9 @@
         "ratingsCount": 75,
         "priceUnit": "dollars_per_gallon",
         "cash": 4.99,
-        "cashPostedTime": "2026-09-07T04:10:15.642Z",
+        "cashPostedTime": "2026-09-07T11:11:49.987Z",
         "credit": 5.09,
-        "creditPostedTime": "2026-09-07T04:10:15.674Z",
+        "creditPostedTime": "2026-09-07T11:11:49.987Z",
         "bestPrice": 4.99
       },
       {
@@ -176,9 +176,9 @@
         "ratingsCount": 151,
         "priceUnit": "dollars_per_gallon",
         "cash": 5.19,
-        "cashPostedTime": "2026-09-07T04:09:45.633Z",
+        "cashPostedTime": "2026-09-07T11:11:30.142Z",
         "credit": 5.29,
-        "creditPostedTime": "2026-09-07T04:09:45.680Z",
+        "creditPostedTime": "2026-09-07T11:11:30.158Z",
         "bestPrice": 5.19
       },
       {
@@ -297,29 +297,6 @@
         "bestPrice": 5.39
       },
       {
-        "id": "99496",
-        "name": "Mobil",
-        "address": {
-          "line1": "7954 Greenfield Rd",
-          "line2": "",
-          "city": "Dearborn",
-          "region": "MI",
-          "postalCode": "48126-1061"
-        },
-        "distance": null,
-        "distanceUnit": null,
-        "latitude": null,
-        "longitude": null,
-        "starRating": 4.2,
-        "ratingsCount": 52,
-        "priceUnit": "dollars_per_gallon",
-        "cash": 5.39,
-        "cashPostedTime": "2026-09-07T03:00:50.745Z",
-        "credit": 5.69,
-        "creditPostedTime": "2026-09-07T03:00:50.713Z",
-        "bestPrice": 5.39
-      },
-      {
         "id": "98820",
         "name": "Mobil",
         "address": {
@@ -340,6 +317,29 @@
         "cashPostedTime": "2026-09-07T03:00:52.759Z",
         "credit": 5.49,
         "creditPostedTime": "2026-09-07T03:00:52.775Z",
+        "bestPrice": 5.39
+      },
+      {
+        "id": "99496",
+        "name": "Mobil",
+        "address": {
+          "line1": "7954 Greenfield Rd",
+          "line2": "",
+          "city": "Dearborn",
+          "region": "MI",
+          "postalCode": "48126-1061"
+        },
+        "distance": null,
+        "distanceUnit": null,
+        "latitude": null,
+        "longitude": null,
+        "starRating": 4.2,
+        "ratingsCount": 52,
+        "priceUnit": "dollars_per_gallon",
+        "cash": 5.39,
+        "cashPostedTime": "2026-09-07T03:00:50.745Z",
+        "credit": 5.69,
+        "creditPostedTime": "2026-09-07T03:00:50.713Z",
         "bestPrice": 5.39
       },
       {
@@ -505,5 +505,5 @@
       }
     ]
   },
-  "fingerprint": "fdc633f7ca65d410247d54796d20da765d236d99958df6d8bffcf4e0e6c68324"
+  "fingerprint": "74ca7cda1d896f63885c28e32871f16e38fd34d9004fab21540b7085412131c5"
 }
