@@ -3,7 +3,7 @@
   "source": "Apify johnvc/fuelprices",
   "search": "Dearborn, MI",
   "maxAgeDays": 3,
-  "generatedAt": "2026-09-07T14:13:38.081Z",
+  "generatedAt": "2026-09-07T19:56:17.112Z",
   "e85": {
     "fuelCode": 5,
     "count": 1,
@@ -38,7 +38,7 @@
   },
   "premium93": {
     "fuelCode": 3,
-    "count": 20,
+    "count": 21,
     "avg": 5.385,
     "min": 4.99,
     "max": 5.89,
@@ -224,7 +224,7 @@
         "cash": null,
         "cashPostedTime": null,
         "credit": 5.29,
-        "creditPostedTime": "2026-09-06T14:32:15.540Z",
+        "creditPostedTime": "2026-09-07T14:31:32.528Z",
         "bestPrice": 5.29
       },
       {
@@ -294,6 +294,29 @@
         "cashPostedTime": "2026-09-07T03:00:17.053Z",
         "credit": null,
         "creditPostedTime": null,
+        "bestPrice": 5.39
+      },
+      {
+        "id": "37791",
+        "name": "Marathon",
+        "address": {
+          "line1": "1300 Southfield Fwy",
+          "line2": "",
+          "city": "Dearborn",
+          "region": "MI",
+          "postalCode": "48124-4031"
+        },
+        "distance": null,
+        "distanceUnit": null,
+        "latitude": null,
+        "longitude": null,
+        "starRating": 3.5,
+        "ratingsCount": 43,
+        "priceUnit": "dollars_per_gallon",
+        "cash": null,
+        "cashPostedTime": null,
+        "credit": 5.39,
+        "creditPostedTime": "2026-09-07T16:57:56.897Z",
         "bestPrice": 5.39
       },
       {
@@ -505,5 +528,5 @@
       }
     ]
   },
-  "fingerprint": "74ca7cda1d896f63885c28e32871f16e38fd34d9004fab21540b7085412131c5"
+  "fingerprint": "1af27eeb007b2640fbe040f41241bdc585992f61348ca34ebdcafdb6772cd42e"
 }
