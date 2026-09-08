@@ -3,7 +3,7 @@
   "source": "Apify johnvc/fuelprices",
   "search": "Dearborn, MI",
   "maxAgeDays": 3,
-  "generatedAt": "2026-09-08T19:25:24.135Z",
+  "generatedAt": "2026-09-08T22:37:54.960Z",
   "e85": {
     "fuelCode": 5,
     "count": 1,
@@ -39,7 +39,7 @@
   "premium93": {
     "fuelCode": 3,
     "count": 21,
-    "avg": 5.376,
+    "avg": 5.395,
     "min": 4.99,
     "max": 5.89,
     "stations": [
@@ -182,29 +182,6 @@
         "bestPrice": 5.19
       },
       {
-        "id": "3309",
-        "name": "Speedway",
-        "address": {
-          "line1": "20180 Outer Dr",
-          "line2": "",
-          "city": "Dearborn",
-          "region": "MI",
-          "postalCode": "48124-2647"
-        },
-        "distance": null,
-        "distanceUnit": null,
-        "latitude": null,
-        "longitude": null,
-        "starRating": 4,
-        "ratingsCount": 153,
-        "priceUnit": "dollars_per_gallon",
-        "cash": null,
-        "cashPostedTime": null,
-        "credit": 5.19,
-        "creditPostedTime": "2026-09-08T16:23:09.483Z",
-        "bestPrice": 5.19
-      },
-      {
         "id": "172876",
         "name": "Kroger",
         "address": {
@@ -297,29 +274,6 @@
         "bestPrice": 5.39
       },
       {
-        "id": "99496",
-        "name": "Mobil",
-        "address": {
-          "line1": "7954 Greenfield Rd",
-          "line2": "",
-          "city": "Dearborn",
-          "region": "MI",
-          "postalCode": "48126-1061"
-        },
-        "distance": null,
-        "distanceUnit": null,
-        "latitude": null,
-        "longitude": null,
-        "starRating": 4.2,
-        "ratingsCount": 52,
-        "priceUnit": "dollars_per_gallon",
-        "cash": 5.39,
-        "cashPostedTime": "2026-09-08T03:04:10.860Z",
-        "credit": 5.69,
-        "creditPostedTime": "2026-09-07T03:00:50.713Z",
-        "bestPrice": 5.39
-      },
-      {
         "id": "98820",
         "name": "Mobil",
         "address": {
@@ -363,6 +317,29 @@
         "cashPostedTime": "2026-09-08T03:03:28.246Z",
         "credit": 5.49,
         "creditPostedTime": "2026-09-08T03:03:28.230Z",
+        "bestPrice": 5.39
+      },
+      {
+        "id": "99496",
+        "name": "Mobil",
+        "address": {
+          "line1": "7954 Greenfield Rd",
+          "line2": "",
+          "city": "Dearborn",
+          "region": "MI",
+          "postalCode": "48126-1061"
+        },
+        "distance": null,
+        "distanceUnit": null,
+        "latitude": null,
+        "longitude": null,
+        "starRating": 4.2,
+        "ratingsCount": 52,
+        "priceUnit": "dollars_per_gallon",
+        "cash": 5.39,
+        "cashPostedTime": "2026-09-08T03:04:10.860Z",
+        "credit": 5.69,
+        "creditPostedTime": "2026-09-07T03:00:50.713Z",
         "bestPrice": 5.39
       },
       {
@@ -481,6 +458,29 @@
         "bestPrice": 5.59
       },
       {
+        "id": "3309",
+        "name": "Speedway",
+        "address": {
+          "line1": "20180 Outer Dr",
+          "line2": "",
+          "city": "Dearborn",
+          "region": "MI",
+          "postalCode": "48124-2647"
+        },
+        "distance": null,
+        "distanceUnit": null,
+        "latitude": null,
+        "longitude": null,
+        "starRating": 4,
+        "ratingsCount": 153,
+        "priceUnit": "dollars_per_gallon",
+        "cash": null,
+        "cashPostedTime": null,
+        "credit": 5.59,
+        "creditPostedTime": "2026-09-08T20:40:51.041Z",
+        "bestPrice": 5.59
+      },
+      {
         "id": "84078",
         "name": "Shell",
         "address": {
@@ -528,5 +528,5 @@
       }
     ]
   },
-  "fingerprint": "6b8d242507e31343678815a45112257dadc8f022cb3d5afa347bb3c911bc89b8"
+  "fingerprint": "478b682aea2b6e4a3e765daabff11d8982e3cc4908ea3045983ad5b1011a6d7f"
 }
