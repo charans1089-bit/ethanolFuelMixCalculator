@@ -3,7 +3,7 @@
   "source": "Apify johnvc/fuelprices",
   "search": "Dearborn, MI",
   "maxAgeDays": 3,
-  "generatedAt": "2026-09-09T12:56:56.840Z",
+  "generatedAt": "2026-09-09T19:15:41.858Z",
   "e85": {
     "fuelCode": 5,
     "count": 1,
@@ -39,7 +39,7 @@
   "premium93": {
     "fuelCode": 3,
     "count": 22,
-    "avg": 5.395,
+    "avg": 5.381,
     "min": 4.99,
     "max": 5.89,
     "stations": [
@@ -87,6 +87,29 @@
         "cashPostedTime": "2026-09-09T02:59:52.720Z",
         "credit": 5.09,
         "creditPostedTime": "2026-09-09T02:59:52.704Z",
+        "bestPrice": 5.09
+      },
+      {
+        "id": "88127",
+        "name": "Sunoco",
+        "address": {
+          "line1": "5074 Greenfield Rd",
+          "line2": "",
+          "city": "Dearborn",
+          "region": "MI",
+          "postalCode": "48126-2846"
+        },
+        "distance": null,
+        "distanceUnit": null,
+        "latitude": null,
+        "longitude": null,
+        "starRating": 3.2,
+        "ratingsCount": 11,
+        "priceUnit": "dollars_per_gallon",
+        "cash": null,
+        "cashPostedTime": null,
+        "credit": 5.09,
+        "creditPostedTime": "2026-09-09T13:44:29.407Z",
         "bestPrice": 5.09
       },
       {
@@ -274,29 +297,6 @@
         "bestPrice": 5.39
       },
       {
-        "id": "37791",
-        "name": "Marathon",
-        "address": {
-          "line1": "1300 Southfield Fwy",
-          "line2": "",
-          "city": "Dearborn",
-          "region": "MI",
-          "postalCode": "48124-4031"
-        },
-        "distance": null,
-        "distanceUnit": null,
-        "latitude": null,
-        "longitude": null,
-        "starRating": 3.5,
-        "ratingsCount": 43,
-        "priceUnit": "dollars_per_gallon",
-        "cash": null,
-        "cashPostedTime": null,
-        "credit": 5.39,
-        "creditPostedTime": "2026-09-07T16:57:56.897Z",
-        "bestPrice": 5.39
-      },
-      {
         "id": "109058",
         "name": "Mobil",
         "address": {
@@ -408,7 +408,7 @@
         "cash": null,
         "cashPostedTime": null,
         "credit": 5.49,
-        "creditPostedTime": "2026-09-09T12:31:12.065Z",
+        "creditPostedTime": "2026-09-09T16:09:51.753Z",
         "bestPrice": 5.49
       },
       {
@@ -521,9 +521,9 @@
         "ratingsCount": 119,
         "priceUnit": "dollars_per_gallon",
         "cash": 5.69,
-        "cashPostedTime": "2026-09-09T03:00:57.737Z",
-        "credit": 5.69,
-        "creditPostedTime": "2026-09-09T03:00:57.706Z",
+        "cashPostedTime": "2026-09-09T13:59:37.671Z",
+        "credit": 5.79,
+        "creditPostedTime": "2026-09-09T13:59:37.686Z",
         "bestPrice": 5.69
       },
       {
@@ -551,5 +551,5 @@
       }
     ]
   },
-  "fingerprint": "5a29b843b86ef0d0851df1e91ee3655d2fb0dd240c02e242acd7b18e113b249a"
+  "fingerprint": "80473945d2da55d89ceea5070f3fa1c40fbaef8ad97c681c3797fdc043b64abd"
 }
