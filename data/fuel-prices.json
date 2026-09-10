@@ -3,7 +3,7 @@
   "source": "Apify johnvc/fuelprices",
   "search": "Dearborn, MI",
   "maxAgeDays": 3,
-  "generatedAt": "2026-09-10T04:37:09.465Z",
+  "generatedAt": "2026-09-10T12:53:55.839Z",
   "e85": {
     "fuelCode": 5,
     "count": 1,
@@ -90,29 +90,6 @@
         "bestPrice": 5.09
       },
       {
-        "id": "94023",
-        "name": "Marathon",
-        "address": {
-          "line1": "3544 Pelham St",
-          "line2": "",
-          "city": "Dearborn",
-          "region": "MI",
-          "postalCode": "48124"
-        },
-        "distance": null,
-        "distanceUnit": null,
-        "latitude": null,
-        "longitude": null,
-        "starRating": 4.1,
-        "ratingsCount": 151,
-        "priceUnit": "dollars_per_gallon",
-        "cash": 5.19,
-        "cashPostedTime": "2026-09-10T03:00:28.455Z",
-        "credit": 5.29,
-        "creditPostedTime": "2026-09-09T03:00:41.092Z",
-        "bestPrice": 5.19
-      },
-      {
         "id": "109274",
         "name": "Marathon",
         "address": {
@@ -133,6 +110,29 @@
         "cashPostedTime": "2026-09-10T02:59:32.372Z",
         "credit": 5.19,
         "creditPostedTime": "2026-09-10T02:59:32.388Z",
+        "bestPrice": 5.19
+      },
+      {
+        "id": "94023",
+        "name": "Marathon",
+        "address": {
+          "line1": "3544 Pelham St",
+          "line2": "",
+          "city": "Dearborn",
+          "region": "MI",
+          "postalCode": "48124"
+        },
+        "distance": null,
+        "distanceUnit": null,
+        "latitude": null,
+        "longitude": null,
+        "starRating": 4.1,
+        "ratingsCount": 151,
+        "priceUnit": "dollars_per_gallon",
+        "cash": 5.19,
+        "cashPostedTime": "2026-09-10T03:00:28.455Z",
+        "credit": 5.29,
+        "creditPostedTime": "2026-09-09T03:00:41.092Z",
         "bestPrice": 5.19
       },
       {
@@ -320,29 +320,6 @@
         "bestPrice": 5.39
       },
       {
-        "id": "98820",
-        "name": "Mobil",
-        "address": {
-          "line1": "10000 Ford Rd",
-          "line2": "",
-          "city": "Dearborn",
-          "region": "MI",
-          "postalCode": "48126-3329"
-        },
-        "distance": null,
-        "distanceUnit": null,
-        "latitude": null,
-        "longitude": null,
-        "starRating": 3.6,
-        "ratingsCount": 21,
-        "priceUnit": "dollars_per_gallon",
-        "cash": 5.39,
-        "cashPostedTime": "2026-09-10T03:00:02.807Z",
-        "credit": 5.49,
-        "creditPostedTime": "2026-09-10T03:00:02.791Z",
-        "bestPrice": 5.39
-      },
-      {
         "id": "109058",
         "name": "Mobil",
         "address": {
@@ -363,6 +340,29 @@
         "cashPostedTime": "2026-09-10T02:59:20.911Z",
         "credit": 5.49,
         "creditPostedTime": "2026-09-10T02:59:20.880Z",
+        "bestPrice": 5.39
+      },
+      {
+        "id": "98820",
+        "name": "Mobil",
+        "address": {
+          "line1": "10000 Ford Rd",
+          "line2": "",
+          "city": "Dearborn",
+          "region": "MI",
+          "postalCode": "48126-3329"
+        },
+        "distance": null,
+        "distanceUnit": null,
+        "latitude": null,
+        "longitude": null,
+        "starRating": 3.6,
+        "ratingsCount": 21,
+        "priceUnit": "dollars_per_gallon",
+        "cash": 5.39,
+        "cashPostedTime": "2026-09-10T03:00:02.807Z",
+        "credit": 5.49,
+        "creditPostedTime": "2026-09-10T03:00:02.791Z",
         "bestPrice": 5.39
       },
       {
@@ -408,7 +408,7 @@
         "cash": null,
         "cashPostedTime": null,
         "credit": 5.49,
-        "creditPostedTime": "2026-09-09T16:09:51.753Z",
+        "creditPostedTime": "2026-09-10T12:23:44.384Z",
         "bestPrice": 5.49
       },
       {
@@ -528,5 +528,5 @@
       }
     ]
   },
-  "fingerprint": "d96f7944e37873d80a02dd862273496542d626ccf0c1c4e4a509a9afa347e64f"
+  "fingerprint": "cd84cfa522264fae1194eecefce5d1e085791eb268d5dab9e32e2d64ba06f16a"
 }
