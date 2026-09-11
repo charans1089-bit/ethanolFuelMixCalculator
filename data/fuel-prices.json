@@ -3,7 +3,7 @@
   "source": "Apify johnvc/fuelprices",
   "search": "Dearborn, MI",
   "maxAgeDays": 3,
-  "generatedAt": "2026-09-11T12:48:21.298Z",
+  "generatedAt": "2026-09-11T19:08:50.884Z",
   "e85": {
     "fuelCode": 5,
     "count": 1,
@@ -38,8 +38,8 @@
   },
   "premium93": {
     "fuelCode": 3,
-    "count": 21,
-    "avg": 5.428,
+    "count": 20,
+    "avg": 5.445,
     "min": 4.99,
     "max": 5.89,
     "stations": [
@@ -65,29 +65,6 @@
         "credit": 5.09,
         "creditPostedTime": "2026-09-10T17:07:29.200Z",
         "bestPrice": 4.99
-      },
-      {
-        "id": "88127",
-        "name": "Sunoco",
-        "address": {
-          "line1": "5074 Greenfield Rd",
-          "line2": "",
-          "city": "Dearborn",
-          "region": "MI",
-          "postalCode": "48126-2846"
-        },
-        "distance": null,
-        "distanceUnit": null,
-        "latitude": null,
-        "longitude": null,
-        "starRating": 3.2,
-        "ratingsCount": 11,
-        "priceUnit": "dollars_per_gallon",
-        "cash": null,
-        "cashPostedTime": null,
-        "credit": 5.09,
-        "creditPostedTime": "2026-09-09T13:44:29.407Z",
-        "bestPrice": 5.09
       },
       {
         "id": "94023",
@@ -251,29 +228,6 @@
         "bestPrice": 5.39
       },
       {
-        "id": "108616",
-        "name": "Shell",
-        "address": {
-          "line1": "6650 Schaefer Rd",
-          "line2": "",
-          "city": "Dearborn",
-          "region": "MI",
-          "postalCode": "48126-4502"
-        },
-        "distance": null,
-        "distanceUnit": null,
-        "latitude": null,
-        "longitude": null,
-        "starRating": 3.2,
-        "ratingsCount": 12,
-        "priceUnit": "dollars_per_gallon",
-        "cash": 5.39,
-        "cashPostedTime": "2026-09-11T03:04:12.948Z",
-        "credit": 5.49,
-        "creditPostedTime": "2026-09-11T03:04:12.933Z",
-        "bestPrice": 5.39
-      },
-      {
         "id": "108615",
         "name": "Shell",
         "address": {
@@ -294,6 +248,29 @@
         "cashPostedTime": "2026-09-11T03:04:10.954Z",
         "credit": 5.49,
         "creditPostedTime": "2026-09-11T03:04:10.970Z",
+        "bestPrice": 5.39
+      },
+      {
+        "id": "108616",
+        "name": "Shell",
+        "address": {
+          "line1": "6650 Schaefer Rd",
+          "line2": "",
+          "city": "Dearborn",
+          "region": "MI",
+          "postalCode": "48126-4502"
+        },
+        "distance": null,
+        "distanceUnit": null,
+        "latitude": null,
+        "longitude": null,
+        "starRating": 3.2,
+        "ratingsCount": 12,
+        "priceUnit": "dollars_per_gallon",
+        "cash": 5.39,
+        "cashPostedTime": "2026-09-11T03:04:12.948Z",
+        "credit": 5.49,
+        "creditPostedTime": "2026-09-11T03:04:12.933Z",
         "bestPrice": 5.39
       },
       {
@@ -528,5 +505,5 @@
       }
     ]
   },
-  "fingerprint": "c4d99412d946a3438c5a57c47093866b5df40a9c8e61b63999bc4ed5d0e5586c"
+  "fingerprint": "76d2590eb6f494e2a806a427349dd52973f21891352e9d17f12da1bed990991b"
 }
