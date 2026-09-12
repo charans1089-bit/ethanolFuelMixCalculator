@@ -3,7 +3,7 @@
   "source": "Apify johnvc/fuelprices",
   "search": "Dearborn, MI",
   "maxAgeDays": 3,
-  "generatedAt": "2026-09-12T15:29:13.787Z",
+  "generatedAt": "2026-09-12T18:20:49.930Z",
   "e85": {
     "fuelCode": 5,
     "count": 1,
@@ -39,7 +39,7 @@
   "premium93": {
     "fuelCode": 3,
     "count": 20,
-    "avg": 5.455,
+    "avg": 5.46,
     "min": 4.99,
     "max": 5.79,
     "stations": [
@@ -61,9 +61,9 @@
         "ratingsCount": 75,
         "priceUnit": "dollars_per_gallon",
         "cash": 4.99,
-        "cashPostedTime": "2026-09-10T17:07:29.122Z",
+        "cashPostedTime": "2026-09-12T18:03:15.219Z",
         "credit": 5.09,
-        "creditPostedTime": "2026-09-10T17:07:29.200Z",
+        "creditPostedTime": "2026-09-12T18:03:15.219Z",
         "bestPrice": 4.99
       },
       {
@@ -87,29 +87,6 @@
         "cashPostedTime": "2026-09-12T03:02:01.118Z",
         "credit": 5.29,
         "creditPostedTime": "2026-09-12T03:02:01.103Z",
-        "bestPrice": 5.19
-      },
-      {
-        "id": "109064",
-        "name": "Mobil",
-        "address": {
-          "line1": "13551 W Warren Ave",
-          "line2": "",
-          "city": "Dearborn",
-          "region": "MI",
-          "postalCode": "48126-1418"
-        },
-        "distance": null,
-        "distanceUnit": null,
-        "latitude": null,
-        "longitude": null,
-        "starRating": 3.7,
-        "ratingsCount": 29,
-        "priceUnit": "dollars_per_gallon",
-        "cash": 5.19,
-        "cashPostedTime": "2026-09-12T03:01:04.484Z",
-        "credit": 5.19,
-        "creditPostedTime": "2026-09-12T03:01:04.468Z",
         "bestPrice": 5.19
       },
       {
@@ -156,6 +133,29 @@
         "cashPostedTime": "2026-09-12T03:01:36.031Z",
         "credit": 5.29,
         "creditPostedTime": "2026-09-12T03:01:36.015Z",
+        "bestPrice": 5.29
+      },
+      {
+        "id": "109064",
+        "name": "Mobil",
+        "address": {
+          "line1": "13551 W Warren Ave",
+          "line2": "",
+          "city": "Dearborn",
+          "region": "MI",
+          "postalCode": "48126-1418"
+        },
+        "distance": null,
+        "distanceUnit": null,
+        "latitude": null,
+        "longitude": null,
+        "starRating": 3.7,
+        "ratingsCount": 29,
+        "priceUnit": "dollars_per_gallon",
+        "cash": 5.29,
+        "cashPostedTime": "2026-09-12T16:03:05.054Z",
+        "credit": 5.29,
+        "creditPostedTime": "2026-09-12T16:03:05.054Z",
         "bestPrice": 5.29
       },
       {
@@ -505,5 +505,5 @@
       }
     ]
   },
-  "fingerprint": "1637628ecdaf7afdac3a96c6108b20cfe7044c56ca6f35ac44989df59e29aeee"
+  "fingerprint": "e4054ddc00e5b5b3dcfa18c76be3757418e122603a084c3bb55bad9f38726b84"
 }
