@@ -3,7 +3,7 @@
   "source": "Apify johnvc/fuelprices",
   "search": "Dearborn, MI",
   "maxAgeDays": 3,
-  "generatedAt": "2026-09-12T04:30:18.350Z",
+  "generatedAt": "2026-09-12T15:29:13.787Z",
   "e85": {
     "fuelCode": 5,
     "count": 1,
@@ -38,10 +38,10 @@
   },
   "premium93": {
     "fuelCode": 3,
-    "count": 21,
-    "avg": 5.476,
+    "count": 20,
+    "avg": 5.455,
     "min": 4.99,
-    "max": 5.89,
+    "max": 5.79,
     "stations": [
       {
         "id": "94021",
@@ -366,29 +366,6 @@
         "bestPrice": 5.59
       },
       {
-        "id": "109058",
-        "name": "Mobil",
-        "address": {
-          "line1": "10001 Tireman Ave",
-          "line2": "",
-          "city": "Dearborn",
-          "region": "MI",
-          "postalCode": "48126"
-        },
-        "distance": null,
-        "distanceUnit": null,
-        "latitude": null,
-        "longitude": null,
-        "starRating": 4.1,
-        "ratingsCount": 18,
-        "priceUnit": "dollars_per_gallon",
-        "cash": 5.59,
-        "cashPostedTime": "2026-09-12T03:01:18.784Z",
-        "credit": 5.69,
-        "creditPostedTime": "2026-09-12T03:01:18.752Z",
-        "bestPrice": 5.59
-      },
-      {
         "id": "99496",
         "name": "Mobil",
         "address": {
@@ -409,6 +386,29 @@
         "cashPostedTime": "2026-09-12T03:02:00.506Z",
         "credit": 5.69,
         "creditPostedTime": "2026-09-12T03:02:00.490Z",
+        "bestPrice": 5.59
+      },
+      {
+        "id": "109058",
+        "name": "Mobil",
+        "address": {
+          "line1": "10001 Tireman Ave",
+          "line2": "",
+          "city": "Dearborn",
+          "region": "MI",
+          "postalCode": "48126"
+        },
+        "distance": null,
+        "distanceUnit": null,
+        "latitude": null,
+        "longitude": null,
+        "starRating": 4.1,
+        "ratingsCount": 18,
+        "priceUnit": "dollars_per_gallon",
+        "cash": 5.59,
+        "cashPostedTime": "2026-09-12T03:01:18.784Z",
+        "credit": 5.69,
+        "creditPostedTime": "2026-09-12T03:01:18.752Z",
         "bestPrice": 5.59
       },
       {
@@ -502,31 +502,8 @@
         "credit": 5.89,
         "creditPostedTime": "2026-09-12T03:02:50.720Z",
         "bestPrice": 5.79
-      },
-      {
-        "id": "110303",
-        "name": "Amoco",
-        "address": {
-          "line1": "6200 GREENFIELD RD",
-          "line2": "",
-          "city": "Dearborn",
-          "region": "MI",
-          "postalCode": "48126"
-        },
-        "distance": null,
-        "distanceUnit": null,
-        "latitude": null,
-        "longitude": null,
-        "starRating": 3.8,
-        "ratingsCount": 14,
-        "priceUnit": "dollars_per_gallon",
-        "cash": 5.89,
-        "cashPostedTime": "2026-09-10T02:59:40.167Z",
-        "credit": null,
-        "creditPostedTime": null,
-        "bestPrice": 5.89
       }
     ]
   },
-  "fingerprint": "694905bdc978760b28b9a161a890c141e363568c79f3565bed447d79fe5b5933"
+  "fingerprint": "1637628ecdaf7afdac3a96c6108b20cfe7044c56ca6f35ac44989df59e29aeee"
 }
