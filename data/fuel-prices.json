@@ -3,7 +3,7 @@
   "source": "Apify johnvc/fuelprices",
   "search": "Dearborn, MI",
   "maxAgeDays": 3,
-  "generatedAt": "2026-09-13T13:17:29.109Z",
+  "generatedAt": "2026-09-13T18:46:17.417Z",
   "e85": {
     "fuelCode": 5,
     "count": 1,
@@ -222,7 +222,7 @@
         "ratingsCount": 29,
         "priceUnit": "dollars_per_gallon",
         "cash": 5.49,
-        "cashPostedTime": "2026-09-13T03:03:41.474Z",
+        "cashPostedTime": "2026-09-13T15:15:29.689Z",
         "credit": null,
         "creditPostedTime": null,
         "bestPrice": 5.49
@@ -505,5 +505,5 @@
       }
     ]
   },
-  "fingerprint": "c621352b58f4889cbbf22e8332628d7567f8682a968e13926dfa89e08a5afe4a"
+  "fingerprint": "b5f4858bf3ef4d4677d51af366288444e2b22406af2ce99a7c9ee2b701dd5c5d"
 }
