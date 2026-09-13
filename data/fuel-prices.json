@@ -3,7 +3,7 @@
   "source": "Apify johnvc/fuelprices",
   "search": "Dearborn, MI",
   "maxAgeDays": 3,
-  "generatedAt": "2026-09-13T10:40:52.932Z",
+  "generatedAt": "2026-09-13T13:17:29.109Z",
   "e85": {
     "fuelCode": 5,
     "count": 1,
@@ -251,29 +251,6 @@
         "bestPrice": 5.49
       },
       {
-        "id": "108616",
-        "name": "Shell",
-        "address": {
-          "line1": "6650 Schaefer Rd",
-          "line2": "",
-          "city": "Dearborn",
-          "region": "MI",
-          "postalCode": "48126-4502"
-        },
-        "distance": null,
-        "distanceUnit": null,
-        "latitude": null,
-        "longitude": null,
-        "starRating": 3.2,
-        "ratingsCount": 12,
-        "priceUnit": "dollars_per_gallon",
-        "cash": 5.49,
-        "cashPostedTime": "2026-09-13T03:02:19.594Z",
-        "credit": 5.59,
-        "creditPostedTime": "2026-09-13T03:02:19.626Z",
-        "bestPrice": 5.49
-      },
-      {
         "id": "108615",
         "name": "Shell",
         "address": {
@@ -294,6 +271,29 @@
         "cashPostedTime": "2026-09-13T03:02:27.244Z",
         "credit": 5.59,
         "creditPostedTime": "2026-09-13T03:02:27.228Z",
+        "bestPrice": 5.49
+      },
+      {
+        "id": "108616",
+        "name": "Shell",
+        "address": {
+          "line1": "6650 Schaefer Rd",
+          "line2": "",
+          "city": "Dearborn",
+          "region": "MI",
+          "postalCode": "48126-4502"
+        },
+        "distance": null,
+        "distanceUnit": null,
+        "latitude": null,
+        "longitude": null,
+        "starRating": 3.2,
+        "ratingsCount": 12,
+        "priceUnit": "dollars_per_gallon",
+        "cash": 5.49,
+        "cashPostedTime": "2026-09-13T03:02:19.594Z",
+        "credit": 5.59,
+        "creditPostedTime": "2026-09-13T03:02:19.626Z",
         "bestPrice": 5.49
       },
       {
@@ -505,5 +505,5 @@
       }
     ]
   },
-  "fingerprint": "213a40463bb47017950c93402f86c1ce2515ebf2c2ec80434aa4b95b8f9d922d"
+  "fingerprint": "c621352b58f4889cbbf22e8332628d7567f8682a968e13926dfa89e08a5afe4a"
 }
