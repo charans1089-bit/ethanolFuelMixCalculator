@@ -3,7 +3,7 @@
   "source": "Apify johnvc/fuelprices",
   "search": "Dearborn, MI",
   "maxAgeDays": 3,
-  "generatedAt": "2026-09-15T13:30:26.709Z",
+  "generatedAt": "2026-09-15T19:41:19.709Z",
   "e85": {
     "fuelCode": 5,
     "count": 1,
@@ -38,8 +38,8 @@
   },
   "premium93": {
     "fuelCode": 3,
-    "count": 20,
-    "avg": 5.558,
+    "count": 21,
+    "avg": 5.569,
     "min": 4.99,
     "max": 5.99,
     "stations": [
@@ -366,6 +366,29 @@
         "bestPrice": 5.69
       },
       {
+        "id": "3309",
+        "name": "Speedway",
+        "address": {
+          "line1": "20180 Outer Dr",
+          "line2": "",
+          "city": "Dearborn",
+          "region": "MI",
+          "postalCode": "48124-2647"
+        },
+        "distance": null,
+        "distanceUnit": null,
+        "latitude": null,
+        "longitude": null,
+        "starRating": 4,
+        "ratingsCount": 153,
+        "priceUnit": "dollars_per_gallon",
+        "cash": null,
+        "cashPostedTime": null,
+        "credit": 5.69,
+        "creditPostedTime": "2026-09-15T18:21:02.252Z",
+        "bestPrice": 5.69
+      },
+      {
         "id": "94016",
         "name": "Amoco",
         "address": {
@@ -458,27 +481,27 @@
         "bestPrice": 5.79
       },
       {
-        "id": "3309",
-        "name": "Speedway",
+        "id": "102162",
+        "name": "CITGO",
         "address": {
-          "line1": "20180 Outer Dr",
+          "line1": "15500 MICHIGAN AVE",
           "line2": "",
           "city": "Dearborn",
           "region": "MI",
-          "postalCode": "48124-2647"
+          "postalCode": "48126"
         },
         "distance": null,
         "distanceUnit": null,
         "latitude": null,
         "longitude": null,
-        "starRating": 4,
-        "ratingsCount": 153,
+        "starRating": 4.2,
+        "ratingsCount": 269,
         "priceUnit": "dollars_per_gallon",
-        "cash": null,
-        "cashPostedTime": null,
-        "credit": 5.79,
-        "creditPostedTime": "2026-09-14T16:23:08.218Z",
-        "bestPrice": 5.79
+        "cash": 5.89,
+        "cashPostedTime": "2026-09-15T19:26:19.458Z",
+        "credit": 5.99,
+        "creditPostedTime": "2026-09-15T19:26:19.552Z",
+        "bestPrice": 5.89
       },
       {
         "id": "45079",
@@ -505,5 +528,5 @@
       }
     ]
   },
-  "fingerprint": "4a078a523d6f3f5e30aa40a36654f13101f4892c2d47321d9af31b5e1042dfcb"
+  "fingerprint": "3251e5829b6b4c88a8724eb0e70fc3b168e4fb2adaff1b5e6c9a0046dc1f94df"
 }
