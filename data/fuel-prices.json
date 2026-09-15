@@ -3,7 +3,7 @@
   "source": "Apify johnvc/fuelprices",
   "search": "Dearborn, MI",
   "maxAgeDays": 3,
-  "generatedAt": "2026-09-15T19:41:19.709Z",
+  "generatedAt": "2026-09-15T22:52:18.229Z",
   "e85": {
     "fuelCode": 5,
     "count": 1,
@@ -39,7 +39,7 @@
   "premium93": {
     "fuelCode": 3,
     "count": 21,
-    "avg": 5.569,
+    "avg": 5.593,
     "min": 4.99,
     "max": 5.99,
     "stations": [
@@ -179,29 +179,6 @@
         "cashPostedTime": "2026-09-13T15:15:29.689Z",
         "credit": null,
         "creditPostedTime": null,
-        "bestPrice": 5.49
-      },
-      {
-        "id": "172876",
-        "name": "Kroger",
-        "address": {
-          "line1": "23170 Michigan Ave",
-          "line2": "",
-          "city": "Dearborn",
-          "region": "MI",
-          "postalCode": "48124"
-        },
-        "distance": null,
-        "distanceUnit": null,
-        "latitude": null,
-        "longitude": null,
-        "starRating": 4.6,
-        "ratingsCount": 676,
-        "priceUnit": "dollars_per_gallon",
-        "cash": null,
-        "cashPostedTime": null,
-        "credit": 5.49,
-        "creditPostedTime": "2026-09-14T22:46:45.357Z",
         "bestPrice": 5.49
       },
       {
@@ -525,8 +502,31 @@
         "credit": 5.99,
         "creditPostedTime": "2026-09-15T04:05:35.371Z",
         "bestPrice": 5.99
+      },
+      {
+        "id": "172876",
+        "name": "Kroger",
+        "address": {
+          "line1": "23170 Michigan Ave",
+          "line2": "",
+          "city": "Dearborn",
+          "region": "MI",
+          "postalCode": "48124"
+        },
+        "distance": null,
+        "distanceUnit": null,
+        "latitude": null,
+        "longitude": null,
+        "starRating": 4.6,
+        "ratingsCount": 676,
+        "priceUnit": "dollars_per_gallon",
+        "cash": null,
+        "cashPostedTime": null,
+        "credit": 5.99,
+        "creditPostedTime": "2026-09-15T21:11:08.389Z",
+        "bestPrice": 5.99
       }
     ]
   },
-  "fingerprint": "3251e5829b6b4c88a8724eb0e70fc3b168e4fb2adaff1b5e6c9a0046dc1f94df"
+  "fingerprint": "9fe777cc699f21fb509219081ca119d07e764322fe662bff388fe50525d37457"
 }
