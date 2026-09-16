@@ -3,7 +3,7 @@
   "source": "Apify johnvc/fuelprices",
   "search": "Dearborn, MI",
   "maxAgeDays": 3,
-  "generatedAt": "2026-09-16T19:32:11.314Z",
+  "generatedAt": "2026-09-16T22:54:28.158Z",
   "e85": {
     "fuelCode": 5,
     "count": 1,
@@ -38,34 +38,11 @@
   },
   "premium93": {
     "fuelCode": 3,
-    "count": 22,
-    "avg": 5.647,
-    "min": 4.99,
-    "max": 5.99,
+    "count": 21,
+    "avg": 5.712,
+    "min": 5.49,
+    "max": 6.19,
     "stations": [
-      {
-        "id": "94021",
-        "name": "Mobil",
-        "address": {
-          "line1": "19309 Carlysle St",
-          "line2": "",
-          "city": "Dearborn",
-          "region": "MI",
-          "postalCode": "48124-3802"
-        },
-        "distance": null,
-        "distanceUnit": null,
-        "latitude": null,
-        "longitude": null,
-        "starRating": 4,
-        "ratingsCount": 75,
-        "priceUnit": "dollars_per_gallon",
-        "cash": 4.99,
-        "cashPostedTime": "2026-09-14T13:24:19.570Z",
-        "credit": 5.09,
-        "creditPostedTime": "2026-09-14T13:24:19.586Z",
-        "bestPrice": 4.99
-      },
       {
         "id": "81117",
         "name": "Amoco",
@@ -107,7 +84,7 @@
         "ratingsCount": 29,
         "priceUnit": "dollars_per_gallon",
         "cash": 5.49,
-        "cashPostedTime": "2026-09-16T03:03:47.730Z",
+        "cashPostedTime": "2026-09-16T20:08:39.729Z",
         "credit": null,
         "creditPostedTime": null,
         "bestPrice": 5.49
@@ -366,29 +343,6 @@
         "bestPrice": 5.69
       },
       {
-        "id": "3309",
-        "name": "Speedway",
-        "address": {
-          "line1": "20180 Outer Dr",
-          "line2": "",
-          "city": "Dearborn",
-          "region": "MI",
-          "postalCode": "48124-2647"
-        },
-        "distance": null,
-        "distanceUnit": null,
-        "latitude": null,
-        "longitude": null,
-        "starRating": 4,
-        "ratingsCount": 153,
-        "priceUnit": "dollars_per_gallon",
-        "cash": null,
-        "cashPostedTime": null,
-        "credit": 5.69,
-        "creditPostedTime": "2026-09-16T12:21:21.734Z",
-        "bestPrice": 5.69
-      },
-      {
         "id": "94016",
         "name": "Amoco",
         "address": {
@@ -545,11 +499,34 @@
         "priceUnit": "dollars_per_gallon",
         "cash": null,
         "cashPostedTime": null,
-        "credit": 5.99,
-        "creditPostedTime": "2026-09-15T21:11:08.389Z",
-        "bestPrice": 5.99
+        "credit": 6.19,
+        "creditPostedTime": "2026-09-16T22:15:50.975Z",
+        "bestPrice": 6.19
+      },
+      {
+        "id": "3309",
+        "name": "Speedway",
+        "address": {
+          "line1": "20180 Outer Dr",
+          "line2": "",
+          "city": "Dearborn",
+          "region": "MI",
+          "postalCode": "48124-2647"
+        },
+        "distance": null,
+        "distanceUnit": null,
+        "latitude": null,
+        "longitude": null,
+        "starRating": 4,
+        "ratingsCount": 153,
+        "priceUnit": "dollars_per_gallon",
+        "cash": null,
+        "cashPostedTime": null,
+        "credit": 6.19,
+        "creditPostedTime": "2026-09-16T20:38:14.836Z",
+        "bestPrice": 6.19
       }
     ]
   },
-  "fingerprint": "3409d0642071e4ca6740356b210642808ed6ceb63cea5caad844194ef221cfcd"
+  "fingerprint": "b896ec3d7b79a5bf42a6eb70dd086fe1b336c4561e07881b2ca32c4074bf5417"
 }
