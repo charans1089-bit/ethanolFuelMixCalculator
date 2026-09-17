@@ -3,7 +3,7 @@
   "source": "Apify johnvc/fuelprices",
   "search": "Dearborn, MI",
   "maxAgeDays": 3,
-  "generatedAt": "2026-09-17T13:24:40.977Z",
+  "generatedAt": "2026-09-17T19:42:44.832Z",
   "e85": {
     "fuelCode": 5,
     "count": 1,
@@ -38,8 +38,8 @@
   },
   "premium93": {
     "fuelCode": 3,
-    "count": 21,
-    "avg": 5.831,
+    "count": 20,
+    "avg": 5.833,
     "min": 5.49,
     "max": 6.19,
     "stations": [
@@ -108,8 +108,8 @@
         "priceUnit": "dollars_per_gallon",
         "cash": 5.49,
         "cashPostedTime": "2026-09-16T18:00:32.460Z",
-        "credit": 5.59,
-        "creditPostedTime": "2026-09-16T18:00:32.548Z",
+        "credit": 5.99,
+        "creditPostedTime": "2026-09-17T15:24:50.615Z",
         "bestPrice": 5.49
       },
       {
@@ -248,29 +248,6 @@
         "cashPostedTime": "2026-09-17T02:59:49.005Z",
         "credit": 5.79,
         "creditPostedTime": "2026-09-17T02:59:48.989Z",
-        "bestPrice": 5.79
-      },
-      {
-        "id": "98820",
-        "name": "Mobil",
-        "address": {
-          "line1": "10000 Ford Rd",
-          "line2": "",
-          "city": "Dearborn",
-          "region": "MI",
-          "postalCode": "48126-3329"
-        },
-        "distance": null,
-        "distanceUnit": null,
-        "latitude": null,
-        "longitude": null,
-        "starRating": 3.6,
-        "ratingsCount": 21,
-        "priceUnit": "dollars_per_gallon",
-        "cash": 5.79,
-        "cashPostedTime": "2026-09-15T04:01:18.653Z",
-        "credit": 5.89,
-        "creditPostedTime": "2026-09-15T04:01:18.735Z",
         "bestPrice": 5.79
       },
       {
@@ -477,7 +454,7 @@
         "cash": null,
         "cashPostedTime": null,
         "credit": 6.19,
-        "creditPostedTime": "2026-09-17T10:56:13.352Z",
+        "creditPostedTime": "2026-09-17T14:21:50.463Z",
         "bestPrice": 6.19
       },
       {
@@ -528,5 +505,5 @@
       }
     ]
   },
-  "fingerprint": "f6b1632cb31b61c9bc631e03922d3c366fc55311b92dfd7fb040acfacf8f7ce2"
+  "fingerprint": "48e66b20a028fbab4de16cf1d2506db2269bf0395f877bd6a257bd161d8fc2c3"
 }
