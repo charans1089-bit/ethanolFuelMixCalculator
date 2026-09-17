@@ -3,7 +3,7 @@
   "source": "Apify johnvc/fuelprices",
   "search": "Dearborn, MI",
   "maxAgeDays": 3,
-  "generatedAt": "2026-09-17T19:42:44.832Z",
+  "generatedAt": "2026-09-17T22:50:35.150Z",
   "e85": {
     "fuelCode": 5,
     "count": 1,
@@ -39,7 +39,7 @@
   "premium93": {
     "fuelCode": 3,
     "count": 20,
-    "avg": 5.833,
+    "avg": 5.828,
     "min": 5.49,
     "max": 6.19,
     "stations": [
@@ -435,6 +435,29 @@
         "bestPrice": 6.09
       },
       {
+        "id": "3309",
+        "name": "Speedway",
+        "address": {
+          "line1": "20180 Outer Dr",
+          "line2": "",
+          "city": "Dearborn",
+          "region": "MI",
+          "postalCode": "48124-2647"
+        },
+        "distance": null,
+        "distanceUnit": null,
+        "latitude": null,
+        "longitude": null,
+        "starRating": 4,
+        "ratingsCount": 153,
+        "priceUnit": "dollars_per_gallon",
+        "cash": null,
+        "cashPostedTime": null,
+        "credit": 6.09,
+        "creditPostedTime": "2026-09-17T21:21:43.902Z",
+        "bestPrice": 6.09
+      },
+      {
         "id": "172876",
         "name": "Kroger",
         "address": {
@@ -479,31 +502,8 @@
         "credit": 6.29,
         "creditPostedTime": "2026-09-17T03:00:46.570Z",
         "bestPrice": 6.19
-      },
-      {
-        "id": "3309",
-        "name": "Speedway",
-        "address": {
-          "line1": "20180 Outer Dr",
-          "line2": "",
-          "city": "Dearborn",
-          "region": "MI",
-          "postalCode": "48124-2647"
-        },
-        "distance": null,
-        "distanceUnit": null,
-        "latitude": null,
-        "longitude": null,
-        "starRating": 4,
-        "ratingsCount": 153,
-        "priceUnit": "dollars_per_gallon",
-        "cash": null,
-        "cashPostedTime": null,
-        "credit": 6.19,
-        "creditPostedTime": "2026-09-16T20:38:14.836Z",
-        "bestPrice": 6.19
       }
     ]
   },
-  "fingerprint": "48e66b20a028fbab4de16cf1d2506db2269bf0395f877bd6a257bd161d8fc2c3"
+  "fingerprint": "3ba8dade626801afd42e80f37dc9b8d8cf43d56480d5a28507f31570bcf81951"
 }
