@@ -3,7 +3,7 @@
   "source": "Apify johnvc/fuelprices",
   "search": "Dearborn, MI",
   "maxAgeDays": 3,
-  "generatedAt": "2026-09-18T04:38:31.536Z",
+  "generatedAt": "2026-09-18T12:56:44.247Z",
   "e85": {
     "fuelCode": 5,
     "count": 1,
@@ -38,34 +38,11 @@
   },
   "premium93": {
     "fuelCode": 3,
-    "count": 19,
-    "avg": 5.879,
+    "count": 18,
+    "avg": 5.901,
     "min": 5.49,
     "max": 6.19,
     "stations": [
-      {
-        "id": "81117",
-        "name": "Amoco",
-        "address": {
-          "line1": "23785 Michigan Ave",
-          "line2": "",
-          "city": "Dearborn",
-          "region": "MI",
-          "postalCode": "48124"
-        },
-        "distance": null,
-        "distanceUnit": null,
-        "latitude": null,
-        "longitude": null,
-        "starRating": 4.5,
-        "ratingsCount": 232,
-        "priceUnit": "dollars_per_gallon",
-        "cash": 5.49,
-        "cashPostedTime": "2026-09-16T03:03:59.633Z",
-        "credit": null,
-        "creditPostedTime": null,
-        "bestPrice": 5.49
-      },
       {
         "id": "86112",
         "name": "BP",
@@ -159,29 +136,6 @@
         "bestPrice": 5.79
       },
       {
-        "id": "110300",
-        "name": "BP",
-        "address": {
-          "line1": "10419 FORD RD",
-          "line2": "",
-          "city": "Dearborn",
-          "region": "MI",
-          "postalCode": "48126"
-        },
-        "distance": null,
-        "distanceUnit": null,
-        "latitude": null,
-        "longitude": null,
-        "starRating": 4.2,
-        "ratingsCount": 4,
-        "priceUnit": "dollars_per_gallon",
-        "cash": 5.79,
-        "cashPostedTime": "2026-09-17T02:59:05.977Z",
-        "credit": null,
-        "creditPostedTime": null,
-        "bestPrice": 5.79
-      },
-      {
         "id": "110478",
         "name": "BP",
         "address": {
@@ -200,6 +154,29 @@
         "priceUnit": "dollars_per_gallon",
         "cash": 5.79,
         "cashPostedTime": "2026-09-17T07:33:27.358Z",
+        "credit": null,
+        "creditPostedTime": null,
+        "bestPrice": 5.79
+      },
+      {
+        "id": "110300",
+        "name": "BP",
+        "address": {
+          "line1": "10419 FORD RD",
+          "line2": "",
+          "city": "Dearborn",
+          "region": "MI",
+          "postalCode": "48126"
+        },
+        "distance": null,
+        "distanceUnit": null,
+        "latitude": null,
+        "longitude": null,
+        "starRating": 4.2,
+        "ratingsCount": 4,
+        "priceUnit": "dollars_per_gallon",
+        "cash": 5.79,
+        "cashPostedTime": "2026-09-17T02:59:05.977Z",
         "credit": null,
         "creditPostedTime": null,
         "bestPrice": 5.79
@@ -454,7 +431,7 @@
         "cash": null,
         "cashPostedTime": null,
         "credit": 6.19,
-        "creditPostedTime": "2026-09-17T14:21:50.463Z",
+        "creditPostedTime": "2026-09-18T12:18:02.419Z",
         "bestPrice": 6.19
       },
       {
@@ -482,5 +459,5 @@
       }
     ]
   },
-  "fingerprint": "99211f5722395893e831ebcb30c08b158af640aaacba7ebe7194e82dc5c59b49"
+  "fingerprint": "343f029d739f13892678d9a7ccd42ab48f0a79c63094c0c0b529a1fa1729ff8e"
 }
