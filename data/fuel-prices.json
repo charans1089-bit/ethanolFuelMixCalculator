@@ -3,7 +3,7 @@
   "source": "Apify johnvc/fuelprices",
   "search": "Dearborn, MI",
   "maxAgeDays": 3,
-  "generatedAt": "2026-09-18T12:56:44.247Z",
+  "generatedAt": "2026-09-18T19:01:03.815Z",
   "e85": {
     "fuelCode": 5,
     "count": 1,
@@ -61,7 +61,7 @@
         "ratingsCount": 29,
         "priceUnit": "dollars_per_gallon",
         "cash": 5.49,
-        "cashPostedTime": "2026-09-16T20:08:39.729Z",
+        "cashPostedTime": "2026-09-18T12:59:35.791Z",
         "credit": null,
         "creditPostedTime": null,
         "bestPrice": 5.49
@@ -274,6 +274,29 @@
         "bestPrice": 5.89
       },
       {
+        "id": "109064",
+        "name": "Mobil",
+        "address": {
+          "line1": "13551 W Warren Ave",
+          "line2": "",
+          "city": "Dearborn",
+          "region": "MI",
+          "postalCode": "48126-1418"
+        },
+        "distance": null,
+        "distanceUnit": null,
+        "latitude": null,
+        "longitude": null,
+        "starRating": 3.7,
+        "ratingsCount": 29,
+        "priceUnit": "dollars_per_gallon",
+        "cash": 5.99,
+        "cashPostedTime": "2026-09-18T03:00:23.603Z",
+        "credit": 5.99,
+        "creditPostedTime": "2026-09-18T03:00:23.619Z",
+        "bestPrice": 5.99
+      },
+      {
         "id": "109058",
         "name": "Mobil",
         "address": {
@@ -317,29 +340,6 @@
         "cashPostedTime": null,
         "credit": 5.99,
         "creditPostedTime": "2026-09-18T03:00:58.814Z",
-        "bestPrice": 5.99
-      },
-      {
-        "id": "109064",
-        "name": "Mobil",
-        "address": {
-          "line1": "13551 W Warren Ave",
-          "line2": "",
-          "city": "Dearborn",
-          "region": "MI",
-          "postalCode": "48126-1418"
-        },
-        "distance": null,
-        "distanceUnit": null,
-        "latitude": null,
-        "longitude": null,
-        "starRating": 3.7,
-        "ratingsCount": 29,
-        "priceUnit": "dollars_per_gallon",
-        "cash": 5.99,
-        "cashPostedTime": "2026-09-18T03:00:23.603Z",
-        "credit": 5.99,
-        "creditPostedTime": "2026-09-18T03:00:23.619Z",
         "bestPrice": 5.99
       },
       {
@@ -431,7 +431,7 @@
         "cash": null,
         "cashPostedTime": null,
         "credit": 6.19,
-        "creditPostedTime": "2026-09-18T12:18:02.419Z",
+        "creditPostedTime": "2026-09-18T14:59:58.900Z",
         "bestPrice": 6.19
       },
       {
@@ -459,5 +459,5 @@
       }
     ]
   },
-  "fingerprint": "343f029d739f13892678d9a7ccd42ab48f0a79c63094c0c0b529a1fa1729ff8e"
+  "fingerprint": "12b5c6574fc03d65280fabe56eca68d224819e543ce016c9b1ebb180d4542fa3"
 }
