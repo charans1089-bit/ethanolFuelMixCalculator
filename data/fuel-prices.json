@@ -3,7 +3,7 @@
   "source": "Apify johnvc/fuelprices",
   "search": "Dearborn, MI",
   "maxAgeDays": 3,
-  "generatedAt": "2026-09-19T04:33:41.640Z",
+  "generatedAt": "2026-09-19T12:28:20.959Z",
   "e85": {
     "fuelCode": 5,
     "count": 1,
@@ -38,8 +38,8 @@
   },
   "premium93": {
     "fuelCode": 3,
-    "count": 21,
-    "avg": 6.042,
+    "count": 20,
+    "avg": 6.055,
     "min": 5.49,
     "max": 6.29,
     "stations": [
@@ -65,29 +65,6 @@
         "credit": null,
         "creditPostedTime": null,
         "bestPrice": 5.49
-      },
-      {
-        "id": "110478",
-        "name": "BP",
-        "address": {
-          "line1": "14551 W WARREN AVE",
-          "line2": "",
-          "city": "Dearborn",
-          "region": "MI",
-          "postalCode": "48126"
-        },
-        "distance": null,
-        "distanceUnit": null,
-        "latitude": null,
-        "longitude": null,
-        "starRating": 3.7,
-        "ratingsCount": 8,
-        "priceUnit": "dollars_per_gallon",
-        "cash": 5.79,
-        "cashPostedTime": "2026-09-17T07:33:27.358Z",
-        "credit": null,
-        "creditPostedTime": null,
-        "bestPrice": 5.79
       },
       {
         "id": "94021",
@@ -320,29 +297,6 @@
         "bestPrice": 6.09
       },
       {
-        "id": "108616",
-        "name": "Shell",
-        "address": {
-          "line1": "6650 Schaefer Rd",
-          "line2": "",
-          "city": "Dearborn",
-          "region": "MI",
-          "postalCode": "48126-4502"
-        },
-        "distance": null,
-        "distanceUnit": null,
-        "latitude": null,
-        "longitude": null,
-        "starRating": 3.2,
-        "ratingsCount": 12,
-        "priceUnit": "dollars_per_gallon",
-        "cash": 6.09,
-        "cashPostedTime": "2026-09-19T03:03:17.374Z",
-        "credit": 6.19,
-        "creditPostedTime": "2026-09-19T03:03:17.406Z",
-        "bestPrice": 6.09
-      },
-      {
         "id": "108615",
         "name": "Shell",
         "address": {
@@ -363,6 +317,29 @@
         "cashPostedTime": "2026-09-19T03:03:16.383Z",
         "credit": 6.39,
         "creditPostedTime": "2026-09-19T03:03:16.367Z",
+        "bestPrice": 6.09
+      },
+      {
+        "id": "108616",
+        "name": "Shell",
+        "address": {
+          "line1": "6650 Schaefer Rd",
+          "line2": "",
+          "city": "Dearborn",
+          "region": "MI",
+          "postalCode": "48126-4502"
+        },
+        "distance": null,
+        "distanceUnit": null,
+        "latitude": null,
+        "longitude": null,
+        "starRating": 3.2,
+        "ratingsCount": 12,
+        "priceUnit": "dollars_per_gallon",
+        "cash": 6.09,
+        "cashPostedTime": "2026-09-19T03:03:17.374Z",
+        "credit": 6.19,
+        "creditPostedTime": "2026-09-19T03:03:17.406Z",
         "bestPrice": 6.09
       },
       {
@@ -528,5 +505,5 @@
       }
     ]
   },
-  "fingerprint": "cc51ba7450a7dc65f2c00a336af2fb432b2eb167cdf53ad07b400a8bba06776e"
+  "fingerprint": "a5ba5dcf855fc347f0f422af611c8c95b7b545e211365b929af4ad43cfece509"
 }
