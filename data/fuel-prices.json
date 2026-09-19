@@ -3,7 +3,7 @@
   "source": "Apify johnvc/fuelprices",
   "search": "Dearborn, MI",
   "maxAgeDays": 3,
-  "generatedAt": "2026-09-19T12:28:20.959Z",
+  "generatedAt": "2026-09-19T18:35:16.141Z",
   "e85": {
     "fuelCode": 5,
     "count": 1,
@@ -38,8 +38,8 @@
   },
   "premium93": {
     "fuelCode": 3,
-    "count": 20,
-    "avg": 6.055,
+    "count": 19,
+    "avg": 6.043,
     "min": 5.49,
     "max": 6.29,
     "stations": [
@@ -176,9 +176,9 @@
         "ratingsCount": 21,
         "priceUnit": "dollars_per_gallon",
         "cash": 5.99,
-        "cashPostedTime": "2026-09-19T03:03:13.060Z",
+        "cashPostedTime": "2026-09-19T14:46:49.410Z",
         "credit": 6.09,
-        "creditPostedTime": "2026-09-19T03:03:13.044Z",
+        "creditPostedTime": "2026-09-19T14:46:49.426Z",
         "bestPrice": 5.99
       },
       {
@@ -251,6 +251,29 @@
         "bestPrice": 6.09
       },
       {
+        "id": "110300",
+        "name": "BP",
+        "address": {
+          "line1": "10419 FORD RD",
+          "line2": "",
+          "city": "Dearborn",
+          "region": "MI",
+          "postalCode": "48126"
+        },
+        "distance": null,
+        "distanceUnit": null,
+        "latitude": null,
+        "longitude": null,
+        "starRating": 4.2,
+        "ratingsCount": 4,
+        "priceUnit": "dollars_per_gallon",
+        "cash": 6.09,
+        "cashPostedTime": "2026-09-19T14:46:18.632Z",
+        "credit": 6.19,
+        "creditPostedTime": "2026-09-19T14:46:18.632Z",
+        "bestPrice": 6.09
+      },
+      {
         "id": "109274",
         "name": "Marathon",
         "address": {
@@ -268,9 +291,9 @@
         "ratingsCount": 14,
         "priceUnit": "dollars_per_gallon",
         "cash": 6.09,
-        "cashPostedTime": "2026-09-18T23:07:02.740Z",
+        "cashPostedTime": "2026-09-19T14:48:50.423Z",
         "credit": 6.19,
-        "creditPostedTime": "2026-09-18T23:07:02.740Z",
+        "creditPostedTime": "2026-09-19T14:48:50.438Z",
         "bestPrice": 6.09
       },
       {
@@ -314,9 +337,9 @@
         "ratingsCount": 15,
         "priceUnit": "dollars_per_gallon",
         "cash": 6.09,
-        "cashPostedTime": "2026-09-19T03:03:16.383Z",
-        "credit": 6.39,
-        "creditPostedTime": "2026-09-19T03:03:16.367Z",
+        "cashPostedTime": "2026-09-19T14:48:19.394Z",
+        "credit": 6.19,
+        "creditPostedTime": "2026-09-19T14:48:19.394Z",
         "bestPrice": 6.09
       },
       {
@@ -343,29 +366,6 @@
         "bestPrice": 6.09
       },
       {
-        "id": "110300",
-        "name": "BP",
-        "address": {
-          "line1": "10419 FORD RD",
-          "line2": "",
-          "city": "Dearborn",
-          "region": "MI",
-          "postalCode": "48126"
-        },
-        "distance": null,
-        "distanceUnit": null,
-        "latitude": null,
-        "longitude": null,
-        "starRating": 4.2,
-        "ratingsCount": 4,
-        "priceUnit": "dollars_per_gallon",
-        "cash": 6.19,
-        "cashPostedTime": "2026-09-19T03:03:17.300Z",
-        "credit": null,
-        "creditPostedTime": null,
-        "bestPrice": 6.19
-      },
-      {
         "id": "172876",
         "name": "Kroger",
         "address": {
@@ -386,29 +386,6 @@
         "cashPostedTime": null,
         "credit": 6.19,
         "creditPostedTime": "2026-09-18T14:59:58.900Z",
-        "bestPrice": 6.19
-      },
-      {
-        "id": "84078",
-        "name": "Shell",
-        "address": {
-          "line1": "4001 Schaefer Rd",
-          "line2": "",
-          "city": "Dearborn",
-          "region": "MI",
-          "postalCode": "48126-3642"
-        },
-        "distance": null,
-        "distanceUnit": null,
-        "latitude": null,
-        "longitude": null,
-        "starRating": 4.2,
-        "ratingsCount": 119,
-        "priceUnit": "dollars_per_gallon",
-        "cash": 6.19,
-        "cashPostedTime": "2026-09-17T03:00:46.585Z",
-        "credit": 6.29,
-        "creditPostedTime": "2026-09-17T03:00:46.570Z",
         "bestPrice": 6.19
       },
       {
@@ -505,5 +482,5 @@
       }
     ]
   },
-  "fingerprint": "a5ba5dcf855fc347f0f422af611c8c95b7b545e211365b929af4ad43cfece509"
+  "fingerprint": "99dbf82645deec5b42eb7eacf7407590d77fd85585afcb034d335f082e4bf7a3"
 }
