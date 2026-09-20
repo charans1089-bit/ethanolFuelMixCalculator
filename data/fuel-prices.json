@@ -3,7 +3,7 @@
   "source": "Apify johnvc/fuelprices",
   "search": "Dearborn, MI",
   "maxAgeDays": 3,
-  "generatedAt": "2026-09-20T13:02:00.705Z",
+  "generatedAt": "2026-09-20T18:45:21.222Z",
   "e85": {
     "fuelCode": 5,
     "count": 1,
@@ -297,29 +297,6 @@
         "bestPrice": 6.09
       },
       {
-        "id": "108615",
-        "name": "Shell",
-        "address": {
-          "line1": "13841 Ford Rd",
-          "line2": "",
-          "city": "Dearborn",
-          "region": "MI",
-          "postalCode": "48126-3224"
-        },
-        "distance": null,
-        "distanceUnit": null,
-        "latitude": null,
-        "longitude": null,
-        "starRating": 4.2,
-        "ratingsCount": 15,
-        "priceUnit": "dollars_per_gallon",
-        "cash": 6.09,
-        "cashPostedTime": "2026-09-19T14:48:19.394Z",
-        "credit": 6.19,
-        "creditPostedTime": "2026-09-19T14:48:19.394Z",
-        "bestPrice": 6.09
-      },
-      {
         "id": "108616",
         "name": "Shell",
         "address": {
@@ -343,6 +320,29 @@
         "bestPrice": 6.09
       },
       {
+        "id": "108615",
+        "name": "Shell",
+        "address": {
+          "line1": "13841 Ford Rd",
+          "line2": "",
+          "city": "Dearborn",
+          "region": "MI",
+          "postalCode": "48126-3224"
+        },
+        "distance": null,
+        "distanceUnit": null,
+        "latitude": null,
+        "longitude": null,
+        "starRating": 4.2,
+        "ratingsCount": 15,
+        "priceUnit": "dollars_per_gallon",
+        "cash": 6.09,
+        "cashPostedTime": "2026-09-19T14:48:19.394Z",
+        "credit": 6.19,
+        "creditPostedTime": "2026-09-19T14:48:19.394Z",
+        "bestPrice": 6.09
+      },
+      {
         "id": "172876",
         "name": "Kroger",
         "address": {
@@ -362,7 +362,7 @@
         "cash": null,
         "cashPostedTime": null,
         "credit": 6.19,
-        "creditPostedTime": "2026-09-18T14:59:58.900Z",
+        "creditPostedTime": "2026-09-20T18:11:08.608Z",
         "bestPrice": 6.19
       },
       {
@@ -505,5 +505,5 @@
       }
     ]
   },
-  "fingerprint": "28da9503c37f89f3a8dc1cf59abe09eb4fca3552ca1f26212b8c3f82c74c1bc5"
+  "fingerprint": "d046bb543cb726ef35e4a658ae06a7952538159b98a0e29fc04e56faad28fa13"
 }
