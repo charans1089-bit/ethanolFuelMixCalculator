@@ -3,7 +3,7 @@
   "source": "Apify johnvc/fuelprices",
   "search": "Dearborn, MI",
   "maxAgeDays": 3,
-  "generatedAt": "2026-09-20T18:45:21.222Z",
+  "generatedAt": "2026-09-20T22:24:41.081Z",
   "e85": {
     "fuelCode": 5,
     "count": 1,
@@ -38,8 +38,8 @@
   },
   "premium93": {
     "fuelCode": 3,
-    "count": 20,
-    "avg": 6.12,
+    "count": 19,
+    "avg": 6.132,
     "min": 5.79,
     "max": 6.49,
     "stations": [
@@ -65,29 +65,6 @@
         "credit": 5.89,
         "creditPostedTime": "2026-09-19T04:32:30.875Z",
         "bestPrice": 5.79
-      },
-      {
-        "id": "133403",
-        "name": "CITGO",
-        "address": {
-          "line1": "14921 Michigan Ave",
-          "line2": "",
-          "city": "Dearborn",
-          "region": "MI",
-          "postalCode": "48126"
-        },
-        "distance": null,
-        "distanceUnit": null,
-        "latitude": null,
-        "longitude": null,
-        "starRating": 4,
-        "ratingsCount": 135,
-        "priceUnit": "dollars_per_gallon",
-        "cash": 5.89,
-        "cashPostedTime": "2026-09-18T21:20:43.630Z",
-        "credit": 5.99,
-        "creditPostedTime": "2026-09-18T21:20:43.661Z",
-        "bestPrice": 5.89
       },
       {
         "id": "108613",
@@ -505,5 +482,5 @@
       }
     ]
   },
-  "fingerprint": "d046bb543cb726ef35e4a658ae06a7952538159b98a0e29fc04e56faad28fa13"
+  "fingerprint": "4c8aeee0138ae617c325a8e8f61c33cbc43eb6715d7edd8d8b2373017ac3f918"
 }
