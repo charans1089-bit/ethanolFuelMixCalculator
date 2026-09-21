@@ -3,7 +3,7 @@
   "source": "Apify johnvc/fuelprices",
   "search": "Dearborn, MI",
   "maxAgeDays": 3,
-  "generatedAt": "2026-09-21T04:51:22.637Z",
+  "generatedAt": "2026-09-21T15:04:51.735Z",
   "e85": {
     "fuelCode": 5,
     "count": 1,
@@ -38,8 +38,8 @@
   },
   "premium93": {
     "fuelCode": 3,
-    "count": 18,
-    "avg": 6.151,
+    "count": 17,
+    "avg": 6.161,
     "min": 5.79,
     "max": 6.49,
     "stations": [
@@ -61,9 +61,9 @@
         "ratingsCount": 75,
         "priceUnit": "dollars_per_gallon",
         "cash": 5.79,
-        "cashPostedTime": "2026-09-21T04:14:35.183Z",
+        "cashPostedTime": "2026-09-21T13:01:06.893Z",
         "credit": 5.89,
-        "creditPostedTime": "2026-09-21T04:14:35.199Z",
+        "creditPostedTime": "2026-09-21T13:01:06.909Z",
         "bestPrice": 5.79
       },
       {
@@ -84,10 +84,33 @@
         "ratingsCount": 151,
         "priceUnit": "dollars_per_gallon",
         "cash": 5.89,
-        "cashPostedTime": "2026-09-21T04:14:18.774Z",
+        "cashPostedTime": "2026-09-21T12:59:27.386Z",
         "credit": 5.99,
-        "creditPostedTime": "2026-09-21T04:14:18.789Z",
+        "creditPostedTime": "2026-09-21T12:59:27.401Z",
         "bestPrice": 5.89
+      },
+      {
+        "id": "172876",
+        "name": "Kroger",
+        "address": {
+          "line1": "23170 Michigan Ave",
+          "line2": "",
+          "city": "Dearborn",
+          "region": "MI",
+          "postalCode": "48124"
+        },
+        "distance": null,
+        "distanceUnit": null,
+        "latitude": null,
+        "longitude": null,
+        "starRating": 4.6,
+        "ratingsCount": 676,
+        "priceUnit": "dollars_per_gallon",
+        "cash": null,
+        "cashPostedTime": null,
+        "credit": 5.99,
+        "creditPostedTime": "2026-09-21T12:21:52.431Z",
+        "bestPrice": 5.99
       },
       {
         "id": "98820",
@@ -132,7 +155,7 @@
         "cash": null,
         "cashPostedTime": null,
         "credit": 5.99,
-        "creditPostedTime": "2026-09-20T23:04:26.635Z",
+        "creditPostedTime": "2026-09-21T12:59:37.993Z",
         "bestPrice": 5.99
       },
       {
@@ -159,29 +182,6 @@
         "bestPrice": 6.09
       },
       {
-        "id": "110300",
-        "name": "BP",
-        "address": {
-          "line1": "10419 FORD RD",
-          "line2": "",
-          "city": "Dearborn",
-          "region": "MI",
-          "postalCode": "48126"
-        },
-        "distance": null,
-        "distanceUnit": null,
-        "latitude": null,
-        "longitude": null,
-        "starRating": 4.2,
-        "ratingsCount": 4,
-        "priceUnit": "dollars_per_gallon",
-        "cash": 6.09,
-        "cashPostedTime": "2026-09-19T14:46:18.632Z",
-        "credit": 6.19,
-        "creditPostedTime": "2026-09-19T14:46:18.632Z",
-        "bestPrice": 6.09
-      },
-      {
         "id": "108613",
         "name": "Exxon",
         "address": {
@@ -202,29 +202,6 @@
         "cashPostedTime": "2026-09-21T03:02:29.104Z",
         "credit": 6.19,
         "creditPostedTime": "2026-09-21T03:02:29.089Z",
-        "bestPrice": 6.09
-      },
-      {
-        "id": "109274",
-        "name": "Marathon",
-        "address": {
-          "line1": "14243 Ford Rd",
-          "line2": "",
-          "city": "Dearborn",
-          "region": "MI",
-          "postalCode": "48126-3148"
-        },
-        "distance": null,
-        "distanceUnit": null,
-        "latitude": null,
-        "longitude": null,
-        "starRating": 3.5,
-        "ratingsCount": 14,
-        "priceUnit": "dollars_per_gallon",
-        "cash": 6.09,
-        "cashPostedTime": "2026-09-19T14:48:50.423Z",
-        "credit": 6.19,
-        "creditPostedTime": "2026-09-19T14:48:50.438Z",
         "bestPrice": 6.09
       },
       {
@@ -272,29 +249,6 @@
         "credit": 6.19,
         "creditPostedTime": "2026-09-21T03:02:32.746Z",
         "bestPrice": 6.09
-      },
-      {
-        "id": "172876",
-        "name": "Kroger",
-        "address": {
-          "line1": "23170 Michigan Ave",
-          "line2": "",
-          "city": "Dearborn",
-          "region": "MI",
-          "postalCode": "48124"
-        },
-        "distance": null,
-        "distanceUnit": null,
-        "latitude": null,
-        "longitude": null,
-        "starRating": 4.6,
-        "ratingsCount": 676,
-        "priceUnit": "dollars_per_gallon",
-        "cash": null,
-        "cashPostedTime": null,
-        "credit": 6.19,
-        "creditPostedTime": "2026-09-20T18:11:08.608Z",
-        "bestPrice": 6.19
       },
       {
         "id": "99496",
@@ -389,6 +343,29 @@
         "bestPrice": 6.29
       },
       {
+        "id": "45079",
+        "name": "CITGO",
+        "address": {
+          "line1": "22096 MICHIGAN AVE",
+          "line2": "",
+          "city": "Dearborn",
+          "region": "MI",
+          "postalCode": "48124"
+        },
+        "distance": null,
+        "distanceUnit": null,
+        "latitude": null,
+        "longitude": null,
+        "starRating": 4.2,
+        "ratingsCount": 660,
+        "priceUnit": "dollars_per_gallon",
+        "cash": 6.39,
+        "cashPostedTime": "2026-09-21T08:44:38.043Z",
+        "credit": 6.49,
+        "creditPostedTime": "2026-09-21T08:44:38.121Z",
+        "bestPrice": 6.39
+      },
+      {
         "id": "70578",
         "name": "CITGO",
         "address": {
@@ -459,5 +436,5 @@
       }
     ]
   },
-  "fingerprint": "90f88699aca05b9070f1560dcb8371dc6a10ae31a3987dd1946a82795b66dd0c"
+  "fingerprint": "006849c068c949d2123c968c27c588cd8677c9ae75e5c417bf49c462faf9a8b4"
 }
