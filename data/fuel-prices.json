@@ -3,7 +3,7 @@
   "source": "Apify johnvc/fuelprices",
   "search": "Dearborn, MI",
   "maxAgeDays": 3,
-  "generatedAt": "2026-09-22T19:43:48.183Z",
+  "generatedAt": "2026-09-22T22:55:27.992Z",
   "e85": {
     "fuelCode": 5,
     "count": 1,
@@ -201,7 +201,7 @@
         "cash": null,
         "cashPostedTime": null,
         "credit": 5.99,
-        "creditPostedTime": "2026-09-22T13:19:27.551Z",
+        "creditPostedTime": "2026-09-22T20:41:26.157Z",
         "bestPrice": 5.99
       },
       {
@@ -251,29 +251,6 @@
         "bestPrice": 6.09
       },
       {
-        "id": "99496",
-        "name": "Mobil",
-        "address": {
-          "line1": "7954 Greenfield Rd",
-          "line2": "",
-          "city": "Dearborn",
-          "region": "MI",
-          "postalCode": "48126-1061"
-        },
-        "distance": null,
-        "distanceUnit": null,
-        "latitude": null,
-        "longitude": null,
-        "starRating": 4.2,
-        "ratingsCount": 52,
-        "priceUnit": "dollars_per_gallon",
-        "cash": 6.09,
-        "cashPostedTime": "2026-09-22T03:04:30.035Z",
-        "credit": 6.19,
-        "creditPostedTime": "2026-09-21T03:03:38.261Z",
-        "bestPrice": 6.09
-      },
-      {
         "id": "109064",
         "name": "Mobil",
         "address": {
@@ -294,6 +271,29 @@
         "cashPostedTime": "2026-09-22T03:04:24.821Z",
         "credit": 6.09,
         "creditPostedTime": "2026-09-22T03:04:24.789Z",
+        "bestPrice": 6.09
+      },
+      {
+        "id": "99496",
+        "name": "Mobil",
+        "address": {
+          "line1": "7954 Greenfield Rd",
+          "line2": "",
+          "city": "Dearborn",
+          "region": "MI",
+          "postalCode": "48126-1061"
+        },
+        "distance": null,
+        "distanceUnit": null,
+        "latitude": null,
+        "longitude": null,
+        "starRating": 4.2,
+        "ratingsCount": 52,
+        "priceUnit": "dollars_per_gallon",
+        "cash": 6.09,
+        "cashPostedTime": "2026-09-22T03:04:30.035Z",
+        "credit": 6.19,
+        "creditPostedTime": "2026-09-21T03:03:38.261Z",
         "bestPrice": 6.09
       },
       {
@@ -459,5 +459,5 @@
       }
     ]
   },
-  "fingerprint": "452e328157ebbf98b9d764f760db888a42274aaef0d6606d5cfd735ed7f5cb27"
+  "fingerprint": "a93d372c1f675b7bbd10870ffae179b38e26c1e544657d1446951d63fc707a64"
 }
