@@ -3,7 +3,7 @@
   "source": "Apify johnvc/fuelprices",
   "search": "Dearborn, MI",
   "maxAgeDays": 3,
-  "generatedAt": "2026-09-25T13:43:19.621Z",
+  "generatedAt": "2026-09-25T20:00:40.233Z",
   "e85": {
     "fuelCode": 5,
     "count": 1,
@@ -38,8 +38,8 @@
   },
   "premium93": {
     "fuelCode": 3,
-    "count": 21,
-    "avg": 6.019,
+    "count": 19,
+    "avg": 6.022,
     "min": 5.79,
     "max": 6.39,
     "stations": [
@@ -61,9 +61,9 @@
         "ratingsCount": 29,
         "priceUnit": "dollars_per_gallon",
         "cash": 5.79,
-        "cashPostedTime": "2026-09-25T04:01:32.050Z",
+        "cashPostedTime": "2026-09-25T14:06:18.109Z",
         "credit": 5.79,
-        "creditPostedTime": "2026-09-24T03:02:10.411Z",
+        "creditPostedTime": "2026-09-25T14:06:18.141Z",
         "bestPrice": 5.79
       },
       {
@@ -179,29 +179,6 @@
         "cashPostedTime": "2026-09-23T14:05:18.722Z",
         "credit": 5.89,
         "creditPostedTime": "2026-09-25T04:00:00.561Z",
-        "bestPrice": 5.89
-      },
-      {
-        "id": "94021",
-        "name": "Mobil",
-        "address": {
-          "line1": "19309 Carlysle St",
-          "line2": "",
-          "city": "Dearborn",
-          "region": "MI",
-          "postalCode": "48124-3802"
-        },
-        "distance": null,
-        "distanceUnit": null,
-        "latitude": null,
-        "longitude": null,
-        "starRating": 4,
-        "ratingsCount": 75,
-        "priceUnit": "dollars_per_gallon",
-        "cash": null,
-        "cashPostedTime": null,
-        "credit": 5.89,
-        "creditPostedTime": "2026-09-23T17:02:48.266Z",
         "bestPrice": 5.89
       },
       {
@@ -389,29 +366,6 @@
         "bestPrice": 6.09
       },
       {
-        "id": "70578",
-        "name": "CITGO",
-        "address": {
-          "line1": "23645 Ford Rd",
-          "line2": "",
-          "city": "Dearborn",
-          "region": "MI",
-          "postalCode": "48128-1261"
-        },
-        "distance": null,
-        "distanceUnit": null,
-        "latitude": null,
-        "longitude": null,
-        "starRating": 4.7,
-        "ratingsCount": 247,
-        "priceUnit": "dollars_per_gallon",
-        "cash": 6.09,
-        "cashPostedTime": "2026-09-23T17:03:42.056Z",
-        "credit": 6.09,
-        "creditPostedTime": "2026-09-23T17:03:42.290Z",
-        "bestPrice": 6.09
-      },
-      {
         "id": "108615",
         "name": "Shell",
         "address": {
@@ -528,5 +482,5 @@
       }
     ]
   },
-  "fingerprint": "466d3eca29fae2576f0fdfd1adcd8274d5648083ee6131fb067f03a230fd8c99"
+  "fingerprint": "92323915cba084da0448bc465048444d354e26d3c796e8d38236ace6a63cc5a0"
 }
