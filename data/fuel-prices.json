@@ -3,7 +3,7 @@
   "source": "Apify johnvc/fuelprices",
   "search": "Dearborn, MI",
   "maxAgeDays": 3,
-  "generatedAt": "2026-09-25T20:00:40.233Z",
+  "generatedAt": "2026-09-25T23:17:10.442Z",
   "e85": {
     "fuelCode": 5,
     "count": 1,
@@ -39,7 +39,7 @@
   "premium93": {
     "fuelCode": 3,
     "count": 19,
-    "avg": 6.022,
+    "avg": 6.019,
     "min": 5.79,
     "max": 6.39,
     "stations": [
@@ -88,6 +88,29 @@
         "credit": 5.89,
         "creditPostedTime": "2026-09-25T04:00:43.148Z",
         "bestPrice": 5.79
+      },
+      {
+        "id": "3309",
+        "name": "Speedway",
+        "address": {
+          "line1": "20180 Outer Dr",
+          "line2": "",
+          "city": "Dearborn",
+          "region": "MI",
+          "postalCode": "48124-2647"
+        },
+        "distance": null,
+        "distanceUnit": null,
+        "latitude": null,
+        "longitude": null,
+        "starRating": 4,
+        "ratingsCount": 153,
+        "priceUnit": "dollars_per_gallon",
+        "cash": null,
+        "cashPostedTime": null,
+        "credit": 5.84,
+        "creditPostedTime": "2026-09-25T22:21:03.635Z",
+        "bestPrice": 5.84
       },
       {
         "id": "110300",
@@ -179,29 +202,6 @@
         "cashPostedTime": "2026-09-23T14:05:18.722Z",
         "credit": 5.89,
         "creditPostedTime": "2026-09-25T04:00:00.561Z",
-        "bestPrice": 5.89
-      },
-      {
-        "id": "3309",
-        "name": "Speedway",
-        "address": {
-          "line1": "20180 Outer Dr",
-          "line2": "",
-          "city": "Dearborn",
-          "region": "MI",
-          "postalCode": "48124-2647"
-        },
-        "distance": null,
-        "distanceUnit": null,
-        "latitude": null,
-        "longitude": null,
-        "starRating": 4,
-        "ratingsCount": 153,
-        "priceUnit": "dollars_per_gallon",
-        "cash": null,
-        "cashPostedTime": null,
-        "credit": 5.89,
-        "creditPostedTime": "2026-09-24T20:37:26.340Z",
         "bestPrice": 5.89
       },
       {
@@ -482,5 +482,5 @@
       }
     ]
   },
-  "fingerprint": "92323915cba084da0448bc465048444d354e26d3c796e8d38236ace6a63cc5a0"
+  "fingerprint": "e8b712c04f45e76c85e8946e8809edbc753e46dba8b9d87af32f04d788954e5e"
 }
