@@ -3,7 +3,7 @@
   "source": "Apify johnvc/fuelprices",
   "search": "Dearborn, MI",
   "maxAgeDays": 3,
-  "generatedAt": "2026-09-26T19:12:02.065Z",
+  "generatedAt": "2026-09-26T22:45:50.659Z",
   "e85": {
     "fuelCode": 5,
     "count": 1,
@@ -38,8 +38,8 @@
   },
   "premium93": {
     "fuelCode": 3,
-    "count": 19,
-    "avg": 5.977,
+    "count": 18,
+    "avg": 5.965,
     "min": 5.79,
     "max": 6.39,
     "stations": [
@@ -412,29 +412,6 @@
         "bestPrice": 6.09
       },
       {
-        "id": "94016",
-        "name": "Amoco",
-        "address": {
-          "line1": "2740 Monroe St",
-          "line2": "",
-          "city": "Dearborn",
-          "region": "MI",
-          "postalCode": "48124-3018"
-        },
-        "distance": null,
-        "distanceUnit": null,
-        "latitude": null,
-        "longitude": null,
-        "starRating": 4.3,
-        "ratingsCount": 293,
-        "priceUnit": "dollars_per_gallon",
-        "cash": null,
-        "cashPostedTime": null,
-        "credit": 6.19,
-        "creditPostedTime": "2026-09-24T03:01:13.355Z",
-        "bestPrice": 6.19
-      },
-      {
         "id": "71408",
         "name": "BP",
         "address": {
@@ -482,5 +459,5 @@
       }
     ]
   },
-  "fingerprint": "91c88771a2ef6d900a32f0258f894fe42be4e68e830c21dd5358a0406c5be735"
+  "fingerprint": "00e5c51cb7b10f9464e5d7c130dd36c496b941ff32d1d076bf169a45514ca8f4"
 }
