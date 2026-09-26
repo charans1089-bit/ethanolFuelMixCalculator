@@ -3,7 +3,7 @@
   "source": "Apify johnvc/fuelprices",
   "search": "Dearborn, MI",
   "maxAgeDays": 3,
-  "generatedAt": "2026-09-26T13:02:06.790Z",
+  "generatedAt": "2026-09-26T19:12:02.065Z",
   "e85": {
     "fuelCode": 5,
     "count": 1,
@@ -29,9 +29,9 @@
         "ratingsCount": 15,
         "priceUnit": "dollars_per_gallon",
         "cash": 3.19,
-        "cashPostedTime": "2026-09-26T02:59:58.755Z",
+        "cashPostedTime": "2026-09-26T18:23:29.534Z",
         "credit": 3.19,
-        "creditPostedTime": "2026-09-26T02:59:58.724Z",
+        "creditPostedTime": "2026-09-26T18:23:29.550Z",
         "bestPrice": 3.19
       }
     ]
@@ -132,7 +132,7 @@
         "cash": null,
         "cashPostedTime": null,
         "credit": 5.84,
-        "creditPostedTime": "2026-09-25T22:21:03.635Z",
+        "creditPostedTime": "2026-09-26T13:26:43.151Z",
         "bestPrice": 5.84
       },
       {
@@ -154,8 +154,8 @@
         "priceUnit": "dollars_per_gallon",
         "cash": 5.89,
         "cashPostedTime": "2026-09-25T03:59:56.972Z",
-        "credit": 5.99,
-        "creditPostedTime": "2026-09-24T03:00:52.838Z",
+        "credit": null,
+        "creditPostedTime": null,
         "bestPrice": 5.89
       },
       {
@@ -178,7 +178,7 @@
         "cash": null,
         "cashPostedTime": null,
         "credit": 5.89,
-        "creditPostedTime": "2026-09-26T08:03:12.593Z",
+        "creditPostedTime": "2026-09-26T18:23:04.080Z",
         "bestPrice": 5.89
       },
       {
@@ -360,9 +360,9 @@
         "ratingsCount": 15,
         "priceUnit": "dollars_per_gallon",
         "cash": 5.99,
-        "cashPostedTime": "2026-09-26T02:59:58.708Z",
+        "cashPostedTime": "2026-09-26T18:23:29.487Z",
         "credit": 6.09,
-        "creditPostedTime": "2026-09-26T02:59:58.692Z",
+        "creditPostedTime": "2026-09-26T18:23:29.503Z",
         "bestPrice": 5.99
       },
       {
@@ -482,5 +482,5 @@
       }
     ]
   },
-  "fingerprint": "9fb6905e33e4b1f97e0615a74e4dfe48d7360303d6645f7d20a25d5a3743d950"
+  "fingerprint": "91c88771a2ef6d900a32f0258f894fe42be4e68e830c21dd5358a0406c5be735"
 }
