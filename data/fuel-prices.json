@@ -3,7 +3,7 @@
   "source": "Apify johnvc/fuelprices",
   "search": "Dearborn, MI",
   "maxAgeDays": 3,
-  "generatedAt": "2026-09-27T19:44:40.796Z",
+  "generatedAt": "2026-09-27T23:01:04.720Z",
   "e85": {
     "fuelCode": 5,
     "count": 1,
@@ -39,7 +39,7 @@
   "premium93": {
     "fuelCode": 3,
     "count": 17,
-    "avg": 5.958,
+    "avg": 5.952,
     "min": 5.79,
     "max": 6.39,
     "stations": [
@@ -251,6 +251,29 @@
         "bestPrice": 5.89
       },
       {
+        "id": "109274",
+        "name": "Marathon",
+        "address": {
+          "line1": "14243 Ford Rd",
+          "line2": "",
+          "city": "Dearborn",
+          "region": "MI",
+          "postalCode": "48126-3148"
+        },
+        "distance": null,
+        "distanceUnit": null,
+        "latitude": null,
+        "longitude": null,
+        "starRating": 3.5,
+        "ratingsCount": 14,
+        "priceUnit": "dollars_per_gallon",
+        "cash": null,
+        "cashPostedTime": null,
+        "credit": 5.89,
+        "creditPostedTime": "2026-09-25T04:00:00.561Z",
+        "bestPrice": 5.89
+      },
+      {
         "id": "98820",
         "name": "Mobil",
         "address": {
@@ -320,29 +343,6 @@
         "bestPrice": 5.99
       },
       {
-        "id": "108616",
-        "name": "Shell",
-        "address": {
-          "line1": "6650 Schaefer Rd",
-          "line2": "",
-          "city": "Dearborn",
-          "region": "MI",
-          "postalCode": "48126-4502"
-        },
-        "distance": null,
-        "distanceUnit": null,
-        "latitude": null,
-        "longitude": null,
-        "starRating": 3.2,
-        "ratingsCount": 12,
-        "priceUnit": "dollars_per_gallon",
-        "cash": 5.99,
-        "cashPostedTime": "2026-09-25T03:59:47.776Z",
-        "credit": 6.09,
-        "creditPostedTime": "2026-09-25T03:59:47.761Z",
-        "bestPrice": 5.99
-      },
-      {
         "id": "83820",
         "name": "Mobil",
         "address": {
@@ -362,7 +362,7 @@
         "cash": null,
         "cashPostedTime": null,
         "credit": 6.09,
-        "creditPostedTime": "2026-09-27T15:33:25.470Z",
+        "creditPostedTime": "2026-09-27T19:47:45.435Z",
         "bestPrice": 6.09
       },
       {
@@ -436,5 +436,5 @@
       }
     ]
   },
-  "fingerprint": "89871d82d9e6fb5776a7ab1bfee23544fee1bec260cc81bf226642362bb09473"
+  "fingerprint": "2f2b2e42c0c16d105a7f0131e88653e21924eaca088a4f532f51aaa7dcb6fde2"
 }
