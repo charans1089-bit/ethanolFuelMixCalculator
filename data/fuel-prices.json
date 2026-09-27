@@ -3,7 +3,7 @@
   "source": "Apify johnvc/fuelprices",
   "search": "Dearborn, MI",
   "maxAgeDays": 3,
-  "generatedAt": "2026-09-27T13:55:17.680Z",
+  "generatedAt": "2026-09-27T19:44:40.796Z",
   "e85": {
     "fuelCode": 5,
     "count": 1,
@@ -38,8 +38,8 @@
   },
   "premium93": {
     "fuelCode": 3,
-    "count": 16,
-    "avg": 5.943,
+    "count": 17,
+    "avg": 5.958,
     "min": 5.79,
     "max": 6.39,
     "stations": [
@@ -201,7 +201,7 @@
         "cash": null,
         "cashPostedTime": null,
         "credit": 5.84,
-        "creditPostedTime": "2026-09-26T13:26:43.151Z",
+        "creditPostedTime": "2026-09-27T16:21:11.932Z",
         "bestPrice": 5.84
       },
       {
@@ -248,29 +248,6 @@
         "cashPostedTime": "2026-09-26T08:03:45.691Z",
         "credit": 6.19,
         "creditPostedTime": "2026-09-26T08:03:45.707Z",
-        "bestPrice": 5.89
-      },
-      {
-        "id": "109274",
-        "name": "Marathon",
-        "address": {
-          "line1": "14243 Ford Rd",
-          "line2": "",
-          "city": "Dearborn",
-          "region": "MI",
-          "postalCode": "48126-3148"
-        },
-        "distance": null,
-        "distanceUnit": null,
-        "latitude": null,
-        "longitude": null,
-        "starRating": 3.5,
-        "ratingsCount": 14,
-        "priceUnit": "dollars_per_gallon",
-        "cash": null,
-        "cashPostedTime": null,
-        "credit": 5.89,
-        "creditPostedTime": "2026-09-25T04:00:00.561Z",
         "bestPrice": 5.89
       },
       {
@@ -343,6 +320,52 @@
         "bestPrice": 5.99
       },
       {
+        "id": "108616",
+        "name": "Shell",
+        "address": {
+          "line1": "6650 Schaefer Rd",
+          "line2": "",
+          "city": "Dearborn",
+          "region": "MI",
+          "postalCode": "48126-4502"
+        },
+        "distance": null,
+        "distanceUnit": null,
+        "latitude": null,
+        "longitude": null,
+        "starRating": 3.2,
+        "ratingsCount": 12,
+        "priceUnit": "dollars_per_gallon",
+        "cash": 5.99,
+        "cashPostedTime": "2026-09-25T03:59:47.776Z",
+        "credit": 6.09,
+        "creditPostedTime": "2026-09-25T03:59:47.761Z",
+        "bestPrice": 5.99
+      },
+      {
+        "id": "83820",
+        "name": "Mobil",
+        "address": {
+          "line1": "22600 Michigan Ave",
+          "line2": "",
+          "city": "Dearborn",
+          "region": "MI",
+          "postalCode": "48124-2116"
+        },
+        "distance": null,
+        "distanceUnit": null,
+        "latitude": null,
+        "longitude": null,
+        "starRating": 4.6,
+        "ratingsCount": 145,
+        "priceUnit": "dollars_per_gallon",
+        "cash": null,
+        "cashPostedTime": null,
+        "credit": 6.09,
+        "creditPostedTime": "2026-09-27T15:33:25.470Z",
+        "bestPrice": 6.09
+      },
+      {
         "id": "94016",
         "name": "Amoco",
         "address": {
@@ -413,5 +436,5 @@
       }
     ]
   },
-  "fingerprint": "33f1d22a1ce025dac3b48ad05852c9ffd36efdb5aee11a0fb86be3d18327bf37"
+  "fingerprint": "89871d82d9e6fb5776a7ab1bfee23544fee1bec260cc81bf226642362bb09473"
 }
