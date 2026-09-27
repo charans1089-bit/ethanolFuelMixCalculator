@@ -3,7 +3,7 @@
   "source": "Apify johnvc/fuelprices",
   "search": "Dearborn, MI",
   "maxAgeDays": 3,
-  "generatedAt": "2026-09-27T05:14:24.106Z",
+  "generatedAt": "2026-09-27T13:55:17.680Z",
   "e85": {
     "fuelCode": 5,
     "count": 1,
@@ -38,8 +38,8 @@
   },
   "premium93": {
     "fuelCode": 3,
-    "count": 15,
-    "avg": 5.947,
+    "count": 16,
+    "avg": 5.943,
     "min": 5.79,
     "max": 6.39,
     "stations": [
@@ -251,6 +251,29 @@
         "bestPrice": 5.89
       },
       {
+        "id": "109274",
+        "name": "Marathon",
+        "address": {
+          "line1": "14243 Ford Rd",
+          "line2": "",
+          "city": "Dearborn",
+          "region": "MI",
+          "postalCode": "48126-3148"
+        },
+        "distance": null,
+        "distanceUnit": null,
+        "latitude": null,
+        "longitude": null,
+        "starRating": 3.5,
+        "ratingsCount": 14,
+        "priceUnit": "dollars_per_gallon",
+        "cash": null,
+        "cashPostedTime": null,
+        "credit": 5.89,
+        "creditPostedTime": "2026-09-25T04:00:00.561Z",
+        "bestPrice": 5.89
+      },
+      {
         "id": "98820",
         "name": "Mobil",
         "address": {
@@ -390,5 +413,5 @@
       }
     ]
   },
-  "fingerprint": "4eb1fd5b34be319e9f1c5801ce1e2230b51c7a8c989613bd78af043f3a94f60f"
+  "fingerprint": "33f1d22a1ce025dac3b48ad05852c9ffd36efdb5aee11a0fb86be3d18327bf37"
 }
