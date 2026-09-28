@@ -3,7 +3,7 @@
   "source": "Apify johnvc/fuelprices",
   "search": "Dearborn, MI",
   "maxAgeDays": 3,
-  "generatedAt": "2026-09-28T05:18:26.317Z",
+  "generatedAt": "2026-09-28T16:43:52.708Z",
   "e85": {
     "fuelCode": 5,
     "count": 1,
@@ -38,8 +38,8 @@
   },
   "premium93": {
     "fuelCode": 3,
-    "count": 18,
-    "avg": 5.887,
+    "count": 17,
+    "avg": 5.869,
     "min": 5.59,
     "max": 6.39,
     "stations": [
@@ -88,6 +88,29 @@
         "credit": 5.89,
         "creditPostedTime": "2026-09-28T01:02:47.729Z",
         "bestPrice": 5.59
+      },
+      {
+        "id": "86112",
+        "name": "BP",
+        "address": {
+          "line1": "3525 S Telegraph Rd",
+          "line2": "",
+          "city": "Dearborn",
+          "region": "MI",
+          "postalCode": "48124-3244"
+        },
+        "distance": null,
+        "distanceUnit": null,
+        "latitude": null,
+        "longitude": null,
+        "starRating": 4,
+        "ratingsCount": 29,
+        "priceUnit": "dollars_per_gallon",
+        "cash": 5.69,
+        "cashPostedTime": "2026-09-28T15:39:49.762Z",
+        "credit": 5.69,
+        "creditPostedTime": "2026-09-28T15:39:49.840Z",
+        "bestPrice": 5.69
       },
       {
         "id": "70578",
@@ -205,29 +228,6 @@
         "bestPrice": 5.79
       },
       {
-        "id": "108615",
-        "name": "Shell",
-        "address": {
-          "line1": "13841 Ford Rd",
-          "line2": "",
-          "city": "Dearborn",
-          "region": "MI",
-          "postalCode": "48126-3224"
-        },
-        "distance": null,
-        "distanceUnit": null,
-        "latitude": null,
-        "longitude": null,
-        "starRating": 4.2,
-        "ratingsCount": 15,
-        "priceUnit": "dollars_per_gallon",
-        "cash": 5.79,
-        "cashPostedTime": "2026-09-28T03:01:16.708Z",
-        "credit": 5.89,
-        "creditPostedTime": "2026-09-28T03:01:16.645Z",
-        "bestPrice": 5.79
-      },
-      {
         "id": "108616",
         "name": "Shell",
         "address": {
@@ -251,6 +251,29 @@
         "bestPrice": 5.79
       },
       {
+        "id": "108615",
+        "name": "Shell",
+        "address": {
+          "line1": "13841 Ford Rd",
+          "line2": "",
+          "city": "Dearborn",
+          "region": "MI",
+          "postalCode": "48126-3224"
+        },
+        "distance": null,
+        "distanceUnit": null,
+        "latitude": null,
+        "longitude": null,
+        "starRating": 4.2,
+        "ratingsCount": 15,
+        "priceUnit": "dollars_per_gallon",
+        "cash": 5.79,
+        "cashPostedTime": "2026-09-28T03:01:16.708Z",
+        "credit": 5.89,
+        "creditPostedTime": "2026-09-28T03:01:16.645Z",
+        "bestPrice": 5.79
+      },
+      {
         "id": "3309",
         "name": "Speedway",
         "address": {
@@ -270,7 +293,7 @@
         "cash": null,
         "cashPostedTime": null,
         "credit": 5.84,
-        "creditPostedTime": "2026-09-27T16:21:11.932Z",
+        "creditPostedTime": "2026-09-28T16:23:11.374Z",
         "bestPrice": 5.84
       },
       {
@@ -297,29 +320,6 @@
         "bestPrice": 5.89
       },
       {
-        "id": "108613",
-        "name": "Exxon",
-        "address": {
-          "line1": "14545 Ford Rd",
-          "line2": "",
-          "city": "Dearborn",
-          "region": "MI",
-          "postalCode": "48126-3151"
-        },
-        "distance": null,
-        "distanceUnit": null,
-        "latitude": null,
-        "longitude": null,
-        "starRating": 4.2,
-        "ratingsCount": 18,
-        "priceUnit": "dollars_per_gallon",
-        "cash": 5.89,
-        "cashPostedTime": "2026-09-26T08:03:45.691Z",
-        "credit": 6.19,
-        "creditPostedTime": "2026-09-26T08:03:45.707Z",
-        "bestPrice": 5.89
-      },
-      {
         "id": "98820",
         "name": "Mobil",
         "address": {
@@ -340,29 +340,6 @@
         "cashPostedTime": "2026-09-27T03:00:59.578Z",
         "credit": 6.09,
         "creditPostedTime": "2026-09-27T03:00:59.578Z",
-        "bestPrice": 5.99
-      },
-      {
-        "id": "109064",
-        "name": "Mobil",
-        "address": {
-          "line1": "13551 W Warren Ave",
-          "line2": "",
-          "city": "Dearborn",
-          "region": "MI",
-          "postalCode": "48126-1418"
-        },
-        "distance": null,
-        "distanceUnit": null,
-        "latitude": null,
-        "longitude": null,
-        "starRating": 3.7,
-        "ratingsCount": 29,
-        "priceUnit": "dollars_per_gallon",
-        "cash": 6.09,
-        "cashPostedTime": "2026-09-26T08:03:09.469Z",
-        "credit": 5.99,
-        "creditPostedTime": "2026-09-26T08:03:09.547Z",
         "bestPrice": 5.99
       },
       {
@@ -459,5 +436,5 @@
       }
     ]
   },
-  "fingerprint": "201095d92a762fc624e317c9640c1fcc203a5013360fc197d76db32c9ea0af06"
+  "fingerprint": "5cab8088aa950412cf66a2b7622b6a3c5c857ebbd9e6bf076d632e6d672045b8"
 }
