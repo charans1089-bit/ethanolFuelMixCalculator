@@ -3,7 +3,7 @@
   "source": "Apify johnvc/fuelprices",
   "search": "Dearborn, MI",
   "maxAgeDays": 3,
-  "generatedAt": "2026-09-30T14:53:47.750Z",
+  "generatedAt": "2026-09-30T20:47:44.868Z",
   "e85": {
     "fuelCode": 5,
     "count": 1,
@@ -38,8 +38,8 @@
   },
   "premium93": {
     "fuelCode": 3,
-    "count": 18,
-    "avg": 5.759,
+    "count": 20,
+    "avg": 5.777,
     "min": 5.39,
     "max": 6.39,
     "stations": [
@@ -113,6 +113,29 @@
         "bestPrice": 5.59
       },
       {
+        "id": "109276",
+        "name": "Exxon",
+        "address": {
+          "line1": "15430 Warren Ave",
+          "line2": "",
+          "city": "Dearborn",
+          "region": "MI",
+          "postalCode": "48126-1360"
+        },
+        "distance": null,
+        "distanceUnit": null,
+        "latitude": null,
+        "longitude": null,
+        "starRating": 2.4,
+        "ratingsCount": 68,
+        "priceUnit": "dollars_per_gallon",
+        "cash": null,
+        "cashPostedTime": null,
+        "credit": 5.59,
+        "creditPostedTime": "2026-09-30T18:25:40.995Z",
+        "bestPrice": 5.59
+      },
+      {
         "id": "109274",
         "name": "Marathon",
         "address": {
@@ -136,29 +159,6 @@
         "bestPrice": 5.59
       },
       {
-        "id": "109064",
-        "name": "Mobil",
-        "address": {
-          "line1": "13551 W Warren Ave",
-          "line2": "",
-          "city": "Dearborn",
-          "region": "MI",
-          "postalCode": "48126-1418"
-        },
-        "distance": null,
-        "distanceUnit": null,
-        "latitude": null,
-        "longitude": null,
-        "starRating": 3.7,
-        "ratingsCount": 29,
-        "priceUnit": "dollars_per_gallon",
-        "cash": 5.59,
-        "cashPostedTime": "2026-09-30T03:00:00.903Z",
-        "credit": 5.69,
-        "creditPostedTime": "2026-09-29T04:00:16.267Z",
-        "bestPrice": 5.59
-      },
-      {
         "id": "99496",
         "name": "Mobil",
         "address": {
@@ -179,6 +179,29 @@
         "cashPostedTime": "2026-09-30T03:00:35.459Z",
         "credit": 5.69,
         "creditPostedTime": "2026-09-29T04:00:55.490Z",
+        "bestPrice": 5.59
+      },
+      {
+        "id": "109064",
+        "name": "Mobil",
+        "address": {
+          "line1": "13551 W Warren Ave",
+          "line2": "",
+          "city": "Dearborn",
+          "region": "MI",
+          "postalCode": "48126-1418"
+        },
+        "distance": null,
+        "distanceUnit": null,
+        "latitude": null,
+        "longitude": null,
+        "starRating": 3.7,
+        "ratingsCount": 29,
+        "priceUnit": "dollars_per_gallon",
+        "cash": 5.59,
+        "cashPostedTime": "2026-09-30T03:00:00.903Z",
+        "credit": 5.69,
+        "creditPostedTime": "2026-09-29T04:00:16.267Z",
         "bestPrice": 5.59
       },
       {
@@ -224,7 +247,7 @@
         "cash": null,
         "cashPostedTime": null,
         "credit": 5.64,
-        "creditPostedTime": "2026-09-29T20:37:28.830Z",
+        "creditPostedTime": "2026-09-30T20:38:37.900Z",
         "bestPrice": 5.64
       },
       {
@@ -435,6 +458,29 @@
         "bestPrice": 6.13
       },
       {
+        "id": "94016",
+        "name": "Amoco",
+        "address": {
+          "line1": "2740 Monroe St",
+          "line2": "",
+          "city": "Dearborn",
+          "region": "MI",
+          "postalCode": "48124-3018"
+        },
+        "distance": null,
+        "distanceUnit": null,
+        "latitude": null,
+        "longitude": null,
+        "starRating": 4.3,
+        "ratingsCount": 293,
+        "priceUnit": "dollars_per_gallon",
+        "cash": 6.29,
+        "cashPostedTime": "2026-09-28T03:02:09.356Z",
+        "credit": null,
+        "creditPostedTime": null,
+        "bestPrice": 6.29
+      },
+      {
         "id": "84078",
         "name": "Shell",
         "address": {
@@ -459,5 +505,5 @@
       }
     ]
   },
-  "fingerprint": "8ff5aa52c803ee0d52d5c7d130baf44a8a056f262efabae6ef6d315e38f898d2"
+  "fingerprint": "5fbc53af89ed953f62432cee2eae132ee3af2134d7e2618af7acf1e350681db2"
 }
