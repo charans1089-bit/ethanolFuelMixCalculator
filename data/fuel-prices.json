@@ -3,7 +3,7 @@
   "source": "Apify johnvc/fuelprices",
   "search": "Dearborn, MI",
   "maxAgeDays": 3,
-  "generatedAt": "2026-09-30T05:28:00.725Z",
+  "generatedAt": "2026-09-30T14:53:47.750Z",
   "e85": {
     "fuelCode": 5,
     "count": 1,
@@ -39,7 +39,7 @@
   "premium93": {
     "fuelCode": 3,
     "count": 18,
-    "avg": 5.762,
+    "avg": 5.759,
     "min": 5.39,
     "max": 6.39,
     "stations": [
@@ -182,6 +182,29 @@
         "bestPrice": 5.59
       },
       {
+        "id": "172876",
+        "name": "Kroger",
+        "address": {
+          "line1": "23170 Michigan Ave",
+          "line2": "",
+          "city": "Dearborn",
+          "region": "MI",
+          "postalCode": "48124"
+        },
+        "distance": null,
+        "distanceUnit": null,
+        "latitude": null,
+        "longitude": null,
+        "starRating": 4.6,
+        "ratingsCount": 676,
+        "priceUnit": "dollars_per_gallon",
+        "cash": null,
+        "cashPostedTime": null,
+        "credit": 5.64,
+        "creditPostedTime": "2026-09-30T12:23:54.240Z",
+        "bestPrice": 5.64
+      },
+      {
         "id": "3309",
         "name": "Speedway",
         "address": {
@@ -225,29 +248,6 @@
         "cashPostedTime": "2026-09-30T03:01:23.102Z",
         "credit": 5.69,
         "creditPostedTime": "2026-09-28T15:39:49.840Z",
-        "bestPrice": 5.69
-      },
-      {
-        "id": "172876",
-        "name": "Kroger",
-        "address": {
-          "line1": "23170 Michigan Ave",
-          "line2": "",
-          "city": "Dearborn",
-          "region": "MI",
-          "postalCode": "48124"
-        },
-        "distance": null,
-        "distanceUnit": null,
-        "latitude": null,
-        "longitude": null,
-        "starRating": 4.6,
-        "ratingsCount": 676,
-        "priceUnit": "dollars_per_gallon",
-        "cash": null,
-        "cashPostedTime": null,
-        "credit": 5.69,
-        "creditPostedTime": "2026-09-29T12:23:11.903Z",
         "bestPrice": 5.69
       },
       {
@@ -459,5 +459,5 @@
       }
     ]
   },
-  "fingerprint": "0b685c1dc9422712f0117884e6602a342f23e85b5b5bd2db02584452dc1c7c7e"
+  "fingerprint": "8ff5aa52c803ee0d52d5c7d130baf44a8a056f262efabae6ef6d315e38f898d2"
 }
