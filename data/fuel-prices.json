@@ -3,7 +3,7 @@
   "source": "Apify johnvc/fuelprices",
   "search": "Dearborn, MI",
   "maxAgeDays": 3,
-  "generatedAt": "2026-10-01T05:46:34.880Z",
+  "generatedAt": "2026-10-01T15:25:23.889Z",
   "e85": {
     "fuelCode": 5,
     "count": 1,
@@ -38,8 +38,8 @@
   },
   "premium93": {
     "fuelCode": 3,
-    "count": 19,
-    "avg": 5.756,
+    "count": 20,
+    "avg": 5.763,
     "min": 5.39,
     "max": 6.49,
     "stations": [
@@ -343,6 +343,29 @@
         "bestPrice": 5.79
       },
       {
+        "id": "89876",
+        "name": "BP",
+        "address": {
+          "line1": "2731 MONROE ST",
+          "line2": "",
+          "city": "Dearborn",
+          "region": "MI",
+          "postalCode": "48124"
+        },
+        "distance": null,
+        "distanceUnit": null,
+        "latitude": null,
+        "longitude": null,
+        "starRating": 4.2,
+        "ratingsCount": 131,
+        "priceUnit": "dollars_per_gallon",
+        "cash": null,
+        "cashPostedTime": null,
+        "credit": 5.89,
+        "creditPostedTime": "2026-10-01T13:08:29.027Z",
+        "bestPrice": 5.89
+      },
+      {
         "id": "94023",
         "name": "Marathon",
         "address": {
@@ -452,9 +475,9 @@
         "ratingsCount": 119,
         "priceUnit": "dollars_per_gallon",
         "cash": 6.39,
-        "cashPostedTime": "2026-10-01T03:01:51.052Z",
+        "cashPostedTime": "2026-10-01T11:42:45.509Z",
         "credit": 6.49,
-        "creditPostedTime": "2026-10-01T03:01:51.036Z",
+        "creditPostedTime": "2026-10-01T11:42:45.525Z",
         "bestPrice": 6.39
       },
       {
@@ -482,5 +505,5 @@
       }
     ]
   },
-  "fingerprint": "1943df43ab51c66fb3c11efd54c1d69b48feadd9306183b2b8d766918acaa94b"
+  "fingerprint": "ccb4fd07a91b6cdc16e31535c3781d88eec2d4c909683bb6ee4ed84a39a966d4"
 }
