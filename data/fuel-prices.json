@@ -3,14 +3,37 @@
   "source": "Apify johnvc/fuelprices",
   "search": "Dearborn, MI",
   "maxAgeDays": 3,
-  "generatedAt": "2026-10-02T05:31:15.506Z",
+  "generatedAt": "2026-10-02T20:41:34.895Z",
   "e85": {
     "fuelCode": 5,
-    "count": 1,
-    "avg": 3.19,
-    "min": 3.19,
+    "count": 2,
+    "avg": 2.94,
+    "min": 2.69,
     "max": 3.19,
     "stations": [
+      {
+        "id": "29961",
+        "name": "CITGO",
+        "address": {
+          "line1": "25350 Michigan Ave",
+          "line2": "",
+          "city": "Dearborn",
+          "region": "MI",
+          "postalCode": "48124"
+        },
+        "distance": null,
+        "distanceUnit": null,
+        "latitude": null,
+        "longitude": null,
+        "starRating": 3.4,
+        "ratingsCount": 189,
+        "priceUnit": "dollars_per_gallon",
+        "cash": 2.69,
+        "cashPostedTime": "2026-10-02T14:51:08.605Z",
+        "credit": 3.69,
+        "creditPostedTime": "2026-10-02T14:51:08.683Z",
+        "bestPrice": 2.69
+      },
       {
         "id": "108615",
         "name": "Shell",
@@ -29,20 +52,66 @@
         "ratingsCount": 15,
         "priceUnit": "dollars_per_gallon",
         "cash": 3.19,
-        "cashPostedTime": "2026-10-02T02:58:27.509Z",
+        "cashPostedTime": "2026-10-02T15:59:12.533Z",
         "credit": 3.19,
-        "creditPostedTime": "2026-10-02T02:58:27.591Z",
+        "creditPostedTime": "2026-10-02T15:59:12.533Z",
         "bestPrice": 3.19
       }
     ]
   },
   "premium93": {
     "fuelCode": 3,
-    "count": 22,
-    "avg": 5.726,
-    "min": 5.39,
+    "count": 24,
+    "avg": 5.68,
+    "min": 5.12,
     "max": 6.39,
     "stations": [
+      {
+        "id": "74102",
+        "name": "BP",
+        "address": {
+          "line1": "23405 Michigan Ave",
+          "line2": "",
+          "city": "Dearborn",
+          "region": "MI",
+          "postalCode": "48124-1908"
+        },
+        "distance": null,
+        "distanceUnit": null,
+        "latitude": null,
+        "longitude": null,
+        "starRating": 4.1,
+        "ratingsCount": 145,
+        "priceUnit": "dollars_per_gallon",
+        "cash": 5.12,
+        "cashPostedTime": "2026-10-02T14:52:19.935Z",
+        "credit": 5.22,
+        "creditPostedTime": "2026-10-02T14:52:20.044Z",
+        "bestPrice": 5.12
+      },
+      {
+        "id": "37791",
+        "name": "Marathon",
+        "address": {
+          "line1": "1300 Southfield Fwy",
+          "line2": "",
+          "city": "Dearborn",
+          "region": "MI",
+          "postalCode": "48124-4031"
+        },
+        "distance": null,
+        "distanceUnit": null,
+        "latitude": null,
+        "longitude": null,
+        "starRating": 3.5,
+        "ratingsCount": 43,
+        "priceUnit": "dollars_per_gallon",
+        "cash": 5.32,
+        "cashPostedTime": "2026-10-02T15:23:07.877Z",
+        "credit": 5.42,
+        "creditPostedTime": "2026-10-02T15:23:07.987Z",
+        "bestPrice": 5.32
+      },
       {
         "id": "133403",
         "name": "CITGO",
@@ -84,9 +153,9 @@
         "ratingsCount": 232,
         "priceUnit": "dollars_per_gallon",
         "cash": 5.49,
-        "cashPostedTime": "2026-10-02T02:59:40.347Z",
-        "credit": null,
-        "creditPostedTime": null,
+        "cashPostedTime": "2026-10-02T14:51:39.796Z",
+        "credit": 5.66,
+        "creditPostedTime": "2026-10-02T14:51:39.812Z",
         "bestPrice": 5.49
       },
       {
@@ -107,32 +176,9 @@
         "ratingsCount": 29,
         "priceUnit": "dollars_per_gallon",
         "cash": 5.49,
-        "cashPostedTime": "2026-10-01T03:01:46.742Z",
+        "cashPostedTime": "2026-10-02T16:00:06.012Z",
         "credit": null,
         "creditPostedTime": null,
-        "bestPrice": 5.49
-      },
-      {
-        "id": "70578",
-        "name": "CITGO",
-        "address": {
-          "line1": "23645 Ford Rd",
-          "line2": "",
-          "city": "Dearborn",
-          "region": "MI",
-          "postalCode": "48128-1261"
-        },
-        "distance": null,
-        "distanceUnit": null,
-        "latitude": null,
-        "longitude": null,
-        "starRating": 4.7,
-        "ratingsCount": 247,
-        "priceUnit": "dollars_per_gallon",
-        "cash": 5.49,
-        "cashPostedTime": "2026-10-02T03:00:38.591Z",
-        "credit": 5.69,
-        "creditPostedTime": "2026-10-02T03:00:38.544Z",
         "bestPrice": 5.49
       },
       {
@@ -153,9 +199,9 @@
         "ratingsCount": 18,
         "priceUnit": "dollars_per_gallon",
         "cash": 5.49,
-        "cashPostedTime": "2026-10-02T02:58:28.519Z",
+        "cashPostedTime": "2026-10-02T15:59:12.996Z",
         "credit": 5.59,
-        "creditPostedTime": "2026-10-02T02:58:28.534Z",
+        "creditPostedTime": "2026-10-02T15:59:12.949Z",
         "bestPrice": 5.49
       },
       {
@@ -182,26 +228,26 @@
         "bestPrice": 5.49
       },
       {
-        "id": "109276",
-        "name": "Exxon",
+        "id": "70578",
+        "name": "CITGO",
         "address": {
-          "line1": "15430 Warren Ave",
+          "line1": "23645 Ford Rd",
           "line2": "",
           "city": "Dearborn",
           "region": "MI",
-          "postalCode": "48126-1360"
+          "postalCode": "48128-1261"
         },
         "distance": null,
         "distanceUnit": null,
         "latitude": null,
         "longitude": null,
-        "starRating": 2.4,
-        "ratingsCount": 68,
+        "starRating": 4.7,
+        "ratingsCount": 247,
         "priceUnit": "dollars_per_gallon",
-        "cash": null,
-        "cashPostedTime": null,
-        "credit": 5.59,
-        "creditPostedTime": "2026-09-30T18:25:40.995Z",
+        "cash": 5.59,
+        "cashPostedTime": "2026-10-02T16:00:44.449Z",
+        "credit": 5.69,
+        "creditPostedTime": "2026-10-02T16:00:44.371Z",
         "bestPrice": 5.59
       },
       {
@@ -224,7 +270,7 @@
         "cash": null,
         "cashPostedTime": null,
         "credit": 5.59,
-        "creditPostedTime": "2026-10-02T02:59:03.600Z",
+        "creditPostedTime": "2026-10-02T15:59:30.978Z",
         "bestPrice": 5.59
       },
       {
@@ -245,32 +291,9 @@
         "ratingsCount": 29,
         "priceUnit": "dollars_per_gallon",
         "cash": 5.59,
-        "cashPostedTime": "2026-10-02T02:58:23.699Z",
+        "cashPostedTime": "2026-10-02T15:59:10.127Z",
         "credit": 5.59,
-        "creditPostedTime": "2026-10-02T02:58:23.699Z",
-        "bestPrice": 5.59
-      },
-      {
-        "id": "99496",
-        "name": "Mobil",
-        "address": {
-          "line1": "7954 Greenfield Rd",
-          "line2": "",
-          "city": "Dearborn",
-          "region": "MI",
-          "postalCode": "48126-1061"
-        },
-        "distance": null,
-        "distanceUnit": null,
-        "latitude": null,
-        "longitude": null,
-        "starRating": 4.2,
-        "ratingsCount": 52,
-        "priceUnit": "dollars_per_gallon",
-        "cash": 5.59,
-        "cashPostedTime": "2026-09-30T03:00:35.459Z",
-        "credit": 5.69,
-        "creditPostedTime": "2026-10-02T02:58:46.250Z",
+        "creditPostedTime": "2026-10-02T15:59:10.142Z",
         "bestPrice": 5.59
       },
       {
@@ -320,6 +343,29 @@
         "bestPrice": 5.59
       },
       {
+        "id": "81605",
+        "name": "Sunoco",
+        "address": {
+          "line1": "10000 Michigan Ave",
+          "line2": "",
+          "city": "Dearborn",
+          "region": "MI",
+          "postalCode": "48126-3707"
+        },
+        "distance": null,
+        "distanceUnit": null,
+        "latitude": null,
+        "longitude": null,
+        "starRating": 3.7,
+        "ratingsCount": 12,
+        "priceUnit": "dollars_per_gallon",
+        "cash": 5.59,
+        "cashPostedTime": "2026-10-02T18:41:33.208Z",
+        "credit": 5.59,
+        "creditPostedTime": "2026-10-02T18:41:33.315Z",
+        "bestPrice": 5.59
+      },
+      {
         "id": "110300",
         "name": "BP",
         "address": {
@@ -337,9 +383,55 @@
         "ratingsCount": 4,
         "priceUnit": "dollars_per_gallon",
         "cash": 5.69,
-        "cashPostedTime": "2026-10-02T02:58:17.985Z",
+        "cashPostedTime": "2026-10-02T15:59:02.688Z",
         "credit": null,
         "creditPostedTime": null,
+        "bestPrice": 5.69
+      },
+      {
+        "id": "109058",
+        "name": "Mobil",
+        "address": {
+          "line1": "10001 Tireman Ave",
+          "line2": "",
+          "city": "Dearborn",
+          "region": "MI",
+          "postalCode": "48126"
+        },
+        "distance": null,
+        "distanceUnit": null,
+        "latitude": null,
+        "longitude": null,
+        "starRating": 4.1,
+        "ratingsCount": 18,
+        "priceUnit": "dollars_per_gallon",
+        "cash": 5.69,
+        "cashPostedTime": "2026-10-02T15:59:05.831Z",
+        "credit": 5.79,
+        "creditPostedTime": "2026-10-02T15:59:05.800Z",
+        "bestPrice": 5.69
+      },
+      {
+        "id": "99496",
+        "name": "Mobil",
+        "address": {
+          "line1": "7954 Greenfield Rd",
+          "line2": "",
+          "city": "Dearborn",
+          "region": "MI",
+          "postalCode": "48126-1061"
+        },
+        "distance": null,
+        "distanceUnit": null,
+        "latitude": null,
+        "longitude": null,
+        "starRating": 4.2,
+        "ratingsCount": 52,
+        "priceUnit": "dollars_per_gallon",
+        "cash": 5.69,
+        "cashPostedTime": "2026-10-02T15:59:31.829Z",
+        "credit": 5.79,
+        "creditPostedTime": "2026-10-02T15:59:31.812Z",
         "bestPrice": 5.69
       },
       {
@@ -366,29 +458,6 @@
         "bestPrice": 5.69
       },
       {
-        "id": "109058",
-        "name": "Mobil",
-        "address": {
-          "line1": "10001 Tireman Ave",
-          "line2": "",
-          "city": "Dearborn",
-          "region": "MI",
-          "postalCode": "48126"
-        },
-        "distance": null,
-        "distanceUnit": null,
-        "latitude": null,
-        "longitude": null,
-        "starRating": 4.1,
-        "ratingsCount": 18,
-        "priceUnit": "dollars_per_gallon",
-        "cash": 5.79,
-        "cashPostedTime": "2026-09-30T03:00:24.833Z",
-        "credit": 5.89,
-        "creditPostedTime": "2026-10-01T03:00:42.056Z",
-        "bestPrice": 5.79
-      },
-      {
         "id": "89876",
         "name": "BP",
         "address": {
@@ -412,6 +481,29 @@
         "bestPrice": 5.89
       },
       {
+        "id": "94016",
+        "name": "Amoco",
+        "address": {
+          "line1": "2740 Monroe St",
+          "line2": "",
+          "city": "Dearborn",
+          "region": "MI",
+          "postalCode": "48124-3018"
+        },
+        "distance": null,
+        "distanceUnit": null,
+        "latitude": null,
+        "longitude": null,
+        "starRating": 4.3,
+        "ratingsCount": 293,
+        "priceUnit": "dollars_per_gallon",
+        "cash": 5.99,
+        "cashPostedTime": "2026-10-02T15:59:44.867Z",
+        "credit": 6.09,
+        "creditPostedTime": "2026-10-02T15:59:44.851Z",
+        "bestPrice": 5.99
+      },
+      {
         "id": "71408",
         "name": "BP",
         "address": {
@@ -429,9 +521,9 @@
         "ratingsCount": 157,
         "priceUnit": "dollars_per_gallon",
         "cash": 5.99,
-        "cashPostedTime": "2026-10-02T03:00:33.748Z",
-        "credit": null,
-        "creditPostedTime": null,
+        "cashPostedTime": "2026-10-02T15:36:22.026Z",
+        "credit": 6.09,
+        "creditPostedTime": "2026-10-02T15:36:22.042Z",
         "bestPrice": 5.99
       },
       {
@@ -475,9 +567,9 @@
         "ratingsCount": 21,
         "priceUnit": "dollars_per_gallon",
         "cash": 5.99,
-        "cashPostedTime": "2026-10-02T02:58:49.673Z",
+        "cashPostedTime": "2026-10-02T15:36:54.840Z",
         "credit": 6.09,
-        "creditPostedTime": "2026-10-02T02:58:49.689Z",
+        "creditPostedTime": "2026-10-02T15:36:54.870Z",
         "bestPrice": 5.99
       },
       {
@@ -504,29 +596,6 @@
         "bestPrice": 5.99
       },
       {
-        "id": "94016",
-        "name": "Amoco",
-        "address": {
-          "line1": "2740 Monroe St",
-          "line2": "",
-          "city": "Dearborn",
-          "region": "MI",
-          "postalCode": "48124-3018"
-        },
-        "distance": null,
-        "distanceUnit": null,
-        "latitude": null,
-        "longitude": null,
-        "starRating": 4.3,
-        "ratingsCount": 293,
-        "priceUnit": "dollars_per_gallon",
-        "cash": 6.19,
-        "cashPostedTime": "2026-10-02T02:59:13.257Z",
-        "credit": null,
-        "creditPostedTime": null,
-        "bestPrice": 6.19
-      },
-      {
         "id": "84078",
         "name": "Shell",
         "address": {
@@ -546,10 +615,10 @@
         "cash": 6.39,
         "cashPostedTime": "2026-10-01T11:42:45.509Z",
         "credit": 6.49,
-        "creditPostedTime": "2026-10-01T11:42:45.525Z",
+        "creditPostedTime": "2026-10-02T16:00:09.291Z",
         "bestPrice": 6.39
       }
     ]
   },
-  "fingerprint": "b54cca1347ebd9801eeb56188db7a8c516648ced59ef7ff433188d2e0e0fe1e3"
+  "fingerprint": "c1c481e4c9658aa8faa213a84c460be0c9a73717249d016cc43cf0aeba82a35f"
 }
