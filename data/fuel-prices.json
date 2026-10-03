@@ -3,7 +3,7 @@
   "source": "Apify johnvc/fuelprices",
   "search": "Dearborn, MI",
   "maxAgeDays": 3,
-  "generatedAt": "2026-10-03T05:13:27.294Z",
+  "generatedAt": "2026-10-03T19:11:58.576Z",
   "e85": {
     "fuelCode": 5,
     "count": 2,
@@ -61,8 +61,8 @@
   },
   "premium93": {
     "fuelCode": 3,
-    "count": 25,
-    "avg": 5.692,
+    "count": 24,
+    "avg": 5.684,
     "min": 4.79,
     "max": 6.49,
     "stations": [
@@ -458,29 +458,6 @@
         "bestPrice": 5.79
       },
       {
-        "id": "89876",
-        "name": "BP",
-        "address": {
-          "line1": "2731 MONROE ST",
-          "line2": "",
-          "city": "Dearborn",
-          "region": "MI",
-          "postalCode": "48124"
-        },
-        "distance": null,
-        "distanceUnit": null,
-        "latitude": null,
-        "longitude": null,
-        "starRating": 4.2,
-        "ratingsCount": 131,
-        "priceUnit": "dollars_per_gallon",
-        "cash": null,
-        "cashPostedTime": null,
-        "credit": 5.89,
-        "creditPostedTime": "2026-10-01T13:08:29.027Z",
-        "bestPrice": 5.89
-      },
-      {
         "id": "94016",
         "name": "Amoco",
         "address": {
@@ -550,29 +527,6 @@
         "bestPrice": 5.99
       },
       {
-        "id": "98820",
-        "name": "Mobil",
-        "address": {
-          "line1": "10000 Ford Rd",
-          "line2": "",
-          "city": "Dearborn",
-          "region": "MI",
-          "postalCode": "48126-3329"
-        },
-        "distance": null,
-        "distanceUnit": null,
-        "latitude": null,
-        "longitude": null,
-        "starRating": 3.6,
-        "ratingsCount": 21,
-        "priceUnit": "dollars_per_gallon",
-        "cash": 5.99,
-        "cashPostedTime": "2026-10-02T15:36:54.840Z",
-        "credit": 6.09,
-        "creditPostedTime": "2026-10-02T15:36:54.870Z",
-        "bestPrice": 5.99
-      },
-      {
         "id": "83820",
         "name": "Mobil",
         "address": {
@@ -593,6 +547,29 @@
         "cashPostedTime": "2026-10-03T00:39:55.855Z",
         "credit": 6.09,
         "creditPostedTime": "2026-10-03T00:39:55.933Z",
+        "bestPrice": 5.99
+      },
+      {
+        "id": "98820",
+        "name": "Mobil",
+        "address": {
+          "line1": "10000 Ford Rd",
+          "line2": "",
+          "city": "Dearborn",
+          "region": "MI",
+          "postalCode": "48126-3329"
+        },
+        "distance": null,
+        "distanceUnit": null,
+        "latitude": null,
+        "longitude": null,
+        "starRating": 3.6,
+        "ratingsCount": 21,
+        "priceUnit": "dollars_per_gallon",
+        "cash": 5.99,
+        "cashPostedTime": "2026-10-02T15:36:54.840Z",
+        "credit": 6.09,
+        "creditPostedTime": "2026-10-02T15:36:54.870Z",
         "bestPrice": 5.99
       },
       {
@@ -638,10 +615,10 @@
         "cash": null,
         "cashPostedTime": null,
         "credit": 6.49,
-        "creditPostedTime": "2026-10-02T22:23:35.031Z",
+        "creditPostedTime": "2026-10-03T13:21:50.755Z",
         "bestPrice": 6.49
       }
     ]
   },
-  "fingerprint": "e72b107fb60ce84bfc25938290fa66e5a158a55bbca09b784a82ab7d67c11dfc"
+  "fingerprint": "f6d10e47a539c99901e5ccc4f304f3d3283957d849a83a2bd8ff0a02e6455d43"
 }
