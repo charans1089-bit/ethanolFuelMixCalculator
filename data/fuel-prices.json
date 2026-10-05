@@ -3,7 +3,7 @@
   "source": "Apify johnvc/fuelprices",
   "search": "Dearborn, MI",
   "maxAgeDays": 3,
-  "generatedAt": "2026-10-05T05:33:11.900Z",
+  "generatedAt": "2026-10-05T17:06:53.618Z",
   "e85": {
     "fuelCode": 5,
     "count": 2,
@@ -61,10 +61,10 @@
   },
   "premium93": {
     "fuelCode": 3,
-    "count": 22,
-    "avg": 5.726,
+    "count": 21,
+    "avg": 5.69,
     "min": 5.12,
-    "max": 6.49,
+    "max": 6.4,
     "stations": [
       {
         "id": "74102",
@@ -84,9 +84,9 @@
         "ratingsCount": 145,
         "priceUnit": "dollars_per_gallon",
         "cash": 5.12,
-        "cashPostedTime": "2026-10-04T01:13:47.507Z",
+        "cashPostedTime": "2026-10-05T15:58:59.214Z",
         "credit": 5.22,
-        "creditPostedTime": "2026-10-04T01:13:47.523Z",
+        "creditPostedTime": "2026-10-05T15:58:59.230Z",
         "bestPrice": 5.12
       },
       {
@@ -130,9 +130,9 @@
         "ratingsCount": 75,
         "priceUnit": "dollars_per_gallon",
         "cash": 5.39,
-        "cashPostedTime": "2026-10-05T05:19:02.992Z",
+        "cashPostedTime": "2026-10-05T16:10:51.060Z",
         "credit": 5.49,
-        "creditPostedTime": "2026-10-05T05:19:03.007Z",
+        "creditPostedTime": "2026-10-05T16:10:51.079Z",
         "bestPrice": 5.39
       },
       {
@@ -205,6 +205,29 @@
         "bestPrice": 5.49
       },
       {
+        "id": "94023",
+        "name": "Marathon",
+        "address": {
+          "line1": "3544 Pelham St",
+          "line2": "",
+          "city": "Dearborn",
+          "region": "MI",
+          "postalCode": "48124"
+        },
+        "distance": null,
+        "distanceUnit": null,
+        "latitude": null,
+        "longitude": null,
+        "starRating": 4.1,
+        "ratingsCount": 151,
+        "priceUnit": "dollars_per_gallon",
+        "cash": 5.49,
+        "cashPostedTime": "2026-10-05T16:10:15.052Z",
+        "credit": 5.59,
+        "creditPostedTime": "2026-10-05T16:10:15.083Z",
+        "bestPrice": 5.49
+      },
+      {
         "id": "109274",
         "name": "Marathon",
         "address": {
@@ -225,29 +248,6 @@
         "cashPostedTime": "2026-10-04T02:59:52.090Z",
         "credit": 5.59,
         "creditPostedTime": "2026-10-04T02:59:52.074Z",
-        "bestPrice": 5.49
-      },
-      {
-        "id": "94023",
-        "name": "Marathon",
-        "address": {
-          "line1": "3544 Pelham St",
-          "line2": "",
-          "city": "Dearborn",
-          "region": "MI",
-          "postalCode": "48124"
-        },
-        "distance": null,
-        "distanceUnit": null,
-        "latitude": null,
-        "longitude": null,
-        "starRating": 4.1,
-        "ratingsCount": 151,
-        "priceUnit": "dollars_per_gallon",
-        "cash": 5.49,
-        "cashPostedTime": "2026-10-05T05:18:25.573Z",
-        "credit": 5.59,
-        "creditPostedTime": "2026-10-05T05:18:25.573Z",
         "bestPrice": 5.49
       },
       {
@@ -316,7 +316,7 @@
         "cash": null,
         "cashPostedTime": null,
         "credit": 5.59,
-        "creditPostedTime": "2026-10-04T16:09:28.615Z",
+        "creditPostedTime": "2026-10-05T16:09:55.901Z",
         "bestPrice": 5.59
       },
       {
@@ -477,7 +477,7 @@
         "cash": null,
         "cashPostedTime": null,
         "credit": 5.99,
-        "creditPostedTime": "2026-10-04T19:00:50.607Z",
+        "creditPostedTime": "2026-10-05T15:59:21.549Z",
         "bestPrice": 5.99
       },
       {
@@ -521,9 +521,9 @@
         "ratingsCount": 119,
         "priceUnit": "dollars_per_gallon",
         "cash": 6.39,
-        "cashPostedTime": "2026-10-04T03:00:54.645Z",
+        "cashPostedTime": "2026-10-05T11:55:30.409Z",
         "credit": 6.49,
-        "creditPostedTime": "2026-10-04T03:00:54.739Z",
+        "creditPostedTime": "2026-10-05T11:55:30.425Z",
         "bestPrice": 6.39
       },
       {
@@ -548,31 +548,8 @@
         "credit": null,
         "creditPostedTime": null,
         "bestPrice": 6.4
-      },
-      {
-        "id": "102162",
-        "name": "CITGO",
-        "address": {
-          "line1": "15500 MICHIGAN AVE",
-          "line2": "",
-          "city": "Dearborn",
-          "region": "MI",
-          "postalCode": "48126"
-        },
-        "distance": null,
-        "distanceUnit": null,
-        "latitude": null,
-        "longitude": null,
-        "starRating": 4.2,
-        "ratingsCount": 269,
-        "priceUnit": "dollars_per_gallon",
-        "cash": null,
-        "cashPostedTime": null,
-        "credit": 6.49,
-        "creditPostedTime": "2026-10-03T13:21:50.755Z",
-        "bestPrice": 6.49
       }
     ]
   },
-  "fingerprint": "891bcb0deb350f90ebaf461717cfc91918187a3058ebd60a6e3ab522ec2af59e"
+  "fingerprint": "78fce1af3d2e8852ac96bd4ccaf4144f4bdfbd7be6be099ec323ae3878ba0cef"
 }
