@@ -3,37 +3,14 @@
   "source": "Apify johnvc/fuelprices",
   "search": "Dearborn, MI",
   "maxAgeDays": 3,
-  "generatedAt": "2026-10-06T11:14:10.682Z",
+  "generatedAt": "2026-10-06T18:19:28.789Z",
   "e85": {
     "fuelCode": 5,
-    "count": 2,
-    "avg": 2.94,
-    "min": 2.69,
+    "count": 1,
+    "avg": 3.19,
+    "min": 3.19,
     "max": 3.19,
     "stations": [
-      {
-        "id": "29961",
-        "name": "CITGO",
-        "address": {
-          "line1": "25350 Michigan Ave",
-          "line2": "",
-          "city": "Dearborn",
-          "region": "MI",
-          "postalCode": "48124"
-        },
-        "distance": null,
-        "distanceUnit": null,
-        "latitude": null,
-        "longitude": null,
-        "starRating": 3.4,
-        "ratingsCount": 189,
-        "priceUnit": "dollars_per_gallon",
-        "cash": 2.69,
-        "cashPostedTime": "2026-10-02T14:51:08.605Z",
-        "credit": 3.69,
-        "creditPostedTime": "2026-10-02T14:51:08.683Z",
-        "bestPrice": 2.69
-      },
       {
         "id": "108615",
         "name": "Shell",
@@ -574,5 +551,5 @@
       }
     ]
   },
-  "fingerprint": "ae72af84ba1d0ca6457396d77389d0e6a1c811e6e37011b0b390af98d1d712a2"
+  "fingerprint": "160cb36d0030760e89161659f3acf2461fb5cb9619cda0affc4e034a5146df02"
 }
