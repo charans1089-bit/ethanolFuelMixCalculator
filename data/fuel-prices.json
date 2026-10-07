@@ -3,7 +3,7 @@
   "source": "Apify johnvc/fuelprices",
   "search": "Dearborn, MI",
   "maxAgeDays": 3,
-  "generatedAt": "2026-10-07T15:31:50.889Z",
+  "generatedAt": "2026-10-07T21:16:35.422Z",
   "e85": {
     "fuelCode": 5,
     "count": 1,
@@ -38,33 +38,33 @@
   },
   "premium93": {
     "fuelCode": 3,
-    "count": 24,
-    "avg": 5.694,
-    "min": 5.12,
+    "count": 25,
+    "avg": 5.704,
+    "min": 5.29,
     "max": 6.49,
     "stations": [
       {
-        "id": "74102",
-        "name": "BP",
+        "id": "133403",
+        "name": "CITGO",
         "address": {
-          "line1": "23405 Michigan Ave",
+          "line1": "14921 Michigan Ave",
           "line2": "",
           "city": "Dearborn",
           "region": "MI",
-          "postalCode": "48124-1908"
+          "postalCode": "48126"
         },
         "distance": null,
         "distanceUnit": null,
         "latitude": null,
         "longitude": null,
-        "starRating": 4.1,
-        "ratingsCount": 145,
+        "starRating": 4,
+        "ratingsCount": 135,
         "priceUnit": "dollars_per_gallon",
-        "cash": 5.12,
-        "cashPostedTime": "2026-10-05T17:52:17.294Z",
-        "credit": 5.22,
-        "creditPostedTime": "2026-10-05T17:52:17.308Z",
-        "bestPrice": 5.12
+        "cash": 5.29,
+        "cashPostedTime": "2026-10-07T18:15:54.450Z",
+        "credit": 5.39,
+        "creditPostedTime": "2026-10-07T18:15:54.538Z",
+        "bestPrice": 5.29
       },
       {
         "id": "29961",
@@ -88,6 +88,29 @@
         "credit": 5.39,
         "creditPostedTime": "2026-10-06T20:08:12.530Z",
         "bestPrice": 5.29
+      },
+      {
+        "id": "81117",
+        "name": "Amoco",
+        "address": {
+          "line1": "23785 Michigan Ave",
+          "line2": "",
+          "city": "Dearborn",
+          "region": "MI",
+          "postalCode": "48124"
+        },
+        "distance": null,
+        "distanceUnit": null,
+        "latitude": null,
+        "longitude": null,
+        "starRating": 4.5,
+        "ratingsCount": 232,
+        "priceUnit": "dollars_per_gallon",
+        "cash": 5.39,
+        "cashPostedTime": "2026-10-07T19:10:49.445Z",
+        "credit": 5.49,
+        "creditPostedTime": "2026-10-07T19:10:49.523Z",
+        "bestPrice": 5.39
       },
       {
         "id": "94021",
@@ -452,7 +475,7 @@
         "ratingsCount": 131,
         "priceUnit": "dollars_per_gallon",
         "cash": 5.89,
-        "cashPostedTime": "2026-10-07T13:58:57.407Z",
+        "cashPostedTime": "2026-10-07T19:40:05.537Z",
         "credit": null,
         "creditPostedTime": null,
         "bestPrice": 5.89
@@ -475,9 +498,9 @@
         "ratingsCount": 293,
         "priceUnit": "dollars_per_gallon",
         "cash": 5.99,
-        "cashPostedTime": "2026-10-07T13:59:33.654Z",
+        "cashPostedTime": "2026-10-07T19:40:40.279Z",
         "credit": 6.09,
-        "creditPostedTime": "2026-10-07T13:59:33.668Z",
+        "creditPostedTime": "2026-10-07T19:40:40.295Z",
         "bestPrice": 5.99
       },
       {
@@ -504,29 +527,6 @@
         "bestPrice": 5.99
       },
       {
-        "id": "172876",
-        "name": "Kroger",
-        "address": {
-          "line1": "23170 Michigan Ave",
-          "line2": "",
-          "city": "Dearborn",
-          "region": "MI",
-          "postalCode": "48124"
-        },
-        "distance": null,
-        "distanceUnit": null,
-        "latitude": null,
-        "longitude": null,
-        "starRating": 4.6,
-        "ratingsCount": 676,
-        "priceUnit": "dollars_per_gallon",
-        "cash": null,
-        "cashPostedTime": null,
-        "credit": 5.99,
-        "creditPostedTime": "2026-10-05T17:52:22.375Z",
-        "bestPrice": 5.99
-      },
-      {
         "id": "98820",
         "name": "Mobil",
         "address": {
@@ -548,6 +548,29 @@
         "credit": 6.09,
         "creditPostedTime": "2026-10-06T04:00:12.407Z",
         "bestPrice": 5.99
+      },
+      {
+        "id": "74102",
+        "name": "BP",
+        "address": {
+          "line1": "23405 Michigan Ave",
+          "line2": "",
+          "city": "Dearborn",
+          "region": "MI",
+          "postalCode": "48124-1908"
+        },
+        "distance": null,
+        "distanceUnit": null,
+        "latitude": null,
+        "longitude": null,
+        "starRating": 4.1,
+        "ratingsCount": 145,
+        "priceUnit": "dollars_per_gallon",
+        "cash": 6.39,
+        "cashPostedTime": "2026-10-07T19:14:56.966Z",
+        "credit": 6.49,
+        "creditPostedTime": "2026-10-07T19:14:56.982Z",
+        "bestPrice": 6.39
       },
       {
         "id": "84078",
@@ -597,5 +620,5 @@
       }
     ]
   },
-  "fingerprint": "adbab02046e70187b29bc2092f09e9070114868a58e7422200823bed4ce2705b"
+  "fingerprint": "20f4e61d456a18aade14e1b722ee70f87d975fe5bc784aa2690b575e41282cc4"
 }
