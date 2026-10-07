@@ -3,7 +3,7 @@
   "source": "Apify johnvc/fuelprices",
   "search": "Dearborn, MI",
   "maxAgeDays": 3,
-  "generatedAt": "2026-10-06T23:46:53.676Z",
+  "generatedAt": "2026-10-07T05:53:20.017Z",
   "e85": {
     "fuelCode": 5,
     "count": 1,
@@ -29,17 +29,17 @@
         "ratingsCount": 15,
         "priceUnit": "dollars_per_gallon",
         "cash": 3.19,
-        "cashPostedTime": "2026-10-06T03:59:41.659Z",
+        "cashPostedTime": "2026-10-07T02:59:39.756Z",
         "credit": 3.19,
-        "creditPostedTime": "2026-10-06T03:59:41.753Z",
+        "creditPostedTime": "2026-10-07T02:59:39.756Z",
         "bestPrice": 3.19
       }
     ]
   },
   "premium93": {
     "fuelCode": 3,
-    "count": 22,
-    "avg": 5.699,
+    "count": 23,
+    "avg": 5.685,
     "min": 5.12,
     "max": 6.49,
     "stations": [
@@ -107,9 +107,9 @@
         "ratingsCount": 75,
         "priceUnit": "dollars_per_gallon",
         "cash": 5.39,
-        "cashPostedTime": "2026-10-05T16:10:51.060Z",
+        "cashPostedTime": "2026-10-07T01:49:22.208Z",
         "credit": 5.49,
-        "creditPostedTime": "2026-10-05T16:10:51.079Z",
+        "creditPostedTime": "2026-10-07T01:49:22.235Z",
         "bestPrice": 5.39
       },
       {
@@ -130,9 +130,9 @@
         "ratingsCount": 12,
         "priceUnit": "dollars_per_gallon",
         "cash": 5.45,
-        "cashPostedTime": "2026-10-06T03:59:41.105Z",
+        "cashPostedTime": "2026-10-07T02:59:39.498Z",
         "credit": 5.55,
-        "creditPostedTime": "2026-10-06T03:59:41.156Z",
+        "creditPostedTime": "2026-10-07T02:59:39.483Z",
         "bestPrice": 5.45
       },
       {
@@ -153,7 +153,7 @@
         "ratingsCount": 29,
         "priceUnit": "dollars_per_gallon",
         "cash": 5.49,
-        "cashPostedTime": "2026-10-06T04:00:52.657Z",
+        "cashPostedTime": "2026-10-07T03:01:09.489Z",
         "credit": null,
         "creditPostedTime": null,
         "bestPrice": 5.49
@@ -176,9 +176,9 @@
         "ratingsCount": 18,
         "priceUnit": "dollars_per_gallon",
         "cash": 5.49,
-        "cashPostedTime": "2026-10-06T03:59:45.412Z",
+        "cashPostedTime": "2026-10-07T02:59:48.738Z",
         "credit": 5.59,
-        "creditPostedTime": "2026-10-06T03:59:45.428Z",
+        "creditPostedTime": "2026-10-07T02:59:48.848Z",
         "bestPrice": 5.49
       },
       {
@@ -199,9 +199,32 @@
         "ratingsCount": 151,
         "priceUnit": "dollars_per_gallon",
         "cash": 5.49,
-        "cashPostedTime": "2026-10-05T16:10:15.052Z",
+        "cashPostedTime": "2026-10-07T01:49:02.508Z",
         "credit": 5.59,
-        "creditPostedTime": "2026-10-05T16:10:15.083Z",
+        "creditPostedTime": "2026-10-07T01:49:02.524Z",
+        "bestPrice": 5.49
+      },
+      {
+        "id": "99496",
+        "name": "Mobil",
+        "address": {
+          "line1": "7954 Greenfield Rd",
+          "line2": "",
+          "city": "Dearborn",
+          "region": "MI",
+          "postalCode": "48126-1061"
+        },
+        "distance": null,
+        "distanceUnit": null,
+        "latitude": null,
+        "longitude": null,
+        "starRating": 4.2,
+        "ratingsCount": 52,
+        "priceUnit": "dollars_per_gallon",
+        "cash": 5.49,
+        "cashPostedTime": "2026-10-07T03:00:11.132Z",
+        "credit": 5.59,
+        "creditPostedTime": "2026-10-07T03:00:11.333Z",
         "bestPrice": 5.49
       },
       {
@@ -222,9 +245,9 @@
         "ratingsCount": 29,
         "priceUnit": "dollars_per_gallon",
         "cash": 5.49,
-        "cashPostedTime": "2026-10-06T03:59:39.262Z",
+        "cashPostedTime": "2026-10-07T02:59:46.820Z",
         "credit": 5.49,
-        "creditPostedTime": "2026-10-06T03:59:39.246Z",
+        "creditPostedTime": "2026-10-07T02:59:46.805Z",
         "bestPrice": 5.49
       },
       {
@@ -247,8 +270,31 @@
         "cash": null,
         "cashPostedTime": null,
         "credit": 5.49,
-        "creditPostedTime": "2026-10-06T21:04:25.105Z",
+        "creditPostedTime": "2026-10-07T01:48:36.215Z",
         "bestPrice": 5.49
+      },
+      {
+        "id": "70578",
+        "name": "CITGO",
+        "address": {
+          "line1": "23645 Ford Rd",
+          "line2": "",
+          "city": "Dearborn",
+          "region": "MI",
+          "postalCode": "48128-1261"
+        },
+        "distance": null,
+        "distanceUnit": null,
+        "latitude": null,
+        "longitude": null,
+        "starRating": 4.7,
+        "ratingsCount": 247,
+        "priceUnit": "dollars_per_gallon",
+        "cash": 5.59,
+        "cashPostedTime": "2026-10-07T03:01:53.641Z",
+        "credit": 5.69,
+        "creditPostedTime": "2026-10-06T04:01:38.777Z",
+        "bestPrice": 5.59
       },
       {
         "id": "109274",
@@ -274,52 +320,6 @@
         "bestPrice": 5.59
       },
       {
-        "id": "99496",
-        "name": "Mobil",
-        "address": {
-          "line1": "7954 Greenfield Rd",
-          "line2": "",
-          "city": "Dearborn",
-          "region": "MI",
-          "postalCode": "48126-1061"
-        },
-        "distance": null,
-        "distanceUnit": null,
-        "latitude": null,
-        "longitude": null,
-        "starRating": 4.2,
-        "ratingsCount": 52,
-        "priceUnit": "dollars_per_gallon",
-        "cash": 5.59,
-        "cashPostedTime": "2026-10-05T02:59:59.182Z",
-        "credit": 5.59,
-        "creditPostedTime": "2026-10-06T04:00:18.989Z",
-        "bestPrice": 5.59
-      },
-      {
-        "id": "70578",
-        "name": "CITGO",
-        "address": {
-          "line1": "23645 Ford Rd",
-          "line2": "",
-          "city": "Dearborn",
-          "region": "MI",
-          "postalCode": "48128-1261"
-        },
-        "distance": null,
-        "distanceUnit": null,
-        "latitude": null,
-        "longitude": null,
-        "starRating": 4.7,
-        "ratingsCount": 247,
-        "priceUnit": "dollars_per_gallon",
-        "cash": null,
-        "cashPostedTime": null,
-        "credit": 5.69,
-        "creditPostedTime": "2026-10-06T04:01:38.777Z",
-        "bestPrice": 5.69
-      },
-      {
         "id": "109058",
         "name": "Mobil",
         "address": {
@@ -336,10 +336,33 @@
         "starRating": 4.1,
         "ratingsCount": 18,
         "priceUnit": "dollars_per_gallon",
-        "cash": 5.69,
-        "cashPostedTime": "2026-10-06T03:59:38.396Z",
+        "cash": 5.59,
+        "cashPostedTime": "2026-10-07T02:59:39.231Z",
         "credit": 5.79,
         "creditPostedTime": "2026-10-06T03:59:38.537Z",
+        "bestPrice": 5.59
+      },
+      {
+        "id": "110300",
+        "name": "BP",
+        "address": {
+          "line1": "10419 FORD RD",
+          "line2": "",
+          "city": "Dearborn",
+          "region": "MI",
+          "postalCode": "48126"
+        },
+        "distance": null,
+        "distanceUnit": null,
+        "latitude": null,
+        "longitude": null,
+        "starRating": 4.2,
+        "ratingsCount": 4,
+        "priceUnit": "dollars_per_gallon",
+        "cash": 5.69,
+        "cashPostedTime": "2026-10-07T02:59:39.697Z",
+        "credit": null,
+        "creditPostedTime": null,
         "bestPrice": 5.69
       },
       {
@@ -406,9 +429,9 @@
         "ratingsCount": 145,
         "priceUnit": "dollars_per_gallon",
         "cash": 5.79,
-        "cashPostedTime": "2026-10-06T04:00:56.882Z",
+        "cashPostedTime": "2026-10-07T03:00:57.911Z",
         "credit": 5.89,
-        "creditPostedTime": "2026-10-06T04:00:56.789Z",
+        "creditPostedTime": "2026-10-07T03:00:57.786Z",
         "bestPrice": 5.79
       },
       {
@@ -429,7 +452,7 @@
         "ratingsCount": 293,
         "priceUnit": "dollars_per_gallon",
         "cash": 5.99,
-        "cashPostedTime": "2026-10-06T04:00:28.639Z",
+        "cashPostedTime": "2026-10-07T03:00:44.066Z",
         "credit": null,
         "creditPostedTime": null,
         "bestPrice": 5.99
@@ -452,7 +475,7 @@
         "ratingsCount": 157,
         "priceUnit": "dollars_per_gallon",
         "cash": 5.99,
-        "cashPostedTime": "2026-10-06T04:01:36.237Z",
+        "cashPostedTime": "2026-10-07T03:01:43.510Z",
         "credit": null,
         "creditPostedTime": null,
         "bestPrice": 5.99
@@ -521,9 +544,9 @@
         "ratingsCount": 119,
         "priceUnit": "dollars_per_gallon",
         "cash": 6.39,
-        "cashPostedTime": "2026-10-05T11:55:30.409Z",
+        "cashPostedTime": "2026-10-07T03:00:58.799Z",
         "credit": 6.49,
-        "creditPostedTime": "2026-10-05T11:55:30.425Z",
+        "creditPostedTime": "2026-10-07T03:00:58.799Z",
         "bestPrice": 6.39
       },
       {
@@ -551,5 +574,5 @@
       }
     ]
   },
-  "fingerprint": "6241981957d288e51fb0e3f0bc382e0786bac6058b99329e4966b82677c5106a"
+  "fingerprint": "83a267c847ff7f113133c64086429df554ab9248fcee00f250ff4c63da7ee507"
 }
