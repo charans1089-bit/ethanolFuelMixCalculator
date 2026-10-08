@@ -3,7 +3,7 @@
   "source": "Apify johnvc/fuelprices",
   "search": "Dearborn, MI",
   "maxAgeDays": 3,
-  "generatedAt": "2026-10-08T15:33:31.370Z",
+  "generatedAt": "2026-10-08T21:17:16.829Z",
   "e85": {
     "fuelCode": 5,
     "count": 1,
@@ -39,7 +39,7 @@
   "premium93": {
     "fuelCode": 3,
     "count": 22,
-    "avg": 5.629,
+    "avg": 5.675,
     "min": 5.29,
     "max": 6.39,
     "stations": [
@@ -64,29 +64,6 @@
         "cashPostedTime": "2026-10-07T18:15:54.450Z",
         "credit": 5.39,
         "creditPostedTime": "2026-10-07T18:15:54.538Z",
-        "bestPrice": 5.29
-      },
-      {
-        "id": "29961",
-        "name": "CITGO",
-        "address": {
-          "line1": "25350 Michigan Ave",
-          "line2": "",
-          "city": "Dearborn",
-          "region": "MI",
-          "postalCode": "48124"
-        },
-        "distance": null,
-        "distanceUnit": null,
-        "latitude": null,
-        "longitude": null,
-        "starRating": 3.4,
-        "ratingsCount": 189,
-        "priceUnit": "dollars_per_gallon",
-        "cash": 5.29,
-        "cashPostedTime": "2026-10-06T20:08:12.514Z",
-        "credit": 5.39,
-        "creditPostedTime": "2026-10-06T20:08:12.530Z",
         "bestPrice": 5.29
       },
       {
@@ -156,29 +133,6 @@
         "cashPostedTime": "2026-10-07T01:49:22.208Z",
         "credit": 5.49,
         "creditPostedTime": "2026-10-07T01:49:22.235Z",
-        "bestPrice": 5.39
-      },
-      {
-        "id": "3309",
-        "name": "Speedway",
-        "address": {
-          "line1": "20180 Outer Dr",
-          "line2": "",
-          "city": "Dearborn",
-          "region": "MI",
-          "postalCode": "48124-2647"
-        },
-        "distance": null,
-        "distanceUnit": null,
-        "latitude": null,
-        "longitude": null,
-        "starRating": 4,
-        "ratingsCount": 153,
-        "priceUnit": "dollars_per_gallon",
-        "cash": null,
-        "cashPostedTime": null,
-        "credit": 5.39,
-        "creditPostedTime": "2026-10-08T02:23:09.022Z",
         "bestPrice": 5.39
       },
       {
@@ -412,6 +366,29 @@
         "bestPrice": 5.69
       },
       {
+        "id": "108615",
+        "name": "Shell",
+        "address": {
+          "line1": "13841 Ford Rd",
+          "line2": "",
+          "city": "Dearborn",
+          "region": "MI",
+          "postalCode": "48126-3224"
+        },
+        "distance": null,
+        "distanceUnit": null,
+        "latitude": null,
+        "longitude": null,
+        "starRating": 4.2,
+        "ratingsCount": 15,
+        "priceUnit": "dollars_per_gallon",
+        "cash": 5.69,
+        "cashPostedTime": "2026-10-06T03:59:41.613Z",
+        "credit": 5.79,
+        "creditPostedTime": "2026-10-06T03:59:41.597Z",
+        "bestPrice": 5.69
+      },
+      {
         "id": "83820",
         "name": "Mobil",
         "address": {
@@ -452,7 +429,7 @@
         "ratingsCount": 131,
         "priceUnit": "dollars_per_gallon",
         "cash": 5.89,
-        "cashPostedTime": "2026-10-08T12:07:12.898Z",
+        "cashPostedTime": "2026-10-08T19:45:07.992Z",
         "credit": null,
         "creditPostedTime": null,
         "bestPrice": 5.89
@@ -475,9 +452,9 @@
         "ratingsCount": 293,
         "priceUnit": "dollars_per_gallon",
         "cash": 5.99,
-        "cashPostedTime": "2026-10-07T19:40:40.279Z",
+        "cashPostedTime": "2026-10-08T19:46:30.039Z",
         "credit": 6.09,
-        "creditPostedTime": "2026-10-07T19:40:40.295Z",
+        "creditPostedTime": "2026-10-08T19:46:30.055Z",
         "bestPrice": 5.99
       },
       {
@@ -501,6 +478,29 @@
         "cashPostedTime": "2026-10-07T03:01:43.510Z",
         "credit": null,
         "creditPostedTime": null,
+        "bestPrice": 5.99
+      },
+      {
+        "id": "3309",
+        "name": "Speedway",
+        "address": {
+          "line1": "20180 Outer Dr",
+          "line2": "",
+          "city": "Dearborn",
+          "region": "MI",
+          "postalCode": "48124-2647"
+        },
+        "distance": null,
+        "distanceUnit": null,
+        "latitude": null,
+        "longitude": null,
+        "starRating": 4,
+        "ratingsCount": 153,
+        "priceUnit": "dollars_per_gallon",
+        "cash": null,
+        "cashPostedTime": null,
+        "credit": 5.99,
+        "creditPostedTime": "2026-10-08T20:37:24.741Z",
         "bestPrice": 5.99
       },
       {
@@ -551,5 +551,5 @@
       }
     ]
   },
-  "fingerprint": "f940075f6315ad9f8857d55602cc6bfcbd404af9aecd8aae27e996837fd34645"
+  "fingerprint": "d47461ea11b337ee11b65827147e0c0846bcb3b303ea94d937afcc3c16481550"
 }
