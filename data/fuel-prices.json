@@ -3,7 +3,7 @@
   "source": "Apify johnvc/fuelprices",
   "search": "Dearborn, MI",
   "maxAgeDays": 3,
-  "generatedAt": "2026-10-08T05:57:33.632Z",
+  "generatedAt": "2026-10-08T15:33:31.370Z",
   "e85": {
     "fuelCode": 5,
     "count": 1,
@@ -38,8 +38,8 @@
   },
   "premium93": {
     "fuelCode": 3,
-    "count": 21,
-    "avg": 5.64,
+    "count": 22,
+    "avg": 5.629,
     "min": 5.29,
     "max": 6.39,
     "stations": [
@@ -107,9 +107,32 @@
         "ratingsCount": 232,
         "priceUnit": "dollars_per_gallon",
         "cash": 5.39,
-        "cashPostedTime": "2026-10-07T19:10:49.445Z",
+        "cashPostedTime": "2026-10-08T12:49:02.162Z",
         "credit": 5.49,
-        "creditPostedTime": "2026-10-07T19:10:49.523Z",
+        "creditPostedTime": "2026-10-08T12:49:02.178Z",
+        "bestPrice": 5.39
+      },
+      {
+        "id": "172876",
+        "name": "Kroger",
+        "address": {
+          "line1": "23170 Michigan Ave",
+          "line2": "",
+          "city": "Dearborn",
+          "region": "MI",
+          "postalCode": "48124"
+        },
+        "distance": null,
+        "distanceUnit": null,
+        "latitude": null,
+        "longitude": null,
+        "starRating": 4.6,
+        "ratingsCount": 676,
+        "priceUnit": "dollars_per_gallon",
+        "cash": null,
+        "cashPostedTime": null,
+        "credit": 5.39,
+        "creditPostedTime": "2026-10-08T12:25:51.916Z",
         "bestPrice": 5.39
       },
       {
@@ -228,29 +251,6 @@
         "bestPrice": 5.49
       },
       {
-        "id": "94023",
-        "name": "Marathon",
-        "address": {
-          "line1": "3544 Pelham St",
-          "line2": "",
-          "city": "Dearborn",
-          "region": "MI",
-          "postalCode": "48124"
-        },
-        "distance": null,
-        "distanceUnit": null,
-        "latitude": null,
-        "longitude": null,
-        "starRating": 4.1,
-        "ratingsCount": 151,
-        "priceUnit": "dollars_per_gallon",
-        "cash": 5.49,
-        "cashPostedTime": "2026-10-07T01:49:02.508Z",
-        "credit": 5.59,
-        "creditPostedTime": "2026-10-08T03:01:33.103Z",
-        "bestPrice": 5.49
-      },
-      {
         "id": "109274",
         "name": "Marathon",
         "address": {
@@ -271,6 +271,29 @@
         "cashPostedTime": null,
         "credit": 5.49,
         "creditPostedTime": "2026-10-08T03:00:45.231Z",
+        "bestPrice": 5.49
+      },
+      {
+        "id": "94023",
+        "name": "Marathon",
+        "address": {
+          "line1": "3544 Pelham St",
+          "line2": "",
+          "city": "Dearborn",
+          "region": "MI",
+          "postalCode": "48124"
+        },
+        "distance": null,
+        "distanceUnit": null,
+        "latitude": null,
+        "longitude": null,
+        "starRating": 4.1,
+        "ratingsCount": 151,
+        "priceUnit": "dollars_per_gallon",
+        "cash": 5.49,
+        "cashPostedTime": "2026-10-07T01:49:02.508Z",
+        "credit": 5.59,
+        "creditPostedTime": "2026-10-08T03:01:33.103Z",
         "bestPrice": 5.49
       },
       {
@@ -429,7 +452,7 @@
         "ratingsCount": 131,
         "priceUnit": "dollars_per_gallon",
         "cash": 5.89,
-        "cashPostedTime": "2026-10-07T19:40:05.537Z",
+        "cashPostedTime": "2026-10-08T12:07:12.898Z",
         "credit": null,
         "creditPostedTime": null,
         "bestPrice": 5.89
@@ -500,7 +523,7 @@
         "cash": 6.39,
         "cashPostedTime": "2026-10-07T19:14:56.966Z",
         "credit": 6.49,
-        "creditPostedTime": "2026-10-07T19:14:56.982Z",
+        "creditPostedTime": "2026-10-08T11:08:26.773Z",
         "bestPrice": 6.39
       },
       {
@@ -528,5 +551,5 @@
       }
     ]
   },
-  "fingerprint": "f9705f84fea031cb1e0f80be7bd22d9dc348fa07a86de197e275f704d01f0238"
+  "fingerprint": "f940075f6315ad9f8857d55602cc6bfcbd404af9aecd8aae27e996837fd34645"
 }
