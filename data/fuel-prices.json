@@ -3,7 +3,7 @@
   "source": "Apify johnvc/fuelprices",
   "search": "Dearborn, MI",
   "maxAgeDays": 3,
-  "generatedAt": "2026-10-09T15:15:43.559Z",
+  "generatedAt": "2026-10-09T20:51:23.760Z",
   "e85": {
     "fuelCode": 5,
     "count": 1,
@@ -38,34 +38,11 @@
   },
   "premium93": {
     "fuelCode": 3,
-    "count": 21,
-    "avg": 5.733,
-    "min": 5.29,
-    "max": 6.39,
+    "count": 20,
+    "avg": 5.76,
+    "min": 5.39,
+    "max": 6.49,
     "stations": [
-      {
-        "id": "133403",
-        "name": "CITGO",
-        "address": {
-          "line1": "14921 Michigan Ave",
-          "line2": "",
-          "city": "Dearborn",
-          "region": "MI",
-          "postalCode": "48126"
-        },
-        "distance": null,
-        "distanceUnit": null,
-        "latitude": null,
-        "longitude": null,
-        "starRating": 4,
-        "ratingsCount": 135,
-        "priceUnit": "dollars_per_gallon",
-        "cash": 5.29,
-        "cashPostedTime": "2026-10-07T18:15:54.450Z",
-        "credit": 5.39,
-        "creditPostedTime": "2026-10-07T18:15:54.538Z",
-        "bestPrice": 5.29
-      },
       {
         "id": "81117",
         "name": "Amoco",
@@ -481,29 +458,6 @@
         "bestPrice": 5.99
       },
       {
-        "id": "74102",
-        "name": "BP",
-        "address": {
-          "line1": "23405 Michigan Ave",
-          "line2": "",
-          "city": "Dearborn",
-          "region": "MI",
-          "postalCode": "48124-1908"
-        },
-        "distance": null,
-        "distanceUnit": null,
-        "latitude": null,
-        "longitude": null,
-        "starRating": 4.1,
-        "ratingsCount": 145,
-        "priceUnit": "dollars_per_gallon",
-        "cash": 6.39,
-        "cashPostedTime": "2026-10-07T19:14:56.966Z",
-        "credit": 6.49,
-        "creditPostedTime": "2026-10-08T11:08:26.773Z",
-        "bestPrice": 6.39
-      },
-      {
         "id": "84078",
         "name": "Shell",
         "address": {
@@ -525,8 +479,31 @@
         "credit": 6.49,
         "creditPostedTime": "2026-10-09T03:00:44.702Z",
         "bestPrice": 6.39
+      },
+      {
+        "id": "74102",
+        "name": "BP",
+        "address": {
+          "line1": "23405 Michigan Ave",
+          "line2": "",
+          "city": "Dearborn",
+          "region": "MI",
+          "postalCode": "48124-1908"
+        },
+        "distance": null,
+        "distanceUnit": null,
+        "latitude": null,
+        "longitude": null,
+        "starRating": 4.1,
+        "ratingsCount": 145,
+        "priceUnit": "dollars_per_gallon",
+        "cash": null,
+        "cashPostedTime": null,
+        "credit": 6.49,
+        "creditPostedTime": "2026-10-08T11:08:26.773Z",
+        "bestPrice": 6.49
       }
     ]
   },
-  "fingerprint": "d5ace7ae95ed9be6648b72ae7a00ec4e615fb9b83cb43b154c3ae64dfcbded0a"
+  "fingerprint": "0c041236ac669e3a2479f787e67c647f0b39cc9d081c360f9445722487ed9f9a"
 }
