@@ -3,7 +3,7 @@
   "source": "Apify johnvc/fuelprices",
   "search": "Dearborn, MI",
   "maxAgeDays": 3,
-  "generatedAt": "2026-10-09T06:03:23.728Z",
+  "generatedAt": "2026-10-09T15:15:43.559Z",
   "e85": {
     "fuelCode": 5,
     "count": 1,
@@ -39,7 +39,7 @@
   "premium93": {
     "fuelCode": 3,
     "count": 21,
-    "avg": 5.714,
+    "avg": 5.733,
     "min": 5.29,
     "max": 6.39,
     "stations": [
@@ -87,29 +87,6 @@
         "cashPostedTime": "2026-10-08T12:49:02.162Z",
         "credit": 5.49,
         "creditPostedTime": "2026-10-08T12:49:02.178Z",
-        "bestPrice": 5.39
-      },
-      {
-        "id": "172876",
-        "name": "Kroger",
-        "address": {
-          "line1": "23170 Michigan Ave",
-          "line2": "",
-          "city": "Dearborn",
-          "region": "MI",
-          "postalCode": "48124"
-        },
-        "distance": null,
-        "distanceUnit": null,
-        "latitude": null,
-        "longitude": null,
-        "starRating": 4.6,
-        "ratingsCount": 676,
-        "priceUnit": "dollars_per_gallon",
-        "cash": null,
-        "cashPostedTime": null,
-        "credit": 5.39,
-        "creditPostedTime": "2026-10-08T12:25:51.916Z",
         "bestPrice": 5.39
       },
       {
@@ -251,29 +228,6 @@
         "bestPrice": 5.59
       },
       {
-        "id": "109064",
-        "name": "Mobil",
-        "address": {
-          "line1": "13551 W Warren Ave",
-          "line2": "",
-          "city": "Dearborn",
-          "region": "MI",
-          "postalCode": "48126-1418"
-        },
-        "distance": null,
-        "distanceUnit": null,
-        "latitude": null,
-        "longitude": null,
-        "starRating": 3.7,
-        "ratingsCount": 29,
-        "priceUnit": "dollars_per_gallon",
-        "cash": 5.59,
-        "cashPostedTime": "2026-10-09T02:59:35.840Z",
-        "credit": 5.59,
-        "creditPostedTime": "2026-10-09T02:59:35.825Z",
-        "bestPrice": 5.59
-      },
-      {
         "id": "83820",
         "name": "Mobil",
         "address": {
@@ -294,6 +248,29 @@
         "cashPostedTime": "2026-10-09T03:00:52.425Z",
         "credit": 5.69,
         "creditPostedTime": "2026-10-09T03:00:52.378Z",
+        "bestPrice": 5.59
+      },
+      {
+        "id": "109064",
+        "name": "Mobil",
+        "address": {
+          "line1": "13551 W Warren Ave",
+          "line2": "",
+          "city": "Dearborn",
+          "region": "MI",
+          "postalCode": "48126-1418"
+        },
+        "distance": null,
+        "distanceUnit": null,
+        "latitude": null,
+        "longitude": null,
+        "starRating": 3.7,
+        "ratingsCount": 29,
+        "priceUnit": "dollars_per_gallon",
+        "cash": 5.59,
+        "cashPostedTime": "2026-10-09T02:59:35.840Z",
+        "credit": 5.59,
+        "creditPostedTime": "2026-10-09T02:59:35.825Z",
         "bestPrice": 5.59
       },
       {
@@ -364,6 +341,29 @@
         "credit": 5.69,
         "creditPostedTime": "2026-10-09T02:59:42.419Z",
         "bestPrice": 5.69
+      },
+      {
+        "id": "172876",
+        "name": "Kroger",
+        "address": {
+          "line1": "23170 Michigan Ave",
+          "line2": "",
+          "city": "Dearborn",
+          "region": "MI",
+          "postalCode": "48124"
+        },
+        "distance": null,
+        "distanceUnit": null,
+        "latitude": null,
+        "longitude": null,
+        "starRating": 4.6,
+        "ratingsCount": 676,
+        "priceUnit": "dollars_per_gallon",
+        "cash": null,
+        "cashPostedTime": null,
+        "credit": 5.79,
+        "creditPostedTime": "2026-10-09T12:25:40.259Z",
+        "bestPrice": 5.79
       },
       {
         "id": "89876",
@@ -528,5 +528,5 @@
       }
     ]
   },
-  "fingerprint": "fde90f397a30497d95140e82770ad2d4f07248811aae5ce5378f89281b290faf"
+  "fingerprint": "d5ace7ae95ed9be6648b72ae7a00ec4e615fb9b83cb43b154c3ae64dfcbded0a"
 }
