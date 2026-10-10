@@ -3,7 +3,7 @@
   "source": "Apify johnvc/fuelprices",
   "search": "Dearborn, MI",
   "maxAgeDays": 3,
-  "generatedAt": "2026-10-10T20:02:30.284Z",
+  "generatedAt": "2026-10-10T23:31:16.193Z",
   "e85": {
     "fuelCode": 5,
     "count": 1,
@@ -38,8 +38,8 @@
   },
   "premium93": {
     "fuelCode": 3,
-    "count": 20,
-    "avg": 5.745,
+    "count": 19,
+    "avg": 5.732,
     "min": 5.39,
     "max": 6.39,
     "stations": [
@@ -458,29 +458,6 @@
         "bestPrice": 5.99
       },
       {
-        "id": "3309",
-        "name": "Speedway",
-        "address": {
-          "line1": "20180 Outer Dr",
-          "line2": "",
-          "city": "Dearborn",
-          "region": "MI",
-          "postalCode": "48124-2647"
-        },
-        "distance": null,
-        "distanceUnit": null,
-        "latitude": null,
-        "longitude": null,
-        "starRating": 4,
-        "ratingsCount": 153,
-        "priceUnit": "dollars_per_gallon",
-        "cash": null,
-        "cashPostedTime": null,
-        "credit": 5.99,
-        "creditPostedTime": "2026-10-08T20:37:24.741Z",
-        "bestPrice": 5.99
-      },
-      {
         "id": "84078",
         "name": "Shell",
         "address": {
@@ -505,5 +482,5 @@
       }
     ]
   },
-  "fingerprint": "801eae49c263a9f0ca0f3ec9efb4dc8bd2ff1fee406b4fd38e7d8d99e5d6d761"
+  "fingerprint": "fd93074c1cc0583f4e367aade42d9b9b56dfa0a22a95650ce35b3af1424ac6e7"
 }
