@@ -3,7 +3,7 @@
   "source": "Apify johnvc/fuelprices",
   "search": "Dearborn, MI",
   "maxAgeDays": 3,
-  "generatedAt": "2026-10-11T05:40:56.120Z",
+  "generatedAt": "2026-10-11T14:53:36.158Z",
   "e85": {
     "fuelCode": 5,
     "count": 1,
@@ -38,8 +38,8 @@
   },
   "premium93": {
     "fuelCode": 3,
-    "count": 21,
-    "avg": 5.719,
+    "count": 20,
+    "avg": 5.715,
     "min": 5.39,
     "max": 6.39,
     "stations": [
@@ -251,29 +251,6 @@
         "bestPrice": 5.59
       },
       {
-        "id": "86112",
-        "name": "BP",
-        "address": {
-          "line1": "3525 S Telegraph Rd",
-          "line2": "",
-          "city": "Dearborn",
-          "region": "MI",
-          "postalCode": "48124-3244"
-        },
-        "distance": null,
-        "distanceUnit": null,
-        "latitude": null,
-        "longitude": null,
-        "starRating": 4,
-        "ratingsCount": 29,
-        "priceUnit": "dollars_per_gallon",
-        "cash": 5.69,
-        "cashPostedTime": "2026-10-10T04:00:54.772Z",
-        "credit": null,
-        "creditPostedTime": null,
-        "bestPrice": 5.69
-      },
-      {
         "id": "110300",
         "name": "BP",
         "address": {
@@ -292,6 +269,29 @@
         "priceUnit": "dollars_per_gallon",
         "cash": 5.69,
         "cashPostedTime": "2026-10-11T04:06:22.118Z",
+        "credit": null,
+        "creditPostedTime": null,
+        "bestPrice": 5.69
+      },
+      {
+        "id": "86112",
+        "name": "BP",
+        "address": {
+          "line1": "3525 S Telegraph Rd",
+          "line2": "",
+          "city": "Dearborn",
+          "region": "MI",
+          "postalCode": "48124-3244"
+        },
+        "distance": null,
+        "distanceUnit": null,
+        "latitude": null,
+        "longitude": null,
+        "starRating": 4,
+        "ratingsCount": 29,
+        "priceUnit": "dollars_per_gallon",
+        "cash": 5.69,
+        "cashPostedTime": "2026-10-10T04:00:54.772Z",
         "credit": null,
         "creditPostedTime": null,
         "bestPrice": 5.69
@@ -387,29 +387,6 @@
         "credit": 5.69,
         "creditPostedTime": "2026-10-11T02:23:47.837Z",
         "bestPrice": 5.69
-      },
-      {
-        "id": "172876",
-        "name": "Kroger",
-        "address": {
-          "line1": "23170 Michigan Ave",
-          "line2": "",
-          "city": "Dearborn",
-          "region": "MI",
-          "postalCode": "48124"
-        },
-        "distance": null,
-        "distanceUnit": null,
-        "latitude": null,
-        "longitude": null,
-        "starRating": 4.6,
-        "ratingsCount": 676,
-        "priceUnit": "dollars_per_gallon",
-        "cash": null,
-        "cashPostedTime": null,
-        "credit": 5.79,
-        "creditPostedTime": "2026-10-09T12:25:40.259Z",
-        "bestPrice": 5.79
       },
       {
         "id": "110303",
@@ -528,5 +505,5 @@
       }
     ]
   },
-  "fingerprint": "2ecac2b59ea9d99e778fcc92230d62fd3b3936da3bf01ac810173cf7a341f3aa"
+  "fingerprint": "9d683974f9b98f4b7fe034141a129eb0f20052e0470d0b355f3984924782c7cf"
 }
