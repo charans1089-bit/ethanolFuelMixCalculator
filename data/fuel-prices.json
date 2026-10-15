@@ -3,7 +3,7 @@
   "source": "Apify johnvc/fuelprices",
   "search": "Dearborn, MI",
   "maxAgeDays": 3,
-  "generatedAt": "2026-10-15T13:22:42.594Z",
+  "generatedAt": "2026-10-15T19:51:47.715Z",
   "e85": {
     "fuelCode": 5,
     "count": 1,
@@ -39,7 +39,7 @@
   "premium93": {
     "fuelCode": 3,
     "count": 19,
-    "avg": 5.743,
+    "avg": 5.753,
     "min": 5.39,
     "max": 6.29,
     "stations": [
@@ -412,29 +412,6 @@
         "bestPrice": 5.89
       },
       {
-        "id": "94016",
-        "name": "Amoco",
-        "address": {
-          "line1": "2740 Monroe St",
-          "line2": "",
-          "city": "Dearborn",
-          "region": "MI",
-          "postalCode": "48124-3018"
-        },
-        "distance": null,
-        "distanceUnit": null,
-        "latitude": null,
-        "longitude": null,
-        "starRating": 4.3,
-        "ratingsCount": 293,
-        "priceUnit": "dollars_per_gallon",
-        "cash": 5.99,
-        "cashPostedTime": "2026-10-15T03:01:00.740Z",
-        "credit": 6.09,
-        "creditPostedTime": "2026-10-15T03:01:00.771Z",
-        "bestPrice": 5.99
-      },
-      {
         "id": "98820",
         "name": "Mobil",
         "address": {
@@ -456,6 +433,29 @@
         "credit": 6.09,
         "creditPostedTime": "2026-10-15T03:01:18.985Z",
         "bestPrice": 5.99
+      },
+      {
+        "id": "94016",
+        "name": "Amoco",
+        "address": {
+          "line1": "2740 Monroe St",
+          "line2": "",
+          "city": "Dearborn",
+          "region": "MI",
+          "postalCode": "48124-3018"
+        },
+        "distance": null,
+        "distanceUnit": null,
+        "latitude": null,
+        "longitude": null,
+        "starRating": 4.3,
+        "ratingsCount": 293,
+        "priceUnit": "dollars_per_gallon",
+        "cash": 6.19,
+        "cashPostedTime": "2026-10-15T19:37:28.405Z",
+        "credit": 6.29,
+        "creditPostedTime": "2026-10-15T19:37:28.420Z",
+        "bestPrice": 6.19
       },
       {
         "id": "84078",
@@ -482,5 +482,5 @@
       }
     ]
   },
-  "fingerprint": "a94ef422f4ab99c54c41e7f22385195b42a40171a51a98991ded320037e8e314"
+  "fingerprint": "2b0bec1677fb8e6e5e04664ce7f5c61f769f6d457dec24fe0143b0e6ffc3308e"
 }
