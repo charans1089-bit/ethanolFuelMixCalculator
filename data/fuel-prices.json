@@ -3,7 +3,7 @@
   "source": "Apify johnvc/fuelprices",
   "search": "Dearborn, MI",
   "maxAgeDays": 3,
-  "generatedAt": "2026-10-16T04:25:46.584Z",
+  "generatedAt": "2026-10-16T13:13:14.142Z",
   "e85": {
     "fuelCode": 5,
     "count": 1,
@@ -38,34 +38,11 @@
   },
   "premium93": {
     "fuelCode": 3,
-    "count": 19,
-    "avg": 5.764,
-    "min": 5.39,
+    "count": 18,
+    "avg": 5.784,
+    "min": 5.49,
     "max": 6.39,
     "stations": [
-      {
-        "id": "133403",
-        "name": "CITGO",
-        "address": {
-          "line1": "14921 Michigan Ave",
-          "line2": "",
-          "city": "Dearborn",
-          "region": "MI",
-          "postalCode": "48126"
-        },
-        "distance": null,
-        "distanceUnit": null,
-        "latitude": null,
-        "longitude": null,
-        "starRating": 4,
-        "ratingsCount": 135,
-        "priceUnit": "dollars_per_gallon",
-        "cash": 5.39,
-        "cashPostedTime": "2026-10-14T12:40:38.767Z",
-        "credit": 5.49,
-        "creditPostedTime": "2026-10-14T12:40:38.845Z",
-        "bestPrice": 5.39
-      },
       {
         "id": "172876",
         "name": "Kroger",
@@ -86,7 +63,7 @@
         "cash": null,
         "cashPostedTime": null,
         "credit": 5.49,
-        "creditPostedTime": "2026-10-15T12:23:28.283Z",
+        "creditPostedTime": "2026-10-16T12:20:56.718Z",
         "bestPrice": 5.49
       },
       {
@@ -482,5 +459,5 @@
       }
     ]
   },
-  "fingerprint": "b799cd53ebe946989b77164be1ccb528f38d42234387cac635d1314926e3a5f3"
+  "fingerprint": "aa16076ad62561a4909f3a45bad78ceb720721754b978d14121ad5a9fdb36d87"
 }
