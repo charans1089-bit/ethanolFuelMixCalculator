@@ -3,7 +3,7 @@
   "source": "Apify johnvc/fuelprices",
   "search": "Dearborn, MI",
   "maxAgeDays": 3,
-  "generatedAt": "2026-10-17T04:20:05.613Z",
+  "generatedAt": "2026-10-17T15:29:21.997Z",
   "e85": {
     "fuelCode": 5,
     "count": 1,
@@ -63,7 +63,7 @@
         "cash": null,
         "cashPostedTime": null,
         "credit": 5.49,
-        "creditPostedTime": "2026-10-16T12:20:56.718Z",
+        "creditPostedTime": "2026-10-17T13:21:27.231Z",
         "bestPrice": 5.49
       },
       {
@@ -459,5 +459,5 @@
       }
     ]
   },
-  "fingerprint": "dc542cad961c8c9d6acebeae2177e2b969bd2889bbed6bc63e840933d04e2a0e"
+  "fingerprint": "1114b049bc20627da7bc2cc6d11b22839013de3082e351ccb919e0b0a12f09b0"
 }
