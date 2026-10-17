@@ -3,7 +3,7 @@
   "source": "Apify johnvc/fuelprices",
   "search": "Dearborn, MI",
   "maxAgeDays": 3,
-  "generatedAt": "2026-10-17T15:29:21.997Z",
+  "generatedAt": "2026-10-17T18:27:29.068Z",
   "e85": {
     "fuelCode": 5,
     "count": 1,
@@ -38,10 +38,10 @@
   },
   "premium93": {
     "fuelCode": 3,
-    "count": 18,
-    "avg": 5.779,
+    "count": 19,
+    "avg": 5.822,
     "min": 5.49,
-    "max": 6.39,
+    "max": 6.59,
     "stations": [
       {
         "id": "172876",
@@ -456,8 +456,31 @@
         "credit": 6.49,
         "creditPostedTime": "2026-10-16T03:00:54.731Z",
         "bestPrice": 6.39
+      },
+      {
+        "id": "45079",
+        "name": "CITGO",
+        "address": {
+          "line1": "22096 MICHIGAN AVE",
+          "line2": "",
+          "city": "Dearborn",
+          "region": "MI",
+          "postalCode": "48124"
+        },
+        "distance": null,
+        "distanceUnit": null,
+        "latitude": null,
+        "longitude": null,
+        "starRating": 4.2,
+        "ratingsCount": 660,
+        "priceUnit": "dollars_per_gallon",
+        "cash": null,
+        "cashPostedTime": null,
+        "credit": 6.59,
+        "creditPostedTime": "2026-10-17T16:07:25.776Z",
+        "bestPrice": 6.59
       }
     ]
   },
-  "fingerprint": "1114b049bc20627da7bc2cc6d11b22839013de3082e351ccb919e0b0a12f09b0"
+  "fingerprint": "31eedabc41d96f5cefa87ad2304b51cada4698a4a4771555d8ff33e60dcce132"
 }
