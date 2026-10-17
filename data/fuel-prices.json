@@ -3,7 +3,7 @@
   "source": "Apify johnvc/fuelprices",
   "search": "Dearborn, MI",
   "maxAgeDays": 3,
-  "generatedAt": "2026-10-17T18:27:29.068Z",
+  "generatedAt": "2026-10-17T22:15:20.038Z",
   "e85": {
     "fuelCode": 5,
     "count": 1,
@@ -39,7 +39,7 @@
   "premium93": {
     "fuelCode": 3,
     "count": 19,
-    "avg": 5.822,
+    "avg": 5.795,
     "min": 5.49,
     "max": 6.59,
     "stations": [
@@ -179,6 +179,29 @@
         "cashPostedTime": "2026-10-16T02:59:51.025Z",
         "credit": null,
         "creditPostedTime": null,
+        "bestPrice": 5.69
+      },
+      {
+        "id": "39449",
+        "name": "CITGO",
+        "address": {
+          "line1": "25351 Ford Rd",
+          "line2": "",
+          "city": "Dearborn",
+          "region": "MI",
+          "postalCode": "48128-1057"
+        },
+        "distance": null,
+        "distanceUnit": null,
+        "latitude": null,
+        "longitude": null,
+        "starRating": 4.3,
+        "ratingsCount": 54,
+        "priceUnit": "dollars_per_gallon",
+        "cash": 5.69,
+        "cashPostedTime": "2026-10-17T19:55:13.720Z",
+        "credit": 5.79,
+        "creditPostedTime": "2026-10-17T19:55:13.798Z",
         "bestPrice": 5.69
       },
       {
@@ -412,29 +435,6 @@
         "bestPrice": 5.99
       },
       {
-        "id": "94016",
-        "name": "Amoco",
-        "address": {
-          "line1": "2740 Monroe St",
-          "line2": "",
-          "city": "Dearborn",
-          "region": "MI",
-          "postalCode": "48124-3018"
-        },
-        "distance": null,
-        "distanceUnit": null,
-        "latitude": null,
-        "longitude": null,
-        "starRating": 4.3,
-        "ratingsCount": 293,
-        "priceUnit": "dollars_per_gallon",
-        "cash": 6.19,
-        "cashPostedTime": "2026-10-15T19:37:28.405Z",
-        "credit": 6.29,
-        "creditPostedTime": "2026-10-15T19:37:28.420Z",
-        "bestPrice": 6.19
-      },
-      {
         "id": "84078",
         "name": "Shell",
         "address": {
@@ -482,5 +482,5 @@
       }
     ]
   },
-  "fingerprint": "31eedabc41d96f5cefa87ad2304b51cada4698a4a4771555d8ff33e60dcce132"
+  "fingerprint": "9607cd05746138dbe89b88409267cb70c9c6cf93d78b99f5ed814215dbef9761"
 }
