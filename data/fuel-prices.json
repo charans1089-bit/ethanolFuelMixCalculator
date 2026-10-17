@@ -3,7 +3,7 @@
   "source": "Apify johnvc/fuelprices",
   "search": "Dearborn, MI",
   "maxAgeDays": 3,
-  "generatedAt": "2026-10-16T22:48:41.445Z",
+  "generatedAt": "2026-10-17T04:20:05.613Z",
   "e85": {
     "fuelCode": 5,
     "count": 1,
@@ -251,29 +251,6 @@
         "bestPrice": 5.69
       },
       {
-        "id": "109064",
-        "name": "Mobil",
-        "address": {
-          "line1": "13551 W Warren Ave",
-          "line2": "",
-          "city": "Dearborn",
-          "region": "MI",
-          "postalCode": "48126-1418"
-        },
-        "distance": null,
-        "distanceUnit": null,
-        "latitude": null,
-        "longitude": null,
-        "starRating": 3.7,
-        "ratingsCount": 29,
-        "priceUnit": "dollars_per_gallon",
-        "cash": 5.69,
-        "cashPostedTime": "2026-10-16T02:59:55.748Z",
-        "credit": 5.69,
-        "creditPostedTime": "2026-10-16T02:59:55.748Z",
-        "bestPrice": 5.69
-      },
-      {
         "id": "99496",
         "name": "Mobil",
         "address": {
@@ -294,6 +271,29 @@
         "cashPostedTime": "2026-10-16T03:00:34.089Z",
         "credit": 5.69,
         "creditPostedTime": "2026-10-16T03:00:34.058Z",
+        "bestPrice": 5.69
+      },
+      {
+        "id": "109064",
+        "name": "Mobil",
+        "address": {
+          "line1": "13551 W Warren Ave",
+          "line2": "",
+          "city": "Dearborn",
+          "region": "MI",
+          "postalCode": "48126-1418"
+        },
+        "distance": null,
+        "distanceUnit": null,
+        "latitude": null,
+        "longitude": null,
+        "starRating": 3.7,
+        "ratingsCount": 29,
+        "priceUnit": "dollars_per_gallon",
+        "cash": 5.69,
+        "cashPostedTime": "2026-10-16T02:59:55.748Z",
+        "credit": 5.69,
+        "creditPostedTime": "2026-10-16T02:59:55.748Z",
         "bestPrice": 5.69
       },
       {
@@ -459,5 +459,5 @@
       }
     ]
   },
-  "fingerprint": "9e23a9bfacc4870eea23b949ace3f2a68af63f24dbfb1ab9e1d748c0bf0acd10"
+  "fingerprint": "dc542cad961c8c9d6acebeae2177e2b969bd2889bbed6bc63e840933d04e2a0e"
 }
