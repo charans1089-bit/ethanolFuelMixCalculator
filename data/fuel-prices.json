@@ -3,7 +3,7 @@
   "source": "Apify johnvc/fuelprices",
   "search": "Dearborn, MI",
   "maxAgeDays": 3,
-  "generatedAt": "2026-10-18T22:24:07.132Z",
+  "generatedAt": "2026-10-19T15:33:46.444Z",
   "e85": {
     "fuelCode": 5,
     "count": 0,
@@ -14,8 +14,8 @@
   },
   "premium93": {
     "fuelCode": 3,
-    "count": 6,
-    "avg": 5.923,
+    "count": 8,
+    "avg": 5.955,
     "min": 5.39,
     "max": 6.59,
     "stations": [
@@ -66,6 +66,29 @@
         "bestPrice": 5.49
       },
       {
+        "id": "81117",
+        "name": "Amoco",
+        "address": {
+          "line1": "23785 Michigan Ave",
+          "line2": "",
+          "city": "Dearborn",
+          "region": "MI",
+          "postalCode": "48124"
+        },
+        "distance": null,
+        "distanceUnit": null,
+        "latitude": null,
+        "longitude": null,
+        "starRating": 4.5,
+        "ratingsCount": 232,
+        "priceUnit": "dollars_per_gallon",
+        "cash": null,
+        "cashPostedTime": null,
+        "credit": 5.69,
+        "creditPostedTime": "2026-10-19T11:05:44.696Z",
+        "bestPrice": 5.69
+      },
+      {
         "id": "39449",
         "name": "CITGO",
         "address": {
@@ -89,27 +112,50 @@
         "bestPrice": 5.69
       },
       {
-        "id": "86112",
-        "name": "BP",
+        "id": "110303",
+        "name": "Amoco",
         "address": {
-          "line1": "3525 S Telegraph Rd",
+          "line1": "6200 GREENFIELD RD",
           "line2": "",
           "city": "Dearborn",
           "region": "MI",
-          "postalCode": "48124-3244"
+          "postalCode": "48126"
+        },
+        "distance": null,
+        "distanceUnit": null,
+        "latitude": null,
+        "longitude": null,
+        "starRating": 3.8,
+        "ratingsCount": 14,
+        "priceUnit": "dollars_per_gallon",
+        "cash": 6,
+        "cashPostedTime": "2026-10-19T07:05:01.859Z",
+        "credit": 6.1,
+        "creditPostedTime": "2026-10-19T07:05:01.937Z",
+        "bestPrice": 6
+      },
+      {
+        "id": "133403",
+        "name": "CITGO",
+        "address": {
+          "line1": "14921 Michigan Ave",
+          "line2": "",
+          "city": "Dearborn",
+          "region": "MI",
+          "postalCode": "48126"
         },
         "distance": null,
         "distanceUnit": null,
         "latitude": null,
         "longitude": null,
         "starRating": 4,
-        "ratingsCount": 29,
+        "ratingsCount": 135,
         "priceUnit": "dollars_per_gallon",
-        "cash": 5.89,
-        "cashPostedTime": "2026-10-16T03:01:08.924Z",
-        "credit": null,
-        "creditPostedTime": null,
-        "bestPrice": 5.89
+        "cash": 6.3,
+        "cashPostedTime": "2026-10-19T12:02:13.381Z",
+        "credit": 6.4,
+        "creditPostedTime": "2026-10-19T12:02:13.457Z",
+        "bestPrice": 6.3
       },
       {
         "id": "109268",
@@ -159,5 +205,5 @@
       }
     ]
   },
-  "fingerprint": "491f141fb0ae6f7222b10e52b48690841e5cd1e756f87a91ce3b21cb76740791"
+  "fingerprint": "d20995c2daf7d063a92cd8451abe538e22305b80581b84bba20ebfd471666819"
 }
