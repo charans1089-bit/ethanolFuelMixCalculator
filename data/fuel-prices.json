@@ -3,7 +3,7 @@
   "source": "Apify johnvc/fuelprices",
   "search": "Dearborn, MI",
   "maxAgeDays": 3,
-  "generatedAt": "2026-10-20T13:32:24.265Z",
+  "generatedAt": "2026-10-20T19:58:59.574Z",
   "e85": {
     "fuelCode": 5,
     "count": 1,
@@ -38,8 +38,8 @@
   },
   "premium93": {
     "fuelCode": 3,
-    "count": 15,
-    "avg": 5.724,
+    "count": 17,
+    "avg": 5.744,
     "min": 5.48,
     "max": 6.3,
     "stations": [
@@ -274,6 +274,29 @@
         "bestPrice": 5.69
       },
       {
+        "id": "81605",
+        "name": "Sunoco",
+        "address": {
+          "line1": "10000 Michigan Ave",
+          "line2": "",
+          "city": "Dearborn",
+          "region": "MI",
+          "postalCode": "48126-3707"
+        },
+        "distance": null,
+        "distanceUnit": null,
+        "latitude": null,
+        "longitude": null,
+        "starRating": 3.7,
+        "ratingsCount": 12,
+        "priceUnit": "dollars_per_gallon",
+        "cash": 5.69,
+        "cashPostedTime": "2026-10-20T16:42:25.870Z",
+        "credit": 5.69,
+        "creditPostedTime": "2026-10-20T16:42:25.948Z",
+        "bestPrice": 5.69
+      },
+      {
         "id": "109058",
         "name": "Mobil",
         "address": {
@@ -366,6 +389,29 @@
         "bestPrice": 6
       },
       {
+        "id": "94016",
+        "name": "Amoco",
+        "address": {
+          "line1": "2740 Monroe St",
+          "line2": "",
+          "city": "Dearborn",
+          "region": "MI",
+          "postalCode": "48124-3018"
+        },
+        "distance": null,
+        "distanceUnit": null,
+        "latitude": null,
+        "longitude": null,
+        "starRating": 4.3,
+        "ratingsCount": 293,
+        "priceUnit": "dollars_per_gallon",
+        "cash": 6.09,
+        "cashPostedTime": "2026-10-20T19:23:50.142Z",
+        "credit": 6.09,
+        "creditPostedTime": "2026-10-20T19:23:50.220Z",
+        "bestPrice": 6.09
+      },
+      {
         "id": "133403",
         "name": "CITGO",
         "address": {
@@ -390,5 +436,5 @@
       }
     ]
   },
-  "fingerprint": "39f92c8d98b18794defbddec41167f9523a1811b805f5fd00e87838ba5749d30"
+  "fingerprint": "ffdd1c9cef9423a6849bde1dc27f2a12ae873c8148c4e3a1b699191ed3725e9d"
 }
