@@ -3,7 +3,7 @@
   "source": "Apify johnvc/fuelprices",
   "search": "Dearborn, MI",
   "maxAgeDays": 3,
-  "generatedAt": "2026-10-21T13:44:19.027Z",
+  "generatedAt": "2026-10-21T20:07:23.698Z",
   "e85": {
     "fuelCode": 5,
     "count": 1,
@@ -39,9 +39,9 @@
   "premium93": {
     "fuelCode": 3,
     "count": 21,
-    "avg": 5.676,
+    "avg": 5.719,
     "min": 5.39,
-    "max": 6.09,
+    "max": 6.49,
     "stations": [
       {
         "id": "172876",
@@ -63,14 +63,14 @@
         "cash": null,
         "cashPostedTime": null,
         "credit": 5.39,
-        "creditPostedTime": "2026-10-21T12:16:18.749Z",
+        "creditPostedTime": "2026-10-21T17:38:08.127Z",
         "bestPrice": 5.39
       },
       {
-        "id": "29961",
-        "name": "CITGO",
+        "id": "94023",
+        "name": "Marathon",
         "address": {
-          "line1": "25350 Michigan Ave",
+          "line1": "3544 Pelham St",
           "line2": "",
           "city": "Dearborn",
           "region": "MI",
@@ -80,13 +80,13 @@
         "distanceUnit": null,
         "latitude": null,
         "longitude": null,
-        "starRating": 3.4,
-        "ratingsCount": 189,
+        "starRating": 4.1,
+        "ratingsCount": 151,
         "priceUnit": "dollars_per_gallon",
         "cash": 5.49,
-        "cashPostedTime": "2026-10-19T19:54:34.845Z",
-        "credit": 5.49,
-        "creditPostedTime": "2026-10-19T19:54:34.951Z",
+        "cashPostedTime": "2026-10-21T15:02:14.614Z",
+        "credit": 5.59,
+        "creditPostedTime": "2026-10-21T15:02:14.705Z",
         "bestPrice": 5.49
       },
       {
@@ -132,7 +132,7 @@
         "cash": null,
         "cashPostedTime": null,
         "credit": 5.49,
-        "creditPostedTime": "2026-10-21T02:23:43.517Z",
+        "creditPostedTime": "2026-10-21T15:47:07.223Z",
         "bestPrice": 5.49
       },
       {
@@ -153,7 +153,7 @@
         "ratingsCount": 29,
         "priceUnit": "dollars_per_gallon",
         "cash": 5.59,
-        "cashPostedTime": "2026-10-21T03:04:23.681Z",
+        "cashPostedTime": "2026-10-21T18:04:16.654Z",
         "credit": null,
         "creditPostedTime": null,
         "bestPrice": 5.59
@@ -179,29 +179,6 @@
         "cashPostedTime": "2026-10-21T03:05:15.922Z",
         "credit": 5.69,
         "creditPostedTime": "2026-10-21T03:05:15.813Z",
-        "bestPrice": 5.59
-      },
-      {
-        "id": "94023",
-        "name": "Marathon",
-        "address": {
-          "line1": "3544 Pelham St",
-          "line2": "",
-          "city": "Dearborn",
-          "region": "MI",
-          "postalCode": "48124"
-        },
-        "distance": null,
-        "distanceUnit": null,
-        "latitude": null,
-        "longitude": null,
-        "starRating": 4.1,
-        "ratingsCount": 151,
-        "priceUnit": "dollars_per_gallon",
-        "cash": null,
-        "cashPostedTime": null,
-        "credit": 5.59,
-        "creditPostedTime": "2026-10-21T03:03:53.606Z",
         "bestPrice": 5.59
       },
       {
@@ -293,7 +270,7 @@
         "cash": null,
         "cashPostedTime": null,
         "credit": 5.69,
-        "creditPostedTime": "2026-10-19T19:50:53.862Z",
+        "creditPostedTime": "2026-10-21T15:47:57.858Z",
         "bestPrice": 5.69
       },
       {
@@ -525,8 +502,31 @@
         "credit": 6.09,
         "creditPostedTime": "2026-10-20T19:23:50.220Z",
         "bestPrice": 6.09
+      },
+      {
+        "id": "45079",
+        "name": "CITGO",
+        "address": {
+          "line1": "22096 MICHIGAN AVE",
+          "line2": "",
+          "city": "Dearborn",
+          "region": "MI",
+          "postalCode": "48124"
+        },
+        "distance": null,
+        "distanceUnit": null,
+        "latitude": null,
+        "longitude": null,
+        "starRating": 4.2,
+        "ratingsCount": 660,
+        "priceUnit": "dollars_per_gallon",
+        "cash": 6.49,
+        "cashPostedTime": "2026-10-21T17:28:57.558Z",
+        "credit": null,
+        "creditPostedTime": null,
+        "bestPrice": 6.49
       }
     ]
   },
-  "fingerprint": "37b7903bdbe799010a30fbe849b8ae7887ea2cec41ec60e76f40159b72cfdd95"
+  "fingerprint": "9db3eeb1cfcb441fc27d9c4bcae15eca3e87c8313df7b87592d058955b056cac"
 }
