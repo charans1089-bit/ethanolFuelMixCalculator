@@ -3,7 +3,7 @@
   "source": "Apify johnvc/fuelprices",
   "search": "Dearborn, MI",
   "maxAgeDays": 3,
-  "generatedAt": "2026-10-21T20:07:23.698Z",
+  "generatedAt": "2026-10-21T23:15:57.806Z",
   "e85": {
     "fuelCode": 5,
     "count": 1,
@@ -39,7 +39,7 @@
   "premium93": {
     "fuelCode": 3,
     "count": 21,
-    "avg": 5.719,
+    "avg": 5.742,
     "min": 5.39,
     "max": 6.49,
     "stations": [
@@ -110,29 +110,6 @@
         "cashPostedTime": null,
         "credit": 5.49,
         "creditPostedTime": "2026-10-21T03:04:24.482Z",
-        "bestPrice": 5.49
-      },
-      {
-        "id": "3309",
-        "name": "Speedway",
-        "address": {
-          "line1": "20180 Outer Dr",
-          "line2": "",
-          "city": "Dearborn",
-          "region": "MI",
-          "postalCode": "48124-2647"
-        },
-        "distance": null,
-        "distanceUnit": null,
-        "latitude": null,
-        "longitude": null,
-        "starRating": 4,
-        "ratingsCount": 153,
-        "priceUnit": "dollars_per_gallon",
-        "cash": null,
-        "cashPostedTime": null,
-        "credit": 5.49,
-        "creditPostedTime": "2026-10-21T15:47:07.223Z",
         "bestPrice": 5.49
       },
       {
@@ -481,6 +458,29 @@
         "bestPrice": 5.99
       },
       {
+        "id": "3309",
+        "name": "Speedway",
+        "address": {
+          "line1": "20180 Outer Dr",
+          "line2": "",
+          "city": "Dearborn",
+          "region": "MI",
+          "postalCode": "48124-2647"
+        },
+        "distance": null,
+        "distanceUnit": null,
+        "latitude": null,
+        "longitude": null,
+        "starRating": 4,
+        "ratingsCount": 153,
+        "priceUnit": "dollars_per_gallon",
+        "cash": null,
+        "cashPostedTime": null,
+        "credit": 5.99,
+        "creditPostedTime": "2026-10-21T20:39:00.908Z",
+        "bestPrice": 5.99
+      },
+      {
         "id": "94016",
         "name": "Amoco",
         "address": {
@@ -528,5 +528,5 @@
       }
     ]
   },
-  "fingerprint": "9db3eeb1cfcb441fc27d9c4bcae15eca3e87c8313df7b87592d058955b056cac"
+  "fingerprint": "3f589303b8307baf9e73ee773ac7b31041ba7d6a82e40623128b63d222512e61"
 }
