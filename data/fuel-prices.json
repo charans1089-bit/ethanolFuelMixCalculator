@@ -3,7 +3,7 @@
   "source": "Apify johnvc/fuelprices",
   "search": "Dearborn, MI",
   "maxAgeDays": 3,
-  "generatedAt": "2026-11-02T05:56:10.984Z",
+  "generatedAt": "2026-11-02T18:16:25.288Z",
   "e85": {
     "fuelCode": 5,
     "count": 1,
@@ -38,8 +38,8 @@
   },
   "premium93": {
     "fuelCode": 3,
-    "count": 17,
-    "avg": 5.846,
+    "count": 18,
+    "avg": 5.868,
     "min": 5.59,
     "max": 6.39,
     "stations": [
@@ -90,6 +90,29 @@
         "bestPrice": 5.59
       },
       {
+        "id": "109064",
+        "name": "Mobil",
+        "address": {
+          "line1": "13551 W Warren Ave",
+          "line2": "",
+          "city": "Dearborn",
+          "region": "MI",
+          "postalCode": "48126-1418"
+        },
+        "distance": null,
+        "distanceUnit": null,
+        "latitude": null,
+        "longitude": null,
+        "starRating": 3.7,
+        "ratingsCount": 29,
+        "priceUnit": "dollars_per_gallon",
+        "cash": 5.59,
+        "cashPostedTime": "2026-11-02T03:01:21.210Z",
+        "credit": 5.69,
+        "creditPostedTime": "2026-11-01T02:59:23.374Z",
+        "bestPrice": 5.59
+      },
+      {
         "id": "99496",
         "name": "Mobil",
         "address": {
@@ -113,26 +136,26 @@
         "bestPrice": 5.59
       },
       {
-        "id": "109064",
-        "name": "Mobil",
+        "id": "3309",
+        "name": "Speedway",
         "address": {
-          "line1": "13551 W Warren Ave",
+          "line1": "20180 Outer Dr",
           "line2": "",
           "city": "Dearborn",
           "region": "MI",
-          "postalCode": "48126-1418"
+          "postalCode": "48124-2647"
         },
         "distance": null,
         "distanceUnit": null,
         "latitude": null,
         "longitude": null,
-        "starRating": 3.7,
-        "ratingsCount": 29,
+        "starRating": 4,
+        "ratingsCount": 153,
         "priceUnit": "dollars_per_gallon",
-        "cash": 5.59,
-        "cashPostedTime": "2026-11-02T03:01:21.210Z",
-        "credit": 5.69,
-        "creditPostedTime": "2026-11-01T02:59:23.374Z",
+        "cash": null,
+        "cashPostedTime": null,
+        "credit": 5.59,
+        "creditPostedTime": "2026-11-02T17:21:09.677Z",
         "bestPrice": 5.59
       },
       {
@@ -178,7 +201,7 @@
         "cash": null,
         "cashPostedTime": null,
         "credit": 5.69,
-        "creditPostedTime": "2026-11-01T14:24:49.220Z",
+        "creditPostedTime": "2026-11-02T13:21:29.408Z",
         "bestPrice": 5.69
       },
       {
@@ -226,29 +249,6 @@
         "credit": 5.79,
         "creditPostedTime": "2026-11-02T03:01:38.668Z",
         "bestPrice": 5.69
-      },
-      {
-        "id": "3309",
-        "name": "Speedway",
-        "address": {
-          "line1": "20180 Outer Dr",
-          "line2": "",
-          "city": "Dearborn",
-          "region": "MI",
-          "postalCode": "48124-2647"
-        },
-        "distance": null,
-        "distanceUnit": null,
-        "latitude": null,
-        "longitude": null,
-        "starRating": 4,
-        "ratingsCount": 153,
-        "priceUnit": "dollars_per_gallon",
-        "cash": null,
-        "cashPostedTime": null,
-        "credit": 5.75,
-        "creditPostedTime": "2026-11-01T02:21:57.135Z",
-        "bestPrice": 5.75
       },
       {
         "id": "110300",
@@ -433,8 +433,31 @@
         "credit": 6.49,
         "creditPostedTime": "2026-11-01T08:20:11.065Z",
         "bestPrice": 6.39
+      },
+      {
+        "id": "84078",
+        "name": "Shell",
+        "address": {
+          "line1": "4001 Schaefer Rd",
+          "line2": "",
+          "city": "Dearborn",
+          "region": "MI",
+          "postalCode": "48126-3642"
+        },
+        "distance": null,
+        "distanceUnit": null,
+        "latitude": null,
+        "longitude": null,
+        "starRating": 4.2,
+        "ratingsCount": 119,
+        "priceUnit": "dollars_per_gallon",
+        "cash": 6.39,
+        "cashPostedTime": "2026-11-02T14:52:27.430Z",
+        "credit": 6.49,
+        "creditPostedTime": "2026-11-02T14:52:27.508Z",
+        "bestPrice": 6.39
       }
     ]
   },
-  "fingerprint": "9237557de37edbc9a50d9cf4a2837654f85fafb365bc9dd9ddd4e3e7cc68d055"
+  "fingerprint": "7f4e7030a2fddc173da4d49318f8bec8120e18fc76181e395fa2e559da477a92"
 }
