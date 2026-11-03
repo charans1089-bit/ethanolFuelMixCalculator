@@ -3,7 +3,7 @@
   "source": "Apify johnvc/fuelprices",
   "search": "Dearborn, MI",
   "maxAgeDays": 3,
-  "generatedAt": "2026-11-02T18:16:25.288Z",
+  "generatedAt": "2026-11-03T02:15:43.980Z",
   "e85": {
     "fuelCode": 5,
     "count": 1,
@@ -29,17 +29,17 @@
         "ratingsCount": 15,
         "priceUnit": "dollars_per_gallon",
         "cash": 3.19,
-        "cashPostedTime": "2026-11-02T03:01:13.631Z",
+        "cashPostedTime": "2026-11-02T20:00:16.720Z",
         "credit": 3.19,
-        "creditPostedTime": "2026-11-02T03:01:13.883Z",
+        "creditPostedTime": "2026-11-02T20:00:16.736Z",
         "bestPrice": 3.19
       }
     ]
   },
   "premium93": {
     "fuelCode": 3,
-    "count": 18,
-    "avg": 5.868,
+    "count": 17,
+    "avg": 5.843,
     "min": 5.59,
     "max": 6.39,
     "stations": [
@@ -84,32 +84,9 @@
         "ratingsCount": 14,
         "priceUnit": "dollars_per_gallon",
         "cash": 5.59,
-        "cashPostedTime": "2026-11-01T02:59:24.018Z",
+        "cashPostedTime": "2026-11-02T20:01:45.993Z",
         "credit": 5.79,
-        "creditPostedTime": "2026-11-01T02:59:23.986Z",
-        "bestPrice": 5.59
-      },
-      {
-        "id": "109064",
-        "name": "Mobil",
-        "address": {
-          "line1": "13551 W Warren Ave",
-          "line2": "",
-          "city": "Dearborn",
-          "region": "MI",
-          "postalCode": "48126-1418"
-        },
-        "distance": null,
-        "distanceUnit": null,
-        "latitude": null,
-        "longitude": null,
-        "starRating": 3.7,
-        "ratingsCount": 29,
-        "priceUnit": "dollars_per_gallon",
-        "cash": 5.59,
-        "cashPostedTime": "2026-11-02T03:01:21.210Z",
-        "credit": 5.69,
-        "creditPostedTime": "2026-11-01T02:59:23.374Z",
+        "creditPostedTime": "2026-11-02T20:01:46.009Z",
         "bestPrice": 5.59
       },
       {
@@ -133,6 +110,29 @@
         "cashPostedTime": "2026-11-02T03:02:21.120Z",
         "credit": 5.69,
         "creditPostedTime": "2026-11-01T03:00:17.844Z",
+        "bestPrice": 5.59
+      },
+      {
+        "id": "109064",
+        "name": "Mobil",
+        "address": {
+          "line1": "13551 W Warren Ave",
+          "line2": "",
+          "city": "Dearborn",
+          "region": "MI",
+          "postalCode": "48126-1418"
+        },
+        "distance": null,
+        "distanceUnit": null,
+        "latitude": null,
+        "longitude": null,
+        "starRating": 3.7,
+        "ratingsCount": 29,
+        "priceUnit": "dollars_per_gallon",
+        "cash": 5.59,
+        "cashPostedTime": "2026-11-02T03:01:21.210Z",
+        "credit": 5.69,
+        "creditPostedTime": "2026-11-01T02:59:23.374Z",
         "bestPrice": 5.59
       },
       {
@@ -389,29 +389,6 @@
         "bestPrice": 6.19
       },
       {
-        "id": "139710",
-        "name": "Sunoco",
-        "address": {
-          "line1": "10005 W Warren Ave",
-          "line2": "",
-          "city": "Dearborn",
-          "region": "MI",
-          "postalCode": "48126"
-        },
-        "distance": null,
-        "distanceUnit": null,
-        "latitude": null,
-        "longitude": null,
-        "starRating": 3.7,
-        "ratingsCount": 14,
-        "priceUnit": "dollars_per_gallon",
-        "cash": 6.29,
-        "cashPostedTime": "2026-11-01T00:57:36.812Z",
-        "credit": 6.39,
-        "creditPostedTime": "2026-11-01T00:57:36.906Z",
-        "bestPrice": 6.29
-      },
-      {
         "id": "102162",
         "name": "CITGO",
         "address": {
@@ -459,5 +436,5 @@
       }
     ]
   },
-  "fingerprint": "7f4e7030a2fddc173da4d49318f8bec8120e18fc76181e395fa2e559da477a92"
+  "fingerprint": "37a8e3da0a66892626e737062fe400bb969eeac40fb154298960e7a0a9427836"
 }
