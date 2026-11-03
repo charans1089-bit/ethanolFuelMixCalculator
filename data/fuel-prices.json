@@ -3,7 +3,7 @@
   "source": "Apify johnvc/fuelprices",
   "search": "Dearborn, MI",
   "maxAgeDays": 3,
-  "generatedAt": "2026-11-03T11:52:55.910Z",
+  "generatedAt": "2026-11-03T19:27:58.812Z",
   "e85": {
     "fuelCode": 5,
     "count": 1,
@@ -38,11 +38,34 @@
   },
   "premium93": {
     "fuelCode": 3,
-    "count": 19,
-    "avg": 5.806,
-    "min": 5.59,
+    "count": 18,
+    "avg": 5.768,
+    "min": 5.49,
     "max": 6.39,
     "stations": [
+      {
+        "id": "3309",
+        "name": "Speedway",
+        "address": {
+          "line1": "20180 Outer Dr",
+          "line2": "",
+          "city": "Dearborn",
+          "region": "MI",
+          "postalCode": "48124-2647"
+        },
+        "distance": null,
+        "distanceUnit": null,
+        "latitude": null,
+        "longitude": null,
+        "starRating": 4,
+        "ratingsCount": 153,
+        "priceUnit": "dollars_per_gallon",
+        "cash": null,
+        "cashPostedTime": null,
+        "credit": 5.49,
+        "creditPostedTime": "2026-11-03T17:23:14.977Z",
+        "bestPrice": 5.49
+      },
       {
         "id": "86112",
         "name": "BP",
@@ -179,29 +202,6 @@
         "cashPostedTime": "2026-11-03T03:03:45.112Z",
         "credit": null,
         "creditPostedTime": null,
-        "bestPrice": 5.59
-      },
-      {
-        "id": "3309",
-        "name": "Speedway",
-        "address": {
-          "line1": "20180 Outer Dr",
-          "line2": "",
-          "city": "Dearborn",
-          "region": "MI",
-          "postalCode": "48124-2647"
-        },
-        "distance": null,
-        "distanceUnit": null,
-        "latitude": null,
-        "longitude": null,
-        "starRating": 4,
-        "ratingsCount": 153,
-        "priceUnit": "dollars_per_gallon",
-        "cash": null,
-        "cashPostedTime": null,
-        "credit": 5.59,
-        "creditPostedTime": "2026-11-02T17:21:09.677Z",
         "bestPrice": 5.59
       },
       {
@@ -435,29 +435,6 @@
         "bestPrice": 6.19
       },
       {
-        "id": "102162",
-        "name": "CITGO",
-        "address": {
-          "line1": "15500 MICHIGAN AVE",
-          "line2": "",
-          "city": "Dearborn",
-          "region": "MI",
-          "postalCode": "48126"
-        },
-        "distance": null,
-        "distanceUnit": null,
-        "latitude": null,
-        "longitude": null,
-        "starRating": 4.2,
-        "ratingsCount": 269,
-        "priceUnit": "dollars_per_gallon",
-        "cash": 6.39,
-        "cashPostedTime": "2026-11-01T08:20:10.971Z",
-        "credit": 6.49,
-        "creditPostedTime": "2026-11-01T08:20:11.065Z",
-        "bestPrice": 6.39
-      },
-      {
         "id": "84078",
         "name": "Shell",
         "address": {
@@ -482,5 +459,5 @@
       }
     ]
   },
-  "fingerprint": "e2be724a612a2511e60b56c4234a7ccda04b595a7c10c67db01bdf18c54c7e5c"
+  "fingerprint": "58bcb56e8eca10d7efdb605a2b8a00f1e106145fce57b53a199dd2a2e79f4150"
 }
