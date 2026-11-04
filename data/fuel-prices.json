@@ -3,7 +3,7 @@
   "source": "Apify johnvc/fuelprices",
   "search": "Dearborn, MI",
   "maxAgeDays": 3,
-  "generatedAt": "2026-11-03T19:27:58.812Z",
+  "generatedAt": "2026-11-04T00:35:20.054Z",
   "e85": {
     "fuelCode": 5,
     "count": 1,
@@ -38,8 +38,8 @@
   },
   "premium93": {
     "fuelCode": 3,
-    "count": 18,
-    "avg": 5.768,
+    "count": 20,
+    "avg": 5.77,
     "min": 5.49,
     "max": 6.39,
     "stations": [
@@ -205,6 +205,29 @@
         "bestPrice": 5.59
       },
       {
+        "id": "39449",
+        "name": "CITGO",
+        "address": {
+          "line1": "25351 Ford Rd",
+          "line2": "",
+          "city": "Dearborn",
+          "region": "MI",
+          "postalCode": "48128-1057"
+        },
+        "distance": null,
+        "distanceUnit": null,
+        "latitude": null,
+        "longitude": null,
+        "starRating": 4.3,
+        "ratingsCount": 54,
+        "priceUnit": "dollars_per_gallon",
+        "cash": 5.69,
+        "cashPostedTime": "2026-11-03T21:51:40.293Z",
+        "credit": 5.79,
+        "creditPostedTime": "2026-11-03T21:51:40.395Z",
+        "bestPrice": 5.69
+      },
+      {
         "id": "172876",
         "name": "Kroger",
         "address": {
@@ -366,6 +389,29 @@
         "bestPrice": 5.79
       },
       {
+        "id": "102162",
+        "name": "CITGO",
+        "address": {
+          "line1": "15500 MICHIGAN AVE",
+          "line2": "",
+          "city": "Dearborn",
+          "region": "MI",
+          "postalCode": "48126"
+        },
+        "distance": null,
+        "distanceUnit": null,
+        "latitude": null,
+        "longitude": null,
+        "starRating": 4.2,
+        "ratingsCount": 269,
+        "priceUnit": "dollars_per_gallon",
+        "cash": 5.89,
+        "cashPostedTime": "2026-11-04T00:01:42.539Z",
+        "credit": 5.99,
+        "creditPostedTime": "2026-11-04T00:01:42.554Z",
+        "bestPrice": 5.89
+      },
+      {
         "id": "98820",
         "name": "Mobil",
         "address": {
@@ -459,5 +505,5 @@
       }
     ]
   },
-  "fingerprint": "58bcb56e8eca10d7efdb605a2b8a00f1e106145fce57b53a199dd2a2e79f4150"
+  "fingerprint": "b3b0a56764548eab8699fec2b79be2b94b18dd02380c9a64f35288945df8f082"
 }
