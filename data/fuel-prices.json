@@ -3,7 +3,7 @@
   "source": "Apify johnvc/fuelprices",
   "search": "Dearborn, MI",
   "maxAgeDays": 3,
-  "generatedAt": "2026-11-04T00:35:20.054Z",
+  "generatedAt": "2026-11-04T12:03:30.937Z",
   "e85": {
     "fuelCode": 5,
     "count": 1,
@@ -29,20 +29,89 @@
         "ratingsCount": 15,
         "priceUnit": "dollars_per_gallon",
         "cash": 3.19,
-        "cashPostedTime": "2026-11-02T20:00:16.720Z",
+        "cashPostedTime": "2026-11-04T02:58:54.308Z",
         "credit": 3.19,
-        "creditPostedTime": "2026-11-02T20:00:16.736Z",
+        "creditPostedTime": "2026-11-04T02:58:54.261Z",
         "bestPrice": 3.19
       }
     ]
   },
   "premium93": {
     "fuelCode": 3,
-    "count": 20,
-    "avg": 5.77,
+    "count": 21,
+    "avg": 5.733,
     "min": 5.49,
     "max": 6.39,
     "stations": [
+      {
+        "id": "81117",
+        "name": "Amoco",
+        "address": {
+          "line1": "23785 Michigan Ave",
+          "line2": "",
+          "city": "Dearborn",
+          "region": "MI",
+          "postalCode": "48124"
+        },
+        "distance": null,
+        "distanceUnit": null,
+        "latitude": null,
+        "longitude": null,
+        "starRating": 4.5,
+        "ratingsCount": 232,
+        "priceUnit": "dollars_per_gallon",
+        "cash": 5.49,
+        "cashPostedTime": "2026-11-04T03:01:41.625Z",
+        "credit": null,
+        "creditPostedTime": null,
+        "bestPrice": 5.49
+      },
+      {
+        "id": "99496",
+        "name": "Mobil",
+        "address": {
+          "line1": "7954 Greenfield Rd",
+          "line2": "",
+          "city": "Dearborn",
+          "region": "MI",
+          "postalCode": "48126-1061"
+        },
+        "distance": null,
+        "distanceUnit": null,
+        "latitude": null,
+        "longitude": null,
+        "starRating": 4.2,
+        "ratingsCount": 52,
+        "priceUnit": "dollars_per_gallon",
+        "cash": 5.59,
+        "cashPostedTime": "2026-11-03T03:03:49.009Z",
+        "credit": 5.49,
+        "creditPostedTime": "2026-11-04T02:59:45.847Z",
+        "bestPrice": 5.49
+      },
+      {
+        "id": "94021",
+        "name": "Mobil",
+        "address": {
+          "line1": "19309 Carlysle St",
+          "line2": "",
+          "city": "Dearborn",
+          "region": "MI",
+          "postalCode": "48124-3802"
+        },
+        "distance": null,
+        "distanceUnit": null,
+        "latitude": null,
+        "longitude": null,
+        "starRating": 4,
+        "ratingsCount": 75,
+        "priceUnit": "dollars_per_gallon",
+        "cash": null,
+        "cashPostedTime": null,
+        "credit": 5.49,
+        "creditPostedTime": "2026-11-04T02:59:59.381Z",
+        "bestPrice": 5.49
+      },
       {
         "id": "3309",
         "name": "Speedway",
@@ -84,7 +153,7 @@
         "ratingsCount": 29,
         "priceUnit": "dollars_per_gallon",
         "cash": 5.59,
-        "cashPostedTime": "2026-11-03T03:05:38.603Z",
+        "cashPostedTime": "2026-11-04T03:00:41.535Z",
         "credit": 5.59,
         "creditPostedTime": "2026-11-02T03:02:58.442Z",
         "bestPrice": 5.59
@@ -132,7 +201,7 @@
         "cash": 5.59,
         "cashPostedTime": "2026-11-03T03:03:47.176Z",
         "credit": 5.69,
-        "creditPostedTime": "2026-11-03T03:03:47.254Z",
+        "creditPostedTime": "2026-11-04T02:59:01.765Z",
         "bestPrice": 5.59
       },
       {
@@ -156,29 +225,6 @@
         "cashPostedTime": "2026-11-02T20:01:45.993Z",
         "credit": 5.79,
         "creditPostedTime": "2026-11-02T20:01:46.009Z",
-        "bestPrice": 5.59
-      },
-      {
-        "id": "99496",
-        "name": "Mobil",
-        "address": {
-          "line1": "7954 Greenfield Rd",
-          "line2": "",
-          "city": "Dearborn",
-          "region": "MI",
-          "postalCode": "48126-1061"
-        },
-        "distance": null,
-        "distanceUnit": null,
-        "latitude": null,
-        "longitude": null,
-        "starRating": 4.2,
-        "ratingsCount": 52,
-        "priceUnit": "dollars_per_gallon",
-        "cash": 5.59,
-        "cashPostedTime": "2026-11-03T03:03:49.009Z",
-        "credit": null,
-        "creditPostedTime": null,
         "bestPrice": 5.59
       },
       {
@@ -251,29 +297,6 @@
         "bestPrice": 5.69
       },
       {
-        "id": "94023",
-        "name": "Marathon",
-        "address": {
-          "line1": "3544 Pelham St",
-          "line2": "",
-          "city": "Dearborn",
-          "region": "MI",
-          "postalCode": "48124"
-        },
-        "distance": null,
-        "distanceUnit": null,
-        "latitude": null,
-        "longitude": null,
-        "starRating": 4.1,
-        "ratingsCount": 151,
-        "priceUnit": "dollars_per_gallon",
-        "cash": 5.69,
-        "cashPostedTime": "2026-11-02T03:02:52.332Z",
-        "credit": 5.79,
-        "creditPostedTime": "2026-11-02T03:02:52.317Z",
-        "bestPrice": 5.69
-      },
-      {
         "id": "109058",
         "name": "Mobil",
         "address": {
@@ -293,7 +316,7 @@
         "cash": 5.69,
         "cashPostedTime": "2026-11-03T03:03:47.610Z",
         "credit": 5.79,
-        "creditPostedTime": "2026-11-03T03:10:46.857Z",
+        "creditPostedTime": "2026-11-04T02:59:48.400Z",
         "bestPrice": 5.69
       },
       {
@@ -337,7 +360,7 @@
         "ratingsCount": 4,
         "priceUnit": "dollars_per_gallon",
         "cash": 5.79,
-        "cashPostedTime": "2026-11-03T03:03:39.760Z",
+        "cashPostedTime": "2026-11-04T02:59:31.335Z",
         "credit": null,
         "creditPostedTime": null,
         "bestPrice": 5.79
@@ -362,7 +385,7 @@
         "cash": null,
         "cashPostedTime": null,
         "credit": 5.79,
-        "creditPostedTime": "2026-11-03T03:05:32.002Z",
+        "creditPostedTime": "2026-11-04T03:01:26.129Z",
         "bestPrice": 5.79
       },
       {
@@ -412,6 +435,29 @@
         "bestPrice": 5.89
       },
       {
+        "id": "71408",
+        "name": "BP",
+        "address": {
+          "line1": "10001 MICHIGAN AVE",
+          "line2": "",
+          "city": "Dearborn",
+          "region": "MI",
+          "postalCode": "48126"
+        },
+        "distance": null,
+        "distanceUnit": null,
+        "latitude": null,
+        "longitude": null,
+        "starRating": 3.9,
+        "ratingsCount": 157,
+        "priceUnit": "dollars_per_gallon",
+        "cash": 5.99,
+        "cashPostedTime": "2026-11-04T03:02:27.376Z",
+        "credit": 6.09,
+        "creditPostedTime": "2026-11-03T03:12:29.031Z",
+        "bestPrice": 5.99
+      },
+      {
         "id": "98820",
         "name": "Mobil",
         "address": {
@@ -435,29 +481,6 @@
         "bestPrice": 5.99
       },
       {
-        "id": "71408",
-        "name": "BP",
-        "address": {
-          "line1": "10001 MICHIGAN AVE",
-          "line2": "",
-          "city": "Dearborn",
-          "region": "MI",
-          "postalCode": "48126"
-        },
-        "distance": null,
-        "distanceUnit": null,
-        "latitude": null,
-        "longitude": null,
-        "starRating": 3.9,
-        "ratingsCount": 157,
-        "priceUnit": "dollars_per_gallon",
-        "cash": 6.19,
-        "cashPostedTime": "2026-11-02T03:04:25.025Z",
-        "credit": 6.09,
-        "creditPostedTime": "2026-11-03T03:12:29.031Z",
-        "bestPrice": 6.09
-      },
-      {
         "id": "94016",
         "name": "Amoco",
         "address": {
@@ -474,11 +497,11 @@
         "starRating": 4.3,
         "ratingsCount": 293,
         "priceUnit": "dollars_per_gallon",
-        "cash": 6.19,
-        "cashPostedTime": "2026-11-03T03:11:38.491Z",
+        "cash": 6.09,
+        "cashPostedTime": "2026-11-04T02:59:59.646Z",
         "credit": null,
         "creditPostedTime": null,
-        "bestPrice": 6.19
+        "bestPrice": 6.09
       },
       {
         "id": "84078",
@@ -498,12 +521,12 @@
         "ratingsCount": 119,
         "priceUnit": "dollars_per_gallon",
         "cash": 6.39,
-        "cashPostedTime": "2026-11-02T14:52:27.430Z",
+        "cashPostedTime": "2026-11-04T03:01:40.974Z",
         "credit": 6.49,
-        "creditPostedTime": "2026-11-02T14:52:27.508Z",
+        "creditPostedTime": "2026-11-04T03:01:40.939Z",
         "bestPrice": 6.39
       }
     ]
   },
-  "fingerprint": "b3b0a56764548eab8699fec2b79be2b94b18dd02380c9a64f35288945df8f082"
+  "fingerprint": "e122a86bbbc4930a044fdaeec8d11b96d06b972c44864fb97d31d139b3afc9b5"
 }
