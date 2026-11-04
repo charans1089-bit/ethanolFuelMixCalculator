@@ -3,7 +3,7 @@
   "source": "Apify johnvc/fuelprices",
   "search": "Dearborn, MI",
   "maxAgeDays": 3,
-  "generatedAt": "2026-11-04T12:03:30.937Z",
+  "generatedAt": "2026-11-04T19:42:28.823Z",
   "e85": {
     "fuelCode": 5,
     "count": 1,
@@ -39,7 +39,7 @@
   "premium93": {
     "fuelCode": 3,
     "count": 21,
-    "avg": 5.733,
+    "avg": 5.723,
     "min": 5.49,
     "max": 6.39,
     "stations": [
@@ -64,6 +64,29 @@
         "cashPostedTime": "2026-11-04T03:01:41.625Z",
         "credit": null,
         "creditPostedTime": null,
+        "bestPrice": 5.49
+      },
+      {
+        "id": "172876",
+        "name": "Kroger",
+        "address": {
+          "line1": "23170 Michigan Ave",
+          "line2": "",
+          "city": "Dearborn",
+          "region": "MI",
+          "postalCode": "48124"
+        },
+        "distance": null,
+        "distanceUnit": null,
+        "latitude": null,
+        "longitude": null,
+        "starRating": 4.6,
+        "ratingsCount": 676,
+        "priceUnit": "dollars_per_gallon",
+        "cash": null,
+        "cashPostedTime": null,
+        "credit": 5.49,
+        "creditPostedTime": "2026-11-04T13:21:38.777Z",
         "bestPrice": 5.49
       },
       {
@@ -271,29 +294,6 @@
         "cashPostedTime": "2026-11-03T21:51:40.293Z",
         "credit": 5.79,
         "creditPostedTime": "2026-11-03T21:51:40.395Z",
-        "bestPrice": 5.69
-      },
-      {
-        "id": "172876",
-        "name": "Kroger",
-        "address": {
-          "line1": "23170 Michigan Ave",
-          "line2": "",
-          "city": "Dearborn",
-          "region": "MI",
-          "postalCode": "48124"
-        },
-        "distance": null,
-        "distanceUnit": null,
-        "latitude": null,
-        "longitude": null,
-        "starRating": 4.6,
-        "ratingsCount": 676,
-        "priceUnit": "dollars_per_gallon",
-        "cash": null,
-        "cashPostedTime": null,
-        "credit": 5.69,
-        "creditPostedTime": "2026-11-02T13:21:29.408Z",
         "bestPrice": 5.69
       },
       {
@@ -528,5 +528,5 @@
       }
     ]
   },
-  "fingerprint": "e122a86bbbc4930a044fdaeec8d11b96d06b972c44864fb97d31d139b3afc9b5"
+  "fingerprint": "5b3312306e6ede8236fddb5a0aef98d77e39dcf08d59e32c706421152fc346e3"
 }
