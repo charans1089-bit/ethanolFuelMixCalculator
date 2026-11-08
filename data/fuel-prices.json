@@ -3,7 +3,7 @@
   "source": "Apify johnvc/fuelprices",
   "search": "Dearborn, MI",
   "maxAgeDays": 3,
-  "generatedAt": "2026-11-08T15:08:13.387Z",
+  "generatedAt": "2026-11-08T20:26:27.475Z",
   "e85": {
     "fuelCode": 5,
     "count": 1,
@@ -38,11 +38,34 @@
   },
   "premium93": {
     "fuelCode": 3,
-    "count": 13,
-    "avg": 5.636,
-    "min": 5.19,
+    "count": 14,
+    "avg": 5.597,
+    "min": 5.09,
     "max": 6.39,
     "stations": [
+      {
+        "id": "70578",
+        "name": "CITGO",
+        "address": {
+          "line1": "23645 Ford Rd",
+          "line2": "",
+          "city": "Dearborn",
+          "region": "MI",
+          "postalCode": "48128-1261"
+        },
+        "distance": null,
+        "distanceUnit": null,
+        "latitude": null,
+        "longitude": null,
+        "starRating": 4.7,
+        "ratingsCount": 247,
+        "priceUnit": "dollars_per_gallon",
+        "cash": 5.09,
+        "cashPostedTime": "2026-11-08T18:38:27.056Z",
+        "credit": null,
+        "creditPostedTime": null,
+        "bestPrice": 5.09
+      },
       {
         "id": "108613",
         "name": "Exxon",
@@ -176,9 +199,9 @@
         "ratingsCount": 145,
         "priceUnit": "dollars_per_gallon",
         "cash": 5.49,
-        "cashPostedTime": "2026-11-08T03:02:55.098Z",
+        "cashPostedTime": "2026-11-08T16:22:37.829Z",
         "credit": 5.59,
-        "creditPostedTime": "2026-11-08T03:02:55.067Z",
+        "creditPostedTime": "2026-11-08T16:22:37.844Z",
         "bestPrice": 5.49
       },
       {
@@ -344,5 +367,5 @@
       }
     ]
   },
-  "fingerprint": "87c58d1659372bd237b25601e5bbd8b251a4ec777a40584992af66d9c05dda67"
+  "fingerprint": "0f4ffa0db56e0fc67481405332ac33a238ae9ba1c3d3a3af04c3f2bc39a43a60"
 }
