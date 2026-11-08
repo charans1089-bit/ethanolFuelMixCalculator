@@ -3,7 +3,7 @@
   "source": "Apify johnvc/fuelprices",
   "search": "Dearborn, MI",
   "maxAgeDays": 3,
-  "generatedAt": "2026-11-08T05:55:24.796Z",
+  "generatedAt": "2026-11-08T15:08:13.387Z",
   "e85": {
     "fuelCode": 5,
     "count": 1,
@@ -38,10 +38,10 @@
   },
   "premium93": {
     "fuelCode": 3,
-    "count": 14,
-    "avg": 5.711,
+    "count": 13,
+    "avg": 5.636,
     "min": 5.19,
-    "max": 6.69,
+    "max": 6.39,
     "stations": [
       {
         "id": "108613",
@@ -341,31 +341,8 @@
         "credit": 6.49,
         "creditPostedTime": "2026-11-08T03:03:11.071Z",
         "bestPrice": 6.39
-      },
-      {
-        "id": "74102",
-        "name": "BP",
-        "address": {
-          "line1": "23405 Michigan Ave",
-          "line2": "",
-          "city": "Dearborn",
-          "region": "MI",
-          "postalCode": "48124-1908"
-        },
-        "distance": null,
-        "distanceUnit": null,
-        "latitude": null,
-        "longitude": null,
-        "starRating": 4.1,
-        "ratingsCount": 145,
-        "priceUnit": "dollars_per_gallon",
-        "cash": 6.69,
-        "cashPostedTime": "2026-11-06T06:51:28.593Z",
-        "credit": 6.79,
-        "creditPostedTime": "2026-11-06T06:51:28.671Z",
-        "bestPrice": 6.69
       }
     ]
   },
-  "fingerprint": "1e3f3a97648ab2caa9baab48790ee4c0e1095a1024beff7bc9f578bc75cb5847"
+  "fingerprint": "87c58d1659372bd237b25601e5bbd8b251a4ec777a40584992af66d9c05dda67"
 }
