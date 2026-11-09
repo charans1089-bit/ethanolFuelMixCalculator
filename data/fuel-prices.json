@@ -3,7 +3,7 @@
   "source": "Apify johnvc/fuelprices",
   "search": "Dearborn, MI",
   "maxAgeDays": 3,
-  "generatedAt": "2026-11-08T20:26:27.475Z",
+  "generatedAt": "2026-11-09T06:16:38.680Z",
   "e85": {
     "fuelCode": 5,
     "count": 1,
@@ -29,17 +29,17 @@
         "ratingsCount": 15,
         "priceUnit": "dollars_per_gallon",
         "cash": 3.19,
-        "cashPostedTime": "2026-11-08T03:01:36.775Z",
+        "cashPostedTime": "2026-11-09T03:00:36.863Z",
         "credit": 3.19,
-        "creditPostedTime": "2026-11-08T03:01:37.447Z",
+        "creditPostedTime": "2026-11-09T03:00:36.738Z",
         "bestPrice": 3.19
       }
     ]
   },
   "premium93": {
     "fuelCode": 3,
-    "count": 14,
-    "avg": 5.597,
+    "count": 16,
+    "avg": 5.571,
     "min": 5.09,
     "max": 6.39,
     "stations": [
@@ -107,10 +107,33 @@
         "ratingsCount": 14,
         "priceUnit": "dollars_per_gallon",
         "cash": 5.19,
-        "cashPostedTime": "2026-11-07T03:09:24.625Z",
+        "cashPostedTime": "2026-11-09T03:00:42.950Z",
+        "credit": 5.29,
+        "creditPostedTime": "2026-11-09T03:00:43.028Z",
+        "bestPrice": 5.19
+      },
+      {
+        "id": "81117",
+        "name": "Amoco",
+        "address": {
+          "line1": "23785 Michigan Ave",
+          "line2": "",
+          "city": "Dearborn",
+          "region": "MI",
+          "postalCode": "48124"
+        },
+        "distance": null,
+        "distanceUnit": null,
+        "latitude": null,
+        "longitude": null,
+        "starRating": 4.5,
+        "ratingsCount": 232,
+        "priceUnit": "dollars_per_gallon",
+        "cash": 5.29,
+        "cashPostedTime": "2026-11-09T03:02:31.621Z",
         "credit": null,
         "creditPostedTime": null,
-        "bestPrice": 5.19
+        "bestPrice": 5.29
       },
       {
         "id": "86112",
@@ -153,7 +176,7 @@
         "ratingsCount": 18,
         "priceUnit": "dollars_per_gallon",
         "cash": 5.29,
-        "cashPostedTime": "2026-11-08T03:01:34.782Z",
+        "cashPostedTime": "2026-11-09T03:00:35.776Z",
         "credit": null,
         "creditPostedTime": null,
         "bestPrice": 5.29
@@ -180,6 +203,29 @@
         "credit": 5.49,
         "creditPostedTime": "2026-11-08T03:01:36.681Z",
         "bestPrice": 5.39
+      },
+      {
+        "id": "45079",
+        "name": "CITGO",
+        "address": {
+          "line1": "22096 MICHIGAN AVE",
+          "line2": "",
+          "city": "Dearborn",
+          "region": "MI",
+          "postalCode": "48124"
+        },
+        "distance": null,
+        "distanceUnit": null,
+        "latitude": null,
+        "longitude": null,
+        "starRating": 4.2,
+        "ratingsCount": 660,
+        "priceUnit": "dollars_per_gallon",
+        "cash": 5.49,
+        "cashPostedTime": "2026-11-09T03:05:04.180Z",
+        "credit": 5.49,
+        "creditPostedTime": "2026-11-09T00:03:08.040Z",
+        "bestPrice": 5.49
       },
       {
         "id": "83820",
@@ -222,7 +268,7 @@
         "ratingsCount": 293,
         "priceUnit": "dollars_per_gallon",
         "cash": 5.59,
-        "cashPostedTime": "2026-11-08T03:02:26.244Z",
+        "cashPostedTime": "2026-11-09T03:01:53.144Z",
         "credit": null,
         "creditPostedTime": null,
         "bestPrice": 5.59
@@ -245,7 +291,7 @@
         "ratingsCount": 157,
         "priceUnit": "dollars_per_gallon",
         "cash": 5.59,
-        "cashPostedTime": "2026-11-08T03:04:17.884Z",
+        "cashPostedTime": "2026-11-09T03:03:08.979Z",
         "credit": null,
         "creditPostedTime": null,
         "bestPrice": 5.59
@@ -268,7 +314,7 @@
         "ratingsCount": 4,
         "priceUnit": "dollars_per_gallon",
         "cash": 5.79,
-        "cashPostedTime": "2026-11-08T03:01:11.013Z",
+        "cashPostedTime": "2026-11-09T03:00:38.678Z",
         "credit": null,
         "creditPostedTime": null,
         "bestPrice": 5.79
@@ -314,9 +360,9 @@
         "ratingsCount": 21,
         "priceUnit": "dollars_per_gallon",
         "cash": 5.99,
-        "cashPostedTime": "2026-11-07T03:10:20.645Z",
-        "credit": 6.09,
-        "creditPostedTime": "2026-11-07T03:00:10.878Z",
+        "cashPostedTime": "2026-11-09T03:01:35.688Z",
+        "credit": null,
+        "creditPostedTime": null,
         "bestPrice": 5.99
       },
       {
@@ -337,7 +383,7 @@
         "ratingsCount": 14,
         "priceUnit": "dollars_per_gallon",
         "cash": 6.09,
-        "cashPostedTime": "2026-11-08T03:00:58.731Z",
+        "cashPostedTime": "2026-11-09T03:00:38.890Z",
         "credit": null,
         "creditPostedTime": null,
         "bestPrice": 6.09
@@ -367,5 +413,5 @@
       }
     ]
   },
-  "fingerprint": "0f4ffa0db56e0fc67481405332ac33a238ae9ba1c3d3a3af04c3f2bc39a43a60"
+  "fingerprint": "c32f1c5954165387c0ca9f82b7ddf486fc0dff743444cc8e2d364d289456bf3d"
 }
