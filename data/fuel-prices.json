@@ -3,7 +3,7 @@
   "source": "Apify johnvc/fuelprices",
   "search": "Dearborn, MI",
   "maxAgeDays": 3,
-  "generatedAt": "2026-11-10T12:34:11.509Z",
+  "generatedAt": "2026-11-10T21:47:01.510Z",
   "e85": {
     "fuelCode": 5,
     "count": 1,
@@ -38,34 +38,11 @@
   },
   "premium93": {
     "fuelCode": 3,
-    "count": 18,
-    "avg": 5.479,
-    "min": 5.09,
+    "count": 17,
+    "avg": 5.488,
+    "min": 4.95,
     "max": 6.39,
     "stations": [
-      {
-        "id": "70578",
-        "name": "CITGO",
-        "address": {
-          "line1": "23645 Ford Rd",
-          "line2": "",
-          "city": "Dearborn",
-          "region": "MI",
-          "postalCode": "48128-1261"
-        },
-        "distance": null,
-        "distanceUnit": null,
-        "latitude": null,
-        "longitude": null,
-        "starRating": 4.7,
-        "ratingsCount": 247,
-        "priceUnit": "dollars_per_gallon",
-        "cash": 5.09,
-        "cashPostedTime": "2026-11-08T18:38:27.056Z",
-        "credit": null,
-        "creditPostedTime": null,
-        "bestPrice": 5.09
-      },
       {
         "id": "172876",
         "name": "Kroger",
@@ -85,9 +62,9 @@
         "priceUnit": "dollars_per_gallon",
         "cash": null,
         "cashPostedTime": null,
-        "credit": 5.09,
-        "creditPostedTime": "2026-11-09T13:22:32.395Z",
-        "bestPrice": 5.09
+        "credit": 4.95,
+        "creditPostedTime": "2026-11-10T21:13:17.727Z",
+        "bestPrice": 4.95
       },
       {
         "id": "109274",
@@ -274,6 +251,29 @@
         "bestPrice": 5.39
       },
       {
+        "id": "94016",
+        "name": "Amoco",
+        "address": {
+          "line1": "2740 Monroe St",
+          "line2": "",
+          "city": "Dearborn",
+          "region": "MI",
+          "postalCode": "48124-3018"
+        },
+        "distance": null,
+        "distanceUnit": null,
+        "latitude": null,
+        "longitude": null,
+        "starRating": 4.3,
+        "ratingsCount": 293,
+        "priceUnit": "dollars_per_gallon",
+        "cash": 5.49,
+        "cashPostedTime": "2026-11-10T20:44:00.892Z",
+        "credit": 5.59,
+        "creditPostedTime": "2026-11-10T20:44:00.905Z",
+        "bestPrice": 5.49
+      },
+      {
         "id": "45079",
         "name": "CITGO",
         "address": {
@@ -318,29 +318,6 @@
         "credit": 5.59,
         "creditPostedTime": "2026-11-08T16:22:37.844Z",
         "bestPrice": 5.49
-      },
-      {
-        "id": "94016",
-        "name": "Amoco",
-        "address": {
-          "line1": "2740 Monroe St",
-          "line2": "",
-          "city": "Dearborn",
-          "region": "MI",
-          "postalCode": "48124-3018"
-        },
-        "distance": null,
-        "distanceUnit": null,
-        "latitude": null,
-        "longitude": null,
-        "starRating": 4.3,
-        "ratingsCount": 293,
-        "priceUnit": "dollars_per_gallon",
-        "cash": 5.59,
-        "cashPostedTime": "2026-11-09T03:01:53.144Z",
-        "credit": null,
-        "creditPostedTime": null,
-        "bestPrice": 5.59
       },
       {
         "id": "71408",
@@ -459,5 +436,5 @@
       }
     ]
   },
-  "fingerprint": "e061c0ebbfea16a566685f84d66ee9db59c9f9a0c77199184fc37afaae8ce398"
+  "fingerprint": "99ac8187e7cf3e3720f84e4c251cdf7d8d24340fb0eada80e29d1a4b69bc9c90"
 }
