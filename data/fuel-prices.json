@@ -3,13 +3,13 @@
   "source": "Apify johnvc/fuelprices",
   "search": "Dearborn, MI",
   "maxAgeDays": 3,
-  "generatedAt": "2026-11-09T18:43:15.866Z",
+  "generatedAt": "2026-11-10T12:34:11.509Z",
   "e85": {
     "fuelCode": 5,
     "count": 1,
-    "avg": 3.19,
-    "min": 3.19,
-    "max": 3.19,
+    "avg": 3.09,
+    "min": 3.09,
+    "max": 3.09,
     "stations": [
       {
         "id": "108615",
@@ -28,18 +28,18 @@
         "starRating": 4.2,
         "ratingsCount": 15,
         "priceUnit": "dollars_per_gallon",
-        "cash": 3.19,
-        "cashPostedTime": "2026-11-09T03:00:36.863Z",
-        "credit": 3.19,
-        "creditPostedTime": "2026-11-09T03:00:36.738Z",
-        "bestPrice": 3.19
+        "cash": 3.09,
+        "cashPostedTime": "2026-11-10T03:03:55.471Z",
+        "credit": 3.09,
+        "creditPostedTime": "2026-11-10T03:03:55.471Z",
+        "bestPrice": 3.09
       }
     ]
   },
   "premium93": {
     "fuelCode": 3,
-    "count": 17,
-    "avg": 5.496,
+    "count": 18,
+    "avg": 5.479,
     "min": 5.09,
     "max": 6.39,
     "stations": [
@@ -90,29 +90,6 @@
         "bestPrice": 5.09
       },
       {
-        "id": "108613",
-        "name": "Exxon",
-        "address": {
-          "line1": "14545 Ford Rd",
-          "line2": "",
-          "city": "Dearborn",
-          "region": "MI",
-          "postalCode": "48126-3151"
-        },
-        "distance": null,
-        "distanceUnit": null,
-        "latitude": null,
-        "longitude": null,
-        "starRating": 4.2,
-        "ratingsCount": 18,
-        "priceUnit": "dollars_per_gallon",
-        "cash": 5.19,
-        "cashPostedTime": "2026-11-08T03:01:32.782Z",
-        "credit": null,
-        "creditPostedTime": null,
-        "bestPrice": 5.19
-      },
-      {
         "id": "109274",
         "name": "Marathon",
         "address": {
@@ -129,10 +106,33 @@
         "starRating": 3.5,
         "ratingsCount": 14,
         "priceUnit": "dollars_per_gallon",
+        "cash": 5.09,
+        "cashPostedTime": "2026-11-10T03:04:02.206Z",
+        "credit": 5.19,
+        "creditPostedTime": "2026-11-10T03:04:02.175Z",
+        "bestPrice": 5.09
+      },
+      {
+        "id": "86112",
+        "name": "BP",
+        "address": {
+          "line1": "3525 S Telegraph Rd",
+          "line2": "",
+          "city": "Dearborn",
+          "region": "MI",
+          "postalCode": "48124-3244"
+        },
+        "distance": null,
+        "distanceUnit": null,
+        "latitude": null,
+        "longitude": null,
+        "starRating": 4,
+        "ratingsCount": 29,
+        "priceUnit": "dollars_per_gallon",
         "cash": 5.19,
-        "cashPostedTime": "2026-11-09T03:00:42.950Z",
-        "credit": 5.29,
-        "creditPostedTime": "2026-11-09T03:00:43.028Z",
+        "cashPostedTime": "2026-11-10T04:01:44.725Z",
+        "credit": null,
+        "creditPostedTime": null,
         "bestPrice": 5.19
       },
       {
@@ -182,26 +182,26 @@
         "bestPrice": 5.29
       },
       {
-        "id": "86112",
-        "name": "BP",
+        "id": "94023",
+        "name": "Marathon",
         "address": {
-          "line1": "3525 S Telegraph Rd",
+          "line1": "3544 Pelham St",
           "line2": "",
           "city": "Dearborn",
           "region": "MI",
-          "postalCode": "48124-3244"
+          "postalCode": "48124"
         },
         "distance": null,
         "distanceUnit": null,
         "latitude": null,
         "longitude": null,
-        "starRating": 4,
-        "ratingsCount": 29,
+        "starRating": 4.1,
+        "ratingsCount": 151,
         "priceUnit": "dollars_per_gallon",
-        "cash": 5.29,
-        "cashPostedTime": "2026-11-08T03:02:58.429Z",
-        "credit": null,
-        "creditPostedTime": null,
+        "cash": null,
+        "cashPostedTime": null,
+        "credit": 5.29,
+        "creditPostedTime": "2026-11-10T04:01:33.100Z",
         "bestPrice": 5.29
       },
       {
@@ -222,9 +222,9 @@
         "ratingsCount": 18,
         "priceUnit": "dollars_per_gallon",
         "cash": 5.29,
-        "cashPostedTime": "2026-11-09T03:00:35.776Z",
-        "credit": null,
-        "creditPostedTime": null,
+        "cashPostedTime": "2026-11-10T04:00:37.835Z",
+        "credit": 5.39,
+        "creditPostedTime": "2026-11-10T03:03:46.465Z",
         "bestPrice": 5.29
       },
       {
@@ -244,10 +244,33 @@
         "starRating": 4.2,
         "ratingsCount": 15,
         "priceUnit": "dollars_per_gallon",
+        "cash": 5.29,
+        "cashPostedTime": "2026-11-10T04:00:46.477Z",
+        "credit": 5.39,
+        "creditPostedTime": "2026-11-10T03:03:55.455Z",
+        "bestPrice": 5.29
+      },
+      {
+        "id": "102162",
+        "name": "CITGO",
+        "address": {
+          "line1": "15500 MICHIGAN AVE",
+          "line2": "",
+          "city": "Dearborn",
+          "region": "MI",
+          "postalCode": "48126"
+        },
+        "distance": null,
+        "distanceUnit": null,
+        "latitude": null,
+        "longitude": null,
+        "starRating": 4.2,
+        "ratingsCount": 269,
+        "priceUnit": "dollars_per_gallon",
         "cash": 5.39,
-        "cashPostedTime": "2026-11-08T03:01:36.728Z",
+        "cashPostedTime": "2026-11-10T03:32:53.472Z",
         "credit": 5.49,
-        "creditPostedTime": "2026-11-08T03:01:36.681Z",
+        "creditPostedTime": "2026-11-10T03:32:53.572Z",
         "bestPrice": 5.39
       },
       {
@@ -270,7 +293,7 @@
         "cash": 5.49,
         "cashPostedTime": "2026-11-09T03:05:04.180Z",
         "credit": 5.49,
-        "creditPostedTime": "2026-11-09T00:03:08.040Z",
+        "creditPostedTime": "2026-11-10T03:08:32.827Z",
         "bestPrice": 5.49
       },
       {
@@ -337,7 +360,7 @@
         "ratingsCount": 157,
         "priceUnit": "dollars_per_gallon",
         "cash": 5.59,
-        "cashPostedTime": "2026-11-09T03:03:08.979Z",
+        "cashPostedTime": "2026-11-10T04:02:10.715Z",
         "credit": null,
         "creditPostedTime": null,
         "bestPrice": 5.59
@@ -383,9 +406,9 @@
         "ratingsCount": 21,
         "priceUnit": "dollars_per_gallon",
         "cash": 5.99,
-        "cashPostedTime": "2026-11-09T03:01:35.688Z",
-        "credit": null,
-        "creditPostedTime": null,
+        "cashPostedTime": "2026-11-10T03:04:51.908Z",
+        "credit": 6.09,
+        "creditPostedTime": "2026-11-10T03:04:51.893Z",
         "bestPrice": 5.99
       },
       {
@@ -406,7 +429,7 @@
         "ratingsCount": 14,
         "priceUnit": "dollars_per_gallon",
         "cash": 6.09,
-        "cashPostedTime": "2026-11-09T03:00:38.890Z",
+        "cashPostedTime": "2026-11-10T03:03:43.118Z",
         "credit": null,
         "creditPostedTime": null,
         "bestPrice": 6.09
@@ -429,12 +452,12 @@
         "ratingsCount": 119,
         "priceUnit": "dollars_per_gallon",
         "cash": 6.39,
-        "cashPostedTime": "2026-11-08T03:03:11.109Z",
-        "credit": 6.49,
-        "creditPostedTime": "2026-11-08T03:03:11.071Z",
+        "cashPostedTime": "2026-11-10T03:05:44.238Z",
+        "credit": null,
+        "creditPostedTime": null,
         "bestPrice": 6.39
       }
     ]
   },
-  "fingerprint": "71836514a80a4e1f47ad8665f0ea0cb551ac89d3397e209b537d7f36a9fdf526"
+  "fingerprint": "e061c0ebbfea16a566685f84d66ee9db59c9f9a0c77199184fc37afaae8ce398"
 }
