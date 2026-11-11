@@ -3,7 +3,7 @@
   "source": "Apify johnvc/fuelprices",
   "search": "Dearborn, MI",
   "maxAgeDays": 3,
-  "generatedAt": "2026-11-10T21:47:01.510Z",
+  "generatedAt": "2026-11-11T06:06:07.247Z",
   "e85": {
     "fuelCode": 5,
     "count": 1,
@@ -29,17 +29,17 @@
         "ratingsCount": 15,
         "priceUnit": "dollars_per_gallon",
         "cash": 3.09,
-        "cashPostedTime": "2026-11-10T03:03:55.471Z",
+        "cashPostedTime": "2026-11-11T03:00:44.097Z",
         "credit": 3.09,
-        "creditPostedTime": "2026-11-10T03:03:55.471Z",
+        "creditPostedTime": "2026-11-11T03:00:44.097Z",
         "bestPrice": 3.09
       }
     ]
   },
   "premium93": {
     "fuelCode": 3,
-    "count": 17,
-    "avg": 5.488,
+    "count": 19,
+    "avg": 5.435,
     "min": 4.95,
     "max": 6.39,
     "stations": [
@@ -67,6 +67,29 @@
         "bestPrice": 4.95
       },
       {
+        "id": "3309",
+        "name": "Speedway",
+        "address": {
+          "line1": "20180 Outer Dr",
+          "line2": "",
+          "city": "Dearborn",
+          "region": "MI",
+          "postalCode": "48124-2647"
+        },
+        "distance": null,
+        "distanceUnit": null,
+        "latitude": null,
+        "longitude": null,
+        "starRating": 4,
+        "ratingsCount": 153,
+        "priceUnit": "dollars_per_gallon",
+        "cash": null,
+        "cashPostedTime": null,
+        "credit": 4.99,
+        "creditPostedTime": "2026-11-11T03:20:17.335Z",
+        "bestPrice": 4.99
+      },
+      {
         "id": "109274",
         "name": "Marathon",
         "address": {
@@ -84,9 +107,9 @@
         "ratingsCount": 14,
         "priceUnit": "dollars_per_gallon",
         "cash": 5.09,
-        "cashPostedTime": "2026-11-10T03:04:02.206Z",
+        "cashPostedTime": "2026-11-11T03:00:57.018Z",
         "credit": 5.19,
-        "creditPostedTime": "2026-11-10T03:04:02.175Z",
+        "creditPostedTime": "2026-11-11T03:00:56.924Z",
         "bestPrice": 5.09
       },
       {
@@ -107,32 +130,55 @@
         "ratingsCount": 29,
         "priceUnit": "dollars_per_gallon",
         "cash": 5.19,
-        "cashPostedTime": "2026-11-10T04:01:44.725Z",
+        "cashPostedTime": "2026-11-11T03:02:22.595Z",
         "credit": null,
         "creditPostedTime": null,
         "bestPrice": 5.19
       },
       {
-        "id": "3309",
-        "name": "Speedway",
+        "id": "108613",
+        "name": "Exxon",
         "address": {
-          "line1": "20180 Outer Dr",
+          "line1": "14545 Ford Rd",
           "line2": "",
           "city": "Dearborn",
           "region": "MI",
-          "postalCode": "48124-2647"
+          "postalCode": "48126-3151"
         },
         "distance": null,
         "distanceUnit": null,
         "latitude": null,
         "longitude": null,
-        "starRating": 4,
-        "ratingsCount": 153,
+        "starRating": 4.2,
+        "ratingsCount": 18,
         "priceUnit": "dollars_per_gallon",
         "cash": null,
         "cashPostedTime": null,
         "credit": 5.19,
-        "creditPostedTime": "2026-11-09T17:21:33.662Z",
+        "creditPostedTime": "2026-11-11T03:00:55.989Z",
+        "bestPrice": 5.19
+      },
+      {
+        "id": "108616",
+        "name": "Shell",
+        "address": {
+          "line1": "6650 Schaefer Rd",
+          "line2": "",
+          "city": "Dearborn",
+          "region": "MI",
+          "postalCode": "48126-4502"
+        },
+        "distance": null,
+        "distanceUnit": null,
+        "latitude": null,
+        "longitude": null,
+        "starRating": 3.2,
+        "ratingsCount": 12,
+        "priceUnit": "dollars_per_gallon",
+        "cash": null,
+        "cashPostedTime": null,
+        "credit": 5.19,
+        "creditPostedTime": "2026-11-11T03:01:01.756Z",
         "bestPrice": 5.19
       },
       {
@@ -178,7 +224,7 @@
         "cash": null,
         "cashPostedTime": null,
         "credit": 5.29,
-        "creditPostedTime": "2026-11-10T04:01:33.100Z",
+        "creditPostedTime": "2026-11-11T03:01:56.954Z",
         "bestPrice": 5.29
       },
       {
@@ -201,7 +247,7 @@
         "cash": 5.29,
         "cashPostedTime": "2026-11-10T04:00:37.835Z",
         "credit": 5.39,
-        "creditPostedTime": "2026-11-10T03:03:46.465Z",
+        "creditPostedTime": "2026-11-11T03:00:53.343Z",
         "bestPrice": 5.29
       },
       {
@@ -222,9 +268,9 @@
         "ratingsCount": 15,
         "priceUnit": "dollars_per_gallon",
         "cash": 5.29,
-        "cashPostedTime": "2026-11-10T04:00:46.477Z",
+        "cashPostedTime": "2026-11-11T03:00:44.019Z",
         "credit": 5.39,
-        "creditPostedTime": "2026-11-10T03:03:55.455Z",
+        "creditPostedTime": "2026-11-11T03:00:44.066Z",
         "bestPrice": 5.29
       },
       {
@@ -248,6 +294,29 @@
         "cashPostedTime": "2026-11-10T03:32:53.472Z",
         "credit": 5.49,
         "creditPostedTime": "2026-11-10T03:32:53.572Z",
+        "bestPrice": 5.39
+      },
+      {
+        "id": "83820",
+        "name": "Mobil",
+        "address": {
+          "line1": "22600 Michigan Ave",
+          "line2": "",
+          "city": "Dearborn",
+          "region": "MI",
+          "postalCode": "48124-2116"
+        },
+        "distance": null,
+        "distanceUnit": null,
+        "latitude": null,
+        "longitude": null,
+        "starRating": 4.6,
+        "ratingsCount": 145,
+        "priceUnit": "dollars_per_gallon",
+        "cash": 5.39,
+        "cashPostedTime": "2026-11-11T03:02:34.953Z",
+        "credit": 5.49,
+        "creditPostedTime": "2026-11-11T03:02:34.937Z",
         "bestPrice": 5.39
       },
       {
@@ -297,29 +366,6 @@
         "bestPrice": 5.49
       },
       {
-        "id": "83820",
-        "name": "Mobil",
-        "address": {
-          "line1": "22600 Michigan Ave",
-          "line2": "",
-          "city": "Dearborn",
-          "region": "MI",
-          "postalCode": "48124-2116"
-        },
-        "distance": null,
-        "distanceUnit": null,
-        "latitude": null,
-        "longitude": null,
-        "starRating": 4.6,
-        "ratingsCount": 145,
-        "priceUnit": "dollars_per_gallon",
-        "cash": 5.49,
-        "cashPostedTime": "2026-11-08T16:22:37.829Z",
-        "credit": 5.59,
-        "creditPostedTime": "2026-11-08T16:22:37.844Z",
-        "bestPrice": 5.49
-      },
-      {
         "id": "71408",
         "name": "BP",
         "address": {
@@ -337,7 +383,7 @@
         "ratingsCount": 157,
         "priceUnit": "dollars_per_gallon",
         "cash": 5.59,
-        "cashPostedTime": "2026-11-10T04:02:10.715Z",
+        "cashPostedTime": "2026-11-11T03:03:06.583Z",
         "credit": null,
         "creditPostedTime": null,
         "bestPrice": 5.59
@@ -359,11 +405,11 @@
         "starRating": 4.2,
         "ratingsCount": 4,
         "priceUnit": "dollars_per_gallon",
-        "cash": 5.79,
-        "cashPostedTime": "2026-11-09T03:00:38.678Z",
+        "cash": 5.69,
+        "cashPostedTime": "2026-11-11T03:00:37.719Z",
         "credit": null,
         "creditPostedTime": null,
-        "bestPrice": 5.79
+        "bestPrice": 5.69
       },
       {
         "id": "98820",
@@ -383,9 +429,9 @@
         "ratingsCount": 21,
         "priceUnit": "dollars_per_gallon",
         "cash": 5.99,
-        "cashPostedTime": "2026-11-10T03:04:51.908Z",
+        "cashPostedTime": "2026-11-11T03:01:50.480Z",
         "credit": 6.09,
-        "creditPostedTime": "2026-11-10T03:04:51.893Z",
+        "creditPostedTime": "2026-11-11T03:01:50.443Z",
         "bestPrice": 5.99
       },
       {
@@ -429,12 +475,12 @@
         "ratingsCount": 119,
         "priceUnit": "dollars_per_gallon",
         "cash": 6.39,
-        "cashPostedTime": "2026-11-10T03:05:44.238Z",
-        "credit": null,
-        "creditPostedTime": null,
+        "cashPostedTime": "2026-11-11T03:02:36.214Z",
+        "credit": 6.49,
+        "creditPostedTime": "2026-11-11T03:02:36.120Z",
         "bestPrice": 6.39
       }
     ]
   },
-  "fingerprint": "99ac8187e7cf3e3720f84e4c251cdf7d8d24340fb0eada80e29d1a4b69bc9c90"
+  "fingerprint": "7306b4db1faf76be5cb3bb5a6a8a57921b720719056ce686383dd260676a724d"
 }
